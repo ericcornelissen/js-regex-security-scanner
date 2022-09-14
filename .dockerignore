@@ -1,0 +1,7 @@
+# Ignore everything
+*
+
+# And use an allowlist instead
+!.eslintrc.yml
+!package.json
+!package-lock.json

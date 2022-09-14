@@ -1,0 +1,16 @@
+name: Check
+on:
+  - push
+  - pull_request
+
+permissions: read-all
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3.0.2
+      - name: Build
+        run: docker build --tag js-re-scan .

@@ -1,0 +1,21 @@
+# Check out ESLint at: https://eslint.org/
+
+plugins:
+  - regexp # see https://github.com/ota-meshi/eslint-plugin-regexp
+
+parserOptions:
+  ecmaVersion: latest
+  sourceType: module
+
+rules:
+  regexp/no-super-linear-backtracking:
+    - error
+    - report: certain
+  regexp/no-super-linear-move:
+    - error
+    - ignorePartial: false
+      ignoreSticky: false
+      report: certain
+
+ignorePatterns:
+  - "node_modules/**"

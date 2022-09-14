@@ -1,0 +1,17 @@
+{
+  "name": "js-regex-security-scanner",
+  "version": "0.1.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.1.2"
+  },
+  "dependencies": {
+    "eslint": "8.23.0",
+    "eslint-plugin-regexp": "1.9.0"
+  },
+  "scripts": {
+    "eslint": "eslint"
+  }
+}
