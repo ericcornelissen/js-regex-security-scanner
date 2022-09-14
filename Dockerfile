@@ -17,7 +17,9 @@ FROM node:18-alpine
 WORKDIR /home/node/js-re-scan
 
 COPY package.json package-lock.json ./
-RUN npm install --omit=dev
+RUN npm install \
+	--omit=dev \
+	--no-update-notifier
 
 COPY ./ ./
 
@@ -25,6 +27,7 @@ ENTRYPOINT [ \
 	"npm", \
 	"run", \
 	"eslint", \
+	"--no-update-notifier", \
 	"--", \
 	\
 	# This option avoids unexpected errors if the project being scanned includes
