@@ -8,7 +8,7 @@ The scanner is available as a Docker image that you can run against any
 JavaScript project - for example:
 
 ```shell
-docker run -v $(pwd):/project ericornelissen/js-re-scan:latest
+docker run --rm -v $(pwd):/project ericornelissen/js-re-scan:latest
 ```
 
 ## Features
