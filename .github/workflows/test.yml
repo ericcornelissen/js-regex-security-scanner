@@ -13,7 +13,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3.0.2
       - name: Build
-        run: docker build --tag js-re-scan .
+        run: docker build --tag ericornelissen/js-re-scan .
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -30,6 +30,6 @@ jobs:
       - name: Install Node.js dependencies
         run: npm ci
       - name: Build
-        run: docker build --tag js-re-scan .
+        run: docker build --tag ericornelissen/js-re-scan .
       - name: Test
         run: npm run ava
