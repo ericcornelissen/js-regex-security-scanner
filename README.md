@@ -11,6 +11,16 @@ JavaScript project - for example:
 docker run --rm -v $(pwd):/project ericornelissen/js-re-scan:latest
 ```
 
+### Exit codes
+
+The scanner has the following exit codes.
+
+| Exit code | Meaning                                          |
+| --------: | :----------------------------------------------- |
+| 0         | No problems were found                           |
+| 1         | Files with problematic regular expressions found |
+| 2         | Something went wrong while scanning              |
+
 ## Features
 
 - Detect cases of exponential and polynomial backtracking.
