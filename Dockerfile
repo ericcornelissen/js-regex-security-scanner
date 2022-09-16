@@ -19,6 +19,7 @@ WORKDIR /home/node/js-re-scan
 COPY package.json package-lock.json ./
 RUN npm install \
 	--omit=dev \
+	--no-fund \
 	--no-update-notifier
 
 COPY ./ ./
