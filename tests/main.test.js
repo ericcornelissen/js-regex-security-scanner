@@ -13,13 +13,30 @@ test.before(t => {
 });
 
 test("sample", t => {
+	const dir = `${t.context.testdataDir}/sample`;
 	const { stdout } = cp.spawnSync(
 		"docker",
 		[
 			"run",
 			"--rm",
 			"-v",
-			`${t.context.testdataDir}:/project`,
+			`${dir}:/project`,
+			"ericornelissen/js-re-scan:latest",
+		],
+		{ encoding: "utf-8" },
+	);
+	t.snapshot(stdout);
+});
+
+test("shescape (v1.5.9)", t => {
+	const dir = `${t.context.testdataDir}/shescape`;
+	const { stdout } = cp.spawnSync(
+		"docker",
+		[
+			"run",
+			"--rm",
+			"-v",
+			`${dir}:/project`,
 			"ericornelissen/js-re-scan:latest",
 		],
 		{ encoding: "utf-8" },

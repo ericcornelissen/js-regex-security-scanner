@@ -16,7 +16,7 @@
     "ava": "4.3.3"
   },
   "scripts": {
-    "ava": "ava",
+    "ava": "ava tests/",
     "eslint": "eslint"
   }
 }
