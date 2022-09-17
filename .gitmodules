@@ -1,0 +1,3 @@
+[submodule "testdata/shescape"]
+	path = testdata/shescape
+	url = git@github.com:ericcornelissen/shescape.git
