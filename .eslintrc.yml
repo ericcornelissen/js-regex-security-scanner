@@ -42,6 +42,10 @@ ignorePatterns:
   - "node_modules/**"
   - "web_modules/**"
 
+  # IDE directories
+  - ".idea/**"
+  - ".vscode/**"
+
   # Output directories
   - ".docusaurus/**"
   - ".fusebox/**"
