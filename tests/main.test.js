@@ -17,6 +17,11 @@ test("sample", t => {
 	t.snapshot(output);
 });
 
+test("sample-ts", t => {
+	const output = scanDir(`${t.context.testdataDir}/sample-ts`);
+	t.snapshot(output);
+});
+
 test("shescape (v1.5.9)", t => {
 	const output = scanDir(`${t.context.testdataDir}/shescape`);
 	t.snapshot(output);

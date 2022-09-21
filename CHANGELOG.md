@@ -7,7 +7,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`9d2829c`) Add support for scanning TypeScript projects.
 
 ## [0.1.1] - 2022-09-17
 

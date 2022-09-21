@@ -42,7 +42,7 @@ ENTRYPOINT [ \
 	\
 	# Specify the extensions of files that should be scanned.
 	"--ext", \
-	".js,.cjs,.mjs", \
+	".js,.cjs,.mjs,.ts", \
 	\
 	# The folder that should be scanned. This is the folder that users should
 	# mount their project to.
