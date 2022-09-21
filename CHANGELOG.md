@@ -8,6 +8,7 @@ Versioning].
 ## [Unreleased]
 
 - (`9d2829c`) Add support for scanning TypeScript projects.
+- (`3aebaf0`) Bump ESLint from `8.23.0` to `8.23.1`.
 
 ## [0.1.1] - 2022-09-17
 
