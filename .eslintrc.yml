@@ -24,4 +24,40 @@ overrides:
     parser: "@typescript-eslint/parser"
 
 ignorePatterns:
+  # Cache/temp directories
+  - ".cache/**"
+  - ".npm/**"
+  - ".parcel-cache/**"
+  - ".rpt2_cache/**"
+  - ".rts2_cache_cjs/**"
+  - ".rts2_cache_es/**"
+  - ".rts2_cache_umd/**"
+  - ".temp/**"
+  - ".yarn/cache/**"
+  - ".yarn/unplugged/**"
+
+  # Dependency directories
+  - "bower_components/**"
+  - "jspm_packages/**"
   - "node_modules/**"
+  - "vendor/**"
+  - "web_modules/**"
+
+  # IDE directories
+  - ".idea/**"
+  - ".vscode/**"
+
+  # Output directories
+  - ".docusaurus/**"
+  - ".fusebox/**"
+  - ".dynamodb/**"
+  - ".grunt/**"
+  - ".next/**"
+  - ".nuxt/**"
+  - ".nyc_output/**"
+  - ".serverless/**"
+  - ".vuepress/dist/**"
+  - "coverage/**"
+  - "dist/**"
+  - "lib-cov/**"
+  - "out/**"
