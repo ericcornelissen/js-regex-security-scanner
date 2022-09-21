@@ -6,6 +6,38 @@ on:
 permissions: read-all
 
 jobs:
+  audit-npm:
+    name: Audit (npm)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+      - name: Install Node.js
+        uses: actions/setup-node@2fddd8803e2f5c9604345a0b591c3020ee971a93
+        with:
+          node-version: 18
+          cache: npm
+      - name: Install Node.js dependencies
+        run: npm ci
+      - name: Audit npm dependencies
+        run: npm audit
+  audit-docker:
+    name: Audit (Docker)
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+      - name: Build
+        run: docker build --tag ericornelissen/js-re-scan .
+      - name: Audit Docker image
+        uses: snyk/actions/docker@7fad562681122205233d1242c3bb39598c5393da
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --file=Dockerfile
+          image: ericornelissen/js-re-scan
   build:
     name: Build
     runs-on: ubuntu-latest
