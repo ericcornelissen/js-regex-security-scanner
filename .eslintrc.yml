@@ -40,6 +40,7 @@ ignorePatterns:
   - "bower_components/**"
   - "jspm_packages/**"
   - "node_modules/**"
+  - "vendor/**"
   - "web_modules/**"
 
   # IDE directories
