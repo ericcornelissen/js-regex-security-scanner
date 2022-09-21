@@ -1,36 +1,42 @@
-name: Check
+name: Audit
 on:
-  - push
-  - pull_request
+  workflow_call:
+    inputs:
+      ref:
+        required: false
+        type: string
+    secrets:
+      SNYK_TOKEN:
+        required: true
 
 permissions: read-all
 
 jobs:
-  audit:
-    name: Audit
-    uses: ericcornelissen/js-regex-security-scanner/.github/workflows/reusable-audit.yml@main
-    needs:
-      - build
-    secrets:
-      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-  build:
-    name: Build
+  docker:
+    name: Docker
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
-      - name: Build
-        run: docker build --tag ericornelissen/js-re-scan .
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    needs:
-      - build
     steps:
       - name: Checkout Code
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
         with:
-          submodules: true
+          ref: ${{ inputs.ref }}
+      - name: Build
+        run: docker build --tag ericornelissen/js-re-scan .
+      - name: Audit Docker image
+        uses: snyk/actions/docker@7fad562681122205233d1242c3bb39598c5393da
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --file=Dockerfile
+          image: ericornelissen/js-re-scan
+  npm:
+    name: npm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        with:
+          ref: ${{ inputs.ref }}
       - name: Install Node.js
         uses: actions/setup-node@2fddd8803e2f5c9604345a0b591c3020ee971a93
         with:
@@ -38,7 +44,5 @@ jobs:
           cache: npm
       - name: Install Node.js dependencies
         run: npm ci
-      - name: Build
-        run: docker build --tag ericornelissen/js-re-scan .
-      - name: Test
-        run: npm run ava
+      - name: Audit npm dependencies
+        run: npm audit

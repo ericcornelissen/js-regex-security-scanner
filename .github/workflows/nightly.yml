@@ -1,0 +1,21 @@
+name: Nightly
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+permissions: read-all
+
+jobs:
+  audit:
+    name: Audit (${{ matrix.ref }})
+    uses: ericcornelissen/js-regex-security-scanner/.github/workflows/reusable-audit.yml@main
+    strategy:
+      matrix:
+        ref:
+          - main
+          - v0
+    secrets:
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+    with:
+      ref: ${{ matrix.ref }}
