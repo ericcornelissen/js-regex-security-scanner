@@ -9,6 +9,9 @@ Versioning].
 
 - (`9d2829c`) Add support for scanning TypeScript projects.
 - (`3aebaf0`) Bump ESLint from `8.23.0` to `8.23.1`.
+- (`8d5b874`) Ignore more dependency as well as common output/temporary folders.
+- (`1353931`) Ignore IDE related folders.
+- (`8863b7b`) Ignore the `vendor/` folder.
 
 ## [0.1.1] - 2022-09-17
 
