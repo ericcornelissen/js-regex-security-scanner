@@ -9,6 +9,7 @@
     "npm": ">=8.1.2"
   },
   "dependencies": {
+    "@typescript-eslint/parser": "5.38.0",
     "eslint": "8.23.0",
     "eslint-plugin-regexp": "1.9.0"
   },

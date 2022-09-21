@@ -17,5 +17,11 @@ rules:
       ignoreSticky: false
       report: certain
 
+overrides:
+  - files:
+      - "*.ts"
+      - "**/*.ts"
+    parser: "@typescript-eslint/parser"
+
 ignorePatterns:
   - "node_modules/**"
