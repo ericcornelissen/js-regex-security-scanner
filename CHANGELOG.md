@@ -7,7 +7,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`4c29319`) Add labels with metadata to the Docker image.
 
 ## [0.2.0] - 2022-09-21
 
