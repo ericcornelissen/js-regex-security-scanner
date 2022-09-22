@@ -1,5 +1,6 @@
 {
   "name": "js-regex-security-scanner",
+  "description": "A static analyzer to scan JavaScript code for problematic regular expressions.",
   "version": "0.2.0",
   "type": "module",
   "private": true,
