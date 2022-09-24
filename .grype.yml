@@ -1,5 +1,10 @@
 # Check out Grype at: https://github.com/anchore/grype
 
+output: json
+file: vulns.json
+
+fail-on-severity: low
+
 ignore:
   # Ignored because the CVE is not for the npm package named "slash".
   - vulnerability: CVE-2002-1647

@@ -6,3 +6,7 @@ npm-debug.log*
 
 # ESLint
 .eslintcache
+
+# Syft & Grype
+sbom.json
+vulns.json
