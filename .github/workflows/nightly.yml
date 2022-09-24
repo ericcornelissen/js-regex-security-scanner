@@ -9,7 +9,7 @@ permissions: read-all
 jobs:
   audit:
     name: Audit (${{ matrix.ref }})
-    uses: ericcornelissen/js-regex-security-scanner/.github/workflows/reusable-audit.yml@main
+    uses: ericcornelissen/js-regex-security-scanner/.github/workflows/reusable-audit.yml@10-dont-audit-dev-deps-for-releases
     strategy:
       matrix:
         ref:
