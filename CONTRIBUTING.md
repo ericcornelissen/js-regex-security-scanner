@@ -156,6 +156,56 @@ To write a test you need to do three things:
 1. Run the tests, this will automatically initialize the snapshot for the new
    test.
 
+---
+
+## Auditing
+
+### SBOM
+
+To be able to generate a Software Bill Of Materials (SBOM), make sure you:
+
+- Have build the [Docker] image of the scanner locally.
+- Have [Syft] installed, you can run:
+
+  ```shell
+  curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | \
+    sh -s -- -b ./bin v0.57.0
+  ```
+
+To generate the SBOM at `./sbom.json`, run:
+
+```shell
+./bin/syft ericornelissen/js-re-scan:latest
+```
+
+### Vulnerability Scanning
+
+#### Docker
+
+To scan for vulnerabilities in the Docker image, make sure you:
+
+- Have generated the project's SBOM.
+- Have [Grype] installed, you can run:
+
+  ```shell
+  curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | \
+    sh -s -- -b ./bin v0.50.2
+  ```
+
+To generate a vulnerability report at `./vulns.json`, run:
+
+```shell
+./bin/grype sbom.json
+```
+
+#### Node.js
+
+To scan for vulnerabilities in Node.js dependencies, run:
+
+```shell
+npm audit
+```
+
 [ava]: https://github.com/avajs/ava
 [bug report]: https://github.com/ericcornelissen/js-regex-security-scanner/issues/new?labels=bug
 [docker]: https://www.docker.com/
@@ -163,8 +213,10 @@ To write a test you need to do three things:
 [eslint]: https://eslint.org/
 [feature request]: https://github.com/ericcornelissen/js-regex-security-scanner/issues/new?labels=enhancement
 [git]: https://git-scm.com/
+[grype]: https://github.com/anchore/grype
 [node.js]: https://nodejs.org/en/
 [npm]: https://www.npmjs.com/
 [open issues]: https://github.com/ericcornelissen/js-regex-security-scanner/issues
 [security policy]: ./SECURITY.md
 [submodule]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
+[syft]: https://github.com/anchore/syft

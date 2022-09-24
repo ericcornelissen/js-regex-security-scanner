@@ -1,0 +1,11 @@
+# Check out Grype at: https://github.com/anchore/grype
+
+output: json
+file: vulns.json
+
+fail-on-severity: low
+
+ignore:
+  # Ignore all npm vulnerabilities. This project relies on `npm audit` instead.
+  - package:
+      type: npm

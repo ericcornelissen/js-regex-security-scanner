@@ -11,8 +11,6 @@ jobs:
     uses: ericcornelissen/js-regex-security-scanner/.github/workflows/reusable-audit.yml@main
     needs:
       - build
-    secrets:
-      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
   build:
     name: Build
     runs-on: ubuntu-latest

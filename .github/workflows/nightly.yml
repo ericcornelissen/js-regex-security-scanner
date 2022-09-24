@@ -15,7 +15,5 @@ jobs:
         ref:
           - main
           - v0
-    secrets:
-      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
     with:
       ref: ${{ matrix.ref }}
