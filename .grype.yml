@@ -6,42 +6,6 @@ file: vulns.json
 fail-on-severity: low
 
 ignore:
-  # Ignored because the CVE is not for the npm package named "slash".
-  - vulnerability: CVE-2002-1647
-    fix-state: unknown
-    package:
-      name: slash
-      language: javascript
-      type: npm
-
-  # Ignored because the CVE is not for the npm package named "opener".
-  - vulnerability: CVE-2021-27482
-    fix-state: unknown
-    package:
-      name: opener
-      language: javascript
-      type: npm
-
-  # Ignored because the CVE is not for the npm package named "opener".
-  - vulnerability: CVE-2021-27498
-    fix-state: unknown
-    package:
-      name: opener
-      language: javascript
-      type: npm
-
-  # Ignored because the CVE is not for the npm package named "opener".
-  - vulnerability: CVE-2021-27500
-    fix-state: unknown
-    package:
-      name: opener
-      language: javascript
-      type: npm
-
-  # Ignored because the CVE is not for the npm package named "opener".
-  - vulnerability: CVE-2021-27478
-    fix-state: unknown
-    package:
-      name: opener
-      language: javascript
+  # Ignore all npm vulnerabilities. This project relies on `npm audit` instead.
+  - package:
       type: npm

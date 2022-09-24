@@ -180,7 +180,9 @@ To generate the SBOM at `./sbom.json`, run:
 
 ### Vulnerability Scanning
 
-To scan for vulnerabilities, make sure you:
+#### Docker
+
+To scan for vulnerabilities in the Docker image, make sure you:
 
 - Have generated the project's SBOM.
 - Have [Grype] installed, you can run:
@@ -194,6 +196,14 @@ To generate a vulnerability report at `./vulns.json`, run:
 
 ```shell
 ./bin/grype sbom.json
+```
+
+#### Node.js
+
+To scan for vulnerabilities in Node.js dependencies, run:
+
+```shell
+npm audit
 ```
 
 [ava]: https://github.com/avajs/ava
