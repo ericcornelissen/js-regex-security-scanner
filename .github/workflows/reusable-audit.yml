@@ -31,7 +31,7 @@ jobs:
         run: docker build --tag ericornelissen/js-re-scan .
       - name: Create SBOM
         run: |
-          ./bin/syft ericornelissen/js-re-scan:latest -o json > ${{ env.SBOM_FILE }}
+          ./bin/syft ericornelissen/js-re-scan:latest
       - name: Scan SBOM
         run: |
           ./bin/grype ${{ env.SBOM_FILE }} -o json > ${{ env.VULN_FILE }}
