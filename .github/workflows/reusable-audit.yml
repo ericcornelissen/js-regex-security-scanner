@@ -5,9 +5,6 @@ on:
       ref:
         required: false
         type: string
-    secrets:
-      SNYK_TOKEN:
-        required: true
 
 permissions: read-all
 
