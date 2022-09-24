@@ -56,5 +56,9 @@ jobs:
           cache: npm
       - name: Install Node.js dependencies
         run: npm ci
-      - name: Audit npm dependencies
+      - name: Audit all npm dependencies
+        if: ${{ !startsWith(inputs.ref, 'v') }}
         run: npm audit
+      - name: Audit production npm dependencies
+        if: ${{ startsWith(inputs.ref, 'v') }}
+        run: npm audit --omit dev
