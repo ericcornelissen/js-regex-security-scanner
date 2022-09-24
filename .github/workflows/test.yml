@@ -8,7 +8,7 @@ permissions: read-all
 jobs:
   audit:
     name: Audit
-    uses: ericcornelissen/js-regex-security-scanner/.github/workflows/reusable-audit.yml@main
+    uses: ericcornelissen/js-regex-security-scanner/.github/workflows/reusable-audit.yml@10-use-syft-and-grype
     needs:
       - build
     secrets:
