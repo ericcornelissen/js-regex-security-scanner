@@ -1,0 +1,6 @@
+# Binaries shouldn't be tracked in version control. This .gitignore exists to
+# ensure 1) this directory exists, avoiding potential problems when trying to
+# put files in it, and 2) no binaries are ever committed.
+
+*
+!.gitignore
