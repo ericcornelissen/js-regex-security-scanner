@@ -1,18 +1,28 @@
+IMAGE_NAME=ericornelissen/js-re-scan
+
+GRYPE_VERSION=v0.50.2
+SYFT_VERSION=v0.57.0
+
+BIN_DIR=bin
+TEMP_DIR=.tmp
+
+SBOM_FILE=sbom.json
+VULN_FILE=vulns.json
+
 default: help
 
-audit: | vulns.json ## Audit the project dependencies
+audit: | $(VULN_FILE) ## Audit the project dependencies
 	npm audit
 
-build: | .tmp/dockerimage ## Build the Docker image
+build: | $(TEMP_DIR)/dockerimage ## Build the Docker image
 
 clean: ## Clean the repository
 	@git clean -fx \
-		.tmp/ \
-		bin/grype \
-		bin/syft \
+		$(BIN_DIR) \
+		$(TEMP_DIR) \
 		node_modules/ \
-		sbom.json \
-		vulns.json
+		$(SBOM_FILE) \
+		$(VULN_FILE)
 
 help: ## Show this help message
 	@printf "Usage: make <command>\n\n"
@@ -21,9 +31,9 @@ help: ## Show this help message
 	  printf "  \033[36m%-30s\033[0m %s\n", $$1, $$NF \
 	}' $(MAKEFILE_LIST)
 
-init: | bin/grype bin/syft node_modules/ ## Initialize the project dependencies
+init: | $(BIN_DIR)/grype $(BIN_DIR)/syft node_modules/ ## Initialize the project dependencies
 
-sbom: build | sbom.json ## Generate a Software Bill Of Materials (SBOM)
+sbom: build | $(SBOM_FILE) ## Generate a Software Bill Of Materials (SBOM)
 
 test: build node_modules/ ## Run the tests
 	npm run ava -- tests/
@@ -33,22 +43,22 @@ update-test-snapshots: build node_modules/ ## Update the test snapsthos
 
 .PHONY: default audit build clean help init sbom test update-test-snapshots
 
-sbom.json: bin/syft
-	./bin/syft ericornelissen/js-re-scan:latest
-vulns.json: bin/grype sbom.json
-	./bin/grype sbom.json
+$(SBOM_FILE): $(BIN_DIR)/syft
+	./$(BIN_DIR)/syft $(IMAGE_NAME):latest
+$(VULN_FILE): $(BIN_DIR)/grype $(SBOM_FILE)
+	./$(BIN_DIR)/grype $(SBOM_FILE)
 
-bin/syft:
+$(BIN_DIR)/syft:
 	curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | \
-		sh -s -- -b ./bin v0.57.0
-bin/grype:
+		sh -s -- -b ./$(BIN_DIR) $(SYFT_VERSION)
+$(BIN_DIR)/grype:
 	curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | \
-		sh -s -- -b ./bin v0.50.2
+		sh -s -- -b ./$(BIN_DIR) $(GRYPE_VERSION)
 node_modules/: .npmrc package*.json
 	npm install
 
-.tmp/:
-	@mkdir .tmp
-.tmp/dockerimage: .tmp/ .dockerignore .eslintrc.yml Dockerfile package*.json
-	docker build --tag ericornelissen/js-re-scan .
-	@touch .tmp/dockerimage
+$(TEMP_DIR):
+	@mkdir $(TEMP_DIR)
+$(TEMP_DIR)/dockerimage: $(TEMP_DIR) .dockerignore .eslintrc.yml Dockerfile package*.json
+	docker build --tag $(IMAGE_NAME) .
+	@touch $(TEMP_DIR)/dockerimage
