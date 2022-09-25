@@ -44,6 +44,10 @@ ENTRYPOINT [ \
 	# an ESLint configuration file.
 	"--no-eslintrc", \
 	\
+	# This option avoids errors due to ignore directives for rules not known to
+	# the ESLint setup in this project.
+	"--no-inline-config", \
+	\
 	# Explicitly specify a path to the local configuration file so it can't be
 	# missed.
 	"--config", \

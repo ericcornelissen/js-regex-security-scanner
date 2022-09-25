@@ -22,6 +22,11 @@ test("sample-ts", t => {
 	t.snapshot(output);
 });
 
+test("sample-unknown-rule", t => {
+	const output = scanDir(`${t.context.testdataDir}/sample-unknown-rule`);
+	t.snapshot(output);
+});
+
 test("shescape (v1.5.9)", t => {
 	const output = scanDir(`${t.context.testdataDir}/shescape`);
 	t.snapshot(output);
