@@ -14,7 +14,7 @@ default: help
 audit: audit-docker audit-npm ## Audit the project dependencies
 audit-docker: | $(VULN_FILE)
 audit-npm:
-	npm audit
+	npm audit $(ARGS)
 
 build: | $(TEMP_DIR)/dockerimage ## Build the Docker image
 
@@ -35,7 +35,7 @@ help: ## Show this help message
 
 init: | $(BIN_DIR)/grype $(BIN_DIR)/syft node_modules/ ## Initialize the project dependencies
 
-sbom: build | $(SBOM_FILE) ## Generate a Software Bill Of Materials (SBOM)
+sbom: $(SBOM_FILE) ## Generate a Software Bill Of Materials (SBOM)
 
 test: build node_modules/ ## Run the tests
 	npm run ava -- tests/
@@ -45,9 +45,9 @@ update-test-snapshots: build node_modules/ ## Update the test snapsthos
 
 .PHONY: default audit audit-docker audit-npm build clean help init sbom test update-test-snapshots
 
-$(SBOM_FILE): $(BIN_DIR)/syft
+$(SBOM_FILE): $(BIN_DIR)/syft $(TEMP_DIR)/dockerimage
 	./$(BIN_DIR)/syft $(IMAGE_NAME):latest
-$(VULN_FILE): $(BIN_DIR)/grype sbom
+$(VULN_FILE): $(BIN_DIR)/grype $(SBOM_FILE)
 	./$(BIN_DIR)/grype $(SBOM_FILE)
 
 $(BIN_DIR):

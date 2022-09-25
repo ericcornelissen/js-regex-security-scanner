@@ -36,7 +36,5 @@ jobs:
           cache: npm
       - name: Install Node.js dependencies
         run: npm ci
-      - name: Build
-        run: make build
       - name: Test
         run: make test
