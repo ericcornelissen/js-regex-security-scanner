@@ -56,7 +56,7 @@ jobs:
         if: ${{ always() }}
         with:
           if-no-files-found: error
-          name: container-scan
+          name: container-scan-${{ inputs.ref }}
           path: |
             ${{ env.SBOM_FILE }}
             ${{ env.VULN_FILE }}
