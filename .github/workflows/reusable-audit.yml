@@ -21,17 +21,13 @@ jobs:
         with:
           ref: ${{ inputs.ref }}
       - name: Download Syft and Grype
-        run: |
-          curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b ./bin v0.57.0
-          curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh  | sh -s -- -b ./bin v0.50.2
+        run: make bin/syft bin/grype
       - name: Build
-        run: docker build --tag ericornelissen/js-re-scan .
+        run: make build
       - name: Create SBOM
-        run: |
-          ./bin/syft ericornelissen/js-re-scan:latest
+        run: make ${{ env.SBOM_FILE }}
       - name: Scan SBOM
-        run: |
-          ./bin/grype ${{ env.SBOM_FILE }}
+        run: make ${{ env.VULN_FILE }}
       - name: Upload SBOM and vulnerability scan
         uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
         if: ${{ always() }}
@@ -57,4 +53,4 @@ jobs:
       - name: Install Node.js dependencies
         run: npm ci
       - name: Audit npm dependencies
-        run: npm audit
+        run: make audit-npm
