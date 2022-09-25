@@ -8,6 +8,7 @@ Versioning].
 ## [Unreleased]
 
 - (`4c29319`) Add labels with metadata to the Docker image.
+- (`1643b5e`) Fix incorrect errors due to ESLint ignore directives.
 
 ## [0.2.0] - 2022-09-21
 
