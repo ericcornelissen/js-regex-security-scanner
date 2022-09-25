@@ -19,15 +19,17 @@ LABEL name="js-regex-security-scanner" \
 	version="0.2.0" \
 	license="Apache-2.0"
 
+USER node:node
+RUN mkdir /home/node/js-re-scan
 WORKDIR /home/node/js-re-scan
 
-COPY package.json package-lock.json ./
+COPY --chown=node:node package.json package-lock.json ./
 RUN npm install \
 	--omit=dev \
 	--no-fund \
 	--no-update-notifier
 
-COPY ./ ./
+COPY --chown=node:node ./ ./
 
 ENTRYPOINT [ \
 	"npm", \
