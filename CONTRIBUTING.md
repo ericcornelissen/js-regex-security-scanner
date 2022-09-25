@@ -79,6 +79,7 @@ To be able to contribute you need at least the following:
 
 - [Git];
 - [Docker];
+- [Make];
 - [Node.js] v18.0.0 or higher and [npm] v8.1.2 or higher;
 - (Recommended) a code editor with [EditorConfig] support;
 
@@ -107,7 +108,7 @@ this setup. This means the two most important files are:
 To build the Docker image for this scanner, run:
 
 ```shell
-docker build --tag ericornelissen/js-re-scan .
+make build
 ```
 
 #### Testing
@@ -121,25 +122,23 @@ project.
 
 To be able to run the tests, make sure you:
 
-1. Initialized the [git] submodules.
-   - If you're cloning the project, use the `--recurse-submodules` flag.
-   - If you already cloned the repo, use `git submodule update --init`.
-1. Installed the [npm] dependencies using `npm install`.
-1. Have build the [Docker] image of the scanner locally.
+- Initialized the [git] submodules.
+  - If you're cloning the project, use the `--recurse-submodules` flag.
+  - If you already cloned the repo, use `git submodule update --init`.
 
 To run the tests, run:
 
 ```shell
-npm run ava
+make test
 ```
 
 ##### Updating Snapshots
 
 If you made changes to the scanner, it is likely necessary to update the test
-snapshots. To do this you need to be able to run the tests and then run:
+snapshots. To do this, run:
 
 ```shell
-npm run ava -- --update-snapshots
+make update-test-snapshots
 ```
 
 ##### Writing Tests
@@ -162,48 +161,33 @@ To write a test you need to do three things:
 
 ### SBOM
 
-To be able to generate a Software Bill Of Materials (SBOM), make sure you:
-
-- Have build the [Docker] image of the scanner locally.
-- Have [Syft] installed, you can run:
-
-  ```shell
-  curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | \
-    sh -s -- -b ./bin v0.57.0
-  ```
-
-To generate the SBOM at `./sbom.json`, run:
+To generate a Software Bill Of Materials (SBOM) at `./sbom.json`, run:
 
 ```shell
-./bin/syft ericornelissen/js-re-scan:latest
+make sbom
 ```
+
+This uses [Syft] to generate an SBOM for the Docker image.
 
 ### Vulnerability Scanning
 
 #### Docker
 
-To scan for vulnerabilities in the Docker image, make sure you:
-
-- Have generated the project's SBOM.
-- Have [Grype] installed, you can run:
-
-  ```shell
-  curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | \
-    sh -s -- -b ./bin v0.50.2
-  ```
-
-To generate a vulnerability report at `./vulns.json`, run:
+To get a vulnerability report for the Docker image at `./vulns.json`, run:
 
 ```shell
-./bin/grype sbom.json
+make audit-docker
 ```
+
+This uses [Grype] to determine vulnerabilities based on the SBOM (excluding
+npm).
 
 #### Node.js
 
 To scan for vulnerabilities in Node.js dependencies, run:
 
 ```shell
-npm audit
+make audit-npm
 ```
 
 [ava]: https://github.com/avajs/ava
@@ -214,6 +198,7 @@ npm audit
 [feature request]: https://github.com/ericcornelissen/js-regex-security-scanner/issues/new?labels=enhancement
 [git]: https://git-scm.com/
 [grype]: https://github.com/anchore/grype
+[make]: https://www.gnu.org/software/make/
 [node.js]: https://nodejs.org/en/
 [npm]: https://www.npmjs.com/
 [open issues]: https://github.com/ericcornelissen/js-regex-security-scanner/issues

@@ -11,7 +11,9 @@ VULN_FILE=vulns.json
 
 default: help
 
-audit: | $(VULN_FILE) ## Audit the project dependencies
+audit: audit-docker audit-npm ## Audit the project dependencies
+audit-docker: | $(VULN_FILE)
+audit-npm:
 	npm audit
 
 build: | $(TEMP_DIR)/dockerimage ## Build the Docker image
@@ -41,11 +43,11 @@ test: build node_modules/ ## Run the tests
 update-test-snapshots: build node_modules/ ## Update the test snapsthos
 	npm run ava -- tests/ --update-snapshots
 
-.PHONY: default audit build clean help init sbom test update-test-snapshots
+.PHONY: default audit audit-docker audit-npm build clean help init sbom test update-test-snapshots
 
 $(SBOM_FILE): $(BIN_DIR)/syft
 	./$(BIN_DIR)/syft $(IMAGE_NAME):latest
-$(VULN_FILE): $(BIN_DIR)/grype $(SBOM_FILE)
+$(VULN_FILE): $(BIN_DIR)/grype sbom
 	./$(BIN_DIR)/grype $(SBOM_FILE)
 
 $(BIN_DIR):
