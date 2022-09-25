@@ -3,7 +3,7 @@ IMAGE_NAME=ericornelissen/js-re-scan
 GRYPE_VERSION=v0.50.2
 SYFT_VERSION=v0.57.0
 
-BIN_DIR=bin
+BIN_DIR=.bin
 TEMP_DIR=.tmp
 
 SBOM_FILE=sbom.json
@@ -48,12 +48,15 @@ $(SBOM_FILE): $(BIN_DIR)/syft
 $(VULN_FILE): $(BIN_DIR)/grype $(SBOM_FILE)
 	./$(BIN_DIR)/grype $(SBOM_FILE)
 
+$(BIN_DIR):
+	@mkdir $(BIN_DIR)
 $(BIN_DIR)/syft:
 	curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | \
 		sh -s -- -b ./$(BIN_DIR) $(SYFT_VERSION)
 $(BIN_DIR)/grype:
 	curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | \
 		sh -s -- -b ./$(BIN_DIR) $(GRYPE_VERSION)
+
 node_modules/: .npmrc package*.json
 	npm install
 
