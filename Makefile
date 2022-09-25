@@ -1,8 +1,6 @@
 default: help
 
-audit: audit-docker audit-npm ## Audit the project dependencies
-audit-docker: | vulns.json
-audit-npm:
+audit: | vulns.json ## Audit the project dependencies
 	npm audit
 
 build: | .tmp/dockerimage ## Build the Docker image
@@ -33,7 +31,7 @@ test: build node_modules/ ## Run the tests
 update-test-snapshots: build node_modules/ ## Update the test snapsthos
 	npm run ava -- tests/ --update-snapshots
 
-.PHONY: default audit audit-docker audit-npm build clean help init sbom test update-test-snapshots
+.PHONY: default audit build clean help init sbom test update-test-snapshots
 
 sbom.json: bin/syft
 	./bin/syft ericornelissen/js-re-scan:latest
