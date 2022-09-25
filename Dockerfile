@@ -19,6 +19,8 @@ LABEL name="js-regex-security-scanner" \
 	version="0.2.0" \
 	license="Apache-2.0"
 
+ENV NODE_ENV=production
+
 USER node:node
 RUN mkdir /home/node/js-re-scan
 WORKDIR /home/node/js-re-scan
