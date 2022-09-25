@@ -19,25 +19,6 @@ jobs:
           ref: ${{ inputs.ref }}
       - name: Download Syft and Grype
         run: make .bin/syft .bin/grype
-      - name: Add configuration files
-        if: ${{ inputs.ref == 'v0' }}
-        run: |
-          cat <<EOT >> .syft.yml
-          output:
-            - json=sbom.json
-          EOT
-
-
-          cat <<EOT >> .grype.yml
-          output: json
-          file: vulns.json
-
-          fail-on-severity: low
-
-          ignore:
-            - package:
-                type: npm
-          EOT
       - name: Create SBOM
         run: make sbom
       - name: Scan SBOM
