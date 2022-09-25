@@ -18,7 +18,7 @@ jobs:
         with:
           ref: ${{ inputs.ref }}
       - name: Download Syft and Grype
-        run: make bin/syft bin/grype
+        run: make .bin/syft .bin/grype
       - name: Add configuration files
         if: ${{ inputs.ref == 'v0' }}
         run: |
