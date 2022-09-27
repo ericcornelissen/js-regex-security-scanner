@@ -1,0 +1,9 @@
+# Check out Fossa at: https://fossa.com/
+
+version: 3
+
+server: https://app.fossa.com
+
+paths:
+  exclude:
+    - ./testdata
