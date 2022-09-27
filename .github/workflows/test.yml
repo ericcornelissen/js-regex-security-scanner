@@ -19,6 +19,25 @@ jobs:
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
       - name: Build
         run: make build
+  licenses:
+    name: Licenses
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        with:
+          fetch-depth: 0
+      - name: Get initial commit
+        id: original-commit
+        run : |
+          SHA=$(git rev-list --max-parents=0 HEAD)
+          echo "::set-output name=sha::$SHA"
+      - name: Review dependencies
+        uses: actions/dependency-review-action@375c5370086bfff256c37f8beec0f437e2e72ae1
+        with:
+          config-file: ./.github/dependency-review.yml
+          base-ref: ${{ steps.original-commit.outputs.sha }}
+          head-ref: ${{ github.sha }}
   test:
     name: Test
     runs-on: ubuntu-latest

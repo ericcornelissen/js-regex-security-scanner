@@ -1,0 +1,10 @@
+allow-licenses:
+  - Apache-2.0
+  - BSD-2-Clause
+  - MIT
+  - MPL-2.0
+
+fail-on-scopes: # Intent: all scopes
+  - development
+  - runtime
+  - unknown
