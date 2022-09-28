@@ -4,7 +4,7 @@ A static analyzer to scan JavaScript code for problematic regular expressions.
 
 ## Getting started
 
-The scanner is available as a Docker image that you can run against any
+The scanner is available as a [Docker] image that you can run against any
 JavaScript project - for example:
 
 ```shell
@@ -30,13 +30,14 @@ The scanner has the following exit codes.
 ## About
 
 This scanner runs [ESLint] with the [eslint-plugin-regexp] plugin to find and
-report on Regular Expressions that violate rules with security implications.
+report on regular expressions that violate rules with security implications.
 
 ## License
 
 This project is licensed under the Apache 2.0 license, see [LICENSE] for the
 full license text.
 
+[docker]: https://www.docker.com/
 [eslint]: https://eslint.org/
 [eslint-plugin-regexp]: https://github.com/ota-meshi/eslint-plugin-regexp
 [license]: ./LICENSE

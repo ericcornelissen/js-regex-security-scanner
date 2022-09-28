@@ -1,6 +1,7 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+All notable changes to the _JavaScript Regex Security Scanner_ will be
+documented in this file.
 
 The format is based on [Keep a Changelog], and this project adheres to [Semantic
 Versioning].

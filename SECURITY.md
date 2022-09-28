@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-The table below shows which versions of the JavaScript Regex Security Scanner
+The table below shows which versions of the _JavaScript Regex Security Scanner_
 are currently supported with security updates.
 
 | Version | Supported | End-of-life |
@@ -11,19 +11,18 @@ are currently supported with security updates.
 
 ## Reporting a Vulnerability
 
-The maintainers of the JavaScript Regex Security Scanner take security bugs very
-seriously. We appreciate your efforts to responsibly disclose your findings. Due
-to the non-funded open-source nature of this project, we take a best-efforts
-approach when it comes to engaging with (security) reports.
+The maintainers of the _JavaScript Regex Security Scanner_ take security bugs
+very seriously. We appreciate your efforts to responsibly disclose your
+findings. Due to the non-funded open-source nature of this project, we take a
+best-efforts approach when it comes to engaging with (security) reports.
 
-To report a security issue in a supported version of the JavaScript Regex
-Security Scanner, send an email to [security@ericcornelissen.dev] and include
-the words _"SECURITY"_ and _"js-re-scan"_ in the subject line. Please do not
-open a regular issue or Pull Request in the public repository.
+To report a security issue in a supported version of the project, send an email
+to [security@ericcornelissen.dev] and include the words "SECURITY" and
+"js-re-scan" in the subject line. Please do not open a regular issue or Pull
+Request in the public repository.
 
-If you found a security bug in an unsupported version of the JavaScript Regex
-Security Scanner, please report this publicly. For example, as a regular issue
-in the public repository.
+If you found a security bug in an unsupported version of the project, please
+report this publicly. For example, as a regular issue in the public repository.
 
 ## Advisories
 
@@ -37,4 +36,4 @@ We would like to publicly thank the following reporters:
 
 - _None yet_
 
-[security@ericcornelissen.dev]: mailto:security@ericcornelissen.dev?subject=SECURITY%20%28s-re-scan%29
+[security@ericcornelissen.dev]: mailto:security@ericcornelissen.dev?subject=SECURITY%20%28js-re-scan%29
