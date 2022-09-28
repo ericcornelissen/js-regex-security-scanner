@@ -38,21 +38,17 @@ jobs:
         with:
           install-dir: ./.bin/
           version: 3.7.3
-      - name: Install Node.js dependencies
-        run: npm ci
-      - name: Catalogue licenses
-        run: ./.bin/licensed cache
       - name: Create NOTICE
-        run: ./.bin/licensed notices
+        run: make notice-npm
       - name: Upload NOTICE
         uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
         with:
           if-no-files-found: error
           name: notices-${{ github.sha }}
           path: |
-            .tmp/licensed/NOTICE
+            NOTICE-npm
       - name: Check licenses
-        run: ./.bin/licensed status
+        run: make license-check-npm
   test:
     name: Test
     runs-on: ubuntu-latest
