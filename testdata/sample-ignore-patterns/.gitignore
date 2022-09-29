@@ -1,0 +1,3 @@
+# Override root .gitignore configuration because we need these items for testing
+!.npm/
+!node_modules/
