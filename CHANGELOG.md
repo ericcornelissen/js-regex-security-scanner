@@ -30,7 +30,7 @@ Versioning].
 
 - (`3bc7786`) Correctly scan `.cjs` and `.mjs` files.
 - (`20b5b18`) Document the scanner's exit codes.
-- (`f2f6242`) Suggest using `--rm` flag when running the scanner in the docs.
+- (`f2f6242`) Update usage example to use the `--rm` flag.
 
 ## [0.1.0] - 2022-09-14
 

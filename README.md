@@ -17,7 +17,7 @@ The scanner has the following exit codes.
 
 | Exit code | Meaning                                          |
 | --------: | :----------------------------------------------- |
-| 0         | No problems were found                           |
+| 0         | No problems found                                |
 | 1         | Files with problematic regular expressions found |
 | 2         | Something went wrong while scanning              |
 

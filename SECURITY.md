@@ -17,7 +17,7 @@ findings. Due to the non-funded open-source nature of this project, we take a
 best-efforts approach when it comes to engaging with (security) reports.
 
 To report a security issue in a supported version of the project, send an email
-to [security@ericcornelissen.dev] and include the words "SECURITY" and
+to [security@ericcornelissen.dev] and include the terms "SECURITY" and
 "js-re-scan" in the subject line. Please do not open a regular issue or Pull
 Request in the public repository.
 

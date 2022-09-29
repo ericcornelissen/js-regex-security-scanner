@@ -20,10 +20,9 @@ For security related issues, please refer to the [security policy].
 
 ### Bug Reports
 
-If you have problems with the _JavaScript Regex Security Scanner_ or think
-you've found a bug, please report it to the developers; we ask you to always
-open an issue describing the bug as soon as possible so that we, and others, are
-aware of the bug.
+If you have problems with the project or think you've found a bug, please report
+it to the developers; we ask you to always open an issue describing the bug as
+soon as possible so that we, and others, are aware of the bug.
 
 Before reporting a bug, make sure you've actually found a real bug. Carefully
 read the documentation and see if it really says you can do what you're trying
