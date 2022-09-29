@@ -4,6 +4,13 @@ version: 3
 
 server: https://app.fossa.com
 
+project:
+  id: github.com/ericcornelissen/js-regex-security-scanner
+  name: js-regex-security-scanner
+  url: https://github.com/ericcornelissen/js-regex-security-scanner
+
 paths:
   exclude:
-    - ./testdata
+    - ./.bin/
+    - ./.tmp/
+    - ./testdata/
