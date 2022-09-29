@@ -25,19 +25,17 @@ jobs:
   licenses:
     name: Licenses
     runs-on: ubuntu-latest
-    env:
-      FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
       - name: Install Fossa CLI
         run : |
           curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install-latest.sh | bash
-      - name: Analyze licenses
+      - name: Check licenses
+        env:
+          FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY }}
         run: |
           fossa analyze
-      - name: Test license
-        run: |
           fossa test
   test:
     name: Test
