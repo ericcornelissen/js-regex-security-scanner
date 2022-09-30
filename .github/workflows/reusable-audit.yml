@@ -53,3 +53,18 @@ jobs:
       - name: Audit production npm dependencies
         if: ${{ startsWith(inputs.ref, 'v') }}
         run: make audit-npm ARGS="--omit dev"
+  secrets:
+    name: Secrets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        with:
+          fetch-depth: 0 # To allow for historic scans
+      - name: Scan for secrets
+        uses: gitleaks/gitleaks-action@5425999620c418539c61a8143f29e346d5f6cf08
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_ENABLE_COMMENTS: false
+          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: false
+          GITLEAKS_ENABLE_SUMMARY: true
