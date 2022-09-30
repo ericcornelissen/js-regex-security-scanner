@@ -35,6 +35,14 @@ help: ## Show this help message
 
 init: | $(BIN_DIR)/grype $(BIN_DIR)/syft node_modules/ ## Initialize the project dependencies
 
+lint-md: node_modules/ ## Lint MarkDown files
+	npm run markdownlint -- \
+		--dot \
+		--ignore-path .gitignore \
+		--ignore tests/snapshots \
+		--ignore testdata/ \
+		.
+
 sbom: $(SBOM_FILE) ## Generate a Software Bill Of Materials (SBOM)
 
 test: build node_modules/ ## Run the tests
