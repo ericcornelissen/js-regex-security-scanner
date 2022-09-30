@@ -44,6 +44,14 @@ notice-npm: $(LICENSED_CACHE) ## Create NOTICE for npm dependencies
 	./$(BIN_DIR)/licensed notice
 	mv $(TEMP_DIR)/licensed/NOTICE NOTICE-npm
 
+lint-md: node_modules/ ## Lint MarkDown files
+	npm run markdownlint -- \
+		--dot \
+		--ignore-path .gitignore \
+		--ignore tests/snapshots \
+		--ignore testdata/ \
+		.
+
 sbom: $(SBOM_FILE) ## Generate a Software Bill Of Materials (SBOM)
 
 test: build node_modules/ ## Run the tests

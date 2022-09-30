@@ -17,6 +17,11 @@ test("sample", t => {
 	t.snapshot(output);
 });
 
+test("sample-ignore-patterns", t => {
+	const output = scanDir(`${t.context.testdataDir}/sample-ignore-patterns`);
+	t.snapshot(output);
+});
+
 test("sample-ts", t => {
 	const output = scanDir(`${t.context.testdataDir}/sample-ts`);
 	t.snapshot(output);
