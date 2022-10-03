@@ -1,7 +1,10 @@
 name: Check
 on:
-  - push
-  - pull_request
+  pull_request:
+  push:
+    branches:
+      - main
+      - v0
 
 permissions: read-all
 
@@ -38,6 +41,21 @@ jobs:
           config-file: ./.github/dependency-review.yml
           base-ref: ${{ steps.original-commit.outputs.sha }}
           head-ref: ${{ github.sha }}
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+      - name: Install Node.js
+        uses: actions/setup-node@969bd2663942d722d85b6a8626225850c2f7be4b
+        with:
+          node-version: 18
+          cache: npm
+      - name: Install Node.js dependencies
+        run: npm ci
+      - name: Lint MarkDown
+        run: make lint-md
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -49,7 +67,7 @@ jobs:
         with:
           submodules: true
       - name: Install Node.js
-        uses: actions/setup-node@2fddd8803e2f5c9604345a0b591c3020ee971a93
+        uses: actions/setup-node@969bd2663942d722d85b6a8626225850c2f7be4b
         with:
           node-version: 18
           cache: npm
