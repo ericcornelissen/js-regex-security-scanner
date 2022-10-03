@@ -7,6 +7,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.2.2] - 2022-10-03
+
 - (`1222760`) Bump ESLint from `8.23.1` to `8.24.0`.
 - (`fa669fa`) Bump Node.js runtime from `18.9.0` to `18.9.1`.
 - (`ed6e031`) Bump Node.js runtime from `18.9.1` to `18.10.0`.
