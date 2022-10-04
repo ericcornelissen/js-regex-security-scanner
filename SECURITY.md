@@ -11,10 +11,10 @@ are currently supported with security updates.
 
 ## Reporting a Vulnerability
 
-The maintainers of the _JavaScript Regex Security Scanner_ take security bugs
-very seriously. We appreciate your efforts to responsibly disclose your
-findings. Due to the non-funded open-source nature of this project, we take a
-best-efforts approach when it comes to engaging with (security) reports.
+The maintainers of this project take security bugs very seriously. We appreciate
+your efforts to responsibly disclose your findings. Due to the non-funded and
+open-source nature of this project, we take a best-efforts approach when it
+comes to engaging with (security) reports.
 
 To report a security issue in a supported version of the project, send an email
 to [security@ericcornelissen.dev] and include the terms "SECURITY" and

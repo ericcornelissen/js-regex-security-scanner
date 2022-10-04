@@ -37,7 +37,13 @@ report on regular expressions that violate rules with security implications.
 This project is licensed under the Apache 2.0 license, see [LICENSE] for the
 full license text.
 
+---
+
+Please [open an issue] if you found a mistake or if you have a suggestion for
+how to improve the documentation.
+
 [docker]: https://www.docker.com/
 [eslint]: https://eslint.org/
 [eslint-plugin-regexp]: https://github.com/ota-meshi/eslint-plugin-regexp
 [license]: ./LICENSE
+[open an issue]: https://github.com/ericcornelissen/js-regex-security-scanner/issues/new?labels=documentation&template=documentation.md
