@@ -18,7 +18,7 @@ jobs:
       matrix:
         ref: ${{ fromJSON(inputs.refs) }}
     steps:
-      - name: Checkout Code
+      - name: Checkout repository
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
         with:
           ref: ${{ matrix.ref }}
@@ -45,7 +45,7 @@ jobs:
       matrix:
         ref: ${{ fromJSON(inputs.refs) }}
     steps:
-      - name: Checkout Code
+      - name: Checkout repository
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
         with:
           ref: ${{ matrix.ref }}
