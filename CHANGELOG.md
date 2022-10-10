@@ -8,7 +8,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`2d098a0`) Bump ESLint from `8.24.0` to `8.25.0`.
 
 ## [0.2.2] - 2022-10-03
 
