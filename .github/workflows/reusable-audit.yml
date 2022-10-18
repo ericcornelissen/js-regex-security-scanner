@@ -2,7 +2,8 @@ name: Audit
 on:
   workflow_call:
     inputs:
-      ref:
+      refs:
+        default: '[""]'
         required: false
         type: string
 
@@ -12,11 +13,15 @@ jobs:
   docker:
     name: Docker
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ref: ${{ fromJSON(inputs.refs) }}
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+      - name: Checkout repository
+        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
         with:
-          ref: ${{ inputs.ref }}
+          ref: ${{ matrix.ref }}
       - name: Download Syft and Grype
         run: make .bin/syft .bin/grype
       - name: Create SBOM
@@ -28,28 +33,47 @@ jobs:
         if: ${{ always() }}
         with:
           if-no-files-found: error
-          name: container-scan-${{ inputs.ref }}
+          name: container-scan-${{ matrix.ref }}
           path: |
             sbom.json
             vulns.json
   npm:
     name: npm
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ref: ${{ fromJSON(inputs.refs) }}
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+      - name: Checkout repository
+        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
         with:
-          ref: ${{ inputs.ref }}
+          ref: ${{ matrix.ref }}
       - name: Install Node.js
-        uses: actions/setup-node@969bd2663942d722d85b6a8626225850c2f7be4b
+        uses: actions/setup-node@8c91899e586c5b171469028077307d293428b516
         with:
           node-version: 18
           cache: npm
       - name: Install Node.js dependencies
         run: npm ci
       - name: Audit all npm dependencies
-        if: ${{ !startsWith(inputs.ref, 'v') }}
+        if: ${{ !startsWith(matrix.ref, 'v') }}
         run: make audit-npm
       - name: Audit production npm dependencies
-        if: ${{ startsWith(inputs.ref, 'v') }}
+        if: ${{ startsWith(matrix.ref, 'v') }}
         run: make audit-npm ARGS="--omit dev"
+  secrets:
+    name: Secrets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+        with:
+          fetch-depth: 0 # To allow for historic scans
+      - name: Scan for secrets
+        uses: gitleaks/gitleaks-action@5425999620c418539c61a8143f29e346d5f6cf08
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_ENABLE_COMMENTS: false
+          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: false
+          GITLEAKS_ENABLE_SUMMARY: true

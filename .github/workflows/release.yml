@@ -1,0 +1,76 @@
+name: Release
+on:
+  push:
+    tags:
+      - v*
+
+permissions: read-all
+
+jobs:
+  branch:
+    name: Branch
+    runs-on: ubuntu-latest
+    needs:
+      - validate
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+      - name: Get major version
+        uses: actions/github-script@100527700e8b29ca817ac0e0dfbfc5e8ff38edda
+        id: version
+        with:
+          result-encoding: string
+          script: |
+            const ref = context.ref
+            const tag = ref.replace(/^refs\/tags\//, "")
+            const major = tag.replace(/\.\d\.\d$/, "")
+            return major
+      - name: Update release branch
+        run: git push origin HEAD:v0
+  docker-hub:
+    name: Docker Hub
+    runs-on: ubuntu-latest
+    needs:
+      - validate
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+      - name: Get version
+        uses: actions/github-script@100527700e8b29ca817ac0e0dfbfc5e8ff38edda
+        id: version
+        with:
+          result-encoding: string
+          script: |
+            const ref = context.ref
+            const tag = ref.replace(/^refs\/tags\//, "")
+            return tag
+      - name: Log in to Docker Hub
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build and push to Docker Hub
+        uses: docker/build-push-action@c56af957549030174b10d6867f20e78cfd7debc5
+        with:
+          context: .
+          push: true
+          tags: >-
+            ericornelissen/js-re-scan:latest,
+            ericornelissen/js-re-scan:${{ steps.version.outputs.result }}
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
+      - name: Install Node.js
+        uses: actions/setup-node@8c91899e586c5b171469028077307d293428b516
+        with:
+          cache: npm
+          node-version: 18
+      - name: Install Node.js dependencies
+        run: npm ci
+      - name: Build
+        run: make build
+      - name: Test
+        run: make test
