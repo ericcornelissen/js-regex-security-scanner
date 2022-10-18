@@ -46,7 +46,9 @@ lint-md: node_modules/ ## Lint MarkDown files
 sbom: $(SBOM_FILE) ## Generate a Software Bill Of Materials (SBOM)
 
 test: build node_modules/ ## Run the tests
-	npm run ava -- tests/
+	npm run ava -- \
+		--timeout 20s \
+		tests/
 
 update-test-snapshots: build node_modules/ ## Update the test snapsthos
 	npm run ava -- tests/ --update-snapshots
