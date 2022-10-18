@@ -82,6 +82,7 @@ To be able to contribute you need at least the following:
 - [Make];
 - [Node.js] v18.0.0 or higher and [npm] v8.1.2 or higher;
 - (Recommended) a code editor with [EditorConfig] support;
+- (Optional) [Fossa CLI];
 
 ### Workflow
 
@@ -196,6 +197,7 @@ make audit-npm
 [editorconfig]: https://editorconfig.org/
 [eslint]: https://eslint.org/
 [feature request]: https://github.com/ericcornelissen/js-regex-security-scanner/issues/new?labels=enhancement
+[fossa cli]: https://github.com/fossas/fossa-cli
 [git]: https://git-scm.com/
 [grype]: https://github.com/anchore/grype
 [make]: https://www.gnu.org/software/make/

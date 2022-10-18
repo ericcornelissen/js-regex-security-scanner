@@ -35,6 +35,10 @@ help: ## Show this help message
 
 init: | $(BIN_DIR)/grype $(BIN_DIR)/syft node_modules/ ## Initialize the project dependencies
 
+license-check: ## Check dependency licenses
+	@fossa analyze
+	@fossa test
+
 lint-md: node_modules/ ## Lint MarkDown files
 	npm run markdownlint -- \
 		--dot \
@@ -51,7 +55,7 @@ test: build node_modules/ ## Run the tests
 update-test-snapshots: build node_modules/ ## Update the test snapsthos
 	npm run ava -- tests/ --update-snapshots
 
-.PHONY: default audit audit-docker audit-npm build clean help init sbom test update-test-snapshots
+.PHONY: default audit audit-docker audit-npm build clean help init license-check sbom test update-test-snapshots
 
 $(SBOM_FILE): $(BIN_DIR)/syft $(TEMP_DIR)/dockerimage
 	./$(BIN_DIR)/syft $(IMAGE_NAME):latest
