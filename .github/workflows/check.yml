@@ -22,6 +22,14 @@ jobs:
         uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
       - name: Build
         run: make build
+  licenses:
+    name: Licenses
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+      - name: Check licenses
+        run: make license-check
   lint:
     name: Lint
     runs-on: ubuntu-latest
