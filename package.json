@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "ava": "4.3.3",
+    "licensee": "9.0.0",
     "markdownlint-cli": "0.32.2"
   },
   "scripts": {
