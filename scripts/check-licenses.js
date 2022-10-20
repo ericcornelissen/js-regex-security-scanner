@@ -12,9 +12,8 @@ const allowedLicenses = [
 	"0BSD",
 	"Apache-2.0", "Apache 2.0",
 	"Artistic-2.0",
-	// TODO: uncomment, this is only commented for demonstration purposes
-	//"BSD-2-Clause",
-	//"BSD-3-Clause",
+	"BSD-2-Clause",
+	"BSD-3-Clause",
 	"CC0-1.0",
 	"CC-BY-3.0",
 	"GPL-2.0-only",

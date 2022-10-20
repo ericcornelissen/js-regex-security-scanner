@@ -35,7 +35,7 @@ help: ## Show this help message
 
 init: | $(BIN_DIR)/grype $(BIN_DIR)/syft node_modules/ ## Initialize the project dependencies
 
-license-check: $(SBOM_FILE)
+license-check: $(SBOM_FILE) ## Check dependency licenses
 	@node scripts/check-licenses.js
 
 lint-md: node_modules/ ## Lint MarkDown files
