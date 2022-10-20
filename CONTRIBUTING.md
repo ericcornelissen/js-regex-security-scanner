@@ -1,6 +1,6 @@
-# JavaScript Regex Security Scanner Contributing Guidelines
+# Contributing Guidelines
 
-The JavaScript Regex Security Scanner project welcomes contributions and
+The _JavaScript Regex Security Scanner_ project welcomes contributions and
 corrections of all forms. This includes improvements to the documentation or
 code base, new tests, bug fixes, and implementations of new features. We
 recommend you open an issue before making any substantial changes so you can be
@@ -20,10 +20,9 @@ For security related issues, please refer to the [security policy].
 
 ### Bug Reports
 
-If you have problems with the JavaScript Regex Security Scanner or think you've
-found a bug, please report it to the developers; we ask you to always open an
-issue describing the bug as soon as possible so that we, and others, are aware
-of the bug.
+If you have problems with the project or think you've found a bug, please report
+it to the developers; we ask you to always open an issue describing the bug as
+soon as possible so that we, and others, are aware of the bug.
 
 Before reporting a bug, make sure you've actually found a real bug. Carefully
 read the documentation and see if it really says you can do what you're trying
@@ -38,7 +37,7 @@ as a [bug report].
 ### Feature Requests
 
 New features are welcomed as long as they're related to the JavaScript ecosystem
-or JavaScript Regular Expression security. We recommend you to always open a
+or JavaScript regular expression security. We recommend you to always open a
 [feature request] before trying to implement the feature. You might receive
 useful feedback and can be sure you won't spend time implementing something that
 won't be merged.

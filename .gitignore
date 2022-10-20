@@ -1,16 +1,14 @@
 .bin/
 .tmp/
 NOTICE*
+sbom.json
+vulns.json
+
+# ESLint
+.eslintcache
 
 # Node.js
 node_modules/
 .npm/
 .node_repl_history
 npm-debug.log*
-
-# ESLint
-.eslintcache
-
-# Syft & Grype
-sbom.json
-vulns.json
