@@ -12,5 +12,8 @@
       "Python-2.0"
     ]
   },
+  "packages": {
+    "docopt": "<=0.6.2"
+  },
   "corrections": false
 }
