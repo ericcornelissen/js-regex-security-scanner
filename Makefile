@@ -1,6 +1,7 @@
 IMAGE_NAME=ericornelissen/js-re-scan
 
 GRYPE_VERSION=v0.50.2
+HADOLINT_VERSION=2.9.2
 SYFT_VERSION=v0.57.0
 
 BIN_DIR=.bin
@@ -35,6 +36,11 @@ help: ## Show this help message
 
 init: | $(BIN_DIR)/grype $(BIN_DIR)/syft node_modules/ ## Initialize the project dependencies
 
+lint-docker: ## Lint the Dockerfile
+	@docker run -i --rm \
+		hadolint/hadolint:$(HADOLINT_VERSION) \
+		< Dockerfile
+
 lint-md: node_modules/ ## Lint MarkDown files
 	npm run markdownlint -- \
 		--dot \
@@ -53,7 +59,7 @@ test: build node_modules/ ## Run the tests
 update-test-snapshots: build node_modules/ ## Update the test snapsthos
 	npm run ava -- tests/ --update-snapshots
 
-.PHONY: default audit audit-docker audit-npm build clean help init sbom test update-test-snapshots
+.PHONY: default audit audit-docker audit-npm build clean help init lint-docker lint-md sbom test update-test-snapshots
 
 $(SBOM_FILE): $(BIN_DIR)/syft $(TEMP_DIR)/dockerimage
 	./$(BIN_DIR)/syft $(IMAGE_NAME):latest
