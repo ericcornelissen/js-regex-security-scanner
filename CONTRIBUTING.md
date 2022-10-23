@@ -110,6 +110,15 @@ To build the Docker image for this scanner, run:
 make build
 ```
 
+#### Linting
+
+This project uses linters to catch mistakes and enforce style. You can use the
+following commands to check your changes if applicable:
+
+| File type        | Command        | Linter         |
+| :--------------- | :------------- | :------------- |
+| MarkDown (`.md`) | `make lint-md` | [markdownlint] |
+
 #### Testing
 
 This project is tested using "snapshot testing" with [AVA]. In short, this means
@@ -198,6 +207,7 @@ make audit-npm
 [git]: https://git-scm.com/
 [grype]: https://github.com/anchore/grype
 [make]: https://www.gnu.org/software/make/
+[markdownlint]: https://github.com/DavidAnson/markdownlint
 [node.js]: https://nodejs.org/en/
 [npm]: https://www.npmjs.com/
 [open issues]: https://github.com/ericcornelissen/js-regex-security-scanner/issues
