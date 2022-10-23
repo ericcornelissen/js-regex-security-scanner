@@ -1,13 +1,13 @@
-IMAGE_NAME=ericornelissen/js-re-scan
+IMAGE_NAME:=ericornelissen/js-re-scan
 
-GRYPE_VERSION=v0.50.2
-SYFT_VERSION=v0.57.0
+GRYPE_VERSION:=v0.50.2
+SYFT_VERSION:=v0.57.0
 
-BIN_DIR=.bin
-TEMP_DIR=.tmp
+BIN_DIR:=.bin
+TEMP_DIR:=.tmp
 
-SBOM_FILE=sbom.json
-VULN_FILE=vulns.json
+SBOM_FILE:=sbom.json
+VULN_FILE:=vulns.json
 
 default: help
 
