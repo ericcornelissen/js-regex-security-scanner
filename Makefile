@@ -5,6 +5,7 @@ HADOLINT_VERSION=2.9.2
 SYFT_VERSION=v0.57.0
 
 BIN_DIR=.bin
+ROOT_DIR:=$(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 TEMP_DIR=.tmp
 
 SBOM_FILE=sbom.json
@@ -38,6 +39,7 @@ init: | $(BIN_DIR)/grype $(BIN_DIR)/syft node_modules/ ## Initialize the project
 
 lint-docker: ## Lint the Dockerfile
 	@docker run -i --rm \
+		--mount "type=bind,source=$(ROOT_DIR)/.hadolint.yml,target=/.config/hadolint.yaml" \
 		hadolint/hadolint:$(HADOLINT_VERSION) \
 		< Dockerfile
 
