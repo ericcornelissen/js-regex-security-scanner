@@ -112,8 +112,13 @@ make build
 
 #### Linting
 
-This project uses linters to catch mistakes and enforce style. You can use the
-following commands to check your changes if applicable:
+This project uses linters to catch mistakes and enforce style. Run:
+
+```shell
+make lint
+```
+
+to run all linters or use the following commands to check specific file types:
 
 | File type        | Command            | Linter         |
 | :--------------- | :----------------- | :------------- |
