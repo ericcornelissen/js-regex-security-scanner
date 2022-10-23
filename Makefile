@@ -14,7 +14,7 @@ default: help
 audit: audit-docker audit-npm ## Audit the project dependencies
 audit-docker: | $(VULN_FILE)
 audit-npm:
-	npm audit $(ARGS)
+	@npm audit $(ARGS)
 
 build: | $(TEMP_DIR)/dockerimage ## Build the Docker image
 
@@ -36,7 +36,7 @@ help: ## Show this help message
 init: | $(BIN_DIR)/grype $(BIN_DIR)/syft node_modules/ ## Initialize the project dependencies
 
 lint-md: node_modules/ ## Lint MarkDown files
-	npm run markdownlint -- \
+	@npm run markdownlint -- \
 		--dot \
 		--ignore-path .gitignore \
 		--ignore tests/snapshots \
@@ -46,27 +46,29 @@ lint-md: node_modules/ ## Lint MarkDown files
 sbom: $(SBOM_FILE) ## Generate a Software Bill Of Materials (SBOM)
 
 test: build node_modules/ ## Run the tests
-	npm run ava -- \
+	@npm run ava -- \
 		--timeout 20s \
 		tests/
 
 update-test-snapshots: build node_modules/ ## Update the test snapsthos
-	npm run ava -- tests/ --update-snapshots
+	@npm run ava -- \
+		--update-snapshots \
+		tests/
 
 .PHONY: default audit audit-docker audit-npm build clean help init sbom test update-test-snapshots
 
 $(SBOM_FILE): $(BIN_DIR)/syft $(TEMP_DIR)/dockerimage
-	./$(BIN_DIR)/syft $(IMAGE_NAME):latest
+	@./$(BIN_DIR)/syft $(IMAGE_NAME):latest
 $(VULN_FILE): $(BIN_DIR)/grype $(SBOM_FILE)
-	./$(BIN_DIR)/grype $(SBOM_FILE)
+	@./$(BIN_DIR)/grype $(SBOM_FILE)
 
 $(BIN_DIR):
 	@mkdir $(BIN_DIR)
 $(BIN_DIR)/syft:
-	curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | \
+	@curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | \
 		sh -s -- -b ./$(BIN_DIR) $(SYFT_VERSION)
 $(BIN_DIR)/grype:
-	curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | \
+	@curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | \
 		sh -s -- -b ./$(BIN_DIR) $(GRYPE_VERSION)
 
 node_modules/: .npmrc package*.json
@@ -75,5 +77,5 @@ node_modules/: .npmrc package*.json
 $(TEMP_DIR):
 	@mkdir $(TEMP_DIR)
 $(TEMP_DIR)/dockerimage: $(TEMP_DIR) .dockerignore .eslintrc.yml Dockerfile package*.json
-	docker build --tag $(IMAGE_NAME) .
+	@docker build --tag $(IMAGE_NAME) .
 	@touch $(TEMP_DIR)/dockerimage
