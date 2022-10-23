@@ -35,6 +35,8 @@ jobs:
           cache: npm
       - name: Install Node.js dependencies
         run: npm ci
+      - name: Lint Dockerfile
+        run: make lint-docker
       - name: Lint MarkDown
         run: make lint-md
   test:

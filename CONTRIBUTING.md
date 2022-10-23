@@ -115,9 +115,10 @@ make build
 This project uses linters to catch mistakes and enforce style. You can use the
 following commands to check your changes if applicable:
 
-| File type        | Command        | Linter         |
-| :--------------- | :------------- | :------------- |
-| MarkDown (`.md`) | `make lint-md` | [markdownlint] |
+| File type        | Command            | Linter         |
+| :--------------- | :----------------- | :------------- |
+| `Dockerfile`     | `make lint-docker` | [hadolint]     |
+| MarkDown (`.md`) | `make lint-md`     | [markdownlint] |
 
 #### Testing
 
@@ -206,6 +207,7 @@ make audit-npm
 [feature request]: https://github.com/ericcornelissen/js-regex-security-scanner/issues/new?labels=enhancement
 [git]: https://git-scm.com/
 [grype]: https://github.com/anchore/grype
+[hadolint]: https://github.com/hadolint/hadolint
 [make]: https://www.gnu.org/software/make/
 [markdownlint]: https://github.com/DavidAnson/markdownlint
 [node.js]: https://nodejs.org/en/
