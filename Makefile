@@ -18,8 +18,8 @@ VULN_FILE:=vulns.json
 default: help
 
 audit: audit-docker audit-npm ## Audit the project dependencies
-audit-docker: $(VULN_FILE)
-audit-npm:
+audit-docker: $(VULN_FILE) ## Audit the Docker image dependencies
+audit-npm: ## Audit the npm dependencies
 	@npm audit $(ARGS)
 
 build: $(TEMP_DIR)/dockerimage ## Build the Docker image
