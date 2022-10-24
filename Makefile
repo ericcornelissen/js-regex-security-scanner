@@ -8,6 +8,10 @@ BIN_DIR:=.bin
 ROOT_DIR:=$(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 TEMP_DIR:=.tmp
 
+GRYPE=$(BIN_DIR)/grype
+NODE_MODULES=node_modules/
+SYFT=$(BIN_DIR)/syft
+
 SBOM_FILE:=sbom.json
 VULN_FILE:=vulns.json
 
@@ -24,7 +28,7 @@ clean: ## Clean the repository
 	@git clean -fx \
 		$(BIN_DIR) \
 		$(TEMP_DIR) \
-		node_modules/ \
+		$(NODE_MODULES) \
 		$(SBOM_FILE) \
 		$(VULN_FILE)
 
@@ -35,7 +39,7 @@ help: ## Show this help message
 	  printf "  \033[36m%-30s\033[0m %s\n", $$1, $$NF \
 	}' $(MAKEFILE_LIST)
 
-init: $(BIN_DIR)/grype $(BIN_DIR)/syft node_modules/ ## Initialize the project dependencies
+init: $(GRYPE) $(SYFT) $(NODE_MODULES) ## Initialize the project dependencies
 
 lint: lint-docker lint-md ## Lint the project
 
@@ -45,7 +49,7 @@ lint-docker: ## Lint the Dockerfile
 		hadolint/hadolint:$(HADOLINT_VERSION) \
 		< Dockerfile
 
-lint-md: node_modules/ ## Lint MarkDown files
+lint-md: $(NODE_MODULES) ## Lint MarkDown files
 	@npm run markdownlint -- \
 		--dot \
 		--ignore-path .gitignore \
@@ -55,33 +59,33 @@ lint-md: node_modules/ ## Lint MarkDown files
 
 sbom: $(SBOM_FILE) ## Generate a Software Bill Of Materials (SBOM)
 
-test: build node_modules/ ## Run the tests
+test: build $(NODE_MODULES) ## Run the tests
 	@npm run ava -- \
 		--timeout 20s \
 		tests/
 
-update-test-snapshots: build node_modules/ ## Update the test snapsthos
+update-test-snapshots: build $(NODE_MODULES) ## Update the test snapsthos
 	@npm run ava -- \
 		--update-snapshots \
 		tests/
 
 .PHONY: default audit audit-docker audit-npm build clean help init lint lint-docker lint-md sbom test update-test-snapshots
 
-$(SBOM_FILE): $(BIN_DIR)/syft $(TEMP_DIR)/dockerimage
-	@./$(BIN_DIR)/syft $(IMAGE_NAME):latest
-$(VULN_FILE): $(BIN_DIR)/grype $(SBOM_FILE)
-	@./$(BIN_DIR)/grype $(SBOM_FILE)
+$(SBOM_FILE): $(SYFT) $(TEMP_DIR)/dockerimage
+	@./$(SYFT) $(IMAGE_NAME):latest
+$(VULN_FILE): $(GRYPE) $(SBOM_FILE)
+	./$(GRYPE) $(SBOM_FILE)
 
 $(BIN_DIR):
 	@mkdir $(BIN_DIR)
-$(BIN_DIR)/syft:
+$(SYFT):
 	@curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | \
 		sh -s -- -b ./$(BIN_DIR) $(SYFT_VERSION)
-$(BIN_DIR)/grype:
+$(GRYPE):
 	@curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | \
 		sh -s -- -b ./$(BIN_DIR) $(GRYPE_VERSION)
 
-node_modules/: .npmrc package*.json
+$(NODE_MODULES): .npmrc package*.json
 	npm install
 
 $(TEMP_DIR):
