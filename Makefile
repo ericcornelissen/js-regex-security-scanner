@@ -14,11 +14,11 @@ VULN_FILE:=vulns.json
 default: help
 
 audit: audit-docker audit-npm ## Audit the project dependencies
-audit-docker: | $(VULN_FILE)
+audit-docker: $(VULN_FILE)
 audit-npm:
 	@npm audit $(ARGS)
 
-build: | $(TEMP_DIR)/dockerimage ## Build the Docker image
+build: $(TEMP_DIR)/dockerimage ## Build the Docker image
 
 clean: ## Clean the repository
 	@git clean -fx \
@@ -35,7 +35,7 @@ help: ## Show this help message
 	  printf "  \033[36m%-30s\033[0m %s\n", $$1, $$NF \
 	}' $(MAKEFILE_LIST)
 
-init: | $(BIN_DIR)/grype $(BIN_DIR)/syft node_modules/ ## Initialize the project dependencies
+init: $(BIN_DIR)/grype $(BIN_DIR)/syft node_modules/ ## Initialize the project dependencies
 
 lint: lint-docker lint-md ## Lint the project
 
