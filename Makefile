@@ -37,6 +37,8 @@ help: ## Show this help message
 
 init: | $(BIN_DIR)/grype $(BIN_DIR)/syft node_modules/ ## Initialize the project dependencies
 
+lint: lint-docker lint-md ## Lint the project
+
 lint-docker: ## Lint the Dockerfile
 	@docker run -i --rm \
 		--mount "type=bind,source=$(ROOT_DIR)/.hadolint.yml,target=/.config/hadolint.yaml" \
@@ -63,7 +65,7 @@ update-test-snapshots: build node_modules/ ## Update the test snapsthos
 		--update-snapshots \
 		tests/
 
-.PHONY: default audit audit-docker audit-npm build clean help init lint-docker lint-md sbom test update-test-snapshots
+.PHONY: default audit audit-docker audit-npm build clean help init lint lint-docker lint-md sbom test update-test-snapshots
 
 $(SBOM_FILE): $(BIN_DIR)/syft $(TEMP_DIR)/dockerimage
 	@./$(BIN_DIR)/syft $(IMAGE_NAME):latest
