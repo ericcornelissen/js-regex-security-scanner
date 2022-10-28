@@ -2,7 +2,7 @@ IMAGE_NAME=ericornelissen/js-re-scan
 
 GRYPE_VERSION=v0.51.0
 HADOLINT_VERSION=2.9.2
-SYFT_VERSION=v0.57.0
+SYFT_VERSION=v0.59.0
 
 BIN_DIR=.bin
 ROOT_DIR:=$(dir $(realpath $(lastword $(MAKEFILE_LIST))))
