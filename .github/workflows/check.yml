@@ -38,11 +38,13 @@ jobs:
         with:
           install-dir: ./.bin/
           version: 3.7.3
+      - name: Install Node.js dependencies
+        run: npm ci
       - name: Check Docker licenses
-        continue-on-error: true
+        if: ${{ always() }}
         run: make license-check-docker
       - name: Check npm licenses
-        continue-on-error: true
+        if: ${{ always() }}
         run: make license-check-npm
       - name: Create NOTICE
         run: make notice-npm
