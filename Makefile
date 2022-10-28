@@ -1,30 +1,34 @@
-IMAGE_NAME=ericornelissen/js-re-scan
+IMAGE_NAME:=ericornelissen/js-re-scan
 
-GRYPE_VERSION=v0.51.0
-HADOLINT_VERSION=2.9.2
-SYFT_VERSION=v0.59.0
+GRYPE_VERSION:=v0.51.0
+HADOLINT_VERSION:=2.9.2
+SYFT_VERSION:=v0.59.0
 
-BIN_DIR=.bin
+BIN_DIR:=.bin
 ROOT_DIR:=$(dir $(realpath $(lastword $(MAKEFILE_LIST))))
-TEMP_DIR=.tmp
+TEMP_DIR:=.tmp
 
-SBOM_FILE=sbom.json
-VULN_FILE=vulns.json
+GRYPE=$(BIN_DIR)/grype
+NODE_MODULES=node_modules/
+SYFT=$(BIN_DIR)/syft
+
+SBOM_FILE:=sbom.json
+VULN_FILE:=vulns.json
 
 default: help
 
 audit: audit-docker audit-npm ## Audit the project dependencies
-audit-docker: | $(VULN_FILE)
-audit-npm:
-	npm audit $(ARGS)
+audit-docker: $(VULN_FILE) ## Audit the Docker image dependencies
+audit-npm: ## Audit the npm dependencies
+	@npm audit $(ARGS)
 
-build: | $(TEMP_DIR)/dockerimage ## Build the Docker image
+build: $(TEMP_DIR)/dockerimage ## Build the Docker image
 
 clean: ## Clean the repository
 	@git clean -fx \
 		$(BIN_DIR) \
 		$(TEMP_DIR) \
-		node_modules/ \
+		$(NODE_MODULES) \
 		$(SBOM_FILE) \
 		$(VULN_FILE)
 
@@ -35,7 +39,7 @@ help: ## Show this help message
 	  printf "  \033[36m%-30s\033[0m %s\n", $$1, $$NF \
 	}' $(MAKEFILE_LIST)
 
-init: | $(BIN_DIR)/grype $(BIN_DIR)/syft node_modules/ ## Initialize the project dependencies
+init: $(GRYPE) $(SYFT) $(NODE_MODULES) ## Initialize the project dependencies
 
 lint: lint-docker lint-md ## Lint the project
 
@@ -45,8 +49,8 @@ lint-docker: ## Lint the Dockerfile
 		hadolint/hadolint:$(HADOLINT_VERSION) \
 		< Dockerfile
 
-lint-md: node_modules/ ## Lint MarkDown files
-	npm run markdownlint -- \
+lint-md: $(NODE_MODULES) ## Lint MarkDown files
+	@npm run markdownlint -- \
 		--dot \
 		--ignore-path .gitignore \
 		--ignore tests/snapshots \
@@ -55,35 +59,37 @@ lint-md: node_modules/ ## Lint MarkDown files
 
 sbom: $(SBOM_FILE) ## Generate a Software Bill Of Materials (SBOM)
 
-test: build node_modules/ ## Run the tests
-	npm run ava -- \
+test: build $(NODE_MODULES) ## Run the tests
+	@npm run ava -- \
 		--timeout 20s \
 		tests/
 
-update-test-snapshots: build node_modules/ ## Update the test snapsthos
-	npm run ava -- tests/ --update-snapshots
+update-test-snapshots: build $(NODE_MODULES) ## Update the test snapsthos
+	@npm run ava -- \
+		--update-snapshots \
+		tests/
 
 .PHONY: default audit audit-docker audit-npm build clean help init lint lint-docker lint-md sbom test update-test-snapshots
 
-$(SBOM_FILE): $(BIN_DIR)/syft $(TEMP_DIR)/dockerimage
-	./$(BIN_DIR)/syft $(IMAGE_NAME):latest
-$(VULN_FILE): $(BIN_DIR)/grype $(SBOM_FILE)
-	./$(BIN_DIR)/grype $(SBOM_FILE)
+$(SBOM_FILE): $(SYFT) $(TEMP_DIR)/dockerimage
+	@./$(SYFT) $(IMAGE_NAME):latest
+$(VULN_FILE): $(GRYPE) $(SBOM_FILE)
+	@./$(GRYPE) $(SBOM_FILE)
 
 $(BIN_DIR):
 	@mkdir $(BIN_DIR)
-$(BIN_DIR)/syft:
-	curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | \
+$(SYFT):
+	@curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | \
 		sh -s -- -b ./$(BIN_DIR) $(SYFT_VERSION)
-$(BIN_DIR)/grype:
-	curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | \
+$(GRYPE):
+	@curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | \
 		sh -s -- -b ./$(BIN_DIR) $(GRYPE_VERSION)
 
-node_modules/: .npmrc package*.json
-	npm install
+$(NODE_MODULES): .npmrc package*.json
+	@npm install
 
 $(TEMP_DIR):
 	@mkdir $(TEMP_DIR)
 $(TEMP_DIR)/dockerimage: $(TEMP_DIR) .dockerignore .eslintrc.yml Dockerfile package*.json
-	docker build --tag $(IMAGE_NAME) .
+	@docker build --tag $(IMAGE_NAME) .
 	@touch $(TEMP_DIR)/dockerimage
