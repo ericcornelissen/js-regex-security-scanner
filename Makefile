@@ -1,7 +1,7 @@
 IMAGE_NAME:=ericornelissen/js-re-scan
 
 GRYPE_VERSION:=v0.51.0
-HADOLINT_VERSION:=2.9.2
+HADOLINT_VERSION:=sha256:d355bd7df747a0f124f3b5e7b21e9dafd0cb19732a276f901f0fdee243ec1f3b # tag=2.9.2
 SYFT_VERSION:=v0.59.0
 
 BIN_DIR:=.bin
@@ -52,7 +52,7 @@ lint: lint-docker lint-md ## Lint the project
 lint-docker: ## Lint the Dockerfile
 	@docker run -i --rm \
 		--mount "type=bind,source=$(ROOT_DIR)/.hadolint.yml,target=/.config/hadolint.yaml" \
-		hadolint/hadolint:$(HADOLINT_VERSION) \
+		hadolint/hadolint@$(HADOLINT_VERSION) \
 		< Dockerfile
 
 lint-md: $(NODE_MODULES) ## Lint MarkDown files
