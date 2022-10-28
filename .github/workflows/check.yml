@@ -38,6 +38,14 @@ jobs:
         with:
           install-dir: ./.bin/
           version: 3.7.3
+      - name: Install Node.js dependencies
+        run: npm ci
+      - name: Check Docker licenses
+        if: ${{ always() }}
+        run: make license-check-docker
+      - name: Check npm licenses
+        if: ${{ always() }}
+        run: make license-check-npm
       - name: Create NOTICE
         run: make notice-npm
       - name: Upload NOTICE
@@ -47,8 +55,6 @@ jobs:
           name: notices-${{ github.sha }}
           path: |
             NOTICE-npm
-      - name: Check licenses
-        run: make license-check-npm
   lint:
     name: Lint
     runs-on: ubuntu-latest

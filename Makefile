@@ -44,6 +44,11 @@ help: ## Show this help message
 
 init: $(LICENSED) $(GRYPE) $(SYFT) $(NODE_MODULES) ## Initialize the project dependencies
 
+license-check: license-check-docker license-check-npm ## Check the project dependency licenses
+
+license-check-docker: $(SBOM_FILE) ## Check Docker image dependency licenses
+	@node scripts/check-licenses.js
+
 license-check-npm: $(LICENSED_CACHE) ## Check npm dependency licenses
 	@./$(LICENSED) status
 
@@ -79,7 +84,7 @@ update-test-snapshots: build $(NODE_MODULES) ## Update the test snapsthos
 		--update-snapshots \
 		tests/
 
-.PHONY: default audit audit-docker audit-npm build clean help init license-check-npm lint lint-docker lint-md notice-npm sbom test update-test-snapshots
+.PHONY: default audit audit-docker audit-npm build clean help init license-check license-check-docker license-check-npm lint lint-docker lint-md notice-npm sbom test update-test-snapshots
 
 $(SBOM_FILE): $(SYFT) $(TEMP_DIR)/dockerimage
 	@./$(SYFT) $(IMAGE_NAME):latest

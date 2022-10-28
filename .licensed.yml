@@ -10,8 +10,12 @@ allowed:
   - apache-2.0
   - bsd-2-clause
   - bsd-3-clause
+  - gpl-2.0-only
+  - gpl-2.0-or-later
   - isc
   - mit
+  - openssl
+  - zlib
 
 reviewed:
   npm:
