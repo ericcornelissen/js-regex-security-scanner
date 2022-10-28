@@ -86,6 +86,16 @@ Follow these steps to release a new version (using `v0.1.2` as an example):
    git tag v0.1.2
    ```
 
+   and push it:
+
+   ```shell
+   git push origin v0.1.2
+   ```
+
+   > **Note**: At this point, the continuous delivery automation may kick in and
+   > complete the release process. If not, or only partially, continue following
+   > the remaining steps.
+
 1. Update the `v0` branch to point to the same commit as the new tag:
 
    ```shell
@@ -93,15 +103,11 @@ Follow these steps to release a new version (using `v0.1.2` as an example):
    git merge main
    ```
 
-1. Push the `v0` branch and new tag:
+   and push it:
 
    ```shell
-   git push origin v0 v0.1.2
+   git push origin v0
    ```
-
-   > **Note**: At this point, the continuous delivery automation may kick in and
-   > complete the release process. If not, or only partially, continue following
-   > the remaining steps.
 
 1. Publish to [Docker], first the with a version tag:
 

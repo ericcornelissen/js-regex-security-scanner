@@ -110,6 +110,21 @@ To build the Docker image for this scanner, run:
 make build
 ```
 
+#### Linting
+
+This project uses linters to catch mistakes and enforce style. Run:
+
+```shell
+make lint
+```
+
+to run all linters or use the following commands to check specific file types:
+
+| File type        | Command            | Linter         |
+| :--------------- | :----------------- | :------------- |
+| `Dockerfile`     | `make lint-docker` | [hadolint]     |
+| MarkDown (`.md`) | `make lint-md`     | [markdownlint] |
+
 #### Testing
 
 This project is tested using "snapshot testing" with [AVA]. In short, this means
@@ -197,7 +212,9 @@ make audit-npm
 [feature request]: https://github.com/ericcornelissen/js-regex-security-scanner/issues/new?labels=enhancement
 [git]: https://git-scm.com/
 [grype]: https://github.com/anchore/grype
+[hadolint]: https://github.com/hadolint/hadolint
 [make]: https://www.gnu.org/software/make/
+[markdownlint]: https://github.com/DavidAnson/markdownlint
 [node.js]: https://nodejs.org/en/
 [npm]: https://www.npmjs.com/
 [open issues]: https://github.com/ericcornelissen/js-regex-security-scanner/issues
