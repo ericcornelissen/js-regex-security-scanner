@@ -27,9 +27,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8
       - name: Install Node.js
-        uses: actions/setup-node@2fddd8803e2f5c9604345a0b591c3020ee971a93
+        uses: actions/setup-node@8c91899e586c5b171469028077307d293428b516
         with:
           node-version: 18
           cache: npm
@@ -41,7 +41,7 @@ jobs:
       - name: Create NOTICE
         run: make notice-npm
       - name: Upload NOTICE
-        uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8
+        uses: actions/upload-artifact@83fd05a356d7e2593de66fc9913b3002723633cb
         with:
           if-no-files-found: error
           name: notices-${{ github.sha }}
@@ -62,6 +62,8 @@ jobs:
           cache: npm
       - name: Install Node.js dependencies
         run: npm ci
+      - name: Lint Dockerfile
+        run: make lint-docker
       - name: Lint MarkDown
         run: make lint-md
   test:
