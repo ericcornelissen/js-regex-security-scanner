@@ -25,6 +25,14 @@ const allowedLicenses = [
 	"Zlib",
 ];
 
+// ----------
+// Ecosystems
+// ----------
+
+const skipEcosystems = [
+	"npm",
+];
+
 // ----------------
 // Helper functions
 // ----------------
@@ -70,6 +78,7 @@ const sbom = JSON.parse(rawSbom);
 // -----------------
 
 const licenseViolations = sbom.artifacts
+	.filter(artifact => !skipEcosystems.includes(artifact.type))
 	.filter(artifact => !artifact.licenses.some(isAllowedLicense))
 	.map(artifact => {
 		return {
