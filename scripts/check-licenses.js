@@ -3,27 +3,7 @@ import * as path from "node:path";
 import * as process from "node:process";
 import * as url from "node:url";
 
-// ------------
-// License list
-// ------------
-
-const allowedLicenses = [
-	"BSD",
-	"0BSD",
-	"Apache-2.0", "Apache 2.0",
-	"Artistic-2.0",
-	"BSD-2-Clause",
-	"BSD-3-Clause",
-	"CC0-1.0",
-	"CC-BY-3.0",
-	"GPL-2.0-only",
-	"GPL-2.0-or-later",
-	"ISC",
-	"MIT",
-	"OpenSSL",
-	"Python-2.0",
-	"Zlib",
-];
+import YAML from "yaml";
 
 // ----------
 // Ecosystems
@@ -33,9 +13,18 @@ const skipEcosystems = [
 	"npm",
 ];
 
-// ----------------
-// Helper functions
-// ----------------
+// ---------
+// Utilities
+// ---------
+
+const projectRoot = path.resolve(
+	path.dirname(
+		url.fileURLToPath(
+			new URL(import.meta.url),
+		),
+	),
+	"..",
+);
 
 const matches = (string) => (regexp) => regexp.test(string);
 
@@ -47,24 +36,32 @@ const toMatchWholeWordExpression = (string) => {
 	return new RegExp(`${preWordExpr}${string}${postWordExpr}`);
 };
 
-const isAllowedLicense = (license) =>
-	allowedLicenses.includes(license) ||
+const isAllowedLicense = (_license) => {
+	const license = _license.toLowerCase();
+	return	allowedLicenses.includes(license) ||
 	allowedLicenses
 		.map(toMatchWholeWordExpression)
 		.some(matches(license));
+};
+
+// -------------
+// Load licenses
+// -------------
+
+const licensedConfigFile = path.resolve(
+	projectRoot,
+	".licensed.yml",
+);
+
+const licensedConfigRaw = fs.readFileSync(licensedConfigFile, { encoding: "utf8" });
+const licensedConfig = YAML.parse(licensedConfigRaw);
+
+const allowedLicenses = licensedConfig.allowed;
 
 // -------------
 // Load the SBOM
 // -------------
 
-const projectRoot = path.resolve(
-	path.dirname(
-		url.fileURLToPath(
-			new URL(import.meta.url),
-		),
-	),
-	"..",
-);
 const sbomFile = path.resolve(
 	projectRoot,
 	"sbom.json",
