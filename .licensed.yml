@@ -1,0 +1,34 @@
+# Check out Licensed at: https://github.com/github/licensed
+
+root: true
+
+sources:
+  npm: true
+
+allowed:
+  - 0bsd
+  - apache-2.0
+  - bsd-2-clause
+  - bsd-3-clause
+  - isc
+  - mit
+
+reviewed:
+  npm:
+    - "@typescript-eslint/parser" # bsd-2-clause
+    - "@typescript-eslint/typescript-estree" # bsd-2-clause
+    - argparse # python-2.0
+    - color-convert # mit
+    - doctrine # apache-2.0
+    - esquery # bsd-3-clause
+    - esrecurse # bsd-2-clause
+    - esutils # bsd-2-clause
+    - estraverse # bsd-2-clause
+    - fs.realpath # isc
+    - glob # isc
+    - ignore # mit
+    - lodash.merge # cc0
+    - type-fest # mit
+    - uri-js # bsd-2-clause
+
+cache_path: .tmp/licensed
