@@ -34,7 +34,7 @@ jobs:
           node-version: 18
           cache: npm
       - name: Install Licensed
-        uses: jonabc/setup-licensed@d477a8f55b137ce955453cfd42cb0b438ba2e3e6
+        uses: jonabc/setup-licensed@23892537a4b9275324fe790ff1057eb1d00fddbd
         with:
           install-dir: ./.bin/
           version: 3.7.3
