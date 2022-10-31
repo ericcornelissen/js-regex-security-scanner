@@ -15,6 +15,7 @@ allowed:
   - isc
   - mit
   - openssl
+  - python-2.0
   - zlib
 
 reviewed:
@@ -26,13 +27,13 @@ reviewed:
     - doctrine # apache-2.0
     - esquery # bsd-3-clause
     - esrecurse # bsd-2-clause
-    - esutils # bsd-2-clause
     - estraverse # bsd-2-clause
+    - esutils # bsd-2-clause
     - fs.realpath # isc
     - glob # isc
     - ignore # mit
-    - lodash.merge # cc0
-    - type-fest # mit
+    - lodash.merge # mit
+    - type-fest # mit or cc0-1.0
     - uri-js # bsd-2-clause
 
 cache_path: .tmp/licensed
