@@ -1,7 +1,7 @@
 {
   "name": "js-regex-security-scanner",
   "description": "A static analyzer to scan JavaScript code for problematic regular expressions.",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "type": "module",
   "private": true,
   "license": "Apache-2.0",
