@@ -12,6 +12,7 @@ Versioning].
 - (`a72cfc8`) Bump `@typescript-eslint/parser` from `5.41.0` to `5.42.0`.
 - (`9d5aa6e`) Bump `@typescript-eslint/parser` from `5.42.0` to `5.42.1`.
 - (`42753f0`) Bump Node.js runtime from `18.11.0` to `18.12.0`.
+- (`0f1a8dc`) Bump Node.js runtime from `18.12.0` to `18.12.1`.
 
 ## [0.2.3] - 2022-10-24
 
