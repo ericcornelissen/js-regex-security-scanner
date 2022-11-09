@@ -8,6 +8,7 @@ Versioning].
 
 ## [Unreleased]
 
+- (`621a364`) Bump ESLint from `8.26.0` to `8.27.0`.
 - (`a7e249f`) Bump `@typescript-eslint/parser` from `5.40.1` to `5.41.0`.
 - (`a72cfc8`) Bump `@typescript-eslint/parser` from `5.41.0` to `5.42.0`.
 - (`9d5aa6e`) Bump `@typescript-eslint/parser` from `5.42.0` to `5.42.1`.
