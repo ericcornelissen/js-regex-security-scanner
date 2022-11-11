@@ -2,12 +2,13 @@ IMAGE_NAME:=ericornelissen/js-re-scan
 
 GRYPE_VERSION:=v0.51.0
 HADOLINT_VERSION:=sha256:d355bd7df747a0f124f3b5e7b21e9dafd0cb19732a276f901f0fdee243ec1f3b # tag=2.9.2
+LICENSED_VERSION:=3.8.0
 SYFT_VERSION:=v0.59.0
 
 BIN_DIR:=.bin
-LICENSED_CACHE:=$(TEMP_DIR)/licensed
 ROOT_DIR:=$(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 TEMP_DIR:=.tmp
+LICENSED_CACHE:=$(TEMP_DIR)/licensed_cache
 
 GRYPE=$(BIN_DIR)/grype
 LICENSED=$(BIN_DIR)/licensed
@@ -71,7 +72,7 @@ lint-md: $(NODE_MODULES) ## Lint MarkDown files
 
 notice-npm: $(LICENSED_CACHE) ## Create NOTICE for npm dependencies
 	@./$(LICENSED) notice
-	@mv $(TEMP_DIR)/licensed/NOTICE NOTICE-npm
+	@mv $(LICENSED_CACHE)/NOTICE NOTICE-npm
 
 sbom: $(SBOM_FILE) ## Generate a Software Bill Of Materials (SBOM)
 
@@ -101,7 +102,7 @@ $(GRYPE):
 	@curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | \
 		sh -s -- -b ./$(BIN_DIR) $(GRYPE_VERSION)
 $(LICENSED):
-	@curl -sSL https://github.com/github/licensed/releases/download/3.8.0/licensed-3.8.0-linux-x64.tar.gz > \
+	@curl -sSL https://github.com/github/licensed/releases/download/$(LICENSED_VERSION)/licensed-$(LICENSED_VERSION)-linux-x64.tar.gz > \
 		$(TEMP_DIR)/licensed.tar.gz
 	@tar -xzf $(TEMP_DIR)/licensed.tar.gz --directory $(TEMP_DIR)
 	@rm -rf $(TEMP_DIR)/meta/ $(TEMP_DIR)/licensed.tar.gz

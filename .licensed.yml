@@ -36,4 +36,4 @@ reviewed:
     - type-fest@0.20.2 # mit or cc0-1.0
     - uri-js@4.4.1 # bsd-2-clause
 
-cache_path: .tmp/licensed
+cache_path: .tmp/licensed_cache
