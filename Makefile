@@ -16,11 +16,14 @@ SYFT=$(BIN_DIR)/syft
 
 SBOM_FILE:=sbom.json
 VULN_FILE:=vulns.json
+NOTICE_FILE_NPM=NOTICE-npm
 
 default: help
 
 audit: audit-docker audit-npm ## Audit the project dependencies
+
 audit-docker: $(VULN_FILE) ## Audit the Docker image dependencies
+
 audit-npm: ## Audit the npm dependencies
 	@npm audit $(ARGS)
 
@@ -33,13 +36,13 @@ clean: ## Clean the repository
 		$(NODE_MODULES) \
 		$(SBOM_FILE) \
 		$(VULN_FILE) \
-		NOTICE-npm
+		$(NOTICE_FILE_NPM)
 
 help: ## Show this help message
 	@printf "Usage: make <command>\n\n"
 	@printf "Commands:\n"
 	@awk -F ':(.*)## ' '/^[a-zA-Z0-9%\\\/_.-]+:(.*)##/ { \
-	  printf "  \033[36m%-30s\033[0m %s\n", $$1, $$NF \
+		printf "  \033[36m%-30s\033[0m %s\n", $$1, $$NF \
 	}' $(MAKEFILE_LIST)
 
 init: $(LICENSED) $(GRYPE) $(SYFT) $(NODE_MODULES) ## Initialize the project dependencies
@@ -70,7 +73,7 @@ lint-md: $(NODE_MODULES) ## Lint MarkDown files
 
 notice-npm: $(LICENSED_CACHE) ## Create NOTICE for npm dependencies
 	@./$(LICENSED) notice
-	@mv $(TEMP_DIR)/licensed/NOTICE NOTICE-npm
+	@mv $(TEMP_DIR)/licensed/NOTICE $(NOTICE_FILE_NPM)
 
 sbom: $(SBOM_FILE) ## Generate a Software Bill Of Materials (SBOM)
 
@@ -107,7 +110,8 @@ $(LICENSED):
 	@mv $(TEMP_DIR)/licensed $(LICENSED)
 
 $(NODE_MODULES): .npmrc package*.json
-	@npm install
+	@npm install \
+		--no-audit
 
 $(TEMP_DIR):
 	@mkdir $(TEMP_DIR)
