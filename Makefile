@@ -49,8 +49,9 @@ license-check: license-check-docker license-check-npm ## Check the project depen
 license-check-docker: $(SBOM_FILE) ## Check Docker image dependency licenses
 	@node scripts/check-licenses.js
 
-license-check-npm: $(LICENSED_CACHE) ## Check npm dependency licenses
-	@./$(LICENSED) status
+license-check-npm: $(LICENSED) ## Check npm dependency licenses
+	@./$(LICENSED) status \
+		--data-source=configuration
 
 lint: lint-docker lint-md ## Lint the project
 
@@ -100,7 +101,7 @@ $(GRYPE):
 	@curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | \
 		sh -s -- -b ./$(BIN_DIR) $(GRYPE_VERSION)
 $(LICENSED):
-	@curl -sSL https://github.com/github/licensed/releases/download/3.7.3/licensed-3.7.3-linux-x64.tar.gz > \
+	@curl -sSL https://github.com/github/licensed/releases/download/3.8.0/licensed-3.8.0-linux-x64.tar.gz > \
 		$(TEMP_DIR)/licensed.tar.gz
 	@tar -xzf $(TEMP_DIR)/licensed.tar.gz --directory $(TEMP_DIR)
 	@rm -rf $(TEMP_DIR)/meta/ $(TEMP_DIR)/licensed.tar.gz

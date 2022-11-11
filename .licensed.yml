@@ -20,20 +20,20 @@ allowed:
 
 reviewed:
   npm:
-    - "@typescript-eslint/parser" # bsd-2-clause
-    - "@typescript-eslint/typescript-estree" # bsd-2-clause
-    - argparse # python-2.0
-    - color-convert # mit
-    - doctrine # apache-2.0
-    - esquery # bsd-3-clause
-    - esrecurse # bsd-2-clause
-    - estraverse # bsd-2-clause
-    - esutils # bsd-2-clause
-    - fs.realpath # isc
-    - glob # isc
-    - ignore # mit
-    - lodash.merge # mit
-    - type-fest # mit or cc0-1.0
-    - uri-js # bsd-2-clause
+    - "@typescript-eslint/parser@5.42.1" # bsd-2-clause
+    - "@typescript-eslint/typescript-estree@5.42.1" # bsd-2-clause
+    - argparse@2.0.1 # python-2.0
+    - color-convert@2.0.1 # mit
+    - doctrine@3.0.0 # apache-2.0
+    - esquery@1.4.0 # bsd-3-clause
+    - esrecurse@4.3.0 # bsd-2-clause
+    - estraverse@5.3.0 # bsd-2-clause
+    - esutils@2.0.3 # bsd-2-clause
+    - fs.realpath@1.0.0 # isc
+    - glob@7.2.3 # isc
+    - ignore@5.2.0 # mit
+    - lodash.merge@4.6.2 # mit
+    - type-fest@0.20.2 # mit or cc0-1.0
+    - uri-js@4.4.1 # bsd-2-clause
 
 cache_path: .tmp/licensed
