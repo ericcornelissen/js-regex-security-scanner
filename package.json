@@ -12,7 +12,7 @@
   "dependencies": {
     "@typescript-eslint/parser": "5.42.1",
     "eslint": "8.27.0",
-    "eslint-plugin-regexp": "1.9.0"
+    "eslint-plugin-regexp": "1.10.0"
   },
   "devDependencies": {
     "ava": "5.0.1",
