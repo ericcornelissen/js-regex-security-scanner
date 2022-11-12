@@ -37,7 +37,7 @@ jobs:
         uses: jonabc/setup-licensed@23892537a4b9275324fe790ff1057eb1d00fddbd
         with:
           install-dir: ./.bin/
-          version: 3.7.3
+          version: 3.8.0
       - name: Install Node.js dependencies
         run: npm ci
       - name: Check Docker licenses
