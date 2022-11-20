@@ -138,7 +138,7 @@ considered non-ideal due to their shortcomings. [licensee] was chosen over
 [Licensed] primarily because the maintainers wanted to try it out while already
 having used [licensee] in other projects.
 
-<!-- Links -->
+<!-- External links -->
 
 [dependency-review-action]: https://github.com/actions/dependency-review-action
 [fossa]: https://fossa.com/
