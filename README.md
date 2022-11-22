@@ -1,11 +1,12 @@
 # JavaScript Regex Security Scanner
 
-A static analyzer to scan JavaScript code for problematic regular expressions.
+A static analyzer to scan JavaScript and TypeScript code for problematic regular
+expressions.
 
 ## Getting started
 
 The scanner is available as a [Docker] image that you can run against any
-JavaScript project - for example:
+JavaScript or TypeScript project - for example:
 
 ```shell
 docker run --rm -v $(pwd):/project ericornelissen/js-re-scan:latest
@@ -43,6 +44,7 @@ tools are hard to use.
 
 This scanner runs [ESLint] with the [eslint-plugin-regexp] plugin to find and
 report on regular expressions that violate rules with security implications.
+TypeScript support is provided by [@typescript-eslint/parser].
 
 ## License
 
@@ -54,6 +56,7 @@ full license text.
 Please [open an issue] if you found a mistake or if you have a suggestion for
 how to improve the documentation.
 
+[@typescript-eslint/parser]: https://www.npmjs.com/package/@typescript-eslint/parser
 [docker]: https://www.docker.com/
 [eslint]: https://eslint.org/
 [eslint-plugin-regexp]: https://github.com/ota-meshi/eslint-plugin-regexp
