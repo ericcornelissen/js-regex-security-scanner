@@ -8,6 +8,7 @@ Versioning].
 
 ## [Unreleased]
 
+- (`b13616d`) Bump ESLint from `8.27.0` to `8.28.0`.
 - (`084a590`) Bump `eslint-plugin-regexp` from `1.9.0` to `1.10.0`.
 
 ## [0.2.4] - 2022-11-09
