@@ -2,7 +2,7 @@ IMAGE_NAME:=ericornelissen/js-re-scan
 
 GRYPE_VERSION:=v0.51.0
 HADOLINT_VERSION:=sha256:9259e253a4e299b50c92006149dd3a171c7ea3c5bd36f060022b5d2c1ff0fbbe # tag=2.12.0
-LICENSED_VERSION:=3.8.0
+LICENSED_VERSION:=3.9.0
 SYFT_VERSION:=v0.59.0
 
 BIN_DIR:=.bin
@@ -73,8 +73,8 @@ lint-md: $(NODE_MODULES) ## Lint MarkDown files
 		--ignore testdata/ \
 		.
 
-notice-npm: $(LICENSED_CACHE) ## Create NOTICE for npm dependencies
-	@./$(LICENSED) notice
+notice-npm: $(LICENSED) ## Create NOTICE for npm dependencies
+	@./$(LICENSED) notice --computed
 	@mv $(LICENSED_CACHE)/NOTICE $(NOTICE_FILE_NPM)
 
 sbom: $(SBOM_FILE) ## Generate a Software Bill Of Materials (SBOM)
@@ -120,5 +120,3 @@ $(TEMP_DIR):
 $(TEMP_DIR)/dockerimage: $(TEMP_DIR) .dockerignore .eslintrc.yml Dockerfile package*.json
 	@docker build --tag $(IMAGE_NAME) .
 	@touch $(TEMP_DIR)/dockerimage
-$(LICENSED_CACHE): $(LICENSED) $(NODE_MODULES) $(TEMP_DIR)
-	@./$(LICENSED) cache
