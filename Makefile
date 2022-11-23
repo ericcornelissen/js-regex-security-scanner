@@ -8,7 +8,6 @@ SYFT_VERSION:=v0.59.0
 BIN_DIR:=.bin
 ROOT_DIR:=$(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 TEMP_DIR:=.tmp
-LICENSED_CACHE:=$(TEMP_DIR)/licensed_cache
 
 GRYPE=$(BIN_DIR)/grype
 LICENSED=$(BIN_DIR)/licensed
@@ -53,7 +52,7 @@ license-check: license-check-docker license-check-npm ## Check the project depen
 license-check-docker: $(SBOM_FILE) ## Check Docker image dependency licenses
 	@node scripts/check-licenses.js
 
-license-check-npm: $(LICENSED) ## Check npm dependency licenses
+license-check-npm: $(LICENSED) $(NODE_MODULES) ## Check npm dependency licenses
 	@./$(LICENSED) status \
 		--data-source=configuration
 
@@ -73,9 +72,9 @@ lint-md: $(NODE_MODULES) ## Lint MarkDown files
 		--ignore testdata/ \
 		.
 
-notice-npm: $(LICENSED) ## Create NOTICE for npm dependencies
+notice-npm: $(LICENSED) $(NODE_MODULES) $(TEMP_DIR) ## Create NOTICE for npm dependencies
 	@./$(LICENSED) notice --computed
-	@mv $(LICENSED_CACHE)/NOTICE $(NOTICE_FILE_NPM)
+	@mv $(TEMP_DIR)/NOTICE $(NOTICE_FILE_NPM)
 
 sbom: $(SBOM_FILE) ## Generate a Software Bill Of Materials (SBOM)
 
