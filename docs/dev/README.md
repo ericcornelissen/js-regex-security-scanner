@@ -11,9 +11,11 @@ project were made.
 - [License Validation][0001]
 - [Testing][0002]
 - [Dependency Management][0003]
+- [Releasing][0004]
 
 <!-- Internal links -->
 
 [0001]: ./0001-license-validation.md
 [0002]: ./0002-testing.md
 [0003]: ./0003-dependency-management
+[0004]: ./0004-releasing.md
