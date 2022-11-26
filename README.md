@@ -27,7 +27,8 @@ The scanner has the following exit codes.
 - Detect cases of exponential and polynomial backtracking.
 - Detect super-linear worst-case runtime caused by a regex being moved across
   the input string.
-- Ignores generated code based on standard file and folder patterns.
+- Ignore generated code based on standard file and folder patterns.
+- Ignore tests based on standard file and folder patterns.
 
 ## Philosophy
 
