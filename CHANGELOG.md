@@ -21,6 +21,7 @@ Versioning].
 - (`a7e249f`) Bump `@typescript-eslint/parser` from `5.40.1` to `5.41.0`.
 - (`a72cfc8`) Bump `@typescript-eslint/parser` from `5.41.0` to `5.42.0`.
 - (`9d5aa6e`) Bump `@typescript-eslint/parser` from `5.42.0` to `5.42.1`.
+- (`07f3424`) Ignore test-related folders and files.
 
 ## [0.2.3] - 2022-10-24
 
