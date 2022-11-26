@@ -10,6 +10,8 @@ jobs:
   branch:
     name: Branch
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # To push a branch
     needs:
       - validate
     steps:
@@ -26,7 +28,7 @@ jobs:
             const major = tag.replace(/\.\d\.\d$/, "")
             return major
       - name: Update release branch
-        run: git push origin HEAD:v0
+        run: git push origin HEAD:${{ steps.version.outputs.result }}
   docker-hub:
     name: Docker Hub
     runs-on: ubuntu-latest
