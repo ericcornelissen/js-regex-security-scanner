@@ -1,11 +1,12 @@
 # JavaScript Regex Security Scanner
 
-A static analyzer to scan JavaScript code for problematic regular expressions.
+A static analyzer to scan JavaScript and TypeScript code for problematic regular
+expressions.
 
 ## Getting started
 
 The scanner is available as a [Docker] image that you can run against any
-JavaScript project - for example:
+JavaScript or TypeScript project - for example:
 
 ```shell
 docker run --rm -v $(pwd):/project ericornelissen/js-re-scan:latest
@@ -26,11 +27,25 @@ The scanner has the following exit codes.
 - Detect cases of exponential and polynomial backtracking.
 - Detect super-linear worst-case runtime caused by a regex being moved across
   the input string.
+- Ignores generated code based on standard file and folder patterns.
 
-## About
+## Philosophy
+
+This scanner aims to provide developers with a tool to find vulnerable regular
+expression in their code. As such, the goal is to only report _true positives_.
+The result is that all findings are relevant, but a clean report does not mean
+your project has no vulnerable regular expressions.
+
+This is contrast to tools like [redos-detector], which will find vulnerable
+regular expressions this scanner won't, but also reports _false positives_. As
+it is difficult to determine if a particular report is a false positive, other
+tools are hard to use.
+
+## Behind the Scenes
 
 This scanner runs [ESLint] with the [eslint-plugin-regexp] plugin to find and
 report on regular expressions that violate rules with security implications.
+TypeScript support is provided by [@typescript-eslint/parser].
 
 ## License
 
@@ -42,8 +57,10 @@ full license text.
 Please [open an issue] if you found a mistake or if you have a suggestion for
 how to improve the documentation.
 
+[@typescript-eslint/parser]: https://www.npmjs.com/package/@typescript-eslint/parser
 [docker]: https://www.docker.com/
 [eslint]: https://eslint.org/
 [eslint-plugin-regexp]: https://github.com/ota-meshi/eslint-plugin-regexp
 [license]: ./LICENSE
 [open an issue]: https://github.com/ericcornelissen/js-regex-security-scanner/issues/new?labels=documentation&template=documentation.md
+[redos-detector]: https://github.com/tjenkinson/redos-detector

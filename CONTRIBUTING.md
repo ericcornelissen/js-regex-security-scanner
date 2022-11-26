@@ -157,15 +157,13 @@ make update-test-snapshots
 
 ##### Writing Tests
 
-To write a test you need to do three things:
+To write a test you need to do two things:
 
 1. Create a new project to scan in the `testdata/` directory.
    - If it's a toy example, simply create a directory and put the relevant files
      in the directory.
    - If it's a real-world example, add the repository as a [submodule] to this
      repository.
-1. Update the `tests/main.test.js` file to run the scanner on the project you
-   added.
 1. Run the tests, this will automatically initialize the snapshot for the new
    test.
 

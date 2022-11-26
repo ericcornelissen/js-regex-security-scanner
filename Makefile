@@ -1,11 +1,11 @@
 IMAGE_NAME:=ericornelissen/js-re-scan
 
 GRYPE_VERSION:=v0.51.0
-HADOLINT_VERSION:=2.9.2
+HADOLINT_VERSION:=sha256:9259e253a4e299b50c92006149dd3a171c7ea3c5bd36f060022b5d2c1ff0fbbe # tag=2.12.0
+LICENSED_VERSION:=3.9.0
 SYFT_VERSION:=v0.59.0
 
 BIN_DIR:=.bin
-LICENSED_CACHE:=$(TEMP_DIR)/licensed
 ROOT_DIR:=$(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 TEMP_DIR:=.tmp
 
@@ -16,11 +16,14 @@ SYFT=$(BIN_DIR)/syft
 
 SBOM_FILE:=sbom.json
 VULN_FILE:=vulns.json
+NOTICE_FILE_NPM=NOTICE-npm
 
 default: help
 
 audit: audit-docker audit-npm ## Audit the project dependencies
+
 audit-docker: $(VULN_FILE) ## Audit the Docker image dependencies
+
 audit-npm: ## Audit the npm dependencies
 	@npm audit $(ARGS)
 
@@ -33,13 +36,13 @@ clean: ## Clean the repository
 		$(NODE_MODULES) \
 		$(SBOM_FILE) \
 		$(VULN_FILE) \
-		NOTICE-npm
+		$(NOTICE_FILE_NPM)
 
 help: ## Show this help message
 	@printf "Usage: make <command>\n\n"
 	@printf "Commands:\n"
 	@awk -F ':(.*)## ' '/^[a-zA-Z0-9%\\\/_.-]+:(.*)##/ { \
-	  printf "  \033[36m%-30s\033[0m %s\n", $$1, $$NF \
+		printf "  \033[36m%-30s\033[0m %s\n", $$1, $$NF \
 	}' $(MAKEFILE_LIST)
 
 init: $(LICENSED) $(GRYPE) $(SYFT) $(NODE_MODULES) ## Initialize the project dependencies
@@ -49,15 +52,16 @@ license-check: license-check-docker license-check-npm ## Check the project depen
 license-check-docker: $(SBOM_FILE) ## Check Docker image dependency licenses
 	@node scripts/check-licenses.js
 
-license-check-npm: $(LICENSED_CACHE) ## Check npm dependency licenses
-	@./$(LICENSED) status
+license-check-npm: $(LICENSED) $(NODE_MODULES) ## Check npm dependency licenses
+	@./$(LICENSED) status \
+		--data-source=configuration
 
 lint: lint-docker lint-md ## Lint the project
 
 lint-docker: ## Lint the Dockerfile
 	@docker run -i --rm \
 		--mount "type=bind,source=$(ROOT_DIR)/.hadolint.yml,target=/.config/hadolint.yaml" \
-		hadolint/hadolint:$(HADOLINT_VERSION) \
+		hadolint/hadolint@$(HADOLINT_VERSION) \
 		< Dockerfile
 
 lint-md: $(NODE_MODULES) ## Lint MarkDown files
@@ -68,9 +72,9 @@ lint-md: $(NODE_MODULES) ## Lint MarkDown files
 		--ignore testdata/ \
 		.
 
-notice-npm: $(LICENSED_CACHE) ## Create NOTICE for npm dependencies
-	@./$(LICENSED) notice
-	@mv $(TEMP_DIR)/licensed/NOTICE NOTICE-npm
+notice-npm: $(LICENSED) $(NODE_MODULES) $(TEMP_DIR) ## Create NOTICE for npm dependencies
+	@./$(LICENSED) notice --computed
+	@mv $(TEMP_DIR)/NOTICE $(NOTICE_FILE_NPM)
 
 sbom: $(SBOM_FILE) ## Generate a Software Bill Of Materials (SBOM)
 
@@ -100,19 +104,18 @@ $(GRYPE):
 	@curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | \
 		sh -s -- -b ./$(BIN_DIR) $(GRYPE_VERSION)
 $(LICENSED):
-	@curl -sSL https://github.com/github/licensed/releases/download/3.7.3/licensed-3.7.3-linux-x64.tar.gz > \
+	@curl -sSL https://github.com/github/licensed/releases/download/$(LICENSED_VERSION)/licensed-$(LICENSED_VERSION)-linux-x64.tar.gz > \
 		$(TEMP_DIR)/licensed.tar.gz
 	@tar -xzf $(TEMP_DIR)/licensed.tar.gz --directory $(TEMP_DIR)
 	@rm -rf $(TEMP_DIR)/meta/ $(TEMP_DIR)/licensed.tar.gz
 	@mv $(TEMP_DIR)/licensed $(LICENSED)
 
 $(NODE_MODULES): .npmrc package*.json
-	@npm install
+	@npm install \
+		--no-audit
 
 $(TEMP_DIR):
 	@mkdir $(TEMP_DIR)
 $(TEMP_DIR)/dockerimage: $(TEMP_DIR) .dockerignore .eslintrc.yml Dockerfile package*.json
 	@docker build --tag $(IMAGE_NAME) .
 	@touch $(TEMP_DIR)/dockerimage
-$(LICENSED_CACHE): $(LICENSED) $(NODE_MODULES) $(TEMP_DIR)
-	@./$(LICENSED) cache

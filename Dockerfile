@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM node:18.12.0-alpine3.15
+FROM node:18.12.1-alpine3.15
 
 LABEL name="js-regex-security-scanner" \
 	description="A static analyzer to scan JavaScript code for problematic regular expressions." \
-	version="0.2.3" \
+	version="0.2.4" \
 	license="Apache-2.0"
 
 ENV NODE_ENV=production
