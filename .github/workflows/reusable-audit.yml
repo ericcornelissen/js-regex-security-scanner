@@ -40,7 +40,6 @@ jobs:
       - name: Upload dependency snapshot
         uses: anchore/sbom-action@06e109483e6aa305a2b2395eabae554e51530e1d # v0.13.1
         with:
-          artifact-name: sbom.json
           dependency-snapshot: true
           image: ericornelissen/js-re-scan
   npm:

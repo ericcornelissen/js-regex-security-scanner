@@ -1,4 +1,1 @@
 # Check out Syft at: https://github.com/anchore/syft
-
-output:
-  - json=sbom.json
