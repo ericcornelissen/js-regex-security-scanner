@@ -12,6 +12,7 @@ project were made.
 - [Testing][0002]
 - [Dependency Management][0003]
 - [Releasing][0004]
+- [Software Composition Analysis][0005]
 
 <!-- Internal links -->
 
@@ -19,3 +20,4 @@ project were made.
 [0002]: ./0002-testing.md
 [0003]: ./0003-dependency-management
 [0004]: ./0004-releasing.md
+[0005]: ./0005-software-composition-analysis.md
