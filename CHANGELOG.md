@@ -16,6 +16,7 @@ Versioning].
 - (`084a590`) Bump `eslint-plugin-regexp` from `1.9.0` to `1.10.0`.
 - (`862e731`) Bump `eslint-plugin-regexp` from `1.10.0` to `1.11.0`.
 - (`f1a9baf`) Bump `@typescript-eslint/parser` from `5.42.1` to `5.44.0`.
+- (`49fc85d`) Bump `@typescript-eslint/parser` from `5.44.0` to `5.45.0`.
 
 ## [0.2.4] - 2022-11-09
 
