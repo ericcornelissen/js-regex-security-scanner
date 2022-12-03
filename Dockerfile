@@ -34,11 +34,7 @@ RUN npm install \
 COPY --chown=node:node ./ ./
 
 ENTRYPOINT [ \
-	"npm", \
-	"run", \
-	"eslint", \
-	"--no-update-notifier", \
-	"--", \
+	"./node_modules/.bin/eslint", \
 	\
 	# This option avoids unexpected errors if the project being scanned includes
 	# an ESLint configuration file.
