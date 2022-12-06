@@ -74,6 +74,8 @@ jobs:
         run: make lint-docker
       - name: Lint MarkDown
         run: make lint-md
+      - name: Lint YAML
+        run: make lint-yaml
   test:
     name: Test
     runs-on: ubuntu-latest
