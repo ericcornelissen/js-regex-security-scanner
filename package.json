@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@typescript-eslint/parser": "5.45.0",
-    "eslint": "8.28.0",
+    "eslint": "8.29.0",
     "eslint-plugin-regexp": "1.11.0"
   },
   "devDependencies": {
