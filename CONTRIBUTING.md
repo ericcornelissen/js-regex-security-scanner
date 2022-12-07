@@ -81,6 +81,7 @@ To be able to contribute you need at least the following:
 - [Make];
 - [Node.js] v18.0.0 or higher and [npm] v8.1.2 or higher;
 - (Recommended) a code editor with [EditorConfig] support;
+- (Optional) [yamllint];
 
 ### Workflow
 
@@ -124,6 +125,7 @@ to run all linters or use the following commands to check specific file types:
 | :--------------- | :----------------- | :------------- |
 | `Dockerfile`     | `make lint-docker` | [hadolint]     |
 | MarkDown (`.md`) | `make lint-md`     | [markdownlint] |
+| YAML (`.yml`)    | `make lint-yml`    | [yamllint]     |
 
 #### Testing
 
@@ -219,3 +221,4 @@ make audit-npm
 [security policy]: ./SECURITY.md
 [submodule]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
 [syft]: https://github.com/anchore/syft
+[yamllint]: https://github.com/adrienverge/yamllint

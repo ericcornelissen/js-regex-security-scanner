@@ -1,8 +1,8 @@
 name: Nightly
-on:
+on: # yamllint disable-line rule:truthy
   schedule:
-    - cron: "0 3 * * *"
-  workflow_dispatch:
+    - cron: 0 3 * * *
+  workflow_dispatch: ~
 
 permissions: read-all
 
@@ -11,4 +11,5 @@ jobs:
     name: Audit
     uses: ericcornelissen/js-regex-security-scanner/.github/workflows/reusable-audit.yml@main
     with:
-      refs: '["main", "v0"]'
+      refs: |-
+        ["main", "v0"]
