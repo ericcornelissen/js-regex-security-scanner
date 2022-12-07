@@ -1,6 +1,6 @@
 name: Check
-on:
-  pull_request:
+on: # yamllint disable-line rule:truthy
+  pull_request: ~
   push:
     branches:
       - main
@@ -74,6 +74,8 @@ jobs:
         run: make lint-docker
       - name: Lint MarkDown
         run: make lint-md
+      - name: Lint YAML
+        run: make lint-yml
   test:
     name: Test
     runs-on: ubuntu-latest
