@@ -10,6 +10,7 @@ Versioning].
 
 - (`94fd158`) Bump ESLint from `8.28.0` to `8.29.0`.
 - (`49fc85d`) Bump `@typescript-eslint/parser` from `5.44.0` to `5.45.0`.
+- (`65ada49`) Bump `@typescript-eslint/parser` from `5.45.0` to `5.45.1`.
 - (`94d7c9d`) Omit project and ESLint command details from scanner output.
 
 ## [0.2.5] - 2022-11-26
