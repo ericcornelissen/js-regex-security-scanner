@@ -8,6 +8,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.2.6] - 2022-12-09
+
 - (`94fd158`) Bump ESLint from `8.28.0` to `8.29.0`.
 - (`49fc85d`) Bump `@typescript-eslint/parser` from `5.44.0` to `5.45.0`.
 - (`65ada49`) Bump `@typescript-eslint/parser` from `5.45.0` to `5.45.1`.
