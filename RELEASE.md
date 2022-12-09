@@ -53,17 +53,11 @@ Follow these steps to release a new version (using `v0.1.2` as an example):
    The date should follow the year-month-day format where single-digit months
    and days should be prefixed with a `0` (e.g. `2022-01-01`).
 
-1. Update the test snapshots using:
-
-   ```shell
-   make update-test-snapshots
-   ```
-
 1. Commit the changes to a new release branch and push using:
 
    ```shell
    git checkout -b release-$(sha1sum package-lock.json | awk '{print $1}')
-   git add CHANGELOG.md Dockerfile package.json package-lock.json tests/snapshots
+   git add CHANGELOG.md Dockerfile package.json package-lock.json
    git commit --message "Version bump"
    git push origin release-$(sha1sum package-lock.json | awk '{print $1}')
    ```
