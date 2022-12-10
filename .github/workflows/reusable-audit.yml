@@ -45,6 +45,7 @@ jobs:
         with:
           dependency-snapshot: true
           image: ericornelissen/js-re-scan
+          output-file: sbom.json
   npm:
     name: npm
     runs-on: ubuntu-latest

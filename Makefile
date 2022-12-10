@@ -92,7 +92,7 @@ update-test-snapshots: build $(NODE_MODULES) ## Update the test snapsthos
 .PHONY: default audit audit-docker audit-npm build clean help init license-check license-check-docker license-check-npm lint lint-docker lint-md notice-npm sbom test update-test-snapshots
 
 $(SBOM_FILE): $(SYFT) $(TEMP_DIR)/dockerimage
-	@./$(SYFT) $(IMAGE_NAME):latest -o json > $(SBOM_FILE)
+	@./$(SYFT) $(IMAGE_NAME):latest
 $(VULN_FILE): $(GRYPE) $(SBOM_FILE)
 	@./$(GRYPE) $(SBOM_FILE)
 
