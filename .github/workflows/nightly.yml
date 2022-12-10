@@ -1,8 +1,8 @@
 name: Nightly
-on:
+on: # yamllint disable-line rule:truthy
   schedule:
-    - cron: "0 3 * * *"
-  workflow_dispatch:
+    - cron: 0 3 * * *
+  workflow_dispatch: ~
 
 permissions: read-all
 
@@ -13,4 +13,5 @@ jobs:
     permissions:
       contents: write
     with:
-      refs: '["main", "v0"]'
+      refs: |-
+        ["main", "v0"]

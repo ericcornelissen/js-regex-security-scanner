@@ -8,7 +8,22 @@ Versioning].
 
 ## [Unreleased]
 
+- (`f5a7fa7`) Support scanning `.cts` and `.mts` files.
+
+## [0.2.6] - 2022-12-09
+
+- (`94fd158`) Bump ESLint from `8.28.0` to `8.29.0`.
+- (`49fc85d`) Bump `@typescript-eslint/parser` from `5.44.0` to `5.45.0`.
+- (`65ada49`) Bump `@typescript-eslint/parser` from `5.45.0` to `5.45.1`.
+- (`d0298f8`) Bump `@typescript-eslint/parser` from `5.45.1` to `5.46.0`.
+- (`94d7c9d`) Omit project and ESLint command details from scanner output.
+
+## [0.2.5] - 2022-11-26
+
+- (`b13616d`) Bump ESLint from `8.27.0` to `8.28.0`.
 - (`084a590`) Bump `eslint-plugin-regexp` from `1.9.0` to `1.10.0`.
+- (`862e731`) Bump `eslint-plugin-regexp` from `1.10.0` to `1.11.0`.
+- (`f1a9baf`) Bump `@typescript-eslint/parser` from `5.42.1` to `5.44.0`.
 
 ## [0.2.4] - 2022-11-09
 
@@ -18,6 +33,7 @@ Versioning].
 - (`a7e249f`) Bump `@typescript-eslint/parser` from `5.40.1` to `5.41.0`.
 - (`a72cfc8`) Bump `@typescript-eslint/parser` from `5.41.0` to `5.42.0`.
 - (`9d5aa6e`) Bump `@typescript-eslint/parser` from `5.42.0` to `5.42.1`.
+- (`07f3424`) Ignore test-related folders and files.
 
 ## [0.2.3] - 2022-10-24
 

@@ -16,7 +16,7 @@ FROM node:18.12.1-alpine3.15
 
 LABEL name="js-regex-security-scanner" \
 	description="A static analyzer to scan JavaScript code for problematic regular expressions." \
-	version="0.2.4" \
+	version="0.2.6" \
 	license="Apache-2.0"
 
 ENV NODE_ENV=production
@@ -34,11 +34,7 @@ RUN npm install \
 COPY --chown=node:node ./ ./
 
 ENTRYPOINT [ \
-	"npm", \
-	"run", \
-	"eslint", \
-	"--no-update-notifier", \
-	"--", \
+	"./node_modules/.bin/eslint", \
 	\
 	# This option avoids unexpected errors if the project being scanned includes
 	# an ESLint configuration file.
@@ -55,7 +51,7 @@ ENTRYPOINT [ \
 	\
 	# Specify the extensions of files that should be scanned.
 	"--ext", \
-	".js,.cjs,.mjs,.ts", \
+	".js,.cjs,.mjs,.ts,.cts,.mts", \
 	\
 	# The folder that should be scanned. This is the folder that users should
 	# mount their project to.

@@ -20,8 +20,8 @@ allowed:
 
 reviewed:
   npm:
-    - "@typescript-eslint/parser@5.42.1" # bsd-2-clause
-    - "@typescript-eslint/typescript-estree@5.42.1" # bsd-2-clause
+    - "@typescript-eslint/parser@5.46.0" # bsd-2-clause
+    - "@typescript-eslint/typescript-estree@5.46.0" # bsd-2-clause
     - argparse@2.0.1 # python-2.0
     - color-convert@2.0.1 # mit
     - doctrine@3.0.0 # apache-2.0
@@ -36,4 +36,4 @@ reviewed:
     - type-fest@0.20.2 # mit or cc0-1.0
     - uri-js@4.4.1 # bsd-2-clause
 
-cache_path: .tmp/licensed_cache
+cache_path: .tmp/

@@ -2,13 +2,12 @@ IMAGE_NAME:=ericornelissen/js-re-scan
 
 GRYPE_VERSION:=v0.51.0
 HADOLINT_VERSION:=sha256:9259e253a4e299b50c92006149dd3a171c7ea3c5bd36f060022b5d2c1ff0fbbe # tag=2.12.0
-LICENSED_VERSION:=3.8.0
+LICENSED_VERSION:=3.9.0
 SYFT_VERSION:=v0.59.0
 
 BIN_DIR:=.bin
 ROOT_DIR:=$(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 TEMP_DIR:=.tmp
-LICENSED_CACHE:=$(TEMP_DIR)/licensed_cache
 
 GRYPE=$(BIN_DIR)/grype
 LICENSED=$(BIN_DIR)/licensed
@@ -53,11 +52,11 @@ license-check: license-check-docker license-check-npm ## Check the project depen
 license-check-docker: $(SBOM_FILE) ## Check Docker image dependency licenses
 	@node scripts/check-licenses.js
 
-license-check-npm: $(LICENSED) ## Check npm dependency licenses
+license-check-npm: $(LICENSED) $(NODE_MODULES) ## Check npm dependency licenses
 	@./$(LICENSED) status \
 		--data-source=configuration
 
-lint: lint-docker lint-md ## Lint the project
+lint: lint-docker lint-md lint-yml ## Lint the project
 
 lint-docker: ## Lint the Dockerfile
 	@docker run -i --rm \
@@ -73,9 +72,14 @@ lint-md: $(NODE_MODULES) ## Lint MarkDown files
 		--ignore testdata/ \
 		.
 
-notice-npm: $(LICENSED_CACHE) ## Create NOTICE for npm dependencies
-	@./$(LICENSED) notice
-	@mv $(LICENSED_CACHE)/NOTICE $(NOTICE_FILE_NPM)
+lint-yml: ## Lint .yml files
+	@yamllint \
+		-c .yamllint.yml \
+		.
+
+notice-npm: $(LICENSED) $(NODE_MODULES) $(TEMP_DIR) ## Create NOTICE for npm dependencies
+	@./$(LICENSED) notice --computed
+	@mv $(TEMP_DIR)/NOTICE $(NOTICE_FILE_NPM)
 
 sbom: $(SBOM_FILE) ## Generate a Software Bill Of Materials (SBOM)
 
@@ -89,7 +93,7 @@ update-test-snapshots: build $(NODE_MODULES) ## Update the test snapsthos
 		--update-snapshots \
 		tests/
 
-.PHONY: default audit audit-docker audit-npm build clean help init license-check license-check-docker license-check-npm lint lint-docker lint-md notice-npm sbom test update-test-snapshots
+.PHONY: default audit audit-docker audit-npm build clean help init license-check license-check-docker license-check-npm lint lint-docker lint-md lint-yml notice-npm sbom test update-test-snapshots
 
 $(SBOM_FILE): $(SYFT) $(TEMP_DIR)/dockerimage
 	@./$(SYFT) $(IMAGE_NAME):latest
@@ -120,5 +124,3 @@ $(TEMP_DIR):
 $(TEMP_DIR)/dockerimage: $(TEMP_DIR) .dockerignore .eslintrc.yml Dockerfile package*.json
 	@docker build --tag $(IMAGE_NAME) .
 	@touch $(TEMP_DIR)/dockerimage
-$(LICENSED_CACHE): $(LICENSED) $(NODE_MODULES) $(TEMP_DIR)
-	@./$(LICENSED) cache

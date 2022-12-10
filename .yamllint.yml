@@ -1,0 +1,82 @@
+# Check out yamllint at: https://github.com/adrienverge/yamllint
+
+yaml-files:
+  - "*.yml"
+
+ignore: |
+  node_modules/
+  testdata/
+
+rules:
+  braces:
+    level: error
+    forbid: true
+  brackets:
+    level: error
+    forbid: true
+  colons:
+    level: error
+    max-spaces-before: 0
+    max-spaces-after: 1
+  commas:
+    level: error
+    max-spaces-before: 0
+    min-spaces-after: 1
+    max-spaces-after: 1
+  comments:
+    level: error
+    require-starting-space: true
+    ignore-shebangs: true
+    min-spaces-from-content: 1
+  comments-indentation:
+    level: error
+  document-end:
+    level: error
+    present: false
+  document-start:
+    level: error
+    present: false
+  empty-lines:
+    level: error
+    max: 1
+    max-start: 0
+    max-end: 0
+  empty-values:
+    level: error
+    forbid-in-block-mappings: true
+    forbid-in-flow-mappings: true
+  hyphens:
+    level: error
+    max-spaces-after: 1
+  indentation:
+    level: error
+    spaces: consistent
+    indent-sequences: true
+    check-multi-line-strings: false
+  key-duplicates:
+    level: error
+  key-ordering: disable
+  line-length: disable
+  new-line-at-end-of-file:
+    level: error
+  new-lines:
+    level: error
+    type: unix
+  octal-values:
+    level: error
+    forbid-implicit-octal: true
+    forbid-explicit-octal: true
+  quoted-strings:
+    level: error
+    quote-type: double
+    required: only-when-needed
+    extra-required:
+      - ^\d+:\d+$
+  trailing-spaces:
+    level: error
+  truthy:
+    level: error
+    allowed-values:
+      - "true"
+      - "false"
+    check-keys: true

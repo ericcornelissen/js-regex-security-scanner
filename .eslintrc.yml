@@ -19,8 +19,8 @@ rules:
 
 overrides:
   - files:
-      - "*.ts"
-      - "**/*.ts"
+      - "*.{,c,m}ts"
+      - "**/*.{,c,m}ts"
     parser: "@typescript-eslint/parser"
 
 ignorePatterns:
@@ -61,3 +61,15 @@ ignorePatterns:
   - dist/
   - lib-cov/
   - out/
+
+  # Test directories & files
+  - __mocks__/
+  - __tests__/
+  - __specs__/
+  - e2e/
+  - spec/
+  - specs/
+  - test/
+  - tests/
+  - "*.spec.*"
+  - "*.test.*"

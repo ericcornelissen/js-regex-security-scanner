@@ -81,6 +81,7 @@ To be able to contribute you need at least the following:
 - [Make];
 - [Node.js] v18.0.0 or higher and [npm] v8.1.2 or higher;
 - (Recommended) a code editor with [EditorConfig] support;
+- (Optional) [yamllint];
 
 ### Workflow
 
@@ -124,6 +125,7 @@ to run all linters or use the following commands to check specific file types:
 | :--------------- | :----------------- | :------------- |
 | `Dockerfile`     | `make lint-docker` | [hadolint]     |
 | MarkDown (`.md`) | `make lint-md`     | [markdownlint] |
+| YAML (`.yml`)    | `make lint-yml`    | [yamllint]     |
 
 #### Testing
 
@@ -157,15 +159,13 @@ make update-test-snapshots
 
 ##### Writing Tests
 
-To write a test you need to do three things:
+To write a test you need to do two things:
 
 1. Create a new project to scan in the `testdata/` directory.
    - If it's a toy example, simply create a directory and put the relevant files
      in the directory.
    - If it's a real-world example, add the repository as a [submodule] to this
      repository.
-1. Update the `tests/main.test.js` file to run the scanner on the project you
-   added.
 1. Run the tests, this will automatically initialize the snapshot for the new
    test.
 
@@ -221,3 +221,4 @@ make audit-npm
 [security policy]: ./SECURITY.md
 [submodule]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
 [syft]: https://github.com/anchore/syft
+[yamllint]: https://github.com/adrienverge/yamllint
