@@ -58,7 +58,7 @@ license-check-npm: $(LICENSED) $(NODE_MODULES) ## Check npm dependency licenses
 
 lint: lint-ci lint-docker lint-md lint-yml ## Lint the project
 
-lint-ci: ## Lint .yml files
+lint-ci: ## Lint Continuous Integration configuration files
 	@actionlint
 
 lint-docker: ## Lint the Dockerfile
