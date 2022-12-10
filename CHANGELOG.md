@@ -8,7 +8,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`f5a7fa7`) Support scanning `.cts` and `.mts` files.
 
 ## [0.2.6] - 2022-12-09
 
