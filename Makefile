@@ -56,7 +56,10 @@ license-check-npm: $(LICENSED) $(NODE_MODULES) ## Check npm dependency licenses
 	@./$(LICENSED) status \
 		--data-source=configuration
 
-lint: lint-docker lint-md lint-yml ## Lint the project
+lint: lint-ci lint-docker lint-md lint-yml ## Lint the project
+
+lint-ci: ## Lint Continuous Integration configuration files
+	@actionlint
 
 lint-docker: ## Lint the Dockerfile
 	@docker run -i --rm \
@@ -93,7 +96,7 @@ update-test-snapshots: build $(NODE_MODULES) ## Update the test snapsthos
 		--update-snapshots \
 		tests/
 
-.PHONY: default audit audit-docker audit-npm build clean help init license-check license-check-docker license-check-npm lint lint-docker lint-md lint-yml notice-npm sbom test update-test-snapshots
+.PHONY: default audit audit-docker audit-npm build clean help init license-check license-check-docker license-check-npm lint lint-ci lint-docker lint-md lint-yml notice-npm sbom test update-test-snapshots
 
 $(SBOM_FILE): $(SYFT) $(TEMP_DIR)/dockerimage
 	@./$(SYFT) $(IMAGE_NAME):latest

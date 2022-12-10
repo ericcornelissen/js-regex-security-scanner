@@ -81,6 +81,7 @@ To be able to contribute you need at least the following:
 - [Make];
 - [Node.js] v18.0.0 or higher and [npm] v8.1.2 or higher;
 - (Recommended) a code editor with [EditorConfig] support;
+- (Optional) [actionlint] and [ShellCheck];
 - (Optional) [yamllint];
 
 ### Workflow
@@ -121,11 +122,12 @@ make lint
 
 to run all linters or use the following commands to check specific file types:
 
-| File type        | Command            | Linter         |
-| :--------------- | :----------------- | :------------- |
-| `Dockerfile`     | `make lint-docker` | [hadolint]     |
-| MarkDown (`.md`) | `make lint-md`     | [markdownlint] |
-| YAML (`.yml`)    | `make lint-yml`    | [yamllint]     |
+| File type        | Command            | Linter(s)                   |
+| :--------------- | :----------------- | :-------------------------- |
+| CI workflows     | `make lint-ci`     | [actionlint] & [ShellCheck] |
+| `Dockerfile`     | `make lint-docker` | [hadolint]                  |
+| MarkDown (`.md`) | `make lint-md`     | [markdownlint]              |
+| YAML (`.yml`)    | `make lint-yml`    | [yamllint]                  |
 
 #### Testing
 
@@ -204,6 +206,7 @@ To scan for vulnerabilities in Node.js dependencies, run:
 make audit-npm
 ```
 
+[actionlint]: https://github.com/rhysd/actionlint
 [ava]: https://github.com/avajs/ava
 [bug report]: https://github.com/ericcornelissen/js-regex-security-scanner/issues/new?labels=bug
 [docker]: https://www.docker.com/
@@ -219,6 +222,7 @@ make audit-npm
 [npm]: https://www.npmjs.com/
 [open issues]: https://github.com/ericcornelissen/js-regex-security-scanner/issues
 [security policy]: ./SECURITY.md
+[shellcheck]: https://github.com/koalaman/shellcheck
 [submodule]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
 [syft]: https://github.com/anchore/syft
 [yamllint]: https://github.com/adrienverge/yamllint
