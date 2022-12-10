@@ -19,8 +19,8 @@ rules:
 
 overrides:
   - files:
-      - "*.ts"
-      - "**/*.ts"
+      - "*.{,c,m}ts"
+      - "**/*.{,c,m}ts"
     parser: "@typescript-eslint/parser"
 
 ignorePatterns:
