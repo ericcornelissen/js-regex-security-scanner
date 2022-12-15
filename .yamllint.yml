@@ -79,4 +79,4 @@ rules:
     allowed-values:
       - "true"
       - "false"
-    check-keys: true
+    check-keys: false
