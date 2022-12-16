@@ -9,7 +9,7 @@ permissions: read-all
 jobs:
   branch:
     name: Branch
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     permissions:
       contents: write # To push a branch
     needs:
@@ -33,7 +33,7 @@ jobs:
         run: git push origin HEAD:${{ steps.version.outputs.result }}
   docker-hub:
     name: Docker Hub
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs:
       - validate
     steps:
@@ -63,7 +63,7 @@ jobs:
             ericornelissen/js-re-scan:${{ steps.version.outputs.result }}
   validate:
     name: Validate
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3.2.0

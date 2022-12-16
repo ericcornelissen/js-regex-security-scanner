@@ -13,7 +13,7 @@ permissions: read-all
 jobs:
   docker:
     name: Docker
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
@@ -40,7 +40,7 @@ jobs:
             vulns.json
   npm:
     name: npm
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
@@ -65,7 +65,7 @@ jobs:
         run: make audit-npm ARGS="--omit dev"
   secrets:
     name: Secrets
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout Code
         uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3.2.0
