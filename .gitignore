@@ -1,6 +1,5 @@
 .bin/
 .tmp/
-NOTICE*
 sbom.json
 vulns.json
 

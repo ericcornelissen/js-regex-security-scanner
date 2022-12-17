@@ -35,11 +35,6 @@ jobs:
         with:
           node-version: 18
           cache: npm
-      - name: Install Licensed
-        uses: jonabc/setup-licensed@23892537a4b9275324fe790ff1057eb1d00fddbd # v1.1.3
-        with:
-          install-dir: ./.bin/
-          version: 3.9.0
       - name: Install Node.js dependencies
         run: npm ci
       - name: Check Docker licenses
@@ -48,15 +43,6 @@ jobs:
       - name: Check npm licenses
         if: ${{ always() }}
         run: make license-check-npm
-      - name: Create NOTICE
-        run: make notice-npm
-      - name: Upload NOTICE
-        uses: actions/upload-artifact@83fd05a356d7e2593de66fc9913b3002723633cb # v3.1.1
-        with:
-          if-no-files-found: error
-          name: notices-${{ github.sha }}
-          path: |
-            NOTICE-npm
   lint:
     name: Lint
     runs-on: ubuntu-22.04
