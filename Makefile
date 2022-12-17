@@ -49,7 +49,8 @@ license-check-docker: $(SBOM_FILE) ## Check Docker image dependency licenses
 	@node scripts/check-licenses.js
 
 license-check-npm: $(NODE_MODULES) ## Check npm dependency licenses
-	@echo 'license-check-npm is out of order'
+	@npm run licensee -- \
+		--errors-only
 
 lint: lint-ci lint-docker lint-md lint-yml ## Lint the project
 

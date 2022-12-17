@@ -3,8 +3,6 @@ import * as path from "node:path";
 import * as process from "node:process";
 import * as url from "node:url";
 
-import YAML from "yaml";
-
 // ----------
 // Ecosystems
 // ----------
@@ -30,6 +28,8 @@ const matches = (string) => (regexp) => regexp.test(string);
 
 const quoted = (string) => `'${string}'`;
 
+const toLowerCase = (string) => string.toLowerCase();
+
 const toMatchWholeWordExpression = (string) => {
 	const preWordExpr = /(?:^|[\s(])/.source;
 	const postWordExpr = /(?:[\s)]|$)/.source;
@@ -37,7 +37,7 @@ const toMatchWholeWordExpression = (string) => {
 };
 
 const isAllowedLicense = (_license) => {
-	const license = _license.toLowerCase();
+	const license = toLowerCase(_license);
 	return	allowedLicenses.includes(license) ||
 	allowedLicenses
 		.map(toMatchWholeWordExpression)
@@ -48,15 +48,15 @@ const isAllowedLicense = (_license) => {
 // Load licenses
 // -------------
 
-const licensedConfigFile = path.resolve(
+const licenseConfigFile = path.resolve(
 	projectRoot,
-	".licensed.yml",
+	".licensee.json",
 );
 
-const licensedConfigRaw = fs.readFileSync(licensedConfigFile, { encoding: "utf8" });
-const licensedConfig = YAML.parse(licensedConfigRaw);
+const licenseConfigRaw = fs.readFileSync(licenseConfigFile, { encoding: "utf8" });
+const licenseConfig = JSON.parse(licenseConfigRaw);
 
-const allowedLicenses = licensedConfig.allowed;
+const allowedLicenses = licenseConfig.licenses.spdx.map(toLowerCase);
 
 // -------------
 // Load the SBOM
