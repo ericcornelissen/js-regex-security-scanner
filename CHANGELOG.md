@@ -8,6 +8,7 @@ Versioning].
 
 ## [Unreleased]
 
+- (`6801ca8`) Add support for scanning JSX code.
 - (`de2f21e`) Bump `@typescript-eslint/parser` from `5.46.0` to `5.46.1`.
 - (`f5a7fa7`) Support scanning `.cts` and `.mts` files.
 
