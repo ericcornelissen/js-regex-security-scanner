@@ -97,10 +97,10 @@ $(VULN_FILE): $(GRYPE) $(SBOM_FILE)
 
 $(BIN_DIR):
 	@mkdir $(BIN_DIR)
-$(SYFT):
+$(SYFT): | $(BIN_DIR)
 	@curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | \
 		sh -s -- -b ./$(BIN_DIR) $(SYFT_VERSION)
-$(GRYPE):
+$(GRYPE): | $(BIN_DIR)
 	@curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | \
 		sh -s -- -b ./$(BIN_DIR) $(GRYPE_VERSION)
 
@@ -110,6 +110,6 @@ $(NODE_MODULES): .npmrc package*.json
 
 $(TEMP_DIR):
 	@mkdir $(TEMP_DIR)
-$(TEMP_DIR)/dockerimage: $(TEMP_DIR) .dockerignore .eslintrc.yml Dockerfile package*.json
+$(TEMP_DIR)/dockerimage: .dockerignore .eslintrc.yml Dockerfile package*.json | $(TEMP_DIR)
 	@docker build --tag $(IMAGE_NAME) .
 	@touch $(TEMP_DIR)/dockerimage
