@@ -105,7 +105,7 @@ $(GRYPE):
 		sh -s -- -b ./$(BIN_DIR) $(GRYPE_VERSION)
 
 $(NODE_MODULES): .npmrc package*.json
-	@npm install \
+	@npm clean-install \
 		--no-audit
 
 $(TEMP_DIR):
