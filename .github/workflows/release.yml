@@ -34,6 +34,8 @@ jobs:
   docker-hub:
     name: Docker Hub
     runs-on: ubuntu-22.04
+    permissions:
+      id-token: write # To perform keyless signing with cosign
     needs:
       - validate
     steps:
@@ -48,12 +50,15 @@ jobs:
             const ref = context.ref
             const tag = ref.replace(/^refs\/tags\//, "")
             return tag
+      - name: Install cosign
+        uses: sigstore/cosign-installer@9becc617647dfa20ae7b1151972e9b3a2c338a2b # v2.8.1
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a # v2.1.0
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build and push to Docker Hub
+        id: docker_hub
         uses: docker/build-push-action@c56af957549030174b10d6867f20e78cfd7debc5 # v3.2.0
         with:
           context: .
@@ -61,6 +66,13 @@ jobs:
           tags: >-
             ericornelissen/js-re-scan:latest,
             ericornelissen/js-re-scan:${{ steps.version.outputs.result }}
+      - name: Sign container image (experimental)
+        run: |
+          cosign sign \
+            -a "repo=${{ github.repository }}" \
+            -a "workflow=${{ github.workflow }}" \
+            -a "ref=${{ github.sha }}" \
+            docker.io/ericornelissen/js-re-scan@${{ steps.docker_hub.outputs.digest }}
   validate:
     name: Validate
     runs-on: ubuntu-22.04
