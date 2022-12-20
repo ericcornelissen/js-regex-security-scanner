@@ -18,6 +18,15 @@ rules:
       report: certain
 
 overrides:
+  # JSX
+  - files:
+      - "*.jsx"
+      - "**/*.jsx"
+    parserOptions:
+      ecmaFeatures:
+        jsx: true
+
+  # TypeScript
   - files:
       - "*.{,c,m}ts"
       - "**/*.{,c,m}ts"
