@@ -8,6 +8,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.3.0] - 2022-12-20
+
 - (`6801ca8`) Add support for scanning JSX code.
 - (`3f94109`) Bump ESLint from `8.29.0` to `8.30.0`.
 - (`de2f21e`) Bump `@typescript-eslint/parser` from `5.46.0` to `5.46.1`.
