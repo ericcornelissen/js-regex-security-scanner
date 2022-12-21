@@ -103,17 +103,17 @@ Follow these steps to release a new version (using `v0.1.2` as an example):
    git push origin v0
    ```
 
-1. Publish to [Docker], first the with a version tag:
+1. Publish to [Docker], first with a version tag:
 
    ```shell
-   docker build --tag ericornelissen/js-re-scan:0.1.2 .
-   docker push ericornelissen/js-re-scan:0.1.2
+   make build TAG=v0.1.2
+   docker push ericornelissen/js-re-scan:v0.1.2
    ```
 
    then the `latest` tag:
 
    ```shell
-   docker build --tag ericornelissen/js-re-scan:latest .
+   make build TAG=latest
    docker push ericornelissen/js-re-scan:latest
    ```
 
