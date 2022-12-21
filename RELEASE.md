@@ -102,4 +102,3 @@ Follow these steps to release a new version (using `v0.1.2` as an example):
 
 [docker]: https://www.docker.com/
 [git tag]: https://git-scm.com/book/en/v2/Git-Basics-Tagging
-[npm]: https://www.npmjs.com/
