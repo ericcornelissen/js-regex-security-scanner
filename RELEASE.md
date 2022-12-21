@@ -18,23 +18,6 @@ Follow these steps to release a new version (using `v0.1.2` as an example):
    git clone git@github.com:ericcornelissen/js-regex-security-scanner.git
    ```
 
-1. Update the version number in the [npm] manifest and lockfile:
-
-   ```shell
-   npm version --no-git-tag-version v0.1.2
-   ```
-
-   If that fails, change the value of the version field in `package.json` to the
-   new version:
-
-   ```diff
-   -  "version": "0.1.1",
-   +  "version": "0.1.2",
-   ```
-
-   and update the version number in `package-lock.json` using `npm install`
-   (after updating `package.json`), which will sync the version number.
-
 1. Manually update the `version` label in the `Dockerfile`.
 
    ```diff
@@ -56,10 +39,10 @@ Follow these steps to release a new version (using `v0.1.2` as an example):
 1. Commit the changes to a new release branch and push using:
 
    ```shell
-   git checkout -b release-$(sha1sum package-lock.json | awk '{print $1}')
-   git add CHANGELOG.md Dockerfile package.json package-lock.json
+   git checkout -b release-$(sha1sum Dockerfile | awk '{print $1}')
+   git add CHANGELOG.md Dockerfile
    git commit --message "Version bump"
-   git push origin release-$(sha1sum package-lock.json | awk '{print $1}')
+   git push origin release-$(sha1sum Dockerfile | awk '{print $1}')
    ```
 
 1. Create a Pull Request to merge the release branch into `main`.
