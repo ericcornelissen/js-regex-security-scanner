@@ -1,10 +1,6 @@
 {
-  "name": "js-regex-security-scanner",
-  "description": "A static analyzer to scan JavaScript code for problematic regular expressions.",
-  "version": "0.3.0",
   "type": "module",
   "private": true,
-  "license": "Apache-2.0",
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=8.1.2"
@@ -21,7 +17,6 @@
   },
   "scripts": {
     "ava": "ava",
-    "eslint": "eslint",
     "licensee": "licensee",
     "markdownlint": "markdownlint"
   }
