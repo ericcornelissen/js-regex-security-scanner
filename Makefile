@@ -15,6 +15,8 @@ SYFT=$(BIN_DIR)/syft
 SBOM_FILE:=sbom.json
 VULN_FILE:=vulns.json
 
+TAG?=latest
+
 default: help
 
 audit: audit-docker audit-npm ## Audit the project dependencies
@@ -24,7 +26,7 @@ audit-docker: $(VULN_FILE) ## Audit the Docker image dependencies
 audit-npm: ## Audit the npm dependencies
 	@npm audit $(ARGS)
 
-build: $(TEMP_DIR)/dockerimage ## Build the Docker image
+build: $(TEMP_DIR)/dockerimages/$(TAG) ## Build the Docker image
 
 clean: ## Clean the repository
 	@git clean -fx \
@@ -90,7 +92,7 @@ update-test-snapshots: build $(NODE_MODULES) ## Update the test snapsthos
 
 .PHONY: default audit audit-docker audit-npm build clean help init license-check license-check-docker license-check-npm lint lint-ci lint-docker lint-md lint-yml sbom test update-test-snapshots
 
-$(SBOM_FILE): $(SYFT) $(TEMP_DIR)/dockerimage
+$(SBOM_FILE): $(SYFT) $(TEMP_DIR)/dockerimages/latest
 	@./$(SYFT) $(IMAGE_NAME):latest
 $(VULN_FILE): $(GRYPE) $(SBOM_FILE)
 	@./$(GRYPE) $(SBOM_FILE)
@@ -110,6 +112,8 @@ $(NODE_MODULES): .npmrc package*.json
 
 $(TEMP_DIR):
 	@mkdir $(TEMP_DIR)
-$(TEMP_DIR)/dockerimage: .dockerignore .eslintrc.yml Dockerfile package*.json | $(TEMP_DIR)
-	@docker build --tag $(IMAGE_NAME) .
-	@touch $(TEMP_DIR)/dockerimage
+$(TEMP_DIR)/dockerimages: | $(TEMP_DIR)
+	@mkdir $(TEMP_DIR)/dockerimages
+$(TEMP_DIR)/dockerimages/%: .dockerignore .eslintrc.yml Dockerfile package*.json | $(TEMP_DIR)/dockerimages
+	@docker build --tag $(IMAGE_NAME):$(TAG) .
+	@touch $(TEMP_DIR)/dockerimages/$(TAG)
