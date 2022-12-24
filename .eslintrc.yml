@@ -4,6 +4,8 @@ plugins:
   - regexp # see https://github.com/ota-meshi/eslint-plugin-regexp
 
 parserOptions:
+  ecmaFeatures:
+    jsx: true
   ecmaVersion: latest
   sourceType: module
 
@@ -18,14 +20,6 @@ rules:
       report: certain
 
 overrides:
-  # JSX
-  - files:
-      - "*.jsx"
-      - "**/*.jsx"
-    parserOptions:
-      ecmaFeatures:
-        jsx: true
-
   # TypeScript
   - files:
       - "*.{,c,m}ts"

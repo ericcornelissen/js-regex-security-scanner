@@ -8,7 +8,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`57e3a21`) Expand support for scanning JSX code to non-`.jsx` files.
 
 ## [0.3.0] - 2022-12-20
 
