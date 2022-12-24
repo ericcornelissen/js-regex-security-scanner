@@ -52,6 +52,8 @@ jobs:
             return tag
       - name: Install cosign
         uses: sigstore/cosign-installer@9becc617647dfa20ae7b1151972e9b3a2c338a2b # v2.8.1
+        with:
+          cosign-release: v1.13.1
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a # v2.1.0
         with:
@@ -67,6 +69,8 @@ jobs:
             ericornelissen/js-re-scan:latest,
             ericornelissen/js-re-scan:${{ steps.version.outputs.result }}
       - name: Sign container image (experimental)
+        env:
+          COSIGN_EXPERIMENTAL: 1
         run: |
           cosign sign \
             -a "repo=${{ github.repository }}" \
