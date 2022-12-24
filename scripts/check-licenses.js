@@ -28,18 +28,14 @@ const matches = (string) => (regexp) => regexp.test(string);
 
 const quoted = (string) => `'${string}'`;
 
-const toLowerCase = (string) => string.toLowerCase();
-
 const toMatchWholeWordExpression = (string) => {
 	const preWordExpr = /(?:^|[\s(])/.source;
 	const postWordExpr = /(?:[\s)]|$)/.source;
-	return new RegExp(`${preWordExpr}${string}${postWordExpr}`);
+	return new RegExp(`${preWordExpr}${string}${postWordExpr}`, "i");
 };
 
-const isAllowedLicense = (_license) => {
-	const license = toLowerCase(_license);
-	return	allowedLicenses.includes(license) ||
-	allowedLicenses
+const isAllowedLicense = (license) => {
+	return allowedLicenses
 		.map(toMatchWholeWordExpression)
 		.some(matches(license));
 };
@@ -56,7 +52,7 @@ const licenseConfigFile = path.resolve(
 const licenseConfigRaw = fs.readFileSync(licenseConfigFile, { encoding: "utf8" });
 const licenseConfig = JSON.parse(licenseConfigRaw);
 
-const allowedLicenses = licenseConfig.licenses.spdx.map(toLowerCase);
+const allowedLicenses = licenseConfig.licenses.spdx;
 
 // -------------
 // Load the SBOM
