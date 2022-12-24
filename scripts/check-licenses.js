@@ -44,9 +44,36 @@ const isAllowedLicense = (_license) => {
 		.some(matches(license));
 };
 
-// -------------
-// Load licenses
-// -------------
+const applyCorrection = (artifact) => {
+	const correction = corrections.find(entry => entry.name === artifact.name);
+	return {
+		...artifact,
+		licenses: correction?.licenses ?? artifact.licenses,
+	};
+};
+
+// -----------
+// Load policy
+// -----------
+
+const corrections = [
+	{
+		name: "busybox",
+		licenses: [
+			"GPL-2.0-only",
+		],
+		licenseUrl: "https://busybox.net/license.html",
+		reason: "license not detected by Syft"
+	},
+	{
+		name: "node",
+		licenses: [
+			"MIT",
+		],
+		licenseUrl: "https://github.com/nodejs/node#license",
+		reason: "license not detected by Syft"
+	},
+];
 
 const licenseConfigFile = path.resolve(
 	projectRoot,
@@ -76,6 +103,7 @@ const sbom = JSON.parse(rawSbom);
 
 const licenseViolations = sbom.artifacts
 	.filter(artifact => !skipEcosystems.includes(artifact.type))
+	.map(applyCorrection)
 	.filter(artifact => !artifact.licenses.some(isAllowedLicense))
 	.map(artifact => {
 		return {

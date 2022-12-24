@@ -1,8 +1,8 @@
 IMAGE_NAME:=ericornelissen/js-re-scan
 
-GRYPE_VERSION:=v0.51.0
+GRYPE_VERSION:=v0.54.0
 HADOLINT_VERSION:=sha256:9259e253a4e299b50c92006149dd3a171c7ea3c5bd36f060022b5d2c1ff0fbbe # tag=2.12.0
-SYFT_VERSION:=v0.59.0
+SYFT_VERSION:=v0.63.0
 
 BIN_DIR:=.bin
 ROOT_DIR:=$(dir $(realpath $(lastword $(MAKEFILE_LIST))))
