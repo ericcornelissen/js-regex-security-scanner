@@ -62,18 +62,18 @@ jobs:
         run: |
           npm ci
           go install github.com/rhysd/actionlint/cmd/actionlint@v1.6.22
+      - name: Lint CI
+        if: ${{ failure() || success() }}
+        run: make lint-ci
       - name: Lint Dockerfile
-        if:  ${{ failure() || success() }}
+        if: ${{ failure() || success() }}
         run: make lint-docker
       - name: Lint MarkDown
-        if:  ${{ failure() || success() }}
+        if: ${{ failure() || success() }}
         run: make lint-md
       - name: Lint YAML
-        if:  ${{ failure() || success() }}
+        if: ${{ failure() || success() }}
         run: make lint-yml
-      - name: Lint workflows
-        if:  ${{ failure() || success() }}
-        run: make lint-ci
   test:
     name: Test
     runs-on: ubuntu-22.04
