@@ -35,6 +35,8 @@ clean: ## Clean the repository
 		$(NODE_MODULES) \
 		$(SBOM_FILE) \
 		$(VULN_FILE)
+	@docker rmi --force \
+		$(IMAGE_NAME)
 
 help: ## Show this help message
 	@printf "Usage: make <command>\n\n"
