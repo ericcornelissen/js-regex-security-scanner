@@ -56,7 +56,7 @@ jobs:
           node-version: 18
           cache: npm
       - name: Install Node.js dependencies
-        run: npm ci
+        run: npm clean-install
       - name: Audit all npm dependencies
         if: ${{ !startsWith(matrix.ref, 'v') }}
         run: make audit-npm

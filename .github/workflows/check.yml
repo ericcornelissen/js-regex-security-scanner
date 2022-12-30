@@ -36,7 +36,7 @@ jobs:
           node-version: 18
           cache: npm
       - name: Install Node.js dependencies
-        run: npm ci
+        run: npm clean-install
       - name: Check Docker licenses
         if: ${{ always() }}
         run: make license-check-docker
@@ -60,7 +60,7 @@ jobs:
           go-version: 1.17
       - name: Install Node.js dependencies
         run: |
-          npm ci
+          npm clean-install
           go install github.com/rhysd/actionlint/cmd/actionlint@v1.6.22
       - name: Lint CI
         if: ${{ failure() || success() }}
@@ -90,6 +90,6 @@ jobs:
           node-version: 18
           cache: npm
       - name: Install Node.js dependencies
-        run: npm ci
+        run: npm clean-install
       - name: Test
         run: make test
