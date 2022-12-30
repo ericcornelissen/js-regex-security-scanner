@@ -23,11 +23,7 @@ jobs:
         uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3.2.0
         with:
           ref: ${{ matrix.ref }}
-      - name: Download Syft and Grype
-        run: make .bin/syft .bin/grype
-      - name: Create SBOM
-        run: make sbom
-      - name: Scan SBOM
+      - name: Audit dependencies in Docker image
         run: make audit-docker
       - name: Upload SBOM and vulnerability scan
         uses: actions/upload-artifact@83fd05a356d7e2593de66fc9913b3002723633cb # v3.1.1
@@ -55,8 +51,6 @@ jobs:
         with:
           node-version: 18
           cache: npm
-      - name: Install Node.js dependencies
-        run: npm clean-install
       - name: Audit all npm dependencies
         if: ${{ !startsWith(matrix.ref, 'v') }}
         run: make audit-npm

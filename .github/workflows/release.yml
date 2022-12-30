@@ -90,7 +90,5 @@ jobs:
         with:
           cache: npm
           node-version: 18
-      - name: Install Node.js dependencies
-        run: npm clean-install
       - name: Verify project validity
         run: make verify
