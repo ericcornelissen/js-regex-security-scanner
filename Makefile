@@ -90,7 +90,9 @@ update-test-snapshots: build $(NODE_MODULES) ## Update the test snapsthos
 		--update-snapshots \
 		tests/
 
-.PHONY: default audit audit-docker audit-npm build clean help init license-check license-check-docker license-check-npm lint lint-ci lint-docker lint-md lint-yml sbom test update-test-snapshots
+verify: build license-check lint test ## Verify project is in a good state
+
+.PHONY: default audit audit-docker audit-npm build clean help init license-check license-check-docker license-check-npm lint lint-ci lint-docker lint-md lint-yml sbom test update-test-snapshots verify
 
 $(SBOM_FILE): $(SYFT) $(TEMP_DIR)/dockerimages/latest
 	@./$(SYFT) $(IMAGE_NAME):latest
