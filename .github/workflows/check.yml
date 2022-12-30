@@ -38,10 +38,10 @@ jobs:
       - name: Install Node.js dependencies
         run: npm clean-install
       - name: Check Docker licenses
-        if: ${{ always() }}
+        if: ${{ failure() || success() }}
         run: make license-check-docker
       - name: Check npm licenses
-        if: ${{ always() }}
+        if: ${{ failure() || success() }}
         run: make license-check-npm
   lint:
     name: Lint
