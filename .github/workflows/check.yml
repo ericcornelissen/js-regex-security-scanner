@@ -35,8 +35,6 @@ jobs:
         with:
           node-version: 18
           cache: npm
-      - name: Install Node.js dependencies
-        run: npm clean-install
       - name: Check Docker licenses
         if: ${{ failure() || success() }}
         run: make license-check-docker
@@ -56,8 +54,6 @@ jobs:
           cache: npm
       - name: Install tooling
         uses: asdf-vm/actions/install@707e84f3ee349548310aeabdad0dd3bfcb9b69fa # v1.1.0
-      - name: Install Node.js dependencies
-        run: npm clean-install
       - name: Lint CI
         if: ${{ failure() || success() }}
         run: make lint-ci
@@ -85,7 +81,5 @@ jobs:
         with:
           node-version: 18
           cache: npm
-      - name: Install Node.js dependencies
-        run: npm clean-install
       - name: Test
         run: make test

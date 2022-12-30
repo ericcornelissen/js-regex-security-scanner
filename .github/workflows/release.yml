@@ -90,8 +90,6 @@ jobs:
         with:
           cache: npm
           node-version: 18
-      - name: Install Node.js dependencies
-        run: npm clean-install
       - name: Build
         run: make build
       - name: Test
