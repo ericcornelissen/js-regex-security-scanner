@@ -30,7 +30,7 @@ jobs:
             const major = tag.replace(/\.\d\.\d$/, "")
             return major
       - name: Update release branch
-        run: git push origin HEAD:${{ steps.version.outputs.result }}
+        run: git push origin 'HEAD:${{ steps.version.outputs.result }}'
   docker-hub:
     name: Docker Hub
     runs-on: ubuntu-22.04
@@ -73,10 +73,10 @@ jobs:
           COSIGN_EXPERIMENTAL: 1
         run: |
           cosign sign \
-            -a "repo=${{ github.repository }}" \
-            -a "workflow=${{ github.workflow }}" \
-            -a "ref=${{ github.sha }}" \
-            docker.io/ericornelissen/js-re-scan@${{ steps.docker_hub.outputs.digest }}
+            -a 'repo=${{ github.repository }}' \
+            -a 'workflow=${{ github.workflow }}' \
+            -a 'ref=${{ github.sha }}' \
+            'docker.io/ericornelissen/js-re-scan@${{ steps.docker_hub.outputs.digest }}'
   validate:
     name: Validate
     runs-on: ubuntu-22.04
