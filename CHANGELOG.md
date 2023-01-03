@@ -8,6 +8,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.3.1] - 2023-01-03
+
 - (`5d49ba6`) Bump ESLint from `8.30.0` to `8.31.0`.
 - (`57e3a21`) Expand support for scanning JSX code to non-`.jsx` files.
 
