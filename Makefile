@@ -1,16 +1,12 @@
 IMAGE_NAME:=ericornelissen/js-re-scan
 
-GRYPE_VERSION:=v0.54.0
 HADOLINT_VERSION:=v2.12.0
-SYFT_VERSION:=v0.63.0
 
 BIN_DIR:=.bin
 ROOT_DIR:=$(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 TEMP_DIR:=.tmp
 
-GRYPE=$(BIN_DIR)/grype
 NODE_MODULES=node_modules/
-SYFT=$(BIN_DIR)/syft
 
 SBOM_FILE:=sbom.json
 VULN_FILE:=vulns.json
@@ -45,7 +41,7 @@ help: ## Show this help message
 		printf "  \033[36m%-30s\033[0m %s\n", $$1, $$NF \
 	}' $(MAKEFILE_LIST)
 
-init: $(GRYPE) $(SYFT) $(NODE_MODULES) ## Initialize the project dependencies
+init: $(NODE_MODULES) ## Initialize the project dependencies
 
 license-check: license-check-docker license-check-npm ## Check the project dependency licenses
 
@@ -96,19 +92,13 @@ verify: build license-check lint test ## Verify project is in a good state
 
 .PHONY: default audit audit-docker audit-npm build clean help init license-check license-check-docker license-check-npm lint lint-ci lint-docker lint-md lint-yml sbom test update-test-snapshots verify
 
-$(SBOM_FILE): $(SYFT) $(TEMP_DIR)/dockerimages/latest
-	@./$(SYFT) $(IMAGE_NAME):latest
-$(VULN_FILE): $(GRYPE) $(SBOM_FILE)
-	@./$(GRYPE) $(SBOM_FILE)
+$(SBOM_FILE): $(TEMP_DIR)/dockerimages/latest
+	@syft $(IMAGE_NAME):latest
+$(VULN_FILE): $(SBOM_FILE)
+	@grype $(SBOM_FILE)
 
 $(BIN_DIR):
 	@mkdir $(BIN_DIR)
-$(SYFT): | $(BIN_DIR)
-	@curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | \
-		sh -s -- -b ./$(BIN_DIR) $(SYFT_VERSION)
-$(GRYPE): | $(BIN_DIR)
-	@curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | \
-		sh -s -- -b ./$(BIN_DIR) $(GRYPE_VERSION)
 
 $(NODE_MODULES): .npmrc package*.json
 	@npm clean-install \
