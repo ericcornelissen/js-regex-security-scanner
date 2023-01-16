@@ -85,7 +85,7 @@ To be able to contribute you need at least the following:
 - (Optional) [Grype] (see `.tool-versions` for preferred version);
 - (Optional) [ShellCheck] (see `.tool-versions` for preferred version);
 - (Optional) [Syft] (see `.tool-versions` for preferred version);
-- (Optional) [yamllint];
+- (Optional) [yamllint] (see `.tool-versions` for preferred version);
 
 ### Workflow
 
