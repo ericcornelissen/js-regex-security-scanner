@@ -81,7 +81,10 @@ To be able to contribute you need at least the following:
 - [Make];
 - [Node.js] v18.0.0 or higher and [npm] v8.1.2 or higher;
 - (Recommended) a code editor with [EditorConfig] support;
-- (Optional) [actionlint] and [ShellCheck];
+- (Optional) [actionlint] (see `.tool-versions` for preferred version);
+- (Optional) [Grype] (see `.tool-versions` for preferred version);
+- (Optional) [ShellCheck] (see `.tool-versions` for preferred version);
+- (Optional) [Syft] (see `.tool-versions` for preferred version);
 - (Optional) [yamllint];
 
 ### Workflow
