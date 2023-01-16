@@ -13,3 +13,61 @@ jobs:
     with:
       refs: |-
         ["main", "v0"]
+  tooling:
+    name: Tool update ${{ matrix.tool }}
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write # To push a commit
+      pull-requests: write # To open a Pull Request
+    strategy:
+      fail-fast: false
+      matrix:
+        tool:
+          - actionlint
+          - grype
+          - shellcheck
+          - syft
+          - yamllint
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
+      - name: Install asdf
+        uses: asdf-vm/actions/setup@707e84f3ee349548310aeabdad0dd3bfcb9b69fa # v1.1.0
+      - name: Add plugins
+        run: |
+         asdf plugin add yamllint https://github.com/ericcornelissen/asdf-yamllint
+      - name: Install tooling
+        uses: asdf-vm/actions/install@707e84f3ee349548310aeabdad0dd3bfcb9b69fa # v1.1.0
+      - name: Create token to create Pull Request
+        uses: tibdex/github-app-token@021a2405c7f990db57f5eae5397423dcc554159c # v1.7.0
+        id: release-token
+        with:
+          app_id: ${{ secrets.RELEASE_APP_ID }}
+          private_key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+      - name: Get latest version
+        id: version
+        run: |
+          LATEST_VERSION="$(asdf latest '${{ matrix.tool }}')"
+          echo "latest=$LATEST_VERSION" >> "$GITHUB_OUTPUT"
+      - name: Install new version
+        run: |
+          asdf install '${{ matrix.tool }}' '${{ steps.version.outputs.latest }}'
+      - name: Apply latest version to .tool-versions
+        run: |
+          asdf local '${{ matrix.tool }}' '${{ steps.version.outputs.latest }}'
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@d7db273d6c7206ba99224e659c982ae34a1025e3 # v4.2.1
+        with:
+          token: ${{ steps.release-token.outputs.token }}
+          title: Update ${{ matrix.tool }} to v${{ steps.version.outputs.latest }}
+          body:
+            _This Pull Request was created automatically_
+
+            ---
+
+            Bump ${{ matrix.tool }} to v${{ steps.version.outputs.latest }}
+          branch: asdf-${{ matrix.tool }}-${{ steps.version.outputs.latest }}
+          labels: dependencies
+          commit-message: Update ${{ matrix.tool }} to ${{ steps.version.outputs.latest }}
+          add-paths: |
+            .tool-versions
