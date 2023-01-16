@@ -54,7 +54,7 @@ license-check-npm: $(NODE_MODULES) ## Check npm dependency licenses
 
 lint: lint-ci lint-docker lint-md lint-yml ## Lint the project
 
-lint-ci: ## Lint Continuous Integration configuration files
+lint-ci: $(TEMP_DIR)/.asdf ## Lint Continuous Integration configuration files
 	@actionlint
 
 lint-docker: ## Lint the Dockerfile
@@ -71,7 +71,7 @@ lint-md: $(NODE_MODULES) ## Lint MarkDown files
 		--ignore testdata/ \
 		.
 
-lint-yml: ## Lint .yml files
+lint-yml: $(TEMP_DIR)/.asdf ## Lint .yml files
 	@yamllint \
 		-c .yamllint.yml \
 		.
@@ -97,9 +97,9 @@ verify: build license-check lint test ## Verify project is in a good state
 	lint lint-ci lint-docker lint-md lint-yml \
 	test update-test-snapshots
 
-$(SBOM_FILE): $(TEMP_DIR)/dockerimages/latest
+$(SBOM_FILE): $(TEMP_DIR)/.asdf $(TEMP_DIR)/dockerimages/latest
 	@syft $(IMAGE_NAME):latest
-$(VULN_FILE): $(SBOM_FILE)
+$(VULN_FILE): $(TEMP_DIR)/.asdf $(SBOM_FILE)
 	@grype $(SBOM_FILE)
 
 $(BIN_DIR):
@@ -111,6 +111,11 @@ $(NODE_MODULES): .npmrc package*.json
 
 $(TEMP_DIR):
 	@mkdir $(TEMP_DIR)
+$(TEMP_DIR)/.asdf: .tool-versions | $(TEMP_DIR)
+ifneq (, $(shell which asdf))
+	@asdf install
+	@touch $(TEMP_DIR)/.asdf
+endif
 $(TEMP_DIR)/dockerimages: | $(TEMP_DIR)
 	@mkdir $(TEMP_DIR)/dockerimages
 $(TEMP_DIR)/dockerimages/%: .dockerignore .eslintrc.yml Dockerfile package*.json | $(TEMP_DIR)/dockerimages
