@@ -20,10 +20,20 @@ rules:
       report: certain
 
 overrides:
+  # MarkDown
+  - files:
+      - "*.md"
+      - "**/*.md"
+    plugins:
+      - markdown
+    processor: markdown/markdown
+
   # TypeScript
   - files:
       - "*.{,c,m}ts"
       - "**/*.{,c,m}ts"
+      - "*.md/*.{,c,m}ts"
+      - "**/*.md/*.{,c,m}ts"
     parser: "@typescript-eslint/parser"
 
 ignorePatterns:
