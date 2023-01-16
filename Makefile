@@ -49,7 +49,7 @@ license-check-docker: $(SBOM_FILE) ## Check Docker image dependency licenses
 	@node scripts/check-licenses.js
 
 license-check-npm: $(NODE_MODULES) ## Check npm dependency licenses
-	@npm run licensee -- \
+	@npx licensee \
 		--errors-only
 
 lint: lint-ci lint-docker lint-md lint-yml ## Lint the project
@@ -64,7 +64,7 @@ lint-docker: ## Lint the Dockerfile
 		< Dockerfile
 
 lint-md: $(NODE_MODULES) ## Lint MarkDown files
-	@npm run markdownlint -- \
+	@npx markdownlint \
 		--dot \
 		--ignore-path .gitignore \
 		--ignore tests/snapshots \
@@ -79,12 +79,12 @@ lint-yml: ## Lint .yml files
 sbom: $(SBOM_FILE) ## Generate a Software Bill Of Materials (SBOM)
 
 test: build $(NODE_MODULES) ## Run the tests
-	@npm run ava -- \
+	@npx ava \
 		--timeout 20s \
 		tests/
 
 update-test-snapshots: build $(NODE_MODULES) ## Update the test snapsthos
-	@npm run ava -- \
+	@npx ava \
 		--update-snapshots \
 		tests/
 
