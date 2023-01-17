@@ -1,7 +1,5 @@
 IMAGE_NAME:=ericornelissen/js-re-scan
 
-HADOLINT_VERSION:=v2.12.0
-
 BIN_DIR:=.bin
 NODE_MODULES=node_modules
 ROOT_DIR:=$(dir $(realpath $(lastword $(MAKEFILE_LIST))))
@@ -59,11 +57,9 @@ lint: lint-ci lint-docker lint-md lint-yml ## Lint the project
 lint-ci: $(ASDF) ## Lint Continuous Integration configuration files
 	@actionlint
 
-lint-docker: ## Lint the Dockerfile
-	@docker run -i --rm \
-		--mount "type=bind,source=$(ROOT_DIR)/.hadolint.yml,target=/.config/hadolint.yaml" \
-		hadolint/hadolint:$(HADOLINT_VERSION) \
-		< Dockerfile
+lint-docker: $(ASDF) ## Lint the Dockerfile
+	@hadolint \
+		Dockerfile
 
 lint-md: $(NODE_MODULES) ## Lint MarkDown files
 	@npx markdownlint \

@@ -25,6 +25,7 @@ jobs:
         tool:
           - actionlint
           - grype
+          - hadolint
           - shellcheck
           - syft
           - yamllint
