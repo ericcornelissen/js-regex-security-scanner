@@ -83,6 +83,7 @@ To be able to contribute you need at least the following:
 - (Recommended) a code editor with [EditorConfig] support;
 - (Optional) [actionlint] (see `.tool-versions` for preferred version);
 - (Optional) [Grype] (see `.tool-versions` for preferred version);
+- (Optional) [hadolint] (see `.tool-versions` for preferred version);
 - (Optional) [ShellCheck] (see `.tool-versions` for preferred version);
 - (Optional) [Syft] (see `.tool-versions` for preferred version);
 - (Optional) [yamllint] (see `.tool-versions` for preferred version);
