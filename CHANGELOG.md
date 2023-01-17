@@ -8,6 +8,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.0] - 2023-01-17
+
 - (`eedc5ef`) Add support for scanning MarkDown documentation.
 - (`91beda0`) Bump ESLint from `8.31.0` to `8.32.0`.
 - (`0c14ab5`) Bump `eslint-plugin-regexp` from `1.11.0` to `1.12.0`.
