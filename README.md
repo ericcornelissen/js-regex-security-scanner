@@ -29,6 +29,7 @@ The scanner has the following exit codes.
   the input string.
 - Ignore generated code based on standard file and folder patterns.
 - Ignore tests based on standard file and folder patterns.
+- Scan documentation.
 
 ## Philosophy
 
@@ -46,7 +47,9 @@ tools are hard to use.
 
 This scanner runs [ESLint] with the [eslint-plugin-regexp] plugin to find and
 report on regular expressions that violate rules with security implications.
-TypeScript support is provided by [@typescript-eslint/parser].
+
+TypeScript support is provided by [@typescript-eslint/parser], MarkDown support
+is provided by [eslint-plugin-markdown].
 
 ## License
 
@@ -61,6 +64,7 @@ how to improve the documentation.
 [@typescript-eslint/parser]: https://www.npmjs.com/package/@typescript-eslint/parser
 [docker]: https://www.docker.com/
 [eslint]: https://eslint.org/
+[eslint-plugin-markdown]: https://www.npmjs.com/package/eslint-plugin-markdown
 [eslint-plugin-regexp]: https://github.com/ota-meshi/eslint-plugin-regexp
 [license]: ./LICENSE
 [open an issue]: https://github.com/ericcornelissen/js-regex-security-scanner/issues/new?labels=documentation&template=documentation.md
