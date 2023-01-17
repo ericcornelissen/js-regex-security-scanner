@@ -3,10 +3,12 @@ IMAGE_NAME:=ericornelissen/js-re-scan
 HADOLINT_VERSION:=v2.12.0
 
 BIN_DIR:=.bin
+NODE_MODULES=node_modules
 ROOT_DIR:=$(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 TEMP_DIR:=.tmp
 
-NODE_MODULES=node_modules/
+ASDF:=$(TEMP_DIR)/.asdf
+DOCKERIMAGES:=$(TEMP_DIR)/dockerimages
 
 SBOM_FILE:=sbom.json
 VULN_FILE:=vulns.json
@@ -22,7 +24,7 @@ audit-docker: $(VULN_FILE) ## Audit the Docker image dependencies
 audit-npm: ## Audit the npm dependencies
 	@npm audit $(ARGS)
 
-build: $(TEMP_DIR)/dockerimages/$(TAG) ## Build the Docker image
+build: $(DOCKERIMAGES)/$(TAG) ## Build the Docker image
 
 clean: ## Clean the repository
 	@git clean -fx \
@@ -49,12 +51,12 @@ license-check-docker: $(SBOM_FILE) ## Check Docker image dependency licenses
 	@node scripts/check-licenses.js
 
 license-check-npm: $(NODE_MODULES) ## Check npm dependency licenses
-	@npm run licensee -- \
+	@npx licensee \
 		--errors-only
 
 lint: lint-ci lint-docker lint-md lint-yml ## Lint the project
 
-lint-ci: ## Lint Continuous Integration configuration files
+lint-ci: $(ASDF) ## Lint Continuous Integration configuration files
 	@actionlint
 
 lint-docker: ## Lint the Dockerfile
@@ -64,14 +66,14 @@ lint-docker: ## Lint the Dockerfile
 		< Dockerfile
 
 lint-md: $(NODE_MODULES) ## Lint MarkDown files
-	@npm run markdownlint -- \
+	@npx markdownlint \
 		--dot \
 		--ignore-path .gitignore \
 		--ignore tests/snapshots \
 		--ignore testdata/ \
 		.
 
-lint-yml: ## Lint .yml files
+lint-yml: $(ASDF) ## Lint .yml files
 	@yamllint \
 		-c .yamllint.yml \
 		.
@@ -79,22 +81,27 @@ lint-yml: ## Lint .yml files
 sbom: $(SBOM_FILE) ## Generate a Software Bill Of Materials (SBOM)
 
 test: build $(NODE_MODULES) ## Run the tests
-	@npm run ava -- \
+	@npx ava \
 		--timeout 20s \
 		tests/
 
 update-test-snapshots: build $(NODE_MODULES) ## Update the test snapsthos
-	@npm run ava -- \
+	@npx ava \
 		--update-snapshots \
 		tests/
 
 verify: build license-check lint test ## Verify project is in a good state
 
-.PHONY: default audit audit-docker audit-npm build clean help init license-check license-check-docker license-check-npm lint lint-ci lint-docker lint-md lint-yml sbom test update-test-snapshots verify
+.PHONY: default help \
+	build clean init sbom verify \
+	audit audit-docker audit-npm \
+	license-check license-check-docker license-check-npm \
+	lint lint-ci lint-docker lint-md lint-yml \
+	test update-test-snapshots
 
-$(SBOM_FILE): $(TEMP_DIR)/dockerimages/latest
+$(SBOM_FILE): $(ASDF) $(DOCKERIMAGES)/latest
 	@syft $(IMAGE_NAME):latest
-$(VULN_FILE): $(SBOM_FILE)
+$(VULN_FILE): $(ASDF) $(SBOM_FILE)
 	@grype $(SBOM_FILE)
 
 $(BIN_DIR):
@@ -106,8 +113,13 @@ $(NODE_MODULES): .npmrc package*.json
 
 $(TEMP_DIR):
 	@mkdir $(TEMP_DIR)
-$(TEMP_DIR)/dockerimages: | $(TEMP_DIR)
-	@mkdir $(TEMP_DIR)/dockerimages
-$(TEMP_DIR)/dockerimages/%: .dockerignore .eslintrc.yml Dockerfile package*.json | $(TEMP_DIR)/dockerimages
+$(ASDF): .tool-versions | $(TEMP_DIR)
+ifneq (, $(shell which asdf))
+	@asdf install
+	@touch $(ASDF)
+endif
+$(DOCKERIMAGES): | $(TEMP_DIR)
+	@mkdir $(DOCKERIMAGES)
+$(DOCKERIMAGES)/%: .dockerignore .eslintrc.yml Dockerfile package*.json | $(DOCKERIMAGES)
 	@docker build --tag $(IMAGE_NAME):$(TAG) .
-	@touch $(TEMP_DIR)/dockerimages/$(TAG)
+	@touch $(DOCKERIMAGES)/$(TAG)

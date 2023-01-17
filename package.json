@@ -15,10 +15,5 @@
     "ava": "5.1.0",
     "licensee": "10.0.0",
     "markdownlint-cli": "0.33.0"
-  },
-  "scripts": {
-    "ava": "ava",
-    "licensee": "licensee",
-    "markdownlint": "markdownlint"
   }
 }
