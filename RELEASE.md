@@ -18,7 +18,13 @@ Follow these steps to release a new version (using `v0.1.2` as an example):
    git clone git@github.com:ericcornelissen/js-regex-security-scanner.git
    ```
 
-1. Manually update the `version` label in the `Dockerfile`.
+1. Update the `version` label in the `Dockerfile` using:
+
+   ```shell
+   node script/bump-version.js [patch|minor|major]
+   ```
+
+   If that fails, manually update the `version` label in the `Dockerfile`:
 
    ```diff
    -  version="0.1.1" \
