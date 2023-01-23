@@ -21,7 +21,7 @@ Follow these steps to release a new version (using `v0.1.2` as an example):
 1. Update the `version` label in the `Dockerfile` using:
 
    ```shell
-   node script/bump-version.js [patch|minor|major]
+   node scripts/bump-version.js [patch|minor|major]
    ```
 
    If that fails, manually update the `version` label in the `Dockerfile`:
@@ -31,7 +31,14 @@ Follow these steps to release a new version (using `v0.1.2` as an example):
    +  version="0.1.2" \
    ```
 
-1. Manually add the following text after the `## [Unreleased]` line:
+1. Update the changelog:
+
+   ```shell
+   node scripts/bump-changelog.js
+   ```
+
+   If that fails, manually add the following text after the `## [Unreleased]`
+   line:
 
    ```markdown
    - _No changes yet_
