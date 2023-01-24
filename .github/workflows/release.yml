@@ -1,101 +1,66 @@
 name: Release
 on:
-  push:
-    tags:
-      - v*
+  workflow_dispatch:
+    inputs:
+      update_type:
+        description: Update type
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
 
 permissions: read-all
 
 jobs:
-  branch:
-    name: Branch
+  initiate:
+    name: Initiate
     runs-on: ubuntu-22.04
     permissions:
-      contents: write # To push a branch
-    needs:
-      - validate
+      contents: write # To push a commit
+      pull-requests: write # To open a Pull Request
     steps:
       - name: Checkout repository
         uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
-        with:
-          fetch-depth: 0
-      - name: Get major version
-        uses: actions/github-script@100527700e8b29ca817ac0e0dfbfc5e8ff38edda # v6.3.2
-        id: version
-        with:
-          result-encoding: string
-          script: |
-            const ref = context.ref
-            const tag = ref.replace(/^refs\/tags\//, "")
-            const major = tag.replace(/\.\d\.\d$/, "")
-            return major
-      - name: Update release branch
-        run: git push origin 'HEAD:${{ steps.version.outputs.result }}'
-  docker-hub:
-    name: Docker Hub
-    runs-on: ubuntu-22.04
-    permissions:
-      id-token: write # To perform keyless signing with cosign
-    needs:
-      - validate
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
-      - name: Get version
-        uses: actions/github-script@100527700e8b29ca817ac0e0dfbfc5e8ff38edda # v6.3.2
-        id: version
-        with:
-          result-encoding: string
-          script: |
-            const ref = context.ref
-            const tag = ref.replace(/^refs\/tags\//, "")
-            return tag
-      - name: Install cosign
-        uses: sigstore/cosign-installer@9becc617647dfa20ae7b1151972e9b3a2c338a2b # v2.8.1
-        with:
-          cosign-release: v1.13.1
-      - name: Log in to Docker Hub
-        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a # v2.1.0
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build and push to Docker Hub
-        id: docker_hub
-        uses: docker/build-push-action@37abcedcc1da61a57767b7588cb9d03eb57e28b3 # v3.3.0
-        with:
-          context: .
-          push: true
-          tags: >-
-            ericornelissen/js-re-scan:latest,
-            ericornelissen/js-re-scan:${{ steps.version.outputs.result }}
-      - name: Sign container image (experimental)
-        env:
-          COSIGN_EXPERIMENTAL: 1
-        run: |
-          cosign sign \
-            -a 'repo=${{ github.repository }}' \
-            -a 'workflow=${{ github.workflow }}' \
-            -a 'ref=${{ github.sha }}' \
-            'docker.io/ericornelissen/js-re-scan@${{ steps.docker_hub.outputs.digest }}'
-  validate:
-    name: Validate
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
-        with:
-          submodules: true
       - name: Install Node.js
         uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # v3.6.0
         with:
-          cache: npm
           node-version: 18
-      - name: Install asdf
-        uses: asdf-vm/actions/setup@707e84f3ee349548310aeabdad0dd3bfcb9b69fa # v1.1.0
-      - name: Add plugins
-        run: |
-         asdf plugin add yamllint https://github.com/ericcornelissen/asdf-yamllint
-      - name: Install tooling
-        uses: asdf-vm/actions/install@707e84f3ee349548310aeabdad0dd3bfcb9b69fa # v1.1.0
-      - name: Verify project validity
-        run: make verify
+          cache: npm
+      - name: Create token to create Pull Request
+        uses: tibdex/github-app-token@021a2405c7f990db57f5eae5397423dcc554159c # v1.7.0
+        id: pull_request_token
+        with:
+          app_id: ${{ secrets.RELEASE_APP_ID }}
+          private_key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+      - name: Bump version
+        run: node scripts/bump-version.js '${{ github.event.inputs.update_type }}'
+      - name: Update the changelog
+        run: node scripts/bump-changelog.js
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@d7db273d6c7206ba99224e659c982ae34a1025e3 # v4.2.1
+        with:
+          token: ${{ steps.pull_request_token.outputs.token }}
+          title: New ${{ github.event.inputs.update_type }} release for v0
+          body: |
+            _This Pull Request was created automatically_
+
+            ---
+
+            ### Merge checklist
+
+            - [ ] All continuous integration checks passed.
+            - [ ] The version number is updated in `Dockerfile`.
+            - [ ] The new release is added to `CHANGELOG.md` with the correct version number and date.
+            - [ ] The new version number is in accordance with the [Semantic Versioning] rules.
+            - [ ] There are no other changes in the Pull Request.
+
+            ### Post-merge
+
+            Pull the `main` branch, create a git tag for the new release and push it.
+
+            [semantic versioning]: https://semver.org/spec/v2.0.0.html
+          branch: release-${{ github.event.inputs.update_type }}
+          branch-suffix: random
+          commit-message: Version bump

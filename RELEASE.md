@@ -1,9 +1,22 @@
 # Release Guidelines
 
-If you need to release a new version of _JavaScript Regex Security Scanner_,
+If you need to release a new version of the _JavaScript Regex Security Scanner_,
 follow the guidelines found in this document.
 
-Follow these steps to release a new version (using `v0.1.2` as an example):
+## Automated Releases (Preferred)
+
+To release a new version follow these steps:
+
+1. [Manually trigger] the [release workflow] from the `main` branch; Use an
+   update type in accordance with [Semantic Versioning]. This will create a Pull
+   Request that start the release process.
+1. Follow the instructions in the description of the created Pull Request.
+
+## Manual Releases (Discouraged)
+
+If it's not possible to use automated releases, or if something goes wrong with
+the automatic release process, follow these steps to release a new version
+(using `v0.1.2` as an example):
 
 1. Make sure that your local copy of the repository is up-to-date, sync:
 
@@ -18,14 +31,27 @@ Follow these steps to release a new version (using `v0.1.2` as an example):
    git clone git@github.com:ericcornelissen/js-regex-security-scanner.git
    ```
 
-1. Manually update the `version` label in the `Dockerfile`.
+1. Update the `version` label in the `Dockerfile` using:
+
+   ```shell
+   node scripts/bump-version.js [patch|minor|major]
+   ```
+
+   If that fails, manually update the `version` label in the `Dockerfile`:
 
    ```diff
    -  version="0.1.1" \
    +  version="0.1.2" \
    ```
 
-1. Manually add the following text after the `## [Unreleased]` line:
+1. Update the changelog:
+
+   ```shell
+   node scripts/bump-changelog.js
+   ```
+
+   If that fails, manually add the following text after the `## [Unreleased]`
+   line:
 
    ```markdown
    - _No changes yet_
@@ -102,3 +128,6 @@ Follow these steps to release a new version (using `v0.1.2` as an example):
 
 [docker]: https://www.docker.com/
 [git tag]: https://git-scm.com/book/en/v2/Git-Basics-Tagging
+[manually trigger]: https://docs.github.com/en/actions/managing-workflow-runs/manually-running-a-workflow
+[release workflow]: ./.github/workflows/release.yml
+[semantic versioning]: https://semver.org/spec/v2.0.0.html
