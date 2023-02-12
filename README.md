@@ -12,6 +12,17 @@ JavaScript or TypeScript project - for example:
 docker run --rm -v $(pwd):/project ericornelissen/js-re-scan:latest
 ```
 
+### Ignore patterns
+
+If necessary you can ignore certain files or directories using the option
+`--ignore-pattern`. For example, to ignore vendored code to focus on problems
+in your own project you can use:
+
+```shell
+docker run --rm -v $(pwd):/project ericornelissen/js-re-scan:latest  \
+  --ignore-pattern vendor/
+```
+
 ### Exit codes
 
 The scanner has the following exit codes.
