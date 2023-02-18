@@ -90,11 +90,6 @@ jobs:
         with:
           cache: npm
           node-version: 18
-      - name: Install asdf
-        uses: asdf-vm/actions/setup@707e84f3ee349548310aeabdad0dd3bfcb9b69fa # v1.1.0
-      - name: Add plugins
-        run: |
-         asdf plugin add yamllint https://github.com/ericcornelissen/asdf-yamllint
       - name: Install tooling
         uses: asdf-vm/actions/install@707e84f3ee349548310aeabdad0dd3bfcb9b69fa # v1.1.0
       - name: Verify project validity
