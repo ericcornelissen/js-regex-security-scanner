@@ -8,6 +8,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.1] - 2023-02-20
+
 - (`3ceecf8`) Bump Alpine from `3.15` to `3.17`.
 - (`2174ef9`) Bump ESLint from `8.32.0` to `8.33.0`.
 - (`88c2751`) Bump ESLint from `8.33.0` to `8.34.0`.
