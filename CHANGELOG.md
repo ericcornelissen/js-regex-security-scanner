@@ -8,8 +8,10 @@ Versioning].
 
 ## [Unreleased]
 
+- (`3ceecf8`) Bump Alpine from `3.15` to `3.17`.
 - (`2174ef9`) Bump ESLint from `8.32.0` to `8.33.0`.
 - (`88c2751`) Bump ESLint from `8.33.0` to `8.34.0`.
+- (`3ceecf8`) Bump Node.js runtime from `18.12.1` to `18.14.1`.
 - (`cc1f6c5`) Bump `@typescript-eslint/parser` from `5.48.2` to `5.49.0`.
 
 ## [0.4.0] - 2023-01-17
