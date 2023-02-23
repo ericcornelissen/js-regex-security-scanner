@@ -8,7 +8,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`41dffa2`) Bump Node.js runtime from `18.14.1` to `18.14.2`.
 
 ## [0.4.1] - 2023-02-20
 
