@@ -5,7 +5,7 @@ NODE_MODULES=node_modules
 ROOT_DIR:=$(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 TEMP_DIR:=.tmp
 
-ASDF:=$(TEMP_DIR)/.asdf
+TOOLING:=$(TEMP_DIR)/.tooling
 DOCKERIMAGES:=$(TEMP_DIR)/dockerimages
 
 SBOM_FILE:=sbom.json
@@ -54,10 +54,10 @@ license-check-npm: $(NODE_MODULES) ## Check npm dependency licenses
 
 lint: lint-ci lint-docker lint-md lint-yml ## Lint the project
 
-lint-ci: $(ASDF) ## Lint Continuous Integration configuration files
+lint-ci: $(TOOLING) ## Lint Continuous Integration configuration files
 	@actionlint
 
-lint-docker: $(ASDF) ## Lint the Dockerfile
+lint-docker: $(TOOLING) ## Lint the Dockerfile
 	@hadolint \
 		Dockerfile
 
@@ -69,7 +69,7 @@ lint-md: $(NODE_MODULES) ## Lint MarkDown files
 		--ignore testdata/ \
 		.
 
-lint-yml: $(ASDF) ## Lint .yml files
+lint-yml: $(TOOLING) ## Lint .yml files
 	@yamllint \
 		-c .yamllint.yml \
 		.
@@ -95,9 +95,9 @@ verify: build license-check lint test ## Verify project is in a good state
 	lint lint-ci lint-docker lint-md lint-yml \
 	test update-test-snapshots
 
-$(SBOM_FILE): $(ASDF) $(DOCKERIMAGES)/latest
+$(SBOM_FILE): $(TOOLING) $(DOCKERIMAGES)/latest
 	@syft $(IMAGE_NAME):latest
-$(VULN_FILE): $(ASDF) $(SBOM_FILE)
+$(VULN_FILE): $(TOOLING) $(SBOM_FILE)
 	@grype $(SBOM_FILE)
 
 $(BIN_DIR):
@@ -109,11 +109,13 @@ $(NODE_MODULES): .npmrc package*.json
 
 $(TEMP_DIR):
 	@mkdir $(TEMP_DIR)
-$(ASDF): .tool-versions | $(TEMP_DIR)
+$(TOOLING): .tool-versions | $(TEMP_DIR)
 ifneq (, $(shell which asdf))
 	@asdf install
-	@touch $(ASDF)
+else ifneq (, $(shell which rtx))
+	@rtx install
 endif
+	@touch $(TOOLING)
 $(DOCKERIMAGES): | $(TEMP_DIR)
 	@mkdir $(DOCKERIMAGES)
 $(DOCKERIMAGES)/%: .dockerignore .eslintrc.yml Dockerfile package*.json | $(DOCKERIMAGES)
