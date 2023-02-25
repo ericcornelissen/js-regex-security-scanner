@@ -61,10 +61,15 @@ jobs:
             const ref = context.ref
             const tag = ref.replace(/^refs\/tags\//, "")
             return tag
+      - name: Get cosign version
+        id: versions
+        run: |
+          COSIGN_VERSION="$(grep cosign < .tool-versions | awk '{print $2}')"
+          echo "cosign=$COSIGN_VERSION" >> "$GITHUB_OUTPUT"
       - name: Install cosign
         uses: sigstore/cosign-installer@9becc617647dfa20ae7b1151972e9b3a2c338a2b # v2.8.1
         with:
-          cosign-release: v1.13.1
+          cosign-release: v${{ steps.versions.outputs.cosign }}
       - name: Log in to Docker Hub
         uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a # v2.1.0
         with:
