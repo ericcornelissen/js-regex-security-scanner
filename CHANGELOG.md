@@ -8,6 +8,7 @@ Versioning].
 
 ## [Unreleased]
 
+- (`8a62d62`) Bump ESLint from `8.34.0` to `8.35.0`.
 - (`41dffa2`) Bump Node.js runtime from `18.14.1` to `18.14.2`.
 
 ## [0.4.1] - 2023-02-20
