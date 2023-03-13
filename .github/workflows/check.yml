@@ -53,6 +53,7 @@ jobs:
             auth.docker.io:443
             files.pythonhosted.org:443
             github.com:443
+            gitlab.com:443
             nodejs.org:443
             objects.githubusercontent.com:443
             production.cloudflare.docker.com:443
@@ -89,6 +90,7 @@ jobs:
             artifactcache.actions.githubusercontent.com:443
             files.pythonhosted.org:443
             github.com:443
+            gitlab.com:443
             nodejs.org:443
             objects.githubusercontent.com:443
             pypi.org:443
