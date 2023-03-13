@@ -86,7 +86,7 @@ jobs:
             ericornelissen/js-re-scan:${{ steps.version.outputs.result }}
       - name: Sign container image (experimental)
         run: |
-          cosign sign \
+          cosign sign --yes \
             -a 'repo=${{ github.repository }}' \
             -a 'workflow=${{ github.workflow }}' \
             -a 'ref=${{ github.sha }}' \
