@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@c8454efe5d0bdefd25384362fe217428ca277d57 # v2.2.0
+        uses: step-security/harden-runner@1f99358870fe1c846a3ccba386cc2b2246836776 # v2.2.1
         with:
           disable-sudo: true
           egress-policy: block
@@ -43,7 +43,7 @@ jobs:
       - build
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@c8454efe5d0bdefd25384362fe217428ca277d57 # v2.2.0
+        uses: step-security/harden-runner@1f99358870fe1c846a3ccba386cc2b2246836776 # v2.2.1
         with:
           disable-sudo: true
           egress-policy: block
@@ -53,6 +53,7 @@ jobs:
             auth.docker.io:443
             files.pythonhosted.org:443
             github.com:443
+            gitlab.com:443
             nodejs.org:443
             objects.githubusercontent.com:443
             production.cloudflare.docker.com:443
@@ -80,7 +81,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@c8454efe5d0bdefd25384362fe217428ca277d57 # v2.2.0
+        uses: step-security/harden-runner@1f99358870fe1c846a3ccba386cc2b2246836776 # v2.2.1
         with:
           disable-sudo: true
           egress-policy: block
@@ -89,6 +90,7 @@ jobs:
             artifactcache.actions.githubusercontent.com:443
             files.pythonhosted.org:443
             github.com:443
+            gitlab.com:443
             nodejs.org:443
             objects.githubusercontent.com:443
             pypi.org:443
@@ -133,7 +135,7 @@ jobs:
       - build
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@c8454efe5d0bdefd25384362fe217428ca277d57 # v2.2.0
+        uses: step-security/harden-runner@1f99358870fe1c846a3ccba386cc2b2246836776 # v2.2.1
         with:
           disable-sudo: true
           egress-policy: block
