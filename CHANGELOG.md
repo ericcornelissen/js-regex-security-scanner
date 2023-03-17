@@ -8,7 +8,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`0a2558c`) Bump `eslint-plugin-regexp` from `1.12.0` to `1.13.0`.
 
 ## [0.4.2] - 2023-03-13
 
