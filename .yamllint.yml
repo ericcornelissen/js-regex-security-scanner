@@ -8,6 +8,9 @@ ignore: |
   testdata/
 
 rules:
+  anchors:
+    forbid-undeclared-aliases: true
+    forbid-duplicated-anchors: true
   braces:
     level: error
     forbid: true
