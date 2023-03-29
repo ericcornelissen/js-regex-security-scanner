@@ -12,7 +12,7 @@ const testdataDir = path.resolve(
 );
 
 for (const project of fs.readdirSync(testdataDir)) {
-	test(project, t => {
+	test(project, (t) => {
 		const dirPath = path.resolve(testdataDir, project);
 
 		const argsPath = path.resolve(dirPath, ".args");

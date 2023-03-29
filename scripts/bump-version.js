@@ -4,24 +4,18 @@ import * as process from "node:process";
 import * as url from "node:url";
 
 const projectRoot = path.resolve(
-	path.dirname(
-		url.fileURLToPath(
-			new URL(import.meta.url),
-		),
-	),
+	path.dirname(url.fileURLToPath(new URL(import.meta.url))),
 	"..",
 );
-const dockerFilePath = path.resolve(
-	projectRoot,
-	"Dockerfile",
-);
+const dockerFilePath = path.resolve(projectRoot, "Dockerfile");
 
 const dockerFileRaw = fs.readFileSync(dockerFilePath).toString();
 
-const versionLabel = dockerFileRaw.split(/\n/)
-	.map(line => line.trim())
-	.find(line => line.startsWith("version="));
-const version = versionLabel.split("\"")[1];
+const versionLabel = dockerFileRaw
+	.split(/\n/)
+	.map((line) => line.trim())
+	.find((line) => line.startsWith("version="));
+const version = versionLabel.split('"')[1];
 
 const versionTuple = version.split(".");
 switch (process.argv[2]) {
