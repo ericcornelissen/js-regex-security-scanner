@@ -1,6 +1,5 @@
 IMAGE_NAME:=ericornelissen/js-re-scan
 
-BIN_DIR:=.bin
 NODE_MODULES=node_modules
 ROOT_DIR:=$(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 TEMP_DIR:=.tmp
@@ -26,7 +25,6 @@ build: $(DOCKERIMAGES)/$(TAG) ## Build the Docker image
 
 clean: ## Clean the repository
 	@git clean -fx \
-		$(BIN_DIR) \
 		$(TEMP_DIR) \
 		$(NODE_MODULES) \
 		$(SBOM_FILE) \
@@ -99,9 +97,6 @@ $(SBOM_FILE): $(TOOLING) $(DOCKERIMAGES)/latest
 	@syft $(IMAGE_NAME):latest
 $(VULN_FILE): $(TOOLING) $(SBOM_FILE)
 	@grype $(SBOM_FILE)
-
-$(BIN_DIR):
-	@mkdir $(BIN_DIR)
 
 $(NODE_MODULES): .npmrc package*.json
 	@npm clean-install \
