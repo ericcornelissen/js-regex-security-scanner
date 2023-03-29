@@ -126,12 +126,13 @@ make lint
 
 to run all linters or use the following commands to check specific file types:
 
-| File type        | Command            | Linter(s)                   |
-| :--------------- | :----------------- | :-------------------------- |
-| CI workflows     | `make lint-ci`     | [actionlint] & [ShellCheck] |
-| `Dockerfile`     | `make lint-docker` | [hadolint]                  |
-| MarkDown (`.md`) | `make lint-md`     | [markdownlint]              |
-| YAML (`.yml`)    | `make lint-yml`    | [yamllint]                  |
+| File type          | Command            | Linter(s)                   |
+| :----------------- | :----------------- | :-------------------------- |
+| CI workflows       | `make lint-ci`     | [actionlint] & [ShellCheck] |
+| `Dockerfile`       | `make lint-docker` | [hadolint]                  |
+| JavaScript (`.js`) | `make lint-js`     | [Prettier]                  |
+| MarkDown (`.md`)   | `make lint-md`     | [markdownlint]              |
+| YAML (`.yml`)      | `make lint-yml`    | [yamllint]                  |
 
 #### Testing
 
@@ -225,6 +226,7 @@ make audit-npm
 [node.js]: https://nodejs.org/en/
 [npm]: https://www.npmjs.com/
 [open issues]: https://github.com/ericcornelissen/js-regex-security-scanner/issues
+[prettier]: https://prettier.io/
 [security policy]: ./SECURITY.md
 [shellcheck]: https://github.com/koalaman/shellcheck
 [submodule]: https://git-scm.com/book/en/v2/Git-Tools-Submodules

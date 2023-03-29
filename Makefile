@@ -50,7 +50,7 @@ license-check-npm: $(NODE_MODULES) ## Check npm dependency licenses
 	@npx licensee \
 		--errors-only
 
-lint: lint-ci lint-docker lint-md lint-yml ## Lint the project
+lint: lint-ci lint-docker lint-js lint-md lint-yml ## Lint the project
 
 lint-ci: $(TOOLING) ## Lint Continuous Integration configuration files
 	@actionlint
@@ -58,6 +58,19 @@ lint-ci: $(TOOLING) ## Lint Continuous Integration configuration files
 lint-docker: $(TOOLING) ## Lint the Dockerfile
 	@hadolint \
 		Dockerfile
+
+lint-js: $(NODE_MODULES) ## Lint JavaScript files
+	@npx prettier \
+		--check \
+		--ignore-path .gitignore \
+		\
+		--arrow-parens always \
+		--end-of-line lf \
+		--trailing-comma all \
+		--use-tabs \
+		\
+		./scripts/*.js \
+		./tests/*.js
 
 lint-md: $(NODE_MODULES) ## Lint MarkDown files
 	@npx markdownlint \
@@ -90,7 +103,7 @@ verify: build license-check lint test ## Verify project is in a good state
 	build clean init sbom verify \
 	audit audit-docker audit-npm \
 	license-check license-check-docker license-check-npm \
-	lint lint-ci lint-docker lint-md lint-yml \
+	lint lint-ci lint-docker lint-js lint-md lint-yml \
 	test update-test-snapshots
 
 $(SBOM_FILE): $(TOOLING) $(DOCKERIMAGES)/latest

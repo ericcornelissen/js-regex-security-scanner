@@ -116,6 +116,9 @@ jobs:
       - name: Lint Dockerfile
         if: ${{ failure() || success() }}
         run: make lint-docker
+      - name: Lint JavaScript
+        if: ${{ failure() || success() }}
+        run: make lint-js
       - name: Lint MarkDown
         if: ${{ failure() || success() }}
         run: make lint-md
