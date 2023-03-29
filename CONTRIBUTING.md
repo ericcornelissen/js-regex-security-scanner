@@ -175,6 +175,27 @@ To write a test you need to do two things:
 1. Run the tests, this will automatically initialize the snapshot for the new
    test.
 
+###### Testing with CLI Arguments
+
+If you need to test the behavior of the scanner when given certain arguments,
+include a file called `.args` in the test project directory. For example:
+
+```diff
++ testdata/my-test-project/.args
+  testdata/my-test-project/my-ignored-file.js
+  testdata/my-test-project/my-test-file.js
+```
+
+In the `.args` file, put a single line with all the arguments that should be
+passed to the scanner. For example:
+
+```text
+--ignore-pattern my-ignored-file.js
+```
+
+The test for this test project will read this file and call the scanner with the
+arguments found in this file.
+
 ---
 
 ## Auditing
