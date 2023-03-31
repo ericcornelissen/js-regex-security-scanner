@@ -10,11 +10,7 @@ const STR_UNRELEASED = "## [Unreleased]";
 const STR_NO_CHANGES = "- _No changes yet_";
 
 const projectRoot = path.resolve(
-	path.dirname(
-		url.fileURLToPath(
-			new URL(import.meta.url),
-		),
-	),
+	path.dirname(url.fileURLToPath(new URL(import.meta.url))),
 	"..",
 );
 
@@ -22,14 +18,8 @@ const projectRoot = path.resolve(
 // Paths & Files
 // -------------
 
-const changelogFilePath = path.resolve(
-	projectRoot,
-	"CHANGELOG.md",
-);
-const dockerFilePath = path.resolve(
-	projectRoot,
-	"Dockerfile",
-);
+const changelogFilePath = path.resolve(projectRoot, "CHANGELOG.md");
+const dockerFilePath = path.resolve(projectRoot, "Dockerfile");
 
 const dockerFileRaw = fs.readFileSync(dockerFilePath).toString();
 const changelogRaw = fs.readFileSync(changelogFilePath).toString();
@@ -38,10 +28,11 @@ const changelogRaw = fs.readFileSync(changelogFilePath).toString();
 // Current version
 // ---------------
 
-const versionLabel = dockerFileRaw.split(/\n/)
-	.map(line => line.trim())
-	.find(line => line.startsWith("version="));
-const version = versionLabel.split("\"")[1];
+const versionLabel = dockerFileRaw
+	.split(/\n/)
+	.map((line) => line.trim())
+	.find((line) => line.startsWith("version="));
+const version = versionLabel.split('"')[1];
 
 // ----------
 // Validation

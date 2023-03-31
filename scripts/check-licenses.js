@@ -7,20 +7,14 @@ import * as url from "node:url";
 // Ecosystems
 // ----------
 
-const skipEcosystems = [
-	"npm",
-];
+const skipEcosystems = ["npm"];
 
 // ---------
 // Utilities
 // ---------
 
 const projectRoot = path.resolve(
-	path.dirname(
-		url.fileURLToPath(
-			new URL(import.meta.url),
-		),
-	),
+	path.dirname(url.fileURLToPath(new URL(import.meta.url))),
 	"..",
 );
 
@@ -35,13 +29,11 @@ const toMatchWholeWordExpression = (string) => {
 };
 
 const isAllowedLicense = (license) => {
-	return allowedLicenses
-		.map(toMatchWholeWordExpression)
-		.some(matches(license));
+	return allowedLicenses.map(toMatchWholeWordExpression).some(matches(license));
 };
 
 const applyCorrection = (artifact) => {
-	const correction = corrections.find(entry => entry.name === artifact.name);
+	const correction = corrections.find((entry) => entry.name === artifact.name);
 	return {
 		...artifact,
 		licenses: correction?.licenses ?? artifact.licenses,
@@ -55,28 +47,23 @@ const applyCorrection = (artifact) => {
 const corrections = [
 	{
 		name: "busybox",
-		licenses: [
-			"GPL-2.0-only",
-		],
+		licenses: ["GPL-2.0-only"],
 		licenseUrl: "https://busybox.net/license.html",
-		reason: "license not detected by Syft"
+		reason: "license not detected by Syft",
 	},
 	{
 		name: "node",
-		licenses: [
-			"MIT",
-		],
+		licenses: ["MIT"],
 		licenseUrl: "https://github.com/nodejs/node#license",
-		reason: "license not detected by Syft"
+		reason: "license not detected by Syft",
 	},
 ];
 
-const licenseConfigFile = path.resolve(
-	projectRoot,
-	".licensee.json",
-);
+const licenseConfigFile = path.resolve(projectRoot, ".licensee.json");
 
-const licenseConfigRaw = fs.readFileSync(licenseConfigFile, { encoding: "utf8" });
+const licenseConfigRaw = fs.readFileSync(licenseConfigFile, {
+	encoding: "utf8",
+});
 const licenseConfig = JSON.parse(licenseConfigRaw);
 
 const allowedLicenses = licenseConfig.licenses.spdx;
@@ -85,10 +72,7 @@ const allowedLicenses = licenseConfig.licenses.spdx;
 // Load the SBOM
 // -------------
 
-const sbomFile = path.resolve(
-	projectRoot,
-	"sbom.json",
-);
+const sbomFile = path.resolve(projectRoot, "sbom.json");
 
 const rawSbom = fs.readFileSync(sbomFile);
 const sbom = JSON.parse(rawSbom);
@@ -98,10 +82,10 @@ const sbom = JSON.parse(rawSbom);
 // -----------------
 
 const licenseViolations = sbom.artifacts
-	.filter(artifact => !skipEcosystems.includes(artifact.type))
+	.filter((artifact) => !skipEcosystems.includes(artifact.type))
 	.map(applyCorrection)
-	.filter(artifact => !artifact.licenses.some(isAllowedLicense))
-	.map(artifact => {
+	.filter((artifact) => !artifact.licenses.some(isAllowedLicense))
+	.map((artifact) => {
 		return {
 			licenses: artifact.licenses,
 			name: artifact.name,
@@ -114,7 +98,7 @@ const licenseViolations = sbom.artifacts
 // --------------
 
 if (licenseViolations.length > 0) {
-	licenseViolations.forEach(licenseViolation => {
+	licenseViolations.forEach((licenseViolation) => {
 		const multipleLicenses = licenseViolation.licenses.length > 1;
 		console.log(
 			"The",
@@ -123,7 +107,7 @@ if (licenseViolations.length > 0) {
 			quoted(licenseViolation.name),
 			"is licensed under",
 			multipleLicenses
-				? licenseViolation.licenses.map(quoted).join(' and ')
+				? licenseViolation.licenses.map(quoted).join(" and ")
 				: quoted(licenseViolation.licenses[0]),
 			"which",
 			multipleLicenses ? "are" : "is",
