@@ -116,9 +116,15 @@ To build the Docker image for this scanner, run:
 make build
 ```
 
-#### Linting
+#### Formatting and Linting
 
-This project uses linters to catch mistakes and enforce style. Run:
+This project uses formatters to format source code. Run:
+
+```shell
+make format
+```
+
+This project also uses linters to catch mistakes and enforce style. Run:
 
 ```shell
 make lint

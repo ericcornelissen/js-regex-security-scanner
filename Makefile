@@ -32,6 +32,21 @@ clean: ## Clean the repository
 	@docker rmi --force \
 		$(IMAGE_NAME)
 
+format: format-js ## Format the project
+
+format-js: $(NODE_MODULES) ## Format JavaScript files
+	@npx prettier \
+		--write \
+		--ignore-path .gitignore \
+		\
+		--arrow-parens always \
+		--end-of-line lf \
+		--trailing-comma all \
+		--use-tabs \
+		\
+		./scripts/*.js \
+		./tests/*.js
+
 help: ## Show this help message
 	@printf "Usage: make <command>\n\n"
 	@printf "Commands:\n"
@@ -102,6 +117,7 @@ verify: build license-check lint test ## Verify project is in a good state
 .PHONY: default help \
 	build clean init sbom verify \
 	audit audit-docker audit-npm \
+	format format-js \
 	license-check license-check-docker license-check-npm \
 	lint lint-ci lint-docker lint-js lint-md lint-yml \
 	test update-test-snapshots
