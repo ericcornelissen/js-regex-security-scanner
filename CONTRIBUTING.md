@@ -77,7 +77,7 @@ as clearly as possible.
 To be able to contribute you need at least the following:
 
 - [Git];
-- [Docker];
+- [Docker] (or [Podman]);
 - [Make];
 - [Node.js] v18.0.0 or higher and [npm] v8.1.2 or higher;
 - (Recommended) a code editor with [EditorConfig] support;
@@ -114,6 +114,12 @@ To build the Docker image for this scanner, run:
 
 ```shell
 make build
+```
+
+Or to build using Podman, run:
+
+```shell
+make build ENGINE=podman
 ```
 
 #### Formatting and Linting
@@ -253,6 +259,7 @@ make audit-npm
 [node.js]: https://nodejs.org/en/
 [npm]: https://www.npmjs.com/
 [open issues]: https://github.com/ericcornelissen/js-regex-security-scanner/issues
+[podman]: https://podman.io/
 [prettier]: https://prettier.io/
 [security policy]: ./SECURITY.md
 [shellcheck]: https://github.com/koalaman/shellcheck

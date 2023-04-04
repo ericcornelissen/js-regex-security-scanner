@@ -10,6 +10,7 @@ DOCKERIMAGES:=$(TEMP_DIR)/dockerimages
 SBOM_FILE:=sbom.json
 VULN_FILE:=vulns.json
 
+ENGINE?=docker
 TAG?=latest
 
 default: help
@@ -29,7 +30,7 @@ clean: ## Clean the repository
 		$(NODE_MODULES) \
 		$(SBOM_FILE) \
 		$(VULN_FILE)
-	@docker rmi --force \
+	@$(ENGINE) rmi --force \
 		$(IMAGE_NAME)
 
 format: format-js ## Format the project
@@ -143,5 +144,5 @@ endif
 $(DOCKERIMAGES): | $(TEMP_DIR)
 	@mkdir $(DOCKERIMAGES)
 $(DOCKERIMAGES)/%: .dockerignore .eslintrc.yml Dockerfile package*.json | $(DOCKERIMAGES)
-	@docker build --tag $(IMAGE_NAME):$(TAG) .
+	@$(ENGINE) build --tag $(IMAGE_NAME):$(TAG) .
 	@touch $(DOCKERIMAGES)/$(TAG)
