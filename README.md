@@ -6,7 +6,7 @@ expressions.
 ## Getting started
 
 The scanner is available as a [Docker] image that you can run against any
-JavaScript or TypeScript project - for example:
+JavaScript or TypeScript project. For example, to scan the current directory:
 
 ```shell
 docker run --rm -v $(pwd):/project ericornelissen/js-re-scan:latest
