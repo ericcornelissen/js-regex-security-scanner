@@ -42,6 +42,21 @@ The scanner has the following exit codes.
 - Ignore tests based on standard file and folder patterns.
 - Scan documentation.
 
+## Build from source
+
+If you want you can build the scanner from scratch using [Docker]. From the root
+of this project run something like:
+
+```shell
+docker build . --tag js-regex-scanner
+```
+
+Or use the convenience [Make] target:
+
+```shell
+make build
+```
+
 ## Philosophy
 
 This scanner aims to provide developers with a tool to find vulnerable regular
@@ -78,5 +93,6 @@ how to improve the documentation.
 [eslint-plugin-markdown]: https://www.npmjs.com/package/eslint-plugin-markdown
 [eslint-plugin-regexp]: https://github.com/ota-meshi/eslint-plugin-regexp
 [license]: ./LICENSE
+[make]: https://www.gnu.org/software/make/
 [open an issue]: https://github.com/ericcornelissen/js-regex-security-scanner/issues/new?labels=documentation&template=documentation.md
 [redos-detector]: https://github.com/tjenkinson/redos-detector
