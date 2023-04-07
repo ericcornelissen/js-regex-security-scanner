@@ -5,12 +5,15 @@ expressions.
 
 ## Getting started
 
-The scanner is available as a [Docker] image that you can run against any
+The scanner is available as a container image that you can run against any
 JavaScript or TypeScript project. For example, to scan the current directory:
 
 ```shell
-docker run --rm -v $(pwd):/project ericornelissen/js-re-scan:latest
+docker run --rm -v $(pwd):/project docker.io/ericornelissen/js-re-scan:latest
 ```
+
+> **Note**: You can replace `docker` by `podman` in any command example if you
+> want to use [Podman] instead [Docker].
 
 ### Ignore patterns
 
@@ -19,7 +22,7 @@ If necessary you can ignore certain files or directories using the option
 in your own project you can use:
 
 ```shell
-docker run --rm -v $(pwd):/project ericornelissen/js-re-scan:latest  \
+docker run --rm -v $(pwd):/project docker.io/ericornelissen/js-re-scan:latest  \
   --ignore-pattern vendor/
 ```
 
@@ -44,8 +47,8 @@ The scanner has the following exit codes.
 
 ## Build from source
 
-If you want you can build the scanner from scratch using [Docker]. From the root
-of this project run something like:
+If you want you can build the scanner from scratch. From the root of this
+project run something like:
 
 ```shell
 docker build . --tag js-regex-scanner
@@ -95,4 +98,5 @@ how to improve the documentation.
 [license]: ./LICENSE
 [make]: https://www.gnu.org/software/make/
 [open an issue]: https://github.com/ericcornelissen/js-regex-security-scanner/issues/new?labels=documentation&template=documentation.md
+[podman]: https://podman.io/
 [redos-detector]: https://github.com/tjenkinson/redos-detector
