@@ -14,7 +14,22 @@
       "openssl",
       "Python-2.0",
       "zlib"
-    ]
+    ],
+    "spdx-reasoning": {
+      "0BSD": "permissive",
+      "Apache-2.0": "permissive",
+      "BSD-2-Clause": "permissive",
+      "BSD-3-Clause": "permissive",
+      "GPL-2.0-only": "OK under the 'mere aggregation' clause",
+      "GPL-2.0-or-later": "OK under the 'mere aggregation' clause",
+      "CC0-1.0": "public domain",
+      "CC-BY-3.0": "public domain",
+      "ISC": "permissive",
+      "MIT": "permissive",
+      "openssl": "permissive",
+      "Python-2.0": "permissive",
+      "zlib": "permissive"
+    }
   },
   "corrections": true
 }
