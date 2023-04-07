@@ -11,8 +11,8 @@ on:
 permissions: read-all
 
 jobs:
-  docker:
-    name: Docker
+  image:
+    name: Image
     runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
@@ -47,8 +47,8 @@ jobs:
           ref: ${{ matrix.ref }}
       - name: Install tooling
         uses: asdf-vm/actions/install@75bab86b342b8aa14f3b547296607599522cbe90 # v2.1.0
-      - name: Audit dependencies in Docker image
-        run: make audit-docker
+      - name: Audit dependencies in container image
+        run: make audit-image
       - name: Upload SBOM and vulnerability scan
         uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3.1.2
         if: ${{ failure() || success() }}
