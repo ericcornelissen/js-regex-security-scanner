@@ -1,3 +1,6 @@
+ENGINE?=docker
+TAG?=latest
+
 IMAGE_NAME:=ericornelissen/js-re-scan
 
 NODE_MODULES=node_modules
@@ -5,13 +8,10 @@ ROOT_DIR:=$(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 TEMP_DIR:=.tmp
 
 TOOLING:=$(TEMP_DIR)/.tooling
-DOCKERIMAGES:=$(TEMP_DIR)/dockerimages
+IMAGES_DIR:=$(TEMP_DIR)/images/$(ENGINE)
 
 SBOM_FILE:=sbom.json
 VULN_FILE:=vulns.json
-
-ENGINE?=docker
-TAG?=latest
 
 default: help
 
@@ -22,7 +22,7 @@ audit-docker: $(VULN_FILE) ## Audit the Docker image dependencies
 audit-npm: ## Audit the npm dependencies
 	@npm audit $(ARGS)
 
-build: $(DOCKERIMAGES)/$(TAG) ## Build the Docker image
+build: $(IMAGES_DIR)/$(TAG) ## Build the Docker image
 
 clean: ## Clean the repository
 	@git clean -fx \
@@ -125,7 +125,7 @@ verify: build license-check lint test ## Verify project is in a good state
 	lint lint-ci lint-docker lint-js lint-md lint-yml \
 	test update-test-snapshots
 
-$(SBOM_FILE): $(TOOLING) $(DOCKERIMAGES)/latest
+$(SBOM_FILE): $(TOOLING) $(IMAGES_DIR)/latest
 	@syft $(IMAGE_NAME):latest
 $(VULN_FILE): $(TOOLING) $(SBOM_FILE)
 	@grype $(SBOM_FILE)
@@ -143,8 +143,8 @@ else ifneq (, $(shell which rtx))
 	@rtx install
 endif
 	@touch $(TOOLING)
-$(DOCKERIMAGES): | $(TEMP_DIR)
-	@mkdir $(DOCKERIMAGES)
-$(DOCKERIMAGES)/%: .dockerignore .eslintrc.yml Dockerfile package*.json | $(DOCKERIMAGES)
+$(IMAGES_DIR): | $(TEMP_DIR)
+	@mkdir --parent $(IMAGES_DIR)
+$(IMAGES_DIR)/%: .dockerignore .eslintrc.yml Dockerfile package*.json | $(IMAGES_DIR)
 	@$(ENGINE) build --tag $(IMAGE_NAME):$(TAG) .
-	@touch $(DOCKERIMAGES)/$(TAG)
+	@touch $(IMAGES_DIR)/$(TAG)
