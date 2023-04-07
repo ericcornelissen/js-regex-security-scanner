@@ -104,12 +104,14 @@ lint-yml: $(TOOLING) ## Lint .yml files
 sbom: $(SBOM_FILE) ## Generate a Software Bill Of Materials (SBOM)
 
 test: build $(NODE_MODULES) ## Run the tests
-	@npx ava \
+	@CONTAINER_ENGINE=$(ENGINE) \
+		npx ava \
 		--timeout 20s \
 		tests/
 
 update-test-snapshots: build $(NODE_MODULES) ## Update the test snapsthos
-	@npx ava \
+	@CONTAINER_ENGINE=$(ENGINE) \
+		npx ava \
 		--update-snapshots \
 		tests/
 

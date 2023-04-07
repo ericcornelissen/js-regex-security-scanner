@@ -152,10 +152,16 @@ jobs:
         with:
           sarif_file: semgrep.sarif
   test:
-    name: Test
+    name: Test with ${{ matrix.engine }}
     runs-on: ubuntu-22.04
     needs:
       - build
+    strategy:
+      fail-fast: false
+      matrix:
+        engine:
+          - docker
+          - podman
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@03bee3930647ebbf994244c21ddbc0d4933aab4f # v2.3.0
@@ -182,4 +188,4 @@ jobs:
           node-version: 18
           cache: npm
       - name: Test
-        run: make test
+        run: make test ENGINE='${{ matrix.engine }}'

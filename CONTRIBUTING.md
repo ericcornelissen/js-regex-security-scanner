@@ -167,6 +167,12 @@ To run the tests, run:
 make test
 ```
 
+Or to run the tests using Podman, run:
+
+```shell
+make test ENGINE=podman
+```
+
 ##### Updating Snapshots
 
 If you made changes to the scanner, it is likely necessary to update the test
@@ -174,6 +180,12 @@ snapshots. To do this, run:
 
 ```shell
 make update-test-snapshots
+```
+
+Or using Podman:
+
+```shell
+make update-test-snapshots ENGINE=podman
 ```
 
 ##### Writing Tests
