@@ -79,9 +79,9 @@ jobs:
           cache: npm
       - name: Install tooling
         uses: asdf-vm/actions/install@75bab86b342b8aa14f3b547296607599522cbe90 # v2.1.0
-      - name: Check Docker licenses
+      - name: Check container image licenses
         if: ${{ failure() || success() }}
-        run: make license-check-docker
+        run: make license-check-image
       - name: Check npm licenses
         if: ${{ failure() || success() }}
         run: make license-check-npm
@@ -121,7 +121,7 @@ jobs:
         run: make lint-ci
       - name: Lint Dockerfile
         if: ${{ failure() || success() }}
-        run: make lint-docker
+        run: make lint-image
       - name: Lint JavaScript
         if: ${{ failure() || success() }}
         run: make lint-js

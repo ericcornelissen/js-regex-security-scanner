@@ -15,14 +15,14 @@ VULN_FILE:=vulns.json
 
 default: help
 
-audit: audit-docker audit-npm ## Audit the project dependencies
+audit: audit-image audit-npm ## Audit the project dependencies
 
-audit-docker: $(VULN_FILE) ## Audit the Docker image dependencies
+audit-image: $(VULN_FILE) ## Audit the container image dependencies
 
 audit-npm: ## Audit the npm dependencies
 	@npm audit $(ARGS)
 
-build: $(IMAGES_DIR)/$(TAG) ## Build the Docker image
+build: $(IMAGES_DIR)/$(TAG) ## Build the container image
 
 clean: ## Clean the repository
 	@git clean -fx \
@@ -57,21 +57,21 @@ help: ## Show this help message
 
 init: $(NODE_MODULES) ## Initialize the project dependencies
 
-license-check: license-check-docker license-check-npm ## Check the project dependency licenses
+license-check: license-check-image license-check-npm ## Check the project dependency licenses
 
-license-check-docker: $(SBOM_FILE) ## Check Docker image dependency licenses
+license-check-image: $(SBOM_FILE) ## Check container image dependency licenses
 	@node scripts/check-licenses.js
 
 license-check-npm: $(NODE_MODULES) ## Check npm dependency licenses
 	@npx licensee \
 		--errors-only
 
-lint: lint-ci lint-docker lint-js lint-md lint-yml ## Lint the project
+lint: lint-ci lint-image lint-js lint-md lint-yml ## Lint the project
 
 lint-ci: $(TOOLING) ## Lint Continuous Integration configuration files
 	@actionlint
 
-lint-docker: $(TOOLING) ## Lint the Dockerfile
+lint-image: $(TOOLING) ## Lint the Dockerfile
 	@hadolint \
 		Dockerfile
 
@@ -119,10 +119,10 @@ verify: build license-check lint test ## Verify project is in a good state
 
 .PHONY: default help \
 	build clean init sbom verify \
-	audit audit-docker audit-npm \
+	audit audit-image audit-npm \
 	format format-js \
-	license-check license-check-docker license-check-npm \
-	lint lint-ci lint-docker lint-js lint-md lint-yml \
+	license-check license-check-image license-check-npm \
+	lint lint-ci lint-image lint-js lint-md lint-yml \
 	test update-test-snapshots
 
 $(SBOM_FILE): $(TOOLING) $(IMAGES_DIR)/latest
