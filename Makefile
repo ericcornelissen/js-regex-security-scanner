@@ -1,3 +1,6 @@
+ENGINE?=docker
+TAG?=latest
+
 IMAGE_NAME:=ericornelissen/js-re-scan
 
 NODE_MODULES=node_modules
@@ -5,23 +8,21 @@ ROOT_DIR:=$(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 TEMP_DIR:=.tmp
 
 TOOLING:=$(TEMP_DIR)/.tooling
-DOCKERIMAGES:=$(TEMP_DIR)/dockerimages
+IMAGES_DIR:=$(TEMP_DIR)/images/$(ENGINE)
 
 SBOM_FILE:=sbom.json
 VULN_FILE:=vulns.json
 
-TAG?=latest
-
 default: help
 
-audit: audit-docker audit-npm ## Audit the project dependencies
+audit: audit-image audit-npm ## Audit the project dependencies
 
-audit-docker: $(VULN_FILE) ## Audit the Docker image dependencies
+audit-image: $(VULN_FILE) ## Audit the container image dependencies
 
 audit-npm: ## Audit the npm dependencies
 	@npm audit $(ARGS)
 
-build: $(DOCKERIMAGES)/$(TAG) ## Build the Docker image
+build: $(IMAGES_DIR)/$(TAG) ## Build the container image
 
 clean: ## Clean the repository
 	@git clean -fx \
@@ -29,7 +30,7 @@ clean: ## Clean the repository
 		$(NODE_MODULES) \
 		$(SBOM_FILE) \
 		$(VULN_FILE)
-	@docker rmi --force \
+	@$(ENGINE) rmi --force \
 		$(IMAGE_NAME)
 
 format: format-js ## Format the project
@@ -56,21 +57,21 @@ help: ## Show this help message
 
 init: $(NODE_MODULES) ## Initialize the project dependencies
 
-license-check: license-check-docker license-check-npm ## Check the project dependency licenses
+license-check: license-check-image license-check-npm ## Check the project dependency licenses
 
-license-check-docker: $(SBOM_FILE) ## Check Docker image dependency licenses
+license-check-image: $(SBOM_FILE) ## Check container image dependency licenses
 	@node scripts/check-licenses.js
 
 license-check-npm: $(NODE_MODULES) ## Check npm dependency licenses
 	@npx licensee \
 		--errors-only
 
-lint: lint-ci lint-docker lint-js lint-md lint-yml ## Lint the project
+lint: lint-ci lint-image lint-js lint-md lint-yml ## Lint the project
 
 lint-ci: $(TOOLING) ## Lint Continuous Integration configuration files
 	@actionlint
 
-lint-docker: $(TOOLING) ## Lint the Dockerfile
+lint-image: $(TOOLING) ## Lint the Dockerfile
 	@hadolint \
 		Dockerfile
 
@@ -103,12 +104,14 @@ lint-yml: $(TOOLING) ## Lint .yml files
 sbom: $(SBOM_FILE) ## Generate a Software Bill Of Materials (SBOM)
 
 test: build $(NODE_MODULES) ## Run the tests
-	@npx ava \
+	@CONTAINER_ENGINE=$(ENGINE) \
+		npx ava \
 		--timeout 20s \
 		tests/
 
 update-test-snapshots: build $(NODE_MODULES) ## Update the test snapsthos
-	@npx ava \
+	@CONTAINER_ENGINE=$(ENGINE) \
+		npx ava \
 		--update-snapshots \
 		tests/
 
@@ -116,13 +119,13 @@ verify: build license-check lint test ## Verify project is in a good state
 
 .PHONY: default help \
 	build clean init sbom verify \
-	audit audit-docker audit-npm \
+	audit audit-image audit-npm \
 	format format-js \
-	license-check license-check-docker license-check-npm \
-	lint lint-ci lint-docker lint-js lint-md lint-yml \
+	license-check license-check-image license-check-npm \
+	lint lint-ci lint-image lint-js lint-md lint-yml \
 	test update-test-snapshots
 
-$(SBOM_FILE): $(TOOLING) $(DOCKERIMAGES)/latest
+$(SBOM_FILE): $(TOOLING) $(IMAGES_DIR)/latest
 	@syft $(IMAGE_NAME):latest
 $(VULN_FILE): $(TOOLING) $(SBOM_FILE)
 	@grype $(SBOM_FILE)
@@ -140,8 +143,8 @@ else ifneq (, $(shell which rtx))
 	@rtx install
 endif
 	@touch $(TOOLING)
-$(DOCKERIMAGES): | $(TEMP_DIR)
-	@mkdir $(DOCKERIMAGES)
-$(DOCKERIMAGES)/%: .dockerignore .eslintrc.yml Dockerfile package*.json | $(DOCKERIMAGES)
-	@docker build --tag $(IMAGE_NAME):$(TAG) .
-	@touch $(DOCKERIMAGES)/$(TAG)
+$(IMAGES_DIR): | $(TEMP_DIR)
+	@mkdir --parent $(IMAGES_DIR)
+$(IMAGES_DIR)/%: .dockerignore .eslintrc.yml Dockerfile package*.json | $(IMAGES_DIR)
+	@$(ENGINE) build --tag $(IMAGE_NAME):$(TAG) .
+	@touch $(IMAGES_DIR)/$(TAG)

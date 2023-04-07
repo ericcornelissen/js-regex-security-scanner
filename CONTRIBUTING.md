@@ -77,7 +77,7 @@ as clearly as possible.
 To be able to contribute you need at least the following:
 
 - [Git];
-- [Docker];
+- [Docker] (or [Podman]);
 - [Make];
 - [Node.js] v18.0.0 or higher and [npm] v8.1.2 or higher;
 - (Recommended) a code editor with [EditorConfig] support;
@@ -102,18 +102,25 @@ If you decide to make a contribution, please do use the following workflow:
 ### Development Details
 
 This scanner is in essence running [ESLint] with a specific configuration in a
-[Docker] image. As a first principle, all changes should be made by adjusting
+container image. As a first principle, all changes should be made by adjusting
 this setup. This means the two most important files are:
 
 - `.eslintrc.yml`: The [ESLint] configuration file.
-- `Dockerfile`: The file telling [Docker] how to make the scanner image.
+- `Dockerfile`: The file telling [Docker] (or [Podman]) how to make the scanner
+  image.
 
 #### Building
 
-To build the Docker image for this scanner, run:
+To build the container image for this scanner, run:
 
 ```shell
 make build
+```
+
+Or to build using Podman, run:
+
+```shell
+make build ENGINE=podman
 ```
 
 #### Formatting and Linting
@@ -132,13 +139,13 @@ make lint
 
 to run all linters or use the following commands to check specific file types:
 
-| File type          | Command            | Linter(s)                   |
-| :----------------- | :----------------- | :-------------------------- |
-| CI workflows       | `make lint-ci`     | [actionlint] & [ShellCheck] |
-| `Dockerfile`       | `make lint-docker` | [hadolint]                  |
-| JavaScript (`.js`) | `make lint-js`     | [Prettier]                  |
-| MarkDown (`.md`)   | `make lint-md`     | [markdownlint]              |
-| YAML (`.yml`)      | `make lint-yml`    | [yamllint]                  |
+| File type          | Command           | Linter(s)                   |
+| :----------------- | :---------------- | :-------------------------- |
+| CI workflows       | `make lint-ci`    | [actionlint] & [ShellCheck] |
+| `Dockerfile`       | `make lint-image` | [hadolint]                  |
+| JavaScript (`.js`) | `make lint-js`    | [Prettier]                  |
+| MarkDown (`.md`)   | `make lint-md`    | [markdownlint]              |
+| YAML (`.yml`)      | `make lint-yml`   | [yamllint]                  |
 
 #### Testing
 
@@ -161,6 +168,12 @@ To run the tests, run:
 make test
 ```
 
+Or to run the tests using Podman, run:
+
+```shell
+make test ENGINE=podman
+```
+
 ##### Updating Snapshots
 
 If you made changes to the scanner, it is likely necessary to update the test
@@ -168,6 +181,12 @@ snapshots. To do this, run:
 
 ```shell
 make update-test-snapshots
+```
+
+Or using Podman:
+
+```shell
+make update-test-snapshots ENGINE=podman
 ```
 
 ##### Writing Tests
@@ -215,16 +234,16 @@ To generate a Software Bill Of Materials (SBOM) at `./sbom.json`, run:
 make sbom
 ```
 
-This uses [Syft] to generate an SBOM for the Docker image.
+This uses [Syft] to generate an SBOM for the container image.
 
 ### Vulnerability Scanning
 
-#### Docker
+#### Container Image
 
-To get a vulnerability report for the Docker image at `./vulns.json`, run:
+To get a vulnerability report for the container image at `./vulns.json`, run:
 
 ```shell
-make audit-docker
+make audit-image
 ```
 
 This uses [Grype] to determine vulnerabilities based on the SBOM (excluding
@@ -253,6 +272,7 @@ make audit-npm
 [node.js]: https://nodejs.org/en/
 [npm]: https://www.npmjs.com/
 [open issues]: https://github.com/ericcornelissen/js-regex-security-scanner/issues
+[podman]: https://podman.io/
 [prettier]: https://prettier.io/
 [security policy]: ./SECURITY.md
 [shellcheck]: https://github.com/koalaman/shellcheck

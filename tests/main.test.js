@@ -1,6 +1,7 @@
 import cp from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
+import process from "node:process";
 import url from "node:url";
 
 import test from "ava";
@@ -22,7 +23,7 @@ for (const project of fs.readdirSync(testdataDir)) {
 		}
 
 		const { stdout } = cp.spawnSync(
-			"docker",
+			process.env.CONTAINER_ENGINE,
 			[
 				"run",
 				"--rm",

@@ -15,8 +15,14 @@ jobs:
     needs:
       - build
   build:
-    name: Build
+    name: Build with ${{ matrix.engine }}
     runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        engine:
+          - docker
+          - podman
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@03bee3930647ebbf994244c21ddbc0d4933aab4f # v2.3.0
@@ -35,7 +41,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3 # v3.5.0
       - name: Build
-        run: make build
+        run: make build ENGINE='${{ matrix.engine }}'
   licenses:
     name: Licenses
     runs-on: ubuntu-22.04
@@ -73,9 +79,9 @@ jobs:
           cache: npm
       - name: Install tooling
         uses: asdf-vm/actions/install@75bab86b342b8aa14f3b547296607599522cbe90 # v2.1.0
-      - name: Check Docker licenses
+      - name: Check container image licenses
         if: ${{ failure() || success() }}
-        run: make license-check-docker
+        run: make license-check-image
       - name: Check npm licenses
         if: ${{ failure() || success() }}
         run: make license-check-npm
@@ -115,7 +121,7 @@ jobs:
         run: make lint-ci
       - name: Lint Dockerfile
         if: ${{ failure() || success() }}
-        run: make lint-docker
+        run: make lint-image
       - name: Lint JavaScript
         if: ${{ failure() || success() }}
         run: make lint-js
@@ -146,10 +152,16 @@ jobs:
         with:
           sarif_file: semgrep.sarif
   test:
-    name: Test
+    name: Test with ${{ matrix.engine }}
     runs-on: ubuntu-22.04
     needs:
       - build
+    strategy:
+      fail-fast: false
+      matrix:
+        engine:
+          - docker
+          - podman
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@03bee3930647ebbf994244c21ddbc0d4933aab4f # v2.3.0
@@ -176,4 +188,4 @@ jobs:
           node-version: 18
           cache: npm
       - name: Test
-        run: make test
+        run: make test ENGINE='${{ matrix.engine }}'
