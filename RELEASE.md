@@ -112,7 +112,7 @@ the automatic release process, follow these steps to release a new version
    git push origin v0
    ```
 
-1. Publish to [Docker], first with a version tag:
+1. Publish to [Docker Hub], first with a version tag:
 
    ```shell
    make build TAG=v0.1.2
@@ -126,7 +126,7 @@ the automatic release process, follow these steps to release a new version
    docker push ericornelissen/js-re-scan:latest
    ```
 
-[docker]: https://www.docker.com/
+[docker hub]: https://hub.docker.com/
 [git tag]: https://git-scm.com/book/en/v2/Git-Basics-Tagging
 [manually trigger]: https://docs.github.com/en/actions/managing-workflow-runs/manually-running-a-workflow
 [release workflow]: ./.github/workflows/release.yml
