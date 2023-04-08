@@ -13,8 +13,10 @@ IMAGES_DIR:=$(TEMP_DIR)/images/$(ENGINE)
 SBOM_FILE:=sbom.json
 VULN_FILE:=vulns.json
 
+.PHONY: default
 default: help
 
+.PHONY: audit audit-image audit-npm
 audit: audit-image audit-npm ## Audit the project dependencies
 
 audit-image: $(VULN_FILE) ## Audit the container image dependencies
@@ -22,8 +24,10 @@ audit-image: $(VULN_FILE) ## Audit the container image dependencies
 audit-npm: ## Audit the npm dependencies
 	@npm audit $(ARGS)
 
+.PHONY: build
 build: $(IMAGES_DIR)/$(TAG) ## Build the container image
 
+.PHONY: clean
 clean: ## Clean the repository
 	@git clean -fx \
 		$(TEMP_DIR) \
@@ -33,6 +37,7 @@ clean: ## Clean the repository
 	@$(ENGINE) rmi --force \
 		$(IMAGE_NAME)
 
+.PHONY: format format-js
 format: format-js ## Format the project
 
 format-js: $(NODE_MODULES) ## Format JavaScript files
@@ -48,6 +53,7 @@ format-js: $(NODE_MODULES) ## Format JavaScript files
 		./scripts/*.js \
 		./tests/*.js
 
+.PHONY: help
 help: ## Show this help message
 	@printf "Usage: make <command>\n\n"
 	@printf "Commands:\n"
@@ -55,8 +61,10 @@ help: ## Show this help message
 		printf "  \033[36m%-30s\033[0m %s\n", $$1, $$NF \
 	}' $(MAKEFILE_LIST)
 
+.PHONY: init
 init: $(NODE_MODULES) ## Initialize the project dependencies
 
+.PHONY: license-check license-check-image license-check-npm
 license-check: license-check-image license-check-npm ## Check the project dependency licenses
 
 license-check-image: $(SBOM_FILE) ## Check container image dependency licenses
@@ -66,6 +74,7 @@ license-check-npm: $(NODE_MODULES) ## Check npm dependency licenses
 	@npx licensee \
 		--errors-only
 
+.PHONY: lint lint-ci lint-image lint-js lint-md lint-yml
 lint: lint-ci lint-image lint-js lint-md lint-yml ## Lint the project
 
 lint-ci: $(TOOLING) ## Lint Continuous Integration configuration files
@@ -101,8 +110,10 @@ lint-yml: $(TOOLING) ## Lint .yml files
 		-c .yamllint.yml \
 		.
 
+.PHONY: sbom
 sbom: $(SBOM_FILE) ## Generate a Software Bill Of Materials (SBOM)
 
+.PHONY: test update-test-snapshots
 test: build $(NODE_MODULES) ## Run the tests
 	@CONTAINER_ENGINE=$(ENGINE) \
 		npx ava \
@@ -115,15 +126,8 @@ update-test-snapshots: build $(NODE_MODULES) ## Update the test snapsthos
 		--update-snapshots \
 		tests/
 
+.PHONY: verify
 verify: build license-check lint test ## Verify project is in a good state
-
-.PHONY: default help \
-	build clean init sbom verify \
-	audit audit-image audit-npm \
-	format format-js \
-	license-check license-check-image license-check-npm \
-	lint lint-ci lint-image lint-js lint-md lint-yml \
-	test update-test-snapshots
 
 $(SBOM_FILE): $(TOOLING) $(IMAGES_DIR)/latest
 	@syft $(IMAGE_NAME):latest
