@@ -49,13 +49,6 @@ jobs:
         uses: asdf-vm/actions/install@75bab86b342b8aa14f3b547296607599522cbe90 # v2.1.0
       - name: Audit dependencies in container image
         run: make audit-image
-        # The 4 lines following this comment block, as well as the block itself,
-        # should be removed when the `make audit-image` target is available at
-        # the `v0` ref.
-        if: ${{ matrix.ref != 'v0' }}
-      - name: Audit dependencies in container image
-        if: ${{ matrix.ref == 'v0' }}
-        run: make audit-docker
       - name: Upload SBOM and vulnerability scan
         uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3.1.2
         if: ${{ failure() || success() }}
