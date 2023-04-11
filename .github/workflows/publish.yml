@@ -55,6 +55,7 @@ jobs:
             auth.docker.io:443
             fulcio.sigstore.dev:443
             github.com:443
+            index.docker.io:443
             nodejs.org:443
             objects.githubusercontent.com:443
             production.cloudflare.docker.com:443
