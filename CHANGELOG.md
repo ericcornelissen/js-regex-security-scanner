@@ -8,7 +8,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`18394b0`) Bump Node.js runtime from `18.15.0` to `18.16.0`.
 
 ## [0.4.3] - 2023-04-11
 
