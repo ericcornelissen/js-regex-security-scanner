@@ -243,6 +243,7 @@ only when observed in a dependency of the project.
 | -----------------: | :------------------------------------- |
 |             `0BSD` | Permissive                             |
 |       `Apache-2.0` | Permissive                             |
+|    `BlueOak-1.0.0` | Permissive                             |
 |     `BSD-2-Clause` | Permissive                             |
 |     `BSD-3-Clause` | Permissive                             |
 |     `GPL-2.0-only` | OK under the 'mere aggregation' clause |
