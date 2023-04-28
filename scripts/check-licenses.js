@@ -41,7 +41,9 @@ const isAllowedLicense = (license) => {
 };
 
 const applyCorrection = (artifact) => {
-	const correction = corrections.find((entry) => entry.name === artifact.name);
+	const correction = corrections.find(
+		(correction) => correction.id === artifact.id,
+	);
 	if (correction === undefined) {
 		return artifact;
 	}
@@ -65,12 +67,14 @@ const applyCorrection = (artifact) => {
 
 const corrections = [
 	{
+		id: "e6c9486419cbb84e",
 		name: "busybox",
 		licenses: ["GPL-2.0-only"],
 		licenseUrl: "https://busybox.net/license.html",
 		reason: "license not detected by Syft",
 	},
 	{
+		id: "da217ed84944a9a9",
 		name: "node",
 		licenses: ["MIT"],
 		licenseUrl: "https://github.com/nodejs/node#license",
