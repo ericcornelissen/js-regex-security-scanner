@@ -239,22 +239,20 @@ The policy is defined in `.licensee.json`. The table below explains why the
 license is allowed for this project. Note that licenses are added to the policy
 only when observed in a dependency of the project.
 
-|            License | Reason                                 |
-| -----------------: | :------------------------------------- |
-|             `0BSD` | Permissive                             |
-|       `Apache-2.0` | Permissive                             |
-|    `BlueOak-1.0.0` | Permissive                             |
-|     `BSD-2-Clause` | Permissive                             |
-|     `BSD-3-Clause` | Permissive                             |
-|     `GPL-2.0-only` | OK under the 'mere aggregation' clause |
-| `GPL-2.0-or-later` | OK under the 'mere aggregation' clause |
-|          `CC0-1.0` | Public domain                          |
-|        `CC-BY-3.0` | Public domain                          |
-|              `ISC` | Permissive                             |
-|              `MIT` | Permissive                             |
-|          `openssl` | Permissive                             |
-|       `Python-2.0` | Permissive                             |
-|             `zlib` | Permissive                             |
+|            License | Reason        |
+| -----------------: | :-------------|
+|             `0BSD` | Permissive    |
+|       `Apache-2.0` | Permissive    |
+|    `BlueOak-1.0.0` | Permissive    |
+|     `BSD-2-Clause` | Permissive    |
+|     `BSD-3-Clause` | Permissive    |
+|          `CC0-1.0` | Public domain |
+|        `CC-BY-3.0` | Public domain |
+|              `ISC` | Permissive    |
+|              `MIT` | Permissive    |
+|          `openssl` | Permissive    |
+|       `Python-2.0` | Permissive    |
+|             `zlib` | Permissive    |
 
 ### SBOM
 
