@@ -22,6 +22,14 @@ const matches = (string) => (regexp) => regexp.test(string);
 
 const quoted = (string) => `'${string}'`;
 
+const setEqual = (collection1, collection2) => {
+	const set1 = new Set(collection1);
+	const set2 = new Set(collection2);
+	return (
+		set1.size === set2.size && set1.size === new Set([...set1, ...set2]).size
+	);
+};
+
 const toMatchWholeWordExpression = (string) => {
 	const preWordExpr = /(?:^|[\s(])/.source;
 	const postWordExpr = /(?:[\s)]|$)/.source;
@@ -33,10 +41,23 @@ const isAllowedLicense = (license) => {
 };
 
 const applyCorrection = (artifact) => {
-	const correction = corrections.find((entry) => entry.name === artifact.name);
+	const correction = corrections.find(
+		(correction) => correction.id === artifact.id,
+	);
+	if (correction === undefined) {
+		return artifact;
+	}
+
+	if (setEqual(artifact.licenses, correction.licenses)) {
+		return {
+			...artifact,
+			unnecessaryCorrection: true,
+		};
+	}
+
 	return {
 		...artifact,
-		licenses: correction?.licenses ?? artifact.licenses,
+		licenses: correction.licenses,
 	};
 };
 
@@ -54,12 +75,14 @@ const applyException = (artifact) => {
 
 const corrections = [
 	{
+		id: "e6c9486419cbb84e",
 		name: "busybox",
 		licenses: ["GPL-2.0-only"],
 		licenseUrl: "https://busybox.net/license.html",
 		reason: "license not detected by Syft",
 	},
 	{
+		id: "da217ed84944a9a9",
 		name: "node",
 		licenses: ["MIT"],
 		licenseUrl: "https://github.com/nodejs/node#license",
@@ -113,7 +136,7 @@ const exceptions = [
 		licenses: ["GPL-2.0-only"],
 		reason: "OK under the 'mere aggregation' clause",
 	},
-]
+];
 
 const licenseConfigFile = path.resolve(projectRoot, ".licensee.json");
 
@@ -137,11 +160,13 @@ const sbom = JSON.parse(rawSbom);
 // Evaluate licenses
 // -----------------
 
-const licenseViolations = sbom.artifacts
+const licenseDataToEvaluate = sbom.artifacts
 	.filter((artifact) => !skipEcosystems.includes(artifact.type))
 	.map(applyCorrection)
 	.map(applyException)
-	.filter((artifact) => !artifact.exception)
+	.filter((artifact) => !artifact.exception);
+
+const licenseViolations = licenseDataToEvaluate
 	.filter((artifact) => !artifact.licenses.some(isAllowedLicense))
 	.map((artifact) => {
 		return {
@@ -151,9 +176,29 @@ const licenseViolations = sbom.artifacts
 		};
 	});
 
+const unnecessaryCorrections = licenseDataToEvaluate
+	.filter((artifact) => artifact.unnecessaryCorrection)
+	.map((artifact) => {
+		return {
+			name: artifact.name,
+		};
+	});
+
 // --------------
 // Output results
 // --------------
+
+if (unnecessaryCorrections.length > 0) {
+	unnecessaryCorrections.forEach((artifact) => {
+		console.log("Unnecessary license correction for", quoted(artifact.name));
+	});
+
+	console.log(/* newline */);
+	console.log(
+		unnecessaryCorrections.length,
+		"unnecessary correction(s) detected. Please review",
+	);
+}
 
 if (licenseViolations.length > 0) {
 	licenseViolations.forEach((licenseViolation) => {
@@ -178,7 +223,9 @@ if (licenseViolations.length > 0) {
 		licenseViolations.length,
 		"license violation(s) detected. Please review",
 	);
+}
 
+if (licenseViolations.length > 0 || unnecessaryCorrections.length > 0) {
 	process.exit(1);
 } else {
 	console.log("No license violations detected");
