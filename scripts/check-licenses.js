@@ -61,6 +61,14 @@ const applyCorrection = (artifact) => {
 	};
 };
 
+const applyException = (artifact) => {
+	const exception = exceptions.find((entry) => entry.name === artifact.name);
+	return {
+		...artifact,
+		exception: exception?.licenses.every((l, i) => l === artifact.licenses[i]),
+	};
+};
+
 // -----------
 // Load policy
 // -----------
@@ -79,6 +87,54 @@ const corrections = [
 		licenses: ["MIT"],
 		licenseUrl: "https://github.com/nodejs/node#license",
 		reason: "license not detected by Syft",
+	},
+];
+
+const exceptions = [
+	{
+		name: "alpine-baselayout",
+		licenses: ["GPL-2.0-only"],
+		reason: "OK under the 'mere aggregation' clause",
+	},
+	{
+		name: "alpine-baselayout-data",
+		licenses: ["GPL-2.0-only"],
+		reason: "OK under the 'mere aggregation' clause",
+	},
+	{
+		name: "apk-tools",
+		licenses: ["GPL-2.0-only"],
+		reason: "OK under the 'mere aggregation' clause",
+	},
+	{
+		name: "busybox",
+		licenses: ["GPL-2.0-only"],
+		reason: "OK under the 'mere aggregation' clause",
+	},
+	{
+		name: "busybox-binsh",
+		licenses: ["GPL-2.0-only"],
+		reason: "OK under the 'mere aggregation' clause",
+	},
+	{
+		name: "libgcc",
+		licenses: ["GPL-2.0-or-later", "LGPL-2.1-or-later"],
+		reason: "OK under the 'mere aggregation' clause",
+	},
+	{
+		name: "libstdc++",
+		licenses: ["GPL-2.0-or-later", "LGPL-2.1-or-later"],
+		reason: "OK under the 'mere aggregation' clause",
+	},
+	{
+		name: "scanelf",
+		licenses: ["GPL-2.0-only"],
+		reason: "OK under the 'mere aggregation' clause",
+	},
+	{
+		name: "ssl_client",
+		licenses: ["GPL-2.0-only"],
+		reason: "OK under the 'mere aggregation' clause",
 	},
 ];
 
@@ -106,7 +162,9 @@ const sbom = JSON.parse(rawSbom);
 
 const licenseDataToEvaluate = sbom.artifacts
 	.filter((artifact) => !skipEcosystems.includes(artifact.type))
-	.map(applyCorrection);
+	.map(applyCorrection)
+	.map(applyException)
+	.filter((artifact) => !artifact.exception);
 
 const licenseViolations = licenseDataToEvaluate
 	.filter((artifact) => !artifact.licenses.some(isAllowedLicense))
