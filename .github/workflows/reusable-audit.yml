@@ -54,7 +54,7 @@ jobs:
         if: ${{ failure() || success() }}
         with:
           if-no-files-found: error
-          name: container-scan-${{ matrix.ref }}
+          name: container-scan-${{ github.sha }}
           path: |
             sbom.json
             vulns.json
