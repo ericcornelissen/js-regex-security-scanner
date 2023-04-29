@@ -39,7 +39,7 @@ jobs:
         uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # v3.6.0
         with:
           cache: npm
-          node-version: 20
+          node-version-file: .nvmrc
       - name: Create token to create Pull Request
         uses: tibdex/github-app-token@b62528385c34dbc9f38e5f4225ac829252d1ea92 # v1.8.0
         id: pull_request_token
