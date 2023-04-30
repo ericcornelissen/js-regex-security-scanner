@@ -148,7 +148,7 @@ else ifneq (, $(shell which rtx))
 endif
 	@touch $(TOOLING)
 $(IMAGES_DIR): | $(TEMP_DIR)
-	@mkdir --parent $(IMAGES_DIR)
+	@mkdir -p $(IMAGES_DIR)
 $(IMAGES_DIR)/%: .dockerignore .eslintrc.yml Dockerfile package*.json | $(IMAGES_DIR)
 	@$(ENGINE) build --tag $(IMAGE_NAME):$(TAG) .
 	@touch $(IMAGES_DIR)/$(TAG)
