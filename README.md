@@ -83,7 +83,7 @@ is provided by [eslint-plugin-markdown].
 ## License
 
 This project is licensed under the Apache 2.0 license, see [LICENSE] for the
-full license text.
+full license text. The documentation text is licensed under [CC BY-SA 4.0].
 
 ---
 
@@ -91,6 +91,7 @@ Please [open an issue] if you found a mistake or if you have a suggestion for
 how to improve the documentation.
 
 [@typescript-eslint/parser]: https://www.npmjs.com/package/@typescript-eslint/parser
+[cc by-sa 4.0]: https://creativecommons.org/licenses/by-sa/4.0/
 [docker]: https://www.docker.com/
 [eslint]: https://eslint.org/
 [eslint-plugin-markdown]: https://www.npmjs.com/package/eslint-plugin-markdown
