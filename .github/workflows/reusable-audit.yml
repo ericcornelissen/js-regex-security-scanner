@@ -48,6 +48,11 @@ jobs:
           ref: ${{ matrix.ref }}
       - name: Install tooling
         uses: asdf-vm/actions/install@75bab86b342b8aa14f3b547296607599522cbe90 # v2.1.0
+      - name: Get git context
+        id: git
+        run: |
+          COMMIT_SHA="$(git rev-parse HEAD)"
+          echo "commit-sha=$COMMIT_SHA" >> "$GITHUB_OUTPUT"
       - name: Audit dependencies in container image
         run: make audit-image
       - name: Upload SBOM and vulnerability scan
@@ -55,7 +60,7 @@ jobs:
         if: ${{ failure() || success() }}
         with:
           if-no-files-found: error
-          name: container-scan-${{ github.sha }}
+          name: container-scan-${{ steps.git.outputs.commit-sha }}
           path: |
             sbom.json
             vulns.json
