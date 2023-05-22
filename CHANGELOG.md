@@ -12,6 +12,7 @@ Versioning].
 - (`4cae34b`) Bump ESLint from `8.40.0` to `8.41.0`.
 - (`7aeaec7`) Bump `eslint-plugin-regexp` from `1.14.0` to `1.15.0`.
 - (`f00ab68`) Bump Node.js runtime from `20.0.0` to `20.1.0`.
+- (`ac06e11`) Bump Node.js runtime from `20.1.0` to `20.2.0`.
 
 ## [0.4.4] - 2023-04-23
 
