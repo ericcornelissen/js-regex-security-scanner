@@ -9,8 +9,9 @@ ignore: |
 
 rules:
   anchors:
-    forbid-undeclared-aliases: true
     forbid-duplicated-anchors: true
+    forbid-undeclared-aliases: true
+    forbid-unused-anchors: true
   braces:
     level: error
     forbid: true
