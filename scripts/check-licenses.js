@@ -36,7 +36,8 @@ const toMatchWholeWordExpression = (string) => {
 	return new RegExp(`${preWordExpr}${string}${postWordExpr}`, "i");
 };
 
-const isAllowedLicense = (license) => {
+const isAllowedLicense = (licenseInfo) => {
+	const license = licenseInfo.spdxExpression;
 	return allowedLicenses.map(toMatchWholeWordExpression).some(matches(license));
 };
 
@@ -59,7 +60,9 @@ const applyCorrection = (artifact) => {
 
 	return {
 		...artifact,
-		licenses: correction.licenses,
+		licenses: correction.licenses.map((license) => {
+			return { spdxExpression: license };
+		}),
 	};
 };
 
@@ -67,7 +70,9 @@ const applyException = (artifact) => {
 	const exception = exceptions.find((entry) => entry.name === artifact.name);
 	return {
 		...artifact,
-		exception: exception?.licenses.every((l, i) => l === artifact.licenses[i]),
+		exception: exception?.licenses.every(
+			(l, i) => l === artifact.licenses[i].spdxExpression,
+		),
 	};
 };
 
@@ -172,7 +177,7 @@ const licenseViolations = licenseDataToEvaluate
 	.filter((artifact) => !artifact.licenses.some(isAllowedLicense))
 	.map((artifact) => {
 		return {
-			licenses: artifact.licenses,
+			licenses: artifact.licenses.map((l) => l.spdxExpression),
 			name: artifact.name,
 			type: artifact.type,
 		};
