@@ -45,6 +45,72 @@ The scanner has the following exit codes.
 - Ignore tests based on standard file and folder patterns.
 - Scan documentation.
 
+## Migrating to ESLint
+
+If you have found this scanner helpful, consider using [eslint-plugin-regexp]
+instead. This [ESLint] plugin is what powers the scanner, and it may integrate
+better with your project's existing workflows.
+
+Follow these steps to update your ESLint setup to cover what this scanner does:
+
+1. Install the plugin:
+
+   ```sh
+   npm install --save-dev eslint-plugin-regexp
+   ```
+
+1. Update your ESLint configuration:
+
+   ```yaml
+   # .eslintrc.yml or similar
+
+   plugins:
+     # ... other plugins you're already using
+     - regexp
+
+   rules:
+     # ... other rules you already configured
+     regexp/no-super-linear-backtracking:
+       - error
+       - report: certain
+     regexp/no-super-linear-move:
+       - error
+       - ignorePartial: false
+         ignoreSticky: false
+         report: certain
+
+   # ... rest of your configuration
+   ```
+
+   ```javascript
+   // .eslintrc.json, .eslintrc.js or similar
+
+   {
+     "plugins": [
+       // ... other plugins you're already using
+       "regexp"
+     ],
+     "rules": {
+       // ... other rules you already configured
+       "regexp/no-super-linear-backtracking": [
+         "error",
+         {
+           "report": "certain"
+         }
+       ],
+       "regexp/no-super-linear-move": [
+         "error",
+         {
+           "ignorePartial": false,
+           "ignoreSticky": false,
+           "report": "certain"
+         }
+       ]
+     }
+     // ... rest of your configuration
+   }
+   ```
+
 ## Build from source
 
 If you want you can build the scanner from scratch. From the root of this
