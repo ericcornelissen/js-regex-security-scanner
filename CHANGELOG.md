@@ -12,6 +12,7 @@ Versioning].
 - (`4cae34b`) Bump ESLint from `8.40.0` to `8.41.0`.
 - (`c8c6675`) Bump ESLint from `8.41.0` to `8.42.0`.
 - (`7aeaec7`) Bump `eslint-plugin-regexp` from `1.14.0` to `1.15.0`.
+- (`56e304b`) Bump `@typescript-eslint/parser` from `5.58.0` to `5.59.9`
 - (`f00ab68`) Bump Node.js runtime from `20.0.0` to `20.1.0`.
 - (`ac06e11`) Bump Node.js runtime from `20.1.0` to `20.2.0`.
 
