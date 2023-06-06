@@ -125,12 +125,12 @@ const exceptions = [
 	},
 	{
 		name: "libgcc",
-		licenses: ["GPL-2.0-or-later", "LGPL-2.1-or-later"],
+		licenses: ["GPL-2.0-or-later AND LGPL-2.1-or-later"],
 		reason: "OK under the 'mere aggregation' clause",
 	},
 	{
 		name: "libstdc++",
-		licenses: ["GPL-2.0-or-later", "LGPL-2.1-or-later"],
+		licenses: ["GPL-2.0-or-later AND LGPL-2.1-or-later"],
 		reason: "OK under the 'mere aggregation' clause",
 	},
 	{
