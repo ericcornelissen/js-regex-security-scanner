@@ -8,6 +8,7 @@ Versioning].
 
 ## [Unreleased]
 
+- (`73df12e`) Bump Alpine from `3.17` to `3.18`.
 - (`8cfd729`) Bump ESLint from `8.39.0` to `8.40.0`.
 - (`4cae34b`) Bump ESLint from `8.40.0` to `8.41.0`.
 - (`c8c6675`) Bump ESLint from `8.41.0` to `8.42.0`.
