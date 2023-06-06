@@ -8,6 +8,8 @@ fail-on-severity: low
 ignore:
   # Ignore because this project isn't affected (no AES encryption is used).
   - vulnerability: CVE-2023-1255
+  # Ignore because  this project isn't affected (no ASN.1 object ids used).
+  - vulnerability: CVE-2023-2650
 
   # Ignore all npm vulnerabilities. This project relies on `npm audit` instead.
   - package:
