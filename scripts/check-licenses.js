@@ -18,8 +18,6 @@ const projectRoot = path.resolve(
 	"..",
 );
 
-const matches = (string) => (regexp) => regexp.test(string);
-
 const quoted = (string) => `'${string}'`;
 
 const setEqual = (collection1, collection2) => {
@@ -30,15 +28,27 @@ const setEqual = (collection1, collection2) => {
 	);
 };
 
-const toMatchWholeWordExpression = (string) => {
-	const preWordExpr = /(?:^|[\s(])/.source;
-	const postWordExpr = /(?:[\s)]|$)/.source;
-	return new RegExp(`${preWordExpr}${string}${postWordExpr}`, "i");
+const wholeWordMatches = (str) => (substr) => {
+	substr = substr.toLowerCase();
+	str = str.toLowerCase();
+
+	const matchIndex = str.indexOf(substr);
+	if (matchIndex === -1) {
+		return false;
+	}
+
+	return (
+		// Start-of-string OR preceded by a space or similar ...
+		(matchIndex === 0 || [" ", "("].includes(str.charAt(matchIndex - 1))) &&
+		// ... AND end-of-string OR followed by a space or similar
+		(matchIndex + substr.length === str.length ||
+			[" ", ")"].includes(str.charAt(matchIndex + substr.length)))
+	);
 };
 
 const isAllowedLicense = (licenseInfo) => {
 	const license = licenseInfo.spdxExpression;
-	return allowedLicenses.map(toMatchWholeWordExpression).some(matches(license));
+	return allowedLicenses.some(wholeWordMatches(license));
 };
 
 const applyCorrection = (artifact) => {
