@@ -8,7 +8,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`ad575a7`) Bump Node.js runtime from `20.2.0` to `20.3.0`.
 
 ## [0.4.5] - 2023-06-06
 
