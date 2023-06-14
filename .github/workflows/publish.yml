@@ -23,7 +23,7 @@ jobs:
           allowed-endpoints: >
             github.com:443
       - name: Checkout repository
-        uses: actions/checkout@83b7061638ee4956cf7545a6f7efe594e5ad0247 # v3.5.1
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
         with:
           fetch-depth: 0
       - name: Get major version
@@ -66,7 +66,7 @@ jobs:
             storage.googleapis.com:443
             tuf-repo-cdn.sigstore.dev:443
       - name: Checkout repository
-        uses: actions/checkout@83b7061638ee4956cf7545a6f7efe594e5ad0247 # v3.5.1
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
       - name: Get version
         uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 # v6.4.1
         id: version
@@ -134,7 +134,7 @@ jobs:
             toolbox-data.anchore.io:443
             tuf-repo-cdn.sigstore.dev:443
       - name: Checkout repository
-        uses: actions/checkout@83b7061638ee4956cf7545a6f7efe594e5ad0247 # v3.5.1
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
         with:
           submodules: true
       - name: Install Node.js
