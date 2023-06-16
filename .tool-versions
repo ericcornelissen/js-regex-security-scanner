@@ -2,7 +2,7 @@
 # - asdf: https://asdf-vm.com/
 # - rtx: https://github.com/jdxcode/rtx
 
-actionlint 1.6.24
+actionlint 1.6.25
 cosign 2.0.2
 grype 0.62.3
 hadolint 2.12.0
