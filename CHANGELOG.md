@@ -8,6 +8,7 @@ Versioning].
 
 ## [Unreleased]
 
+- (`aa308e3`) Bump Node.js runtime from `20.3.0` to `20.3.1`.
 - (`90c6b69`) Bump transitive dependency semver from `7.3.8` to `7.5.3`.
 
 ## [0.4.6] - 2023-06-21
