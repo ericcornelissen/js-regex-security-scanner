@@ -18,7 +18,7 @@ Versioning].
 ## [0.4.6] - 2023-06-21
 
 - (`4ddab82`) Bump ESLint from `8.42.0` to `8.43.0`.
-- (`3923830`) Bump `@typescript-eslint/parser` from `5.59.9` to `5.60.0`
+- (`3923830`) Bump `@typescript-eslint/parser` from `5.59.9` to `5.60.0`.
 - (`ad575a7`) Bump Node.js runtime from `20.2.0` to `20.3.0`.
 
 ## [0.4.5] - 2023-06-06
@@ -28,7 +28,7 @@ Versioning].
 - (`4cae34b`) Bump ESLint from `8.40.0` to `8.41.0`.
 - (`c8c6675`) Bump ESLint from `8.41.0` to `8.42.0`.
 - (`7aeaec7`) Bump `eslint-plugin-regexp` from `1.14.0` to `1.15.0`.
-- (`56e304b`) Bump `@typescript-eslint/parser` from `5.58.0` to `5.59.9`
+- (`56e304b`) Bump `@typescript-eslint/parser` from `5.58.0` to `5.59.9`.
 - (`f00ab68`) Bump Node.js runtime from `20.0.0` to `20.1.0`.
 - (`ac06e11`) Bump Node.js runtime from `20.1.0` to `20.2.0`.
 
@@ -44,7 +44,7 @@ Versioning].
 - (`b054372`) Bump ESLint from `8.37.0` to `8.38.0`.
 - (`0a2558c`) Bump `eslint-plugin-regexp` from `1.12.0` to `1.13.0`.
 - (`ca1d521`) Bump `eslint-plugin-regexp` from `1.13.0` to `1.14.0`.
-- (`9a99e7c`) Bump `@typescript-eslint/parser` from `5.49.0` to `5.58.0`
+- (`9a99e7c`) Bump `@typescript-eslint/parser` from `5.49.0` to `5.58.0`.
 
 ## [0.4.2] - 2023-03-13
 
