@@ -8,6 +8,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.8] - 2023-06-28
+
 - (`7166c63`) Bump transitive dependency optionator from `0.9.1` to `0.9.3`.
 
 ## [0.4.7] - 2023-06-23
