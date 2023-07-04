@@ -42,10 +42,10 @@ jobs:
           node-version-file: .nvmrc
       - name: Create token to create Pull Request
         uses: tibdex/github-app-token@b62528385c34dbc9f38e5f4225ac829252d1ea92 # v1.8.0
-        id: pull_request_token
+        id: automation-token
         with:
-          app_id: ${{ secrets.RELEASE_APP_ID }}
-          private_key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+          app_id: ${{ secrets.AUTOMATION_ID }}
+          private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
       - name: Bump version
         env:
           UPDATE_TYPE: ${{ github.event.inputs.update_type }}
@@ -55,7 +55,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@153407881ec5c347639a548ade7d8ad1d6740e38 # v5.0.2
         with:
-          token: ${{ steps.pull_request_token.outputs.token }}
+          token: ${{ steps.automation-token.outputs.token }}
           title: New ${{ github.event.inputs.update_type }} release for v0
           body: |
             _This Pull Request was created automatically_
