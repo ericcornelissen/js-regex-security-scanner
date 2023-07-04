@@ -138,7 +138,7 @@ regular expressions this scanner won't, but also reports _false positives_. As
 it is difficult to determine if a particular report is a false positive, other
 tools are hard to use.
 
-## Behind the Scenes
+## Behind the scenes
 
 This scanner runs [ESLint] with the [eslint-plugin-regexp] plugin to find and
 report on regular expressions that violate rules with security implications.
