@@ -8,6 +8,7 @@ Versioning].
 
 ## [Unreleased]
 
+- (`c8e66cb`) Bump `@typescript-eslint/parser` from `5.60.0` to `5.61.0`.
 - (`c8061a9`) Bump ESLint from `8.43.0` to `8.44.0`.
 
 ## [0.4.8] - 2023-06-28
