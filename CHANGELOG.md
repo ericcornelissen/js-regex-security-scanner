@@ -8,7 +8,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`443df82`) Bump Node.js runtime from `20.3.1` to `20.4.0`.
 
 ## [0.4.9] - 2023-07-04
 
