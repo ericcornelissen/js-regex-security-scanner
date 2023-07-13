@@ -256,7 +256,7 @@ only when observed in a dependency of the project.
 
 ### SBOM
 
-To generate a Software Bill Of Materials (SBOM) at `./sbom.json`, run:
+To generate a Software Bill Of Materials (SBOM) at `./sbom*.json`, run:
 
 ```shell
 make sbom

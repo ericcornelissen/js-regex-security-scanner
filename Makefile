@@ -10,7 +10,8 @@ TEMP_DIR:=.tmp
 TOOLING:=$(TEMP_DIR)/.tooling
 IMAGES_DIR:=$(TEMP_DIR)/images/$(ENGINE)
 
-SBOM_FILE:=sbom.json
+SBOM_SPDX_FILE:=sbom-spdx.json
+SBOM_SYFT_FILE:=sbom-syft.json
 VULN_FILE:=vulns.json
 
 .PHONY: default
@@ -32,7 +33,8 @@ clean: ## Clean the repository
 	@git clean -fx \
 		$(TEMP_DIR) \
 		$(NODE_MODULES) \
-		$(SBOM_FILE) \
+		$(SBOM_SPDX_FILE) \
+		$(SBOM_SYFT_FILE) \
 		$(VULN_FILE)
 	@$(ENGINE) rmi --force \
 		$(IMAGE_NAME)
@@ -67,7 +69,7 @@ init: $(NODE_MODULES) ## Initialize the project dependencies
 .PHONY: license-check license-check-image license-check-npm
 license-check: license-check-image license-check-npm ## Check the project dependency licenses
 
-license-check-image: $(SBOM_FILE) ## Check container image dependency licenses
+license-check-image: $(SBOM_SYFT_FILE) ## Check container image dependency licenses
 	@node scripts/check-licenses.js
 
 license-check-npm: $(NODE_MODULES) ## Check npm dependency licenses
@@ -111,7 +113,7 @@ lint-yml: $(TOOLING) ## Lint .yml files
 		.
 
 .PHONY: sbom
-sbom: $(SBOM_FILE) ## Generate a Software Bill Of Materials (SBOM)
+sbom: $(SBOM_SPDX_FILE) $(SBOM_SYFT_FILE) ## Generate a Software Bill Of Materials (SBOM)
 
 .PHONY: test update-test-snapshots
 test: build $(NODE_MODULES) ## Run the tests
@@ -129,10 +131,10 @@ update-test-snapshots: build $(NODE_MODULES) ## Update the test snapsthos
 .PHONY: verify
 verify: build license-check lint test ## Verify project is in a good state
 
-$(SBOM_FILE): $(TOOLING) $(IMAGES_DIR)/latest
+$(SBOM_SPDX_FILE) $(SBOM_SYFT_FILE): .syft.yml $(TOOLING) $(IMAGES_DIR)/latest
 	@syft $(IMAGE_NAME):latest
-$(VULN_FILE): $(TOOLING) $(SBOM_FILE)
-	@grype $(SBOM_FILE)
+$(VULN_FILE): .grype.yml $(TOOLING) $(SBOM_SPDX_FILE)
+	@grype $(SBOM_SPDX_FILE)
 
 $(NODE_MODULES): .npmrc package*.json
 	@npm clean-install \

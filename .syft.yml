@@ -1,4 +1,5 @@
 # Check out Syft at: https://github.com/anchore/syft
 
 output:
-  - json=sbom.json
+  - json=sbom-syft.json
+  - spdx-json=sbom-spdx.json
