@@ -62,7 +62,7 @@ jobs:
           if-no-files-found: error
           name: container-scan-${{ steps.git.outputs.commit-sha }}
           path: |
-            sbom.json
+            sbom-syft.json
             vulns.json
   npm:
     name: npm

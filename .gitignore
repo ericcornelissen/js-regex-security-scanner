@@ -1,5 +1,5 @@
 .tmp/
-sbom.json
+sbom*.json
 vulns.json
 
 # ESLint

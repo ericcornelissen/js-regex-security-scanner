@@ -168,7 +168,7 @@ const allowedLicenses = licenseConfig.licenses.spdx;
 // Load the SBOM
 // -------------
 
-const sbomFile = path.resolve(projectRoot, "sbom.json");
+const sbomFile = path.resolve(projectRoot, "sbom-syft.json");
 
 const rawSbom = fs.readFileSync(sbomFile);
 const sbom = JSON.parse(rawSbom);
