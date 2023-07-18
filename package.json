@@ -6,7 +6,7 @@
     "npm": ">=8.1.2"
   },
   "dependencies": {
-    "@typescript-eslint/parser": "6.0.0",
+    "@typescript-eslint/parser": "6.1.0",
     "eslint": "8.45.0",
     "eslint-plugin-markdown": "3.0.0",
     "eslint-plugin-regexp": "1.15.0"
