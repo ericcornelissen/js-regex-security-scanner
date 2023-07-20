@@ -34,7 +34,7 @@ jobs:
           script: |
             const ref = context.ref
             const tag = ref.replace(/^refs\/tags\//, "")
-            const major = tag.replace(/\.\d\.\d$/, "")
+            const major = tag.replace(/\.\d+\.\d+$/, "")
             return major
       - name: Update release branch
         run: git push origin 'HEAD:${{ steps.version.outputs.result }}'
