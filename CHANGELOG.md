@@ -8,7 +8,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`5ce4109`) Bump transitive dependencies.
 
 ## [0.4.10] - 2023-07-17
 
