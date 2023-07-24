@@ -8,6 +8,7 @@ Versioning].
 
 ## [Unreleased]
 
+- (`cd02528`) Bump Node.js runtime from `20.4.0` to `20.5.0`.
 - (`5ce4109`) Bump transitive dependencies.
 
 ## [0.4.10] - 2023-07-17
