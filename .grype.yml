@@ -6,6 +6,12 @@ file: vulns.json
 fail-on-severity: low
 
 ignore:
+  # Ignore because this project isn't affected at runtime.
+  - vulnerability: CVE-2023-2975
+
+  # Ignore because this project isn't affected at runtime.
+  - vulnerability: CVE-2023-3446
+
   # Ignore all npm vulnerabilities. This project relies on `npm audit` instead.
   - package:
       type: npm
