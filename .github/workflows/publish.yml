@@ -37,7 +37,9 @@ jobs:
             const major = tag.replace(/\.\d+\.\d+$/, "")
             return major
       - name: Update release branch
-        run: git push origin 'HEAD:${{ steps.version.outputs.result }}'
+        env:
+          MAJOR_VERSION: ${{ steps.version.outputs.result }}
+        run: git push origin "HEAD:$MAJOR_VERSION"
   docker-hub:
     name: Docker Hub
     runs-on: ubuntu-22.04
@@ -101,12 +103,17 @@ jobs:
             ericornelissen/js-re-scan:latest,
             ericornelissen/js-re-scan:${{ steps.version.outputs.result }}
       - name: Sign container image
+        env:
+          IMAGE_DIGEST: ${{ steps.docker_hub.outputs.digest }}
+          REF: ${{ github.sha }}
+          REPO: ${{ github.repository }}
+          WORKFLOW: ${{ github.workflow }}
         run: |
           cosign sign --yes \
-            -a 'repo=${{ github.repository }}' \
-            -a 'workflow=${{ github.workflow }}' \
-            -a 'ref=${{ github.sha }}' \
-            'docker.io/ericornelissen/js-re-scan@${{ steps.docker_hub.outputs.digest }}'
+            -a "repo=$REPO" \
+            -a "workflow=$WORKFLOW" \
+            -a "ref=$REF" \
+            "docker.io/ericornelissen/js-re-scan@$IMAGE_DIGEST"
   validate:
     name: Validate
     runs-on: ubuntu-22.04
