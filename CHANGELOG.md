@@ -8,6 +8,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.12] - 2023-08-24
+
 - (`3e0988f`) Bump ESLint from `8.46.0` to `8.47.0`.
 - (`66b4c0b`) Bump `@typescript-eslint/parser` from `6.0.0` to `6.4.0`.
 - (`828d73e`) Bump Node.js runtime from `20.5.0` to `20.5.1`.
