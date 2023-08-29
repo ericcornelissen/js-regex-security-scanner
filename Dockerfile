@@ -16,7 +16,7 @@ FROM node:20.5.1-alpine3.18
 
 LABEL name="js-regex-security-scanner" \
 	description="A static analyzer to scan JavaScript code for problematic regular expressions." \
-	version="0.4.12" \
+	version="0.4.13" \
 	license="Apache-2.0"
 
 ENV NODE_ENV=production
