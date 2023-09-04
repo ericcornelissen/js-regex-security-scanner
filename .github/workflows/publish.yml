@@ -85,7 +85,7 @@ jobs:
           COSIGN_VERSION="$(grep cosign < .tool-versions | awk '{print $2}')"
           echo "cosign=$COSIGN_VERSION" >> "$GITHUB_OUTPUT"
       - name: Install cosign
-        uses: sigstore/cosign-installer@d13028333d784fcc802b67ec924bcebe75aa0a5f # v3.1.0
+        uses: sigstore/cosign-installer@11086d25041f77fe8fe7b9ea4e48e3b9192b8f19 # v3.1.2
         with:
           cosign-release: v${{ steps.versions.outputs.cosign }}
       - name: Log in to Docker Hub
