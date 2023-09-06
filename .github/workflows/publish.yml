@@ -45,6 +45,9 @@ jobs:
     runs-on: ubuntu-22.04
     permissions:
       id-token: write # To perform keyless signing with cosign
+    environment:
+      name: docker
+      url: https://hub.docker.com/r/ericornelissen/js-re-scan
     needs:
       - validate
     steps:
