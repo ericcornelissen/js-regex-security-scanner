@@ -17,6 +17,7 @@ Versioning].
 - (`692c9f5`) Bump Node.js runtime from `20.6.0` to `20.6.1`.
 - (`6271e2b`) Bump Node.js runtime from `20.6.1` to `20.7.0`.
 - (`f8ab2f5`) Bump Node.js runtime from `20.7.0` to `20.8.0`.
+- (`fa2187c`) Bump Node.js runtime from `20.8.0` to `20.8.1`.
 
 ## [0.4.13] - 2023-08-29
 
