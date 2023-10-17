@@ -8,6 +8,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.14] - 2023-10-17
+
 - (`2274434`) Bump ESLint from `8.48.0` to `8.49.0`.
 - (`e02a16b`) Bump ESLint from `8.49.0` to `8.50.0`.
 - (`723db26`) Bump ESLint from `8.50.0` to `8.51.0`.
