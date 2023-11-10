@@ -48,6 +48,7 @@ rules:
   empty-values:
     level: error
     forbid-in-block-mappings: true
+    forbid-in-block-sequences: true
     forbid-in-flow-mappings: true
   hyphens:
     level: error
