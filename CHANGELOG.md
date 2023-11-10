@@ -8,6 +8,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.15] - 2023-11-10
+
 - (`ee15259`) Bump ESLint from `8.51.0` to `8.52.0`.
 - (`7f0dd23`) Bump ESLint from `8.52.0` to `8.53.0`.
 - (`846a6ba`) Bump `eslint-plugin-regexp` from `2.0.0` to `2.1.1`.
