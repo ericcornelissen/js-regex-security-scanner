@@ -151,7 +151,7 @@ endif
 	@touch $(TOOLING)
 $(IMAGES_DIR): | $(TEMP_DIR)
 	@mkdir -p $(IMAGES_DIR)
-$(IMAGES_DIR)/%: .dockerignore .eslintrc.yml Containerfile package*.json | $(IMAGES_DIR)
+$(IMAGES_DIR)/%: .eslintrc.yml Containerfile package*.json | $(IMAGES_DIR)
 	@$(ENGINE) build \
 		--file Containerfile \
 		--tag $(IMAGE_NAME):$(TAG) \
