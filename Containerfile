@@ -32,7 +32,7 @@ RUN npm install \
 	--no-fund \
 	--no-update-notifier
 
-COPY --chown=node:node ./ ./
+COPY --chown=node:node ./.eslintrc.yml ./
 
 ENTRYPOINT [ \
 	"./node_modules/.bin/eslint", \

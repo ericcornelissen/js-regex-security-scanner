@@ -31,13 +31,13 @@ the automatic release process, follow these steps to release a new version
    git clone git@github.com:ericcornelissen/js-regex-security-scanner.git
    ```
 
-1. Update the `version` label in the `Dockerfile` using:
+1. Update the `version` label in the `Containerfile` using:
 
    ```shell
    node scripts/bump-version.js [patch|minor|major]
    ```
 
-   If that fails, manually update the `version` label in the `Dockerfile`:
+   If that fails, manually update the `version` label in the `Containerfile`:
 
    ```diff
    -  version="0.1.1" \
@@ -65,10 +65,10 @@ the automatic release process, follow these steps to release a new version
 1. Commit the changes to a new release branch and push using:
 
    ```shell
-   git checkout -b release-$(sha1sum Dockerfile | awk '{print $1}')
-   git add CHANGELOG.md Dockerfile
+   git checkout -b release-$(sha1sum Containerfile | awk '{print $1}')
+   git add CHANGELOG.md Containerfile
    git commit --message "Version bump"
-   git push origin release-$(sha1sum Dockerfile | awk '{print $1}')
+   git push origin release-$(sha1sum Containerfile | awk '{print $1}')
    ```
 
 1. Create a Pull Request to merge the release branch into `main`.

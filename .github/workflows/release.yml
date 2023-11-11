@@ -65,7 +65,7 @@ jobs:
             ### Merge checklist
 
             - [ ] All continuous integration checks passed.
-            - [ ] The version number is updated in `Dockerfile`.
+            - [ ] The version number is updated in `Containerfile`.
             - [ ] The new release is added to `CHANGELOG.md` with the correct version number and date.
             - [ ] The new version number is in accordance with the [Semantic Versioning] rules.
             - [ ] There are no other changes in the Pull Request.

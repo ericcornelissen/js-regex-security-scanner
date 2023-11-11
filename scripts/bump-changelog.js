@@ -19,16 +19,16 @@ const projectRoot = path.resolve(
 // -------------
 
 const changelogFilePath = path.resolve(projectRoot, "CHANGELOG.md");
-const dockerFilePath = path.resolve(projectRoot, "Dockerfile");
+const containerfilePath = path.resolve(projectRoot, "Containerfile");
 
-const dockerFileRaw = fs.readFileSync(dockerFilePath).toString();
+const containerfileRaw = fs.readFileSync(containerfilePath).toString();
 const changelogRaw = fs.readFileSync(changelogFilePath).toString();
 
 // ---------------
 // Current version
 // ---------------
 
-const versionLabel = dockerFileRaw
+const versionLabel = containerfileRaw
 	.split(/\n/)
 	.map((line) => line.trim())
 	.find((line) => line.startsWith("version="));

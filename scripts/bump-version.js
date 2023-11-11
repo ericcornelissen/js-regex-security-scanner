@@ -7,11 +7,11 @@ const projectRoot = path.resolve(
 	path.dirname(url.fileURLToPath(new URL(import.meta.url))),
 	"..",
 );
-const dockerFilePath = path.resolve(projectRoot, "Dockerfile");
+const containerfilePath = path.resolve(projectRoot, "Containerfile");
 
-const dockerFileRaw = fs.readFileSync(dockerFilePath).toString();
+const containerfileRaw = fs.readFileSync(containerfilePath).toString();
 
-const versionLabel = dockerFileRaw
+const versionLabel = containerfileRaw
 	.split(/\n/)
 	.map((line) => line.trim())
 	.find((line) => line.startsWith("version="));
@@ -39,6 +39,6 @@ switch (process.argv[2]) {
 
 const newVersion = versionTuple.join(".");
 fs.writeFileSync(
-	dockerFilePath,
-	dockerFileRaw.replace(versionLabel, `version="${newVersion}" \\`),
+	containerfilePath,
+	containerfileRaw.replace(versionLabel, `version="${newVersion}" \\`),
 );
