@@ -117,13 +117,13 @@ If you want you can build the scanner from scratch. From the root of this
 project run something like:
 
 ```shell
-docker build . --tag js-regex-scanner
+docker build --file Containerfile --tag js-regex-scanner .
 ```
 
 Or use the convenience [Make] target:
 
 ```shell
-make build
+make build ENGINE=docker
 ```
 
 ## Philosophy

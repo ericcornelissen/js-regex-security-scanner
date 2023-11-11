@@ -82,9 +82,9 @@ lint: lint-ci lint-image lint-js lint-md lint-yml ## Lint the project
 lint-ci: $(TOOLING) ## Lint Continuous Integration configuration files
 	@actionlint
 
-lint-image: $(TOOLING) ## Lint the Dockerfile
+lint-image: $(TOOLING) ## Lint the Containerfile
 	@hadolint \
-		Dockerfile
+		Containerfile
 
 lint-js: $(NODE_MODULES) ## Lint JavaScript files
 	@npx prettier \
@@ -151,6 +151,9 @@ endif
 	@touch $(TOOLING)
 $(IMAGES_DIR): | $(TEMP_DIR)
 	@mkdir -p $(IMAGES_DIR)
-$(IMAGES_DIR)/%: .dockerignore .eslintrc.yml Dockerfile package*.json | $(IMAGES_DIR)
-	@$(ENGINE) build --tag $(IMAGE_NAME):$(TAG) .
+$(IMAGES_DIR)/%: .dockerignore .eslintrc.yml Containerfile package*.json | $(IMAGES_DIR)
+	@$(ENGINE) build \
+		--file Containerfile \
+		--tag $(IMAGE_NAME):$(TAG) \
+		.
 	@touch $(IMAGES_DIR)/$(TAG)

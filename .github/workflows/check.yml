@@ -123,7 +123,7 @@ jobs:
       - name: Lint CI
         if: ${{ failure() || success() }}
         run: make lint-ci
-      - name: Lint Dockerfile
+      - name: Lint Containerfile
         if: ${{ failure() || success() }}
         run: make lint-image
       - name: Lint JavaScript

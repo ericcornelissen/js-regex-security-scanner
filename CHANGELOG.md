@@ -175,7 +175,7 @@ Versioning].
 
 ## [0.2.1] - 2022-09-25
 
-- (`4c29319`) Add labels with metadata to the Docker image.
+- (`4c29319`) Add labels with metadata to the container image.
 - (`1643b5e`) Fix incorrect errors due to ESLint ignore directives.
 
 ## [0.2.0] - 2022-09-21
@@ -185,7 +185,7 @@ Versioning].
 - (`8d5b874`) Ignore more dependency as well as common output/temporary folders.
 - (`1353931`) Ignore IDE related folders.
 - (`8863b7b`) Ignore the `vendor/` folder.
-- (`20b948a`) Pin Docker image to specific Node.js and Alpine version.
+- (`20b948a`) Pin container image to specific Node.js and Alpine version.
 
 ## [0.1.1] - 2022-09-17
 
@@ -195,8 +195,8 @@ Versioning].
 
 ## [0.1.0] - 2022-09-14
 
-- (`7dfe68a`) Create a Docker-based static scanner to find problematic regular
-  expressions in JavaScript code.
+- (`7dfe68a`) Create a container-based static scanner to find problematic
+  regular expressions in JavaScript code.
 
 [keep a changelog]: https://keepachangelog.com/en/1.0.0/
 [semantic versioning]: https://semver.org/spec/v2.0.0.html

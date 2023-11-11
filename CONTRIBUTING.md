@@ -106,8 +106,8 @@ container image. As a first principle, all changes should be made by adjusting
 this setup. This means the two most important files are:
 
 - `.eslintrc.yml`: The [ESLint] configuration file.
-- `Dockerfile`: The file telling [Docker] (or [Podman]) how to make the scanner
-  image.
+- `Containerfile`: The file telling [Docker] (or [Podman]) how to make the
+  scanner image.
 
 #### Building
 
@@ -142,7 +142,7 @@ to run all linters or use the following commands to check specific file types:
 | File type          | Command           | Linter(s)                   |
 | :----------------- | :---------------- | :-------------------------- |
 | CI workflows       | `make lint-ci`    | [actionlint] & [ShellCheck] |
-| `Dockerfile`       | `make lint-image` | [hadolint]                  |
+| `Containerfile`    | `make lint-image` | [hadolint]                  |
 | JavaScript (`.js`) | `make lint-js`    | [Prettier]                  |
 | MarkDown (`.md`)   | `make lint-md`    | [markdownlint]              |
 | YAML (`.yml`)      | `make lint-yml`   | [yamllint]                  |
