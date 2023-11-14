@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
+
 # JavaScript Regex Security Scanner
 
 A static analyzer to scan JavaScript and TypeScript code for problematic regular
