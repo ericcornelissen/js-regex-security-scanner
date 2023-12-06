@@ -12,6 +12,7 @@ Versioning].
 
 - (`57541f2`) Bump ESLint from `8.53.0` to `8.54.0`.
 - (`2237732`) Bump ESLint from `8.54.0` to `8.55.0`.
+- (`dc18ab5`) Bump `eslint-plugin-regexp` from `2.1.1` to `2.1.2`.
 
 ## [0.4.15] - 2023-11-10
 
