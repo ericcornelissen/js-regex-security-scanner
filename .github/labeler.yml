@@ -1,22 +1,32 @@
 # Check out Labeler at: https://github.com/actions/labeler
 
 ci:
-  - .github/workflows/*
-  - .github/dependabot.yml
-  - .github/labeler.yml
+  - changed-files:
+      - any-glob-to-any-file:
+          - .github/workflows/*
+          - .github/dependabot.yml
+          - .github/labeler.yml
 
 dependencies:
-  - .tool-versions
-  - package-lock.json
+  - changed-files:
+      - any-glob-to-any-file:
+          - .tool-versions
+          - package-lock.json
 
 documentation:
-  - README.md
+  - changed-files:
+      - any-glob-to-any-file:
+          - README.md
 
 test:
-  - testdata/**
-  - testdata/**/*
-  - tests/**
-  - tests/**/*
+  - changed-files:
+      - any-glob-to-any-file:
+          - testdata/**
+          - testdata/**/*
+          - tests/**
+          - tests/**/*
 
 security:
-  - SECURITY.md
+  - changed-files:
+      - any-glob-to-any-file:
+          - SECURITY.md
