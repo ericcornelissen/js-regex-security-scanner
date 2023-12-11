@@ -46,6 +46,16 @@ jobs:
         uses: ericcornelissen/tool-versions-update-action/pr@14fcb5478dac7cc1c080516b26772e08840de5e0 # v0.3.10
         with:
           assignees: ericcornelissen
+          commit-message: Bump {{updated-tools}}
           labels: dependencies
           max: 1
+          pr-body: |
+            Bumps {{updated-tools}} to the latests available version.
+
+            ---
+
+            _This Pull Request was created using the [tool-versions-update-action]_
+
+            [tool-versions-update-action]: https://github.com/ericcornelissen/tool-versions-update-action
+          pr-title: Bump {{updated-tools}}
           token: ${{ steps.automation-token.outputs.token }}
