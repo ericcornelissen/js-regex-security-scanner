@@ -43,7 +43,7 @@ jobs:
           app_id: ${{ secrets.AUTOMATION_ID }}
           private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
       - name: Update tooling
-        uses: ericcornelissen/tool-versions-update-action/pr@14fcb5478dac7cc1c080516b26772e08840de5e0 # v0.3.10
+        uses: ericcornelissen/tool-versions-update-action/pr@mutliline-outputs
         with:
           assignees: ericcornelissen
           commit-message: Bump {{updated-tools}}
