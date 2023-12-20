@@ -43,19 +43,19 @@ jobs:
           app_id: ${{ secrets.AUTOMATION_ID }}
           private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
       - name: Update tooling
-        uses: ericcornelissen/tool-versions-update-action/pr@36a2649aecad3f9e1f29e5932dad757e0a719a0f # v0.3.11
+        uses: ericcornelissen/tool-versions-update-action/pr@ea8e7073a31c5d85bb728398cf7b364c91e8a91f # v0.3.12
         with:
           assignees: ericcornelissen
-          commit-message: Bump {{updated-tools}}
+          commit-message: Bump {{updated-tools}} from {{updated-old-versions}} to {{updated-new-versions}}
           labels: dependencies
           max: 1
           pr-body: |
-            Bumps {{updated-tools}} to the latests available version.
+            Bumps {{updated-tools}} from {{updated-old-versions}} to {{updated-new-versions}}.
 
             ---
 
             _This Pull Request was created using the [tool-versions-update-action]_
 
             [tool-versions-update-action]: https://github.com/ericcornelissen/tool-versions-update-action
-          pr-title: Bump {{updated-tools}}
+          pr-title: Bump {{updated-tools}} from {{updated-old-versions}} to {{updated-new-versions}}
           token: ${{ steps.automation-token.outputs.token }}
