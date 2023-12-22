@@ -4,7 +4,7 @@
 
 actionlint 1.6.26
 cosign 2.2.2
-grype 0.73.4
+grype 0.73.5
 hadolint 2.12.0
 shellcheck 0.9.0
 syft 0.98.0
