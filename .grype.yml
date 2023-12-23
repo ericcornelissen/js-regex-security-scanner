@@ -6,12 +6,6 @@ file: vulns.json
 fail-on-severity: low
 
 ignore:
-  # Ignore because this project isn't affected at runtime.
-  - vulnerability: CVE-2023-5363
-
-  # Ignore because this project isn't affected at runtime.
-  - vulnerability: CVE-2023-5678
-
   # Ignore because _printf_ isn't used.
   - vulnerability: CVE-2023-42363
 
