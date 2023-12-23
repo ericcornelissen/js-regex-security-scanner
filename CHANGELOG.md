@@ -10,6 +10,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.17] - 2023-12-23
+
 - (`5f86470`) Bump Alpine from `3.18` to `3.19`.
 - (`0e3da2b`) Bump ESLint from `8.55.0` to `8.56.0`.
 - (`2026441`) Bump Node.js runtime from `20.9.0` to `20.10.0`.
