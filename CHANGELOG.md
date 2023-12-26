@@ -10,7 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`2bfb28c`) Bump `@typescript-eslint/parser` from `6.13.2` to `6.16.0`.
 
 ## [0.4.17] - 2023-12-23
 
