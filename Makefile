@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT-0
+
 ENGINE?=docker
 TAG?=latest
 
