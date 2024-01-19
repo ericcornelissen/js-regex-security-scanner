@@ -11,6 +11,7 @@ Versioning].
 ## [Unreleased]
 
 - (`2bfb28c`) Bump `@typescript-eslint/parser` from `6.13.2` to `6.16.0`.
+- (`ec7fc87`) Bump Node.js runtime from `20.10.0` to `20.11.0`.
 
 ## [0.4.17] - 2023-12-23
 
