@@ -60,6 +60,7 @@ rules:
     check-multi-line-strings: false
   key-duplicates:
     level: error
+    forbid-duplicated-merge-keys: true
   key-ordering: disable
   line-length: disable
   new-line-at-end-of-file:
@@ -73,6 +74,7 @@ rules:
     forbid-explicit-octal: true
   quoted-strings:
     level: error
+    check-keys: true
     quote-type: double
     required: only-when-needed
     extra-required:
