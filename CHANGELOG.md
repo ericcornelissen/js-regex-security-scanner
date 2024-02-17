@@ -10,6 +10,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.18] - 2024-02-17
+
 - (`2bfb28c`) Bump `@typescript-eslint/parser` from `6.13.2` to `6.16.0`.
 - (`dd5471f`) Bump `@typescript-eslint/parser` from `6.16.0` to `6.21.0`.
 - (`5b93586`) Bump `@typescript-eslint/parser` from `6.21.0` to `7.0.1`.
