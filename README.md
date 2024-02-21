@@ -57,7 +57,8 @@ Follow these steps to update your ESLint setup to cover what this scanner does:
 
 1. Install the plugin:
 
-   ```sh
+   <!-- doctest:ignore -->
+   ```shell
    npm install --save-dev eslint-plugin-regexp
    ```
 
