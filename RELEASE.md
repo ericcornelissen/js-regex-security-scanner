@@ -97,7 +97,7 @@ the automatic release process, follow these steps to release a new version
    git push origin v0.1.2
    ```
 
-   > **Note**: At this point, the continuous delivery automation may kick in and
+   > **NOTE:** At this point, the continuous delivery automation may kick in and
    > complete the release process. If not, or only partially, continue following
    > the remaining steps.
 

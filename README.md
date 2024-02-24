@@ -14,7 +14,7 @@ JavaScript or TypeScript project. For example, to scan the current directory:
 docker run --rm -v $(pwd):/project docker.io/ericornelissen/js-re-scan:latest
 ```
 
-> **Note**: To use [Podman] instead of [Docker] you can replace `docker` by
+> **NOTE:** To use [Podman] instead of [Docker] you can replace `docker` by
 > `podman` in any example command.
 
 ### Ignore patterns
