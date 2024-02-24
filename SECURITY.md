@@ -54,7 +54,7 @@ Try to include as many of the following items as possible in a security report:
 
 ## Advisories
 
-> **Note**: Advisories will be created only for vulnerabilities present in
+> **NOTE:** Advisories will be created only for vulnerabilities present in
 > released versions of the project.
 
 | ID               | Date       | Affected versions | Patched versions |
