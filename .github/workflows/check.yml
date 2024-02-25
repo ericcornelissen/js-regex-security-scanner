@@ -43,7 +43,7 @@ jobs:
       - name: Build
         env:
           ENGINE: ${{ matrix.engine }}
-        run: make build "ENGINE=$ENGINE"
+        run: make build "ENGINE=${ENGINE}"
   licenses:
     name: Licenses
     runs-on: ubuntu-22.04
@@ -174,4 +174,4 @@ jobs:
       - name: Test
         env:
           ENGINE: ${{ matrix.engine }}
-        run: make test "ENGINE=$ENGINE"
+        run: make test "ENGINE=${ENGINE}"

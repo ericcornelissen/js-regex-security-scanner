@@ -39,7 +39,7 @@ jobs:
       - name: Update release branch
         env:
           MAJOR_VERSION: ${{ steps.version.outputs.result }}
-        run: git push origin "HEAD:$MAJOR_VERSION"
+        run: git push origin "HEAD:${MAJOR_VERSION}"
   docker-hub:
     name: Docker Hub
     runs-on: ubuntu-22.04
@@ -86,7 +86,7 @@ jobs:
         id: versions
         run: |
           COSIGN_VERSION="$(grep cosign < .tool-versions | awk '{print $2}')"
-          echo "cosign=$COSIGN_VERSION" >> "$GITHUB_OUTPUT"
+          echo "cosign=${COSIGN_VERSION}" >> "${GITHUB_OUTPUT}"
       - name: Install cosign
         uses: sigstore/cosign-installer@e1523de7571e31dbe865fd2e80c5c7c23ae71eb4 # v3.4.0
         with:
@@ -114,10 +114,10 @@ jobs:
           WORKFLOW: ${{ github.workflow }}
         run: |
           cosign sign --yes \
-            -a "repo=$REPO" \
-            -a "workflow=$WORKFLOW" \
-            -a "ref=$REF" \
-            "docker.io/ericornelissen/js-re-scan@$IMAGE_DIGEST"
+            -a "repo=${REPO}" \
+            -a "workflow=${WORKFLOW}" \
+            -a "ref=${REF}" \
+            "docker.io/ericornelissen/js-re-scan@${IMAGE_DIGEST}"
   validate:
     name: Validate
     runs-on: ubuntu-22.04

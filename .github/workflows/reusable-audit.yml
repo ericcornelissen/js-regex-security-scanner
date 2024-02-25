@@ -52,7 +52,7 @@ jobs:
         id: git
         run: |
           COMMIT_SHA="$(git rev-parse HEAD)"
-          echo "commit-sha=$COMMIT_SHA" >> "$GITHUB_OUTPUT"
+          echo "commit-sha=${COMMIT_SHA}" >> "${GITHUB_OUTPUT}"
       - name: Audit dependencies in container image
         run: make audit-image
       - name: Upload SBOM and vulnerability scan
