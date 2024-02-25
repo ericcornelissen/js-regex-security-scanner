@@ -82,7 +82,8 @@ license-check-npm: $(NODE_MODULES) ## Check npm dependency licenses
 lint: lint-ci lint-image lint-js lint-md lint-yml ## Lint the project
 
 lint-ci: $(TOOLING) ## Lint Continuous Integration configuration files
-	@actionlint
+	@SHELLCHECK_OPTS='--enable=avoid-nullary-conditions --enable=deprecate-which --enable=quote-safe-variables --enable=require-variable-braces' \
+		actionlint
 
 lint-image: $(TOOLING) ## Lint the Containerfile
 	@hadolint \

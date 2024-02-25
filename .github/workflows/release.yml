@@ -49,7 +49,7 @@ jobs:
       - name: Bump version
         env:
           UPDATE_TYPE: ${{ github.event.inputs.update_type }}
-        run: node scripts/bump-version.js "$UPDATE_TYPE"
+        run: node scripts/bump-version.js "${UPDATE_TYPE}"
       - name: Update the changelog
         run: node scripts/bump-changelog.js
       - name: Create Pull Request
