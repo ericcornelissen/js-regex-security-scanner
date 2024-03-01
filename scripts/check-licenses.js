@@ -95,14 +95,14 @@ const applyException = (artifact) => {
 const corrections = [
 	{
 		name: "busybox",
-		foundBy: "binary-cataloger",
+		foundBy: "binary-classifier-cataloger",
 		licenses: ["GPL-2.0-only"],
 		licenseUrl: "https://busybox.net/license.html",
 		reason: "license not detected by Syft",
 	},
 	{
 		name: "node",
-		foundBy: "binary-cataloger",
+		foundBy: "binary-classifier-cataloger",
 		licenses: ["MIT"],
 		licenseUrl: "https://github.com/nodejs/node#license",
 		reason: "license not detected by Syft",
