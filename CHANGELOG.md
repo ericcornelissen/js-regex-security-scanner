@@ -13,6 +13,7 @@ Versioning].
 - (`5989b6d`) Bump ESLint from `8.56.0` to `8.57.0`.
 - (`17ff8d6`) Bump `eslint-plugin-regexp` from `2.1.2` to `2.3.0`.
 - (`f001305`) Bump `@typescript-eslint/parser` from `7.0.1` to `7.1.0`.
+- (`27987f6`) Bump `@typescript-eslint/parser` from `7.1.0` to `7.2.0`.
 
 ## [0.4.18] - 2024-02-17
 
