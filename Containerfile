@@ -26,7 +26,7 @@ RUN mkdir /home/node/js-re-scan
 WORKDIR /home/node/js-re-scan
 
 COPY --chown=node:node package.json package-lock.json ./
-RUN npm install \
+RUN npm clean-install \
 	--omit=dev \
 	--no-audit \
 	--no-fund \
