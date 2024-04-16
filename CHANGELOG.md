@@ -17,6 +17,7 @@ Versioning].
 - (`fb57391`) Bump `@typescript-eslint/parser` from `7.2.0` to `7.5.0`.
 - (`e81c070`) Bump Node.js runtime from `20.11.1` to `20.12.0`.
 - (`55a49ed`) Bump Node.js runtime from `20.12.0` to `20.12.1`.
+- (`8d03533`) Bump Node.js runtime from `20.12.1` to `20.12.2`.
 
 ## [0.4.18] - 2024-02-17
 
