@@ -14,7 +14,7 @@
   "devDependencies": {
     "ava": "6.1.2",
     "licensee": "10.0.0",
-    "markdownlint-cli": "0.39.0",
+    "markdownlint-cli": "0.40.0",
     "prettier": "3.2.5"
   }
 }
