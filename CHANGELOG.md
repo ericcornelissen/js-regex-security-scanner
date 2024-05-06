@@ -19,6 +19,7 @@ Versioning].
 - (`e81c070`) Bump Node.js runtime from `20.11.1` to `20.12.0`.
 - (`55a49ed`) Bump Node.js runtime from `20.12.0` to `20.12.1`.
 - (`8d03533`) Bump Node.js runtime from `20.12.1` to `20.12.2`.
+- (`dda546e`) Bump Node.js runtime from `20.12.2` to `22.1.0`.
 
 ## [0.4.18] - 2024-02-17
 
