@@ -10,6 +10,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.19] - 2024-05-06
+
 - (`5989b6d`) Bump ESLint from `8.56.0` to `8.57.0`.
 - (`17ff8d6`) Bump `eslint-plugin-regexp` from `2.1.2` to `2.3.0`.
 - (`f001305`) Bump `@typescript-eslint/parser` from `7.0.1` to `7.1.0`.
