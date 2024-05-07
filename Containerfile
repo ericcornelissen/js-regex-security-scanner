@@ -1,4 +1,4 @@
-# Copyright 2023 Eric Cornelissen
+# Copyright 2024 Eric Cornelissen
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM docker.io/node:20.12.2-alpine3.19
+FROM docker.io/node:22.1.0-alpine3.19
 
 LABEL name="js-regex-security-scanner" \
 	description="A static analyzer to scan JavaScript code for problematic regular expressions." \
-	version="0.4.18" \
+	version="0.4.19" \
 	license="Apache-2.0"
 
 ENV NODE_ENV=production
