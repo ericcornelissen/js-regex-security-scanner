@@ -10,7 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`97aa650`) Bump `eslint-plugin-markdown` from `4.0.1` to `5.0.0`.
 
 ## [0.4.19] - 2024-05-06
 
