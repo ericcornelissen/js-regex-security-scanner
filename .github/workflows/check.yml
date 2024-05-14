@@ -16,7 +16,7 @@ jobs:
       - build
   build:
     name: Build with ${{ matrix.engine }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -46,7 +46,7 @@ jobs:
         run: make build "ENGINE=${ENGINE}"
   licenses:
     name: Licenses
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs:
       - build
     steps:
@@ -90,7 +90,7 @@ jobs:
         run: make license-check-npm
   lint:
     name: Lint
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@a4aa98b93cab29d9b1101a6143fb8bce00e2eac4 # v2.7.1
@@ -137,7 +137,7 @@ jobs:
         run: make lint-yml
   test:
     name: Test with ${{ matrix.engine }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs:
       - build
     strategy:
