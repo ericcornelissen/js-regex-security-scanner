@@ -13,6 +13,7 @@ Versioning].
 - (`97aa650`) Bump `eslint-plugin-markdown` from `4.0.1` to `5.0.0`.
 - (`4aa5659`) Bump `eslint-plugin-regexp` from `2.3.0` to `2.6.0`.
 - (`66347f4`) Bump `@typescript-eslint/parser` from `7.7.1` to `7.10.0`.
+- (`323be03`) Bump Alpine from `3.19` to `3.20`.
 - (`7adf7c5`) Bump Node.js runtime from `22.1.0` to `22.2.0`.
 
 ## [0.4.19] - 2024-05-06
