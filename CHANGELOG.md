@@ -10,6 +10,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.20] - 2024-06-09
+
 - (`97aa650`) Bump `eslint-plugin-markdown` from `4.0.1` to `5.0.0`.
 - (`4aa5659`) Bump `eslint-plugin-regexp` from `2.3.0` to `2.6.0`.
 - (`66347f4`) Bump `@typescript-eslint/parser` from `7.7.1` to `7.10.0`.
