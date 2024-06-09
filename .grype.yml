@@ -6,17 +6,11 @@ file: vulns.json
 fail-on-severity: low
 
 ignore:
-  # Ignore because _printf_ isn't used.
-  - vulnerability: CVE-2023-42363
-
   # Ignore because _awk_ isn't used.
   - vulnerability: CVE-2023-42364
 
   # Ignore because _awk_ isn't used.
   - vulnerability: CVE-2023-42365
-
-  # Ignore because _awk_ isn't used.
-  - vulnerability: CVE-2023-42366
 
   # Ignore all npm vulnerabilities. This project relies on `npm audit` instead.
   - package:
