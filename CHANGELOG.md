@@ -10,7 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`6a7c553`) Bump transitive dependency braces from `3.0.2` to `3.0.3`.
 
 ## [0.4.20] - 2024-06-09
 
