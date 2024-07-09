@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM docker.io/node:22.4.0-alpine3.20
+FROM docker.io/node:22.4.1-alpine3.20
 
 LABEL name="js-regex-security-scanner" \
 	description="A static analyzer to scan JavaScript code for problematic regular expressions." \
