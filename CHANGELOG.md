@@ -10,7 +10,8 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`005e344`) Bump Node.js runtime from `22.3.0` to `22.4.0`.
+- (`3ade314`) Bump Node.js runtime from `22.4.0` to `22.4.1`.
 
 ## [0.4.21] - 2024-06-25
 
