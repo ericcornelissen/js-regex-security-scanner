@@ -120,7 +120,7 @@ If you want you can build the scanner from scratch. From the root of this
 project run something like:
 
 ```shell
-docker build --file Containerfile --tag js-regex-scanner .
+docker build --file Containerfile .
 ```
 
 Or use the convenience [Make] target:
