@@ -9,6 +9,10 @@ ignore:
   # Ignore because no networking occurs at runtime.
   - vulnerability: CVE-2024-5535
 
+  # Ignore because the permission model is not used.
+  - vulnerability: CVE-2024-22018
+  - vulnerability: CVE-2024-22020
+
   # Ignore all npm vulnerabilities. This project relies on `npm audit` instead.
   - package:
       type: npm
