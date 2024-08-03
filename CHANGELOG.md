@@ -10,6 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
+- (`7142dd2`) Bump `@typescript-eslint/parser` from `7.14.1` to `8.0.0`.
 - (`005e344`) Bump Node.js runtime from `22.3.0` to `22.4.0`.
 - (`3ade314`) Bump Node.js runtime from `22.4.0` to `22.4.1`.
 - (`9a8f130`) Bump Node.js runtime from `22.4.1` to `22.5.1`.
