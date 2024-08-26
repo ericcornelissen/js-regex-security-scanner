@@ -15,6 +15,7 @@ Versioning].
 - (`3ade314`) Bump Node.js runtime from `22.4.0` to `22.4.1`.
 - (`9a8f130`) Bump Node.js runtime from `22.4.1` to `22.5.1`.
 - (`f60dc81`) Bump Node.js runtime from `22.5.1` to `22.6.0`.
+- (`c60fc9e`) Bump Node.js runtime from `22.6.0` to `22.7.0`.
 
 ## [0.4.21] - 2024-06-25
 
