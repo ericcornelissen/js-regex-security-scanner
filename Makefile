@@ -55,7 +55,8 @@ format-js: $(NODE_MODULES) ## Format JavaScript files
 		--use-tabs \
 		\
 		./scripts/*.js \
-		./tests/*.js
+		./tests/*.js \
+		./eslint.config.js
 
 .PHONY: help
 help: ## Show this help message
@@ -100,7 +101,8 @@ lint-js: $(NODE_MODULES) ## Lint JavaScript files
 		--use-tabs \
 		\
 		./scripts/*.js \
-		./tests/*.js
+		./tests/*.js \
+		./eslint.config.js
 
 lint-md: $(NODE_MODULES) ## Lint MarkDown files
 	@npx markdownlint \
@@ -154,7 +156,7 @@ endif
 	@touch $(TOOLING)
 $(IMAGES_DIR): | $(TEMP_DIR)
 	@mkdir -p $(IMAGES_DIR)
-$(IMAGES_DIR)/%: .eslintrc.yml Containerfile package*.json | $(IMAGES_DIR)
+$(IMAGES_DIR)/%: Containerfile eslint.config.js package*.json | $(IMAGES_DIR)
 	@$(ENGINE) build \
 		--file Containerfile \
 		--tag $(IMAGE_NAME):$(TAG) \

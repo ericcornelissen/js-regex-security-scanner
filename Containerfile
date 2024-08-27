@@ -32,14 +32,16 @@ RUN npm clean-install \
 	--no-fund \
 	--no-update-notifier
 
-COPY --chown=node:node ./.eslintrc.yml ./
+COPY --chown=node:node ./eslint.config.js ./
+
+WORKDIR /project
 
 ENTRYPOINT [ \
-	"./node_modules/.bin/eslint", \
+	"/home/node/js-re-scan/node_modules/.bin/eslint", \
 	\
 	# This option avoids unexpected errors if the project being scanned includes
 	# an ESLint configuration file.
-	"--no-eslintrc", \
+	"--no-config-lookup", \
 	\
 	# This option avoids errors due to ignore directives for rules not known to
 	# the ESLint setup in this project.
@@ -48,13 +50,9 @@ ENTRYPOINT [ \
 	# Explicitly specify a path to the local configuration file so it can't be
 	# missed.
 	"--config", \
-	"./.eslintrc.yml", \
-	\
-	# Specify the extensions of files that should be scanned.
-	"--ext", \
-	".js,.jsx,.cjs,.mjs,.ts,.cts,.mts,.md", \
+	"/home/node/js-re-scan/eslint.config.js", \
 	\
 	# The folder that should be scanned. This is the folder that users should
 	# mount their project to.
-	"/project" \
+	"." \
 ]
