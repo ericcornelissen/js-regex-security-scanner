@@ -108,7 +108,7 @@ This scanner is in essence running [ESLint] with a specific configuration in a
 container image. As a first principle, all changes should be made by adjusting
 this setup. This means the two most important files are:
 
-- `.eslintrc.yml`: The [ESLint] configuration file.
+- `eslint.config.js`: The [ESLint] configuration file.
 - `Containerfile`: The file telling [Docker] (or [Podman]) how to make the
   scanner image.
 

@@ -10,7 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`4054fca`) Bump ESLint from`8.57.0` to `9.9.1`.
 
 ## [0.4.22] - 2024-08-27
 
