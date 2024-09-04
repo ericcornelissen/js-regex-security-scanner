@@ -10,7 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`a9756a0`) Bump Node.js runtime from `22.7.0` to `22.8.0`.
 
 ## [0.4.23] - 2024-08-28
 
