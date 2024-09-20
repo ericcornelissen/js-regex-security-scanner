@@ -10,6 +10,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.24] - 2024-09-20
+
 - (`5104754`) Bump ESLint from `9.9.1` to `9.10.0`
 - (`a9756a0`) Bump Node.js runtime from `22.7.0` to `22.8.0`.
 - (`b542e3c`) Bump Node.js runtime from `22.8.0` to `22.9.0`.
