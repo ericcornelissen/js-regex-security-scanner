@@ -19,30 +19,6 @@ jobs:
       matrix:
         ref: ${{ fromJSON(inputs.refs) }}
     steps:
-      - name: Harden Runner
-        uses: step-security/harden-runner@0d381219ddf674d61a7572ddd19d7941e271515c # v2.9.0
-        with:
-          disable-sudo: true
-          egress-policy: block
-          allowed-endpoints: >
-            api.github.com:443
-            artifactcache.actions.githubusercontent.com:443
-            auth.docker.io:443
-            files.pythonhosted.org:443
-            fulcio.sigstore.dev:443
-            github.com:443
-            gitlab.com:443
-            grype.anchore.io:443
-            nodejs.org:443
-            objects.githubusercontent.com:443
-            production.cloudflare.docker.com:443
-            pypi.org:443
-            registry-1.docker.io:443
-            registry.npmjs.org:443
-            rekor.sigstore.dev:443
-            sigstore-tuf-root.storage.googleapis.com:443
-            toolbox-data.anchore.io:443
-            tuf-repo-cdn.sigstore.dev:443
       - name: Checkout repository
         uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
         id: checkout
@@ -69,19 +45,6 @@ jobs:
       matrix:
         ref: ${{ fromJSON(inputs.refs) }}
     steps:
-      - name: Harden Runner
-        uses: step-security/harden-runner@0d381219ddf674d61a7572ddd19d7941e271515c # v2.9.0
-        with:
-          disable-sudo: true
-          egress-policy: block
-          allowed-endpoints: >
-            api.github.com:443
-            artifactcache.actions.githubusercontent.com:443
-            ghcr.io:443
-            github.com:443
-            nodejs.org:443
-            objects.githubusercontent.com:443
-            registry.npmjs.org:443
       - name: Checkout repository
         uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
         with:
@@ -101,17 +64,6 @@ jobs:
     name: Secrets
     runs-on: ubuntu-24.04
     steps:
-      - name: Harden Runner
-        uses: step-security/harden-runner@0d381219ddf674d61a7572ddd19d7941e271515c # v2.9.0
-        with:
-          disable-sudo: true
-          egress-policy: block
-          allowed-endpoints: >
-            actions-results-receiver-production.githubapp.com:80
-            api.github.com:443
-            artifactcache.actions.githubusercontent.com:443
-            github.com:443
-            objects.githubusercontent.com:443
       - name: Checkout Code
         uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
         with:
