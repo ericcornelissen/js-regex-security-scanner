@@ -46,7 +46,7 @@ jobs:
         run: make build "ENGINE=${ENGINE}"
   licenses:
     name: Licenses
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs:
       - build
     steps:
@@ -90,7 +90,7 @@ jobs:
         run: make license-check-npm
   lint:
     name: Lint
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@0d381219ddf674d61a7572ddd19d7941e271515c # v2.9.0
