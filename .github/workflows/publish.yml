@@ -9,7 +9,7 @@ permissions: read-all
 jobs:
   branch:
     name: Branch
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     permissions:
       contents: write # To push a branch
     needs:
@@ -42,7 +42,7 @@ jobs:
         run: git push origin "HEAD:${MAJOR_VERSION}"
   docker-hub:
     name: Docker Hub
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     permissions:
       id-token: write # To perform keyless signing with cosign
     environment:
@@ -120,7 +120,7 @@ jobs:
             "docker.io/ericornelissen/js-re-scan@${IMAGE_DIGEST}"
   validate:
     name: Validate
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@0d381219ddf674d61a7572ddd19d7941e271515c # v2.9.0
