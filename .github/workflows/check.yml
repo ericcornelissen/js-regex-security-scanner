@@ -16,7 +16,7 @@ jobs:
       - build
   build:
     name: Build with ${{ matrix.engine }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -137,7 +137,7 @@ jobs:
         run: make lint-yml
   test:
     name: Test with ${{ matrix.engine }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs:
       - build
     strategy:
