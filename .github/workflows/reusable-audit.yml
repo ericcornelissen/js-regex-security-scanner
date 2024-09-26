@@ -44,16 +44,12 @@ jobs:
             toolbox-data.anchore.io:443
             tuf-repo-cdn.sigstore.dev:443
       - name: Checkout repository
-        uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
+        uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
+        id: checkout
         with:
           ref: ${{ matrix.ref }}
       - name: Install tooling
         uses: asdf-vm/actions/install@4f8f7939dd917fc656bb7c3575969a5988c28364 # v3.0.0
-      - name: Get git context
-        id: git
-        run: |
-          COMMIT_SHA="$(git rev-parse HEAD)"
-          echo "commit-sha=${COMMIT_SHA}" >> "${GITHUB_OUTPUT}"
       - name: Audit dependencies in container image
         run: make audit-image
       - name: Upload SBOM and vulnerability scan
@@ -61,7 +57,7 @@ jobs:
         if: ${{ failure() || success() }}
         with:
           if-no-files-found: error
-          name: container-scan-${{ steps.git.outputs.commit-sha }}
+          name: container-scan-${{ steps.checkout.outputs.commit }}
           path: |
             sbom-syft.json
             vulns.json
@@ -87,7 +83,7 @@ jobs:
             objects.githubusercontent.com:443
             registry.npmjs.org:443
       - name: Checkout repository
-        uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
+        uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
         with:
           ref: ${{ matrix.ref }}
       - name: Install Node.js
@@ -117,7 +113,7 @@ jobs:
             github.com:443
             objects.githubusercontent.com:443
       - name: Checkout Code
-        uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
+        uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
         with:
           fetch-depth: 0 # To allow for historic scans
       - name: Scan for secrets
