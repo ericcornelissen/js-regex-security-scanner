@@ -69,9 +69,6 @@ jobs:
         with:
           fetch-depth: 0 # To allow for historic scans
       - name: Scan for secrets
-        uses: gitleaks/gitleaks-action@cb7149a9b57195b609c63e8518d2c6056677d2d0 # v2.3.3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITLEAKS_ENABLE_COMMENTS: false
-          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: false
-          GITLEAKS_ENABLE_SUMMARY: true
+        uses: trufflesecurity/trufflehog@0328a19a9d3877c9f04d0dbee5717aabff5b575d # v3.82.6
+        with:
+          extra_args: --only-verified
