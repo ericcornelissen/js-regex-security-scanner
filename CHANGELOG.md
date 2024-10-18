@@ -10,6 +10,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.25] - 2024-10-18
+
 - (`a5193e0`) Bump ESLint from `9.10.0` to `9.11.0`.
 - (`460e377`) Bump ESLint from `9.11.0` to `9.11.1`.
 - (`e70cca7`) Bump ESLint from `9.11.1` to `9.12.0`.
