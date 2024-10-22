@@ -182,7 +182,7 @@ This scanner runs [ESLint] with the [eslint-plugin-regexp] plugin to find and
 report on regular expressions that violate rules with security implications.
 
 TypeScript support is provided by [@typescript-eslint/parser], MarkDown support
-is provided by [eslint-plugin-markdown].
+is provided by [@eslint/markdown].
 
 ## License
 
@@ -194,11 +194,11 @@ full license text. The documentation text is licensed under [CC BY-SA 4.0].
 Please [open an issue] if you found a mistake or if you have a suggestion for
 how to improve the documentation.
 
+[@eslint/markdown]: https://www.npmjs.com/package/@eslint/markdown
 [@typescript-eslint/parser]: https://www.npmjs.com/package/@typescript-eslint/parser
 [cc by-sa 4.0]: https://creativecommons.org/licenses/by-sa/4.0/
 [docker]: https://www.docker.com/
 [eslint]: https://eslint.org/
-[eslint-plugin-markdown]: https://www.npmjs.com/package/eslint-plugin-markdown
 [eslint-plugin-regexp]: https://github.com/ota-meshi/eslint-plugin-regexp
 [license]: ./LICENSE
 [make]: https://www.gnu.org/software/make/
