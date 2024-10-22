@@ -11,6 +11,7 @@ Versioning].
 ## [Unreleased]
 
 - (`5da5a14`) Bump ESLint from `9.12.0` to `9.13.0`.
+- (`1f41d92`) Replace `eslint-plugin-markdown` by `@eslint/markdown`.
 
 ## [0.4.25] - 2024-10-18
 

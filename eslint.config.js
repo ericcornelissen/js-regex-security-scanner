@@ -2,9 +2,11 @@
 
 import tsparser from "@typescript-eslint/parser";
 import regexp from "eslint-plugin-regexp";
-import markdown from "eslint-plugin-markdown";
+import markdown from "@eslint/markdown";
 
 export default [
+	...markdown.configs.processor,
+
 	{
 		languageOptions: {
 			parserOptions: {
@@ -37,13 +39,6 @@ export default [
 				},
 			],
 		},
-	},
-	{
-		files: ["**/*.md"],
-		plugins: {
-			markdown,
-		},
-		processor: "markdown/markdown",
 	},
 	{
 		files: ["**/*.{,c,m}ts", "**/*.md/*.{,c,m}ts"],
