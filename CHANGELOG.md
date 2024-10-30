@@ -10,6 +10,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.26] - 2024-10-30
+
 - (`5da5a14`) Bump ESLint from `9.12.0` to `9.13.0`.
 - (`1f41d92`) Replace `eslint-plugin-markdown` by `@eslint/markdown`.
 - (`8292063`) Bump Node.js runtime from `22.9.0` to `22.10.0`.
