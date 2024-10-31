@@ -69,6 +69,6 @@ jobs:
         with:
           fetch-depth: 0 # To allow for historic scans
       - name: Scan for secrets
-        uses: trufflesecurity/trufflehog@0328a19a9d3877c9f04d0dbee5717aabff5b575d # v3.82.6
+        uses: trufflesecurity/trufflehog@4d355d414e2d6c674bcebfe40cb648e22f6457ae # v3.83.1
         with:
           extra_args: --only-verified
