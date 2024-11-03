@@ -23,6 +23,7 @@ jobs:
         uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
         id: checkout
         with:
+          persist-credentials: false
           ref: ${{ matrix.ref }}
       - name: Install tooling
         uses: asdf-vm/actions/install@4f8f7939dd917fc656bb7c3575969a5988c28364 # v3.0.0
@@ -48,6 +49,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
         with:
+          persist-credentials: false
           ref: ${{ matrix.ref }}
       - name: Install Node.js
         uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
@@ -64,10 +66,11 @@ jobs:
     name: Secrets
     runs-on: ubuntu-24.04
     steps:
-      - name: Checkout Code
+      - name: Checkout repository
         uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
         with:
           fetch-depth: 0 # To allow for historic scans
+          persist-credentials: false
       - name: Scan for secrets
         uses: trufflesecurity/trufflehog@4d355d414e2d6c674bcebfe40cb648e22f6457ae # v3.83.1
         with:
