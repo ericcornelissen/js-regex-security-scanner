@@ -79,6 +79,10 @@ the automatic release process, follow these steps to release a new version
 1. Merge the Pull Request if the changes look OK and all continuous integration
    checks are passing.
 
+   > **NOTE:** At this point, the continuous delivery automation may kick in and
+   > complete the release process. If not, or only partially, continue following
+   > the remaining steps.
+
 1. Immediately after the Pull Request is merged, sync the `main` branch:
 
    ```shell
@@ -97,10 +101,6 @@ the automatic release process, follow these steps to release a new version
    ```shell
    git push origin v0.1.2
    ```
-
-   > **NOTE:** At this point, the continuous delivery automation may kick in and
-   > complete the release process. If not, or only partially, continue following
-   > the remaining steps.
 
 1. Update the `v0` branch to point to the same commit as the new tag:
 
