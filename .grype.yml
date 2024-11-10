@@ -6,6 +6,9 @@ file: vulns.json
 fail-on-severity: low
 
 ignore:
+  - vulnerability: CVE-2024-9143
+    vex-justification: vulnerable_code_not_in_execute_path
+
   # Ignore all npm vulnerabilities. This project relies on `npm audit` instead.
   - package:
       type: npm
