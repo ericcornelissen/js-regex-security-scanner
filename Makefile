@@ -20,7 +20,11 @@ VULN_FILE:=vulns.json
 default: help
 
 .PHONY: audit audit-image audit-npm
-audit: audit-image audit-npm ## Audit the project dependencies
+audit: audit-image audit-npm audit-deprecations ## Audit the project dependencies
+
+audit-deprecations: $(NODE_MODULES) ## Audit deprecation warnings
+	@npx depreman \
+		--errors-only
 
 audit-image: $(VULN_FILE) ## Audit the container image dependencies
 

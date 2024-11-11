@@ -288,9 +288,21 @@ To scan for vulnerabilities in Node.js dependencies, run:
 make audit-npm
 ```
 
+### Deprecation Warnings
+
+To check for deprecation warnings in all npm dependencies, run:
+
+```shell
+make audit-deprecations
+```
+
+This uses [depreman] to audit deprecation warnings, which allows for having
+exceptions defined in the `.ndmrc` file.
+
 [actionlint]: https://github.com/rhysd/actionlint
 [ava]: https://github.com/avajs/ava
 [bug report]: https://github.com/ericcornelissen/js-regex-security-scanner/issues/new?labels=bug
+[depreman]: https://github.com/ericcornelissen/depreman
 [docker]: https://www.docker.com/
 [editorconfig]: https://editorconfig.org/
 [eslint]: https://eslint.org/

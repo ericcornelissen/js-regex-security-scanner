@@ -15,5 +15,8 @@
       "zlib"
     ]
   },
+  "packages": {
+    "depreman": "0.3.2"
+  },
   "corrections": true
 }
