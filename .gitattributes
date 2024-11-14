@@ -1,5 +1,5 @@
 * text=auto
 
 # don't diff machine generated files
-*.snap -diff
+*.snapshot -diff
 package-lock.json -diff
