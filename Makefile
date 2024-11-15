@@ -127,15 +127,18 @@ sbom: $(SBOM_SPDX_FILE) $(SBOM_SYFT_FILE) ## Generate a Software Bill Of Materia
 .PHONY: test update-test-snapshots
 test: build $(NODE_MODULES) ## Run the tests
 	@CONTAINER_ENGINE=$(ENGINE) \
-		npx ava \
-		--timeout 20s \
-		tests/
+		node --test \
+		--test-timeout=20000 \
+		--experimental-test-snapshots \
+		'tests/*.test.js'
 
 update-test-snapshots: build $(NODE_MODULES) ## Update the test snapsthos
 	@CONTAINER_ENGINE=$(ENGINE) \
-		npx ava \
-		--update-snapshots \
-		tests/
+		node --test \
+		--test-timeout=20000 \
+		--experimental-test-snapshots \
+		--test-update-snapshots \
+		'tests/*.test.js'
 
 .PHONY: verify
 verify: build license-check lint test ## Verify project is in a good state

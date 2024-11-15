@@ -152,10 +152,9 @@ to run all linters or use the following commands to check specific file types:
 
 #### Testing
 
-This project is tested using "snapshot testing" with [AVA]. In short, this means
-that the scanner is run against known projects and the scanner's output is
-compared against a previous output of the scanner (the snapshot) for that same
-project.
+This project is tested using "snapshot testing". In short, this means the
+scanner is run against known projects and the scanner's output is compared
+against a previous output of the scanner (the snapshot) for that same project.
 
 ##### Running Tests
 
@@ -300,7 +299,6 @@ This uses [depreman] to audit deprecation warnings, which allows for having
 exceptions defined in the `.ndmrc` file.
 
 [actionlint]: https://github.com/rhysd/actionlint
-[ava]: https://github.com/avajs/ava
 [bug report]: https://github.com/ericcornelissen/js-regex-security-scanner/issues/new?labels=bug
 [depreman]: https://github.com/ericcornelissen/depreman
 [docker]: https://www.docker.com/
