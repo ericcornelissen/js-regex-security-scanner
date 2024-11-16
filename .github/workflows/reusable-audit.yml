@@ -30,9 +30,6 @@ jobs:
           cache: npm
           node-version-file: .nvmrc
       - name: Audit deprecation warnings
-        # TODO: remove upon the release of >0.4.26; deprecation warning auditing was
-        # not yet a part of the repo in v0.4.26.
-        if: ${{ !startsWith(matrix.ref, 'v') }}
         run: make audit-deprecations
   image:
     name: Image
