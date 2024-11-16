@@ -2,7 +2,7 @@
   "type": "module",
   "private": true,
   "engines": {
-    "node": ">=22.0.0",
+    "node": ">=18.20.5",
     "npm": ">=8.1.2"
   },
   "dependencies": {
