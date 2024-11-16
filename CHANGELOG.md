@@ -10,6 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
+- (`cc75c2f`) Bump ESLint from `9.14.0` to `9.15.0`.
 - (`c14581a`) Bump eslint-plugin-regexp from `2.6.0` to `2.7.0`.
 
 ## [0.4.27] - 2024-11-16
