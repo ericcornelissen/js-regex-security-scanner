@@ -13,6 +13,7 @@ Versioning].
 - (`003aa39`) Bump ESLint from `9.13.0` to `9.14.0`.
 - (`5b2f44d`) Bump transitive dependency `@eslint/plugin-kit` from `0.2.0` to
   `0.2.3`.
+- (`d3e8b02`) Bump transitive dependency cross-spawn from `7.0.3` to `7.0.5`.
 
 ## [0.4.26] - 2024-10-30
 
