@@ -16,7 +16,7 @@
     ]
   },
   "packages": {
-    "depreman": "0.3.2"
+    "depreman": "*"
   },
   "corrections": true
 }
