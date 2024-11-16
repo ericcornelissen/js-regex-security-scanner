@@ -10,7 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`c14581a`) Bump eslint-plugin-regexp from `2.6.0` to `2.7.0`.
 
 ## [0.4.27] - 2024-11-16
 
