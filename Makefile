@@ -121,6 +121,18 @@ lint-yml: $(TOOLING) ## Lint .yml files
 		-c .yamllint.yml \
 		.
 
+.PHONY: reproducible-build
+reproducible-build: build ## Check if the container is reproducible
+	@TAG=a make build
+	@TAG=b make build
+	@go run github.com/reproducible-containers/diffoci/cmd/diffoci@v0.1.5 diff \
+		--semantic \
+		docker://$(IMAGE_NAME):a \
+		docker://$(IMAGE_NAME):b
+	@$(ENGINE) rmi --force \
+		$(IMAGE_NAME):a \
+		$(IMAGE_NAME):b
+
 .PHONY: sbom
 sbom: $(SBOM_SPDX_FILE) $(SBOM_SYFT_FILE) ## Generate a Software Bill Of Materials (SBOM)
 
@@ -132,7 +144,7 @@ test: build $(NODE_MODULES) ## Run the tests
 		--experimental-test-snapshots \
 		'tests/*.test.js'
 
-update-test-snapshots: build $(NODE_MODULES) ## Update the test snapsthos
+update-test-snapshots: build $(NODE_MODULES) ## Update the test snapshots
 	@CONTAINER_ENGINE=$(ENGINE) \
 		node --test \
 		--test-timeout=20000 \
