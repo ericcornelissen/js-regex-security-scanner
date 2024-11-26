@@ -51,7 +51,7 @@ jobs:
           result-encoding: string
           script: |
             const version = `${process.env.VERSION}`
-            const major = version.replace(/\.\d\.\d$/, "")
+            const major = version.replace(/\.\d+\.\d+$/, "")
             return major
       - name: Create release tag
         env:
