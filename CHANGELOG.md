@@ -10,7 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`653216a`) Bump ESLint from `9.15.0` to `9.16.0`.
 
 ## [0.4.29] - 2024-11-26
 
