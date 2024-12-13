@@ -24,7 +24,8 @@ audit: audit-image audit-npm audit-deprecations ## Audit the project dependencie
 
 audit-deprecations: $(NODE_MODULES) ## Audit deprecation warnings
 	@npx depreman \
-		--errors-only
+		--errors-only \
+		--report-unused
 
 audit-image: $(VULN_FILE) ## Audit the container image dependencies
 
