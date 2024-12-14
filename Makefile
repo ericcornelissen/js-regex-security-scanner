@@ -124,8 +124,8 @@ lint-yml: $(TOOLING) ## Lint .yml files
 
 .PHONY: reproducible-build
 reproducible-build: build ## Check if the container is reproducible
-	@TAG=a make build
-	@TAG=b make build
+	@TAG=a ENGINE_OPTIONS=--no-cache make build
+	@TAG=b ENGINE_OPTIONS=--no-cache make build
 	@go run github.com/reproducible-containers/diffoci/cmd/diffoci@v0.1.5 diff \
 		--semantic \
 		docker://$(IMAGE_NAME):a \
@@ -178,6 +178,7 @@ $(IMAGES_DIR): | $(TEMP_DIR)
 	@mkdir -p $(IMAGES_DIR)
 $(IMAGES_DIR)/%: Containerfile eslint.config.js package*.json | $(IMAGES_DIR)
 	@$(ENGINE) build \
+		$(ENGINE_OPTIONS) \
 		--file Containerfile \
 		--tag $(IMAGE_NAME):$(TAG) \
 		.
