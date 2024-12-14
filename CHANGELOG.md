@@ -10,8 +10,18 @@ Versioning].
 
 ## [Unreleased]
 
+- (`653216a`) Bump ESLint from `9.15.0` to `9.16.0`.
+- (`65ea189`) Bump Node.js runtime from `22.10.0` to `22.12.0`.
+
+## [0.4.29] - 2024-11-26
+
+- (`1d7b050`) Bump `@typescript-eslint/parser` from `8.15.0` to `8.16.0`.
+
+## [0.4.28] - 2024-11-19
+
 - (`cc75c2f`) Bump ESLint from `9.14.0` to `9.15.0`.
 - (`c14581a`) Bump eslint-plugin-regexp from `2.6.0` to `2.7.0`.
+- (`b0849fd`) Bump `@typescript-eslint/parser` from `8.10.0` to `8.15.0`.
 
 ## [0.4.27] - 2024-11-16
 
