@@ -85,6 +85,20 @@ jobs:
       - name: Lint YAML
         if: ${{ failure() || success() }}
         run: make lint-yml
+  reproducible-container:
+    name: Reproducible container
+    runs-on: ubuntu-22.04
+    needs:
+      - build
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
+      - name: Install Go
+        uses: actions/setup-go@41dfa10bad2bb2ae585af6ee5bb4d7d973ad74ed # v5.1.0
+        with:
+          go-version: 1.23
+      - name: Check reproducibility
+        run: make reproducible-build
   test:
     name: Test with ${{ matrix.engine }}
     runs-on: ubuntu-24.04

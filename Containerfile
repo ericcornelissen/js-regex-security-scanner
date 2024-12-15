@@ -30,7 +30,9 @@ RUN npm clean-install \
 	--omit=dev \
 	--no-audit \
 	--no-fund \
-	--no-update-notifier
+	--no-update-notifier \
+	&& \
+	rm -rf /home/node/.npm/_cacache /home/node/.npm/_logs
 
 COPY --chown=node:node ./eslint.config.js ./
 
