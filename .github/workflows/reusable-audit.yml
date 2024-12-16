@@ -48,7 +48,7 @@ jobs:
       - name: Install tooling
         uses: asdf-vm/actions/install@4f8f7939dd917fc656bb7c3575969a5988c28364 # v3.0.0
       - name: Audit dependencies in container image
-        run: make audit-image
+        run: make audit-vulnerabilities-image
       - name: Upload SBOM and vulnerability scan
         uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
         if: ${{ failure() || success() }}
@@ -78,7 +78,7 @@ jobs:
           node-version-file: .nvmrc
       - name: Audit all npm dependencies
         if: ${{ !startsWith(matrix.ref, 'v') }}
-        run: make audit-npm
+        run: make audit-vulnerabilities-npm
       - name: Audit production npm dependencies
         if: ${{ startsWith(matrix.ref, 'v') }}
-        run: make audit-npm ARGS="--omit dev"
+        run: make audit-vulnerabilities-npm ARGS="--omit dev"

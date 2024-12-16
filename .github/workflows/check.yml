@@ -14,6 +14,34 @@ jobs:
     uses: ./.github/workflows/reusable-audit.yml
     needs:
       - build
+  check:
+    name: ${{ matrix.what }}
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        what:
+          - ci
+          - formatting
+          - image
+          - md
+          - yml
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
+        with:
+          persist-credentials: false
+      - name: Install Node.js
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          cache: npm
+          node-version-file: .nvmrc
+      - name: Install tooling
+        uses: asdf-vm/actions/install@4f8f7939dd917fc656bb7c3575969a5988c28364 # v3.0.0
+      - name: Check
+        env:
+          WHAT: ${{ matrix.what }}
+        run: make "check-${WHAT}"
   build:
     name: Build with ${{ matrix.engine }}
     runs-on: ubuntu-24.04
@@ -51,40 +79,10 @@ jobs:
         uses: asdf-vm/actions/install@4f8f7939dd917fc656bb7c3575969a5988c28364 # v3.0.0
       - name: Check container image licenses
         if: ${{ failure() || success() }}
-        run: make license-check-image
+        run: make check-licenses-image
       - name: Check npm licenses
         if: ${{ failure() || success() }}
-        run: make license-check-npm
-  lint:
-    name: Lint
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
-        with:
-          persist-credentials: false
-      - name: Install Node.js
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
-        with:
-          cache: npm
-          node-version-file: .nvmrc
-      - name: Install tooling
-        uses: asdf-vm/actions/install@4f8f7939dd917fc656bb7c3575969a5988c28364 # v3.0.0
-      - name: Lint CI
-        if: ${{ failure() || success() }}
-        run: make lint-ci
-      - name: Lint Containerfile
-        if: ${{ failure() || success() }}
-        run: make lint-image
-      - name: Lint JavaScript
-        if: ${{ failure() || success() }}
-        run: make lint-js
-      - name: Lint MarkDown
-        if: ${{ failure() || success() }}
-        run: make lint-md
-      - name: Lint YAML
-        if: ${{ failure() || success() }}
-        run: make lint-yml
+        run: make check-licenses-npm
   test:
     name: Test with ${{ matrix.engine }}
     runs-on: ubuntu-24.04

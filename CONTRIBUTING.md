@@ -126,29 +126,25 @@ Or to build using Podman, run:
 make build ENGINE=podman
 ```
 
-#### Formatting and Linting
+#### Formatting
 
-This project uses formatters to format source code. Run:
+This project uses formatters to automatically format source code. Run the
+command `make format` to format the source code, or `make check-formatting` to
+check if your changes follow the expected format.
 
-```shell
-make format
-```
+#### Analyzing
 
-This project also uses linters to catch mistakes and enforce style. Run:
+On top of that, the project uses static analysis tools to catch mistakes. Use
+`make check` to run all checks, or use one of the following commands to check
+your changes if applicable:
 
-```shell
-make lint
-```
-
-to run all linters or use the following commands to check specific file types:
-
-| File type          | Command           | Linter(s)                   |
-| :----------------- | :---------------- | :-------------------------- |
-| CI workflows       | `make lint-ci`    | [actionlint] & [ShellCheck] |
-| `Containerfile`    | `make lint-image` | [hadolint]                  |
-| JavaScript (`.js`) | `make lint-js`    | [Prettier]                  |
-| MarkDown (`.md`)   | `make lint-md`    | [markdownlint]              |
-| YAML (`.yml`)      | `make lint-yml`   | [yamllint]                  |
+| What            | Command                 |
+| :-------------- | :---------------------- |
+| CI workflows    | `make check-ci`         |
+| `Containerfile` | `make check-image`      |
+| Licenses        | `make check-licenses`   |
+| MarkDown        | `make check-md`         |
+| YAML            | `make check-yml`        |
 
 #### Testing
 
@@ -228,34 +224,6 @@ arguments found in this file.
 
 ## Auditing
 
-### License Compliance
-
-To verify that all dependency licenses are in compliance with the defined
-policy, run the following command:
-
-```shell
-make license-check
-```
-
-The policy is defined in `.licensee.json`. The table below explains why the
-license is allowed for this project. Note that licenses are added to the policy
-only when observed in a dependency of the project.
-
-|            License | Reason        |
-| -----------------: | :-------------|
-|             `0BSD` | Permissive    |
-|       `Apache-2.0` | Permissive    |
-|    `BlueOak-1.0.0` | Permissive    |
-|     `BSD-2-Clause` | Permissive    |
-|     `BSD-3-Clause` | Permissive    |
-|          `CC0-1.0` | Public domain |
-|        `CC-BY-3.0` | Public domain |
-|              `ISC` | Permissive    |
-|              `MIT` | Permissive    |
-|          `openssl` | Permissive    |
-|       `Python-2.0` | Permissive    |
-|             `zlib` | Permissive    |
-
 ### SBOM
 
 To generate a Software Bill Of Materials (SBOM) at `./sbom*.json`, run:
@@ -273,7 +241,7 @@ This uses [Syft] to generate an SBOM for the container image.
 To get a vulnerability report for the container image at `./vulns.json`, run:
 
 ```shell
-make audit-image
+make audit-vulnerabilities-image
 ```
 
 This uses [Grype] to determine vulnerabilities based on the SBOM (excluding
@@ -284,7 +252,7 @@ npm).
 To scan for vulnerabilities in Node.js dependencies, run:
 
 ```shell
-make audit-npm
+make audit-vulnerabilities-npm
 ```
 
 ### Deprecation Warnings
@@ -309,12 +277,10 @@ exceptions defined in the `.ndmrc` file.
 [grype]: https://github.com/anchore/grype
 [hadolint]: https://github.com/hadolint/hadolint
 [make]: https://www.gnu.org/software/make/
-[markdownlint]: https://github.com/DavidAnson/markdownlint
 [node.js]: https://nodejs.org/en/
 [npm]: https://www.npmjs.com/
 [open issues]: https://github.com/ericcornelissen/js-regex-security-scanner/issues
 [podman]: https://podman.io/
-[prettier]: https://prettier.io/
 [security policy]: ./SECURITY.md
 [shellcheck]: https://github.com/koalaman/shellcheck
 [submodule]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
