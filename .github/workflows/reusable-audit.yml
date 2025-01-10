@@ -64,7 +64,7 @@ jobs:
         if: ${{ startsWith(matrix.ref, 'v') }}
         run: make audit-image
       - name: Upload SBOM and vulnerability scan
-        uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4.5.0
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
         if: ${{ failure() || success() }}
         with:
           if-no-files-found: error
