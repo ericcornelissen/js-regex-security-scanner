@@ -13,6 +13,7 @@ Versioning].
 - (`ef29b70`) Bump Alpine from `3.20` to `3.21`.
 - (`653216a`) Bump ESLint from `9.15.0` to `9.16.0`.
 - (`3066fe2`) Bump ESLint from `9.16.0` to `9.17.0`.
+- (`07844c2`) Bump ESLint from `9.17.0` to `9.18.0`.
 - (`65ea189`) Bump Node.js runtime from `22.10.0` to `22.12.0`.
 - (`48d3bfd`) Bump `@typescript-eslint/parser` from `8.16.0` to `8.18.1`.
 
