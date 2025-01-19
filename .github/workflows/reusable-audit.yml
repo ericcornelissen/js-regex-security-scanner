@@ -58,11 +58,7 @@ jobs:
           GRYPERC: ${{ vars.GRYPERC }}
         run: echo "${GRYPERC}" | tee .grype.yml
       - name: Audit dependencies in container image
-        if: ${{ !startsWith(matrix.ref, 'v') }}
         run: make audit-vulnerabilities-image
-      - name: Audit dependencies in container image
-        if: ${{ startsWith(matrix.ref, 'v') }}
-        run: make audit-image
       - name: Upload SBOM and vulnerability scan
         uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4.5.0
         if: ${{ failure() || success() }}
@@ -95,4 +91,4 @@ jobs:
         run: make audit-vulnerabilities-npm
       - name: Audit production npm dependencies
         if: ${{ startsWith(matrix.ref, 'v') }}
-        run: make audit-npm ARGS="--omit dev"
+        run: make audit-vulnerabilities-npm ARGS="--omit dev"
