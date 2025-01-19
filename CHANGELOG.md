@@ -10,6 +10,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.30] - 2025-01-19
+
 - (`ef29b70`) Bump Alpine from `3.20` to `3.21`.
 - (`653216a`) Bump ESLint from `9.15.0` to `9.16.0`.
 - (`3066fe2`) Bump ESLint from `9.16.0` to `9.17.0`.
