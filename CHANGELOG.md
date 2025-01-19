@@ -15,6 +15,7 @@ Versioning].
 - (`3066fe2`) Bump ESLint from `9.16.0` to `9.17.0`.
 - (`07844c2`) Bump ESLint from `9.17.0` to `9.18.0`.
 - (`65ea189`) Bump Node.js runtime from `22.10.0` to `22.12.0`.
+- (`bf42676`) Bump Node.js runtime from `22.12.0` to `22.13.0`.
 - (`48d3bfd`) Bump `@typescript-eslint/parser` from `8.16.0` to `8.18.1`.
 - (`c05e1cb`) Bump `@typescript-eslint/parser` from `8.18.1` to `8.20.0`.
 
