@@ -14,6 +14,24 @@ jobs:
     uses: ./.github/workflows/reusable-audit.yml
     needs:
       - build
+  build:
+    name: Build with ${{ matrix.engine }}
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        engine:
+          - docker
+          - podman
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
+        with:
+          persist-credentials: false
+      - name: Build
+        env:
+          ENGINE: ${{ matrix.engine }}
+        run: make build "ENGINE=${ENGINE}"
   check:
     name: ${{ matrix.what }}
     runs-on: ubuntu-24.04
@@ -42,24 +60,23 @@ jobs:
         env:
           WHAT: ${{ matrix.what }}
         run: make "check-${WHAT}"
-  build:
-    name: Build with ${{ matrix.engine }}
+  codeql:
+    name: CodeQL (actions)
     runs-on: ubuntu-24.04
-    strategy:
-      fail-fast: false
-      matrix:
-        engine:
-          - docker
-          - podman
+    permissions:
+      security-events: write # To upload CodeQL results
     steps:
       - name: Checkout repository
         uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
         with:
           persist-credentials: false
-      - name: Build
-        env:
-          ENGINE: ${{ matrix.engine }}
-        run: make build "ENGINE=${ENGINE}"
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@b6a472f63d85b9c78a3ac5e89422239fc15e9b3c # v3.28.1
+        with:
+          config-file: ./.github/codeql.yml
+          languages: actions
+      - name: Perform CodeQL analysis
+        uses: github/codeql-action/analyze@b6a472f63d85b9c78a3ac5e89422239fc15e9b3c # v3.28.1
   licenses:
     name: Licenses
     runs-on: ubuntu-24.04
