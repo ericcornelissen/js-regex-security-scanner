@@ -10,7 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`613a51a`) Bump Node.js runtime from `22.13.0` to `22.13.1`.
 
 ## [0.4.30] - 2025-01-19
 
