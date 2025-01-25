@@ -1,4 +1,4 @@
-# Check out yamllint at: https://github.com/adrienverge/yamllint
+# Configuration file for yamllint (https://github.com/adrienverge/yamllint)
 
 yaml-files:
   - "*.yml"
