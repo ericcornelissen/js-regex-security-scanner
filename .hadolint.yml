@@ -1,4 +1,4 @@
-# Check out hadolint at: https://github.com/hadolint/hadolint
+# Configuration file for hadolint (https://github.com/hadolint/hadolint)
 
 failure-threshold: style
 format: tty

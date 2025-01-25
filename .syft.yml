@@ -1,4 +1,4 @@
-# Check out Syft at: https://github.com/anchore/syft
+# Configuration file for Syft (https://github.com/anchore/syft)
 
 output:
   - json=sbom-syft.json

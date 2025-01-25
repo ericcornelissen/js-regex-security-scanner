@@ -1,4 +1,4 @@
-# Check out Grype at: https://github.com/anchore/grype
+# Configuration file for Grype (https://github.com/anchore/grype)
 
 output: json
 file: vulns.json
