@@ -25,9 +25,10 @@ audit: audit-deprecations audit-vulnerabilities ## Audit the project dependencie
 audit-deprecations: audit-deprecations-npm ## Audit deprecation warnings
 
 audit-deprecations-npm: $(NODE_MODULES) ## Audit the npm dependencies deprecation warnings
-	@npx depreman \
+	npx depreman \
 		--errors-only \
-		--report-unused
+		--report-unused \
+		$(ARGS)
 
 audit-vulnerabilities: audit-vulnerabilities-image audit-vulnerabilities-npm ## Audit for known vulnerabilities
 
