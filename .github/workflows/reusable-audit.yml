@@ -39,7 +39,7 @@ jobs:
         run: make audit-deprecations-npm
       - name: Audit production deprecation warnings
         if: ${{ startsWith(matrix.ref, 'v') }}
-        run: make audit-deprecations-npm ARGS="--omit dev"
+        run: make audit-deprecations-npm ARGS="--omit=dev"
   image:
     name: Image
     runs-on: ubuntu-24.04
