@@ -15,6 +15,7 @@ Versioning].
 - (`613a51a`) Bump Node.js runtime from `22.13.0` to `22.13.1`.
 - (`b846735`) Bump `@typescript-eslint/parser` from `8.20.0` to `8.22.0`.
 - (`47d01fb`) Bump `@typescript-eslint/parser` from `8.22.0` to `8.23.0`.
+- (`475ee0d`) Bump `@typescript-eslint/parser` from `8.23.0` to `8.24.0`.
 
 ## [0.4.30] - 2025-01-19
 
