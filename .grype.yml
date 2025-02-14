@@ -8,9 +8,15 @@ fail-on-severity: low
 ignore:
   - vulnerability: CVE-2024-13176
     vex-justification: vulnerable_code_not_in_execute_path
+  - vulnerability: CVE-2024-12797
+    vex-justification: vulnerable_code_not_in_execute_path
   - vulnerability: CVE-2025-23083
     vex-justification: vulnerable_code_not_in_execute_path
+  - vulnerability: CVE-2025-23085
+    vex-justification: vulnerable_code_not_in_execute_path
   - vulnerability: CVE-2025-23090
+    vex-justification: vulnerable_code_not_in_execute_path
+  - vulnerability: CVE-2025-26519
     vex-justification: vulnerable_code_not_in_execute_path
 
   # Ignore all npm vulnerabilities. This project relies on `npm audit` instead.
