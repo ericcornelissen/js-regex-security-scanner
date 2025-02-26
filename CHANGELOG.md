@@ -10,6 +10,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.31] - 2025-02-26
+
 - (`62f7a03`) Bump ESLint from `9.18.0` to `9.19.0`.
 - (`47adeeb`) Bump ESLint from `9.19.0` to `9.20.0`.
 - (`1017260`) Bump ESLint from `9.20.0` to `9.21.0`.
