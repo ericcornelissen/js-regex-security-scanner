@@ -10,7 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`261e7d9`) Bump `@typescript-eslint/parser` from `8.25.0` to `8.26.0`.
 
 ## [0.4.31] - 2025-02-26
 
