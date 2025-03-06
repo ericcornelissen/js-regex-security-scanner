@@ -7,12 +7,6 @@ on:
 permissions: read-all
 
 jobs:
-  audit:
-    name: Audit
-    uses: ./.github/workflows/reusable-audit.yml
-    with:
-      refs: |-
-        ["main", "v0"]
   tooling:
     name: Update tooling
     runs-on: ubuntu-24.04

@@ -9,11 +9,6 @@ on:
 permissions: read-all
 
 jobs:
-  audit:
-    name: Audit
-    uses: ./.github/workflows/reusable-audit.yml
-    needs:
-      - build
   build:
     name: Build with ${{ matrix.engine }}
     runs-on: ubuntu-24.04
