@@ -10,6 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
+- (`91d0e82`) Bump `@eslint/markdown` from `6.2.1` to `6.3.0`.
 - (`261e7d9`) Bump `@typescript-eslint/parser` from `8.25.0` to `8.26.0`.
 
 ## [0.4.31] - 2025-02-26
