@@ -67,11 +67,21 @@ jobs:
     name: Docker Hub
     runs-on: ubuntu-24.04
     if: ${{ needs.check.outputs.released == 'false' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: docker
+            registry: "" # `docker/login-action` defaults to Docker Hub
+            url: https://hub.docker.com/r/ericornelissen/js-re-scan
+          - name: ghcr
+            registry: ghcr.io
+            url: https://github.com/ericcornelissen/js-regex-security-scanner/pkgs/container/js-re-scan
     permissions:
       id-token: write # To perform keyless signing with cosign
     environment:
-      name: docker
-      url: https://hub.docker.com/r/ericornelissen/js-re-scan
+      name: ${{ matrix.name }}
+      url: ${{ matrix.url }}
     needs:
       - check
     steps:
@@ -91,8 +101,9 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@0d4c9c5ea7693da7b068278f7b52bda2a190a446 # v3.2.0
         with:
-          username: ${{ vars.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ vars.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+          registry: ${{ matrix.registry }}
       - name: Build and push to Docker Hub
         id: docker_hub
         uses: docker/build-push-action@471d1dc4e07e5cdedd4c2171150001c434f0b7a4 # v6.15.0
@@ -101,12 +112,13 @@ jobs:
           file: Containerfile
           push: true
           tags: >-
-            ericornelissen/js-re-scan:latest,
-            ericornelissen/js-re-scan:${{ needs.check.outputs.version }}
+            ${{ matrix.registry }}/ericornelissen/js-re-scan:latest,
+            ${{ matrix.registry }}/ericornelissen/js-re-scan:${{ needs.check.outputs.version }}
       - name: Sign container image
         env:
           IMAGE_DIGEST: ${{ steps.docker_hub.outputs.digest }}
           REF: ${{ github.sha }}
+          REGISTRY: ${{ matrix.registry }}
           REPO: ${{ github.repository }}
           WORKFLOW: ${{ github.workflow }}
         run: |
@@ -114,4 +126,4 @@ jobs:
             -a "repo=${REPO}" \
             -a "workflow=${WORKFLOW}" \
             -a "ref=${REF}" \
-            "docker.io/ericornelissen/js-re-scan@${IMAGE_DIGEST}"
+            "${REGISTRY}/ericornelissen/js-re-scan@${IMAGE_DIGEST}"
