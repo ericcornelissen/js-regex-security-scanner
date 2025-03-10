@@ -16,7 +16,7 @@ FROM docker.io/node:22.14.0-alpine3.21
 
 LABEL name="js-regex-security-scanner" \
 	description="A static analyzer to scan JavaScript code for problematic regular expressions." \
-	version="0.4.31" \
+	version="0.4.32" \
 	license="Apache-2.0" \
 	org.opencontainers.image.source="https://github.com/ericcornelissen/js-regex-security-scanner"
 
