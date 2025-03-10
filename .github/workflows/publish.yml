@@ -72,9 +72,11 @@ jobs:
       matrix:
         include:
           - name: docker
+            image: ericornelissen/js-re-scan
             registry: "" # `docker/login-action` defaults to Docker Hub
             url: https://hub.docker.com/r/ericornelissen/js-re-scan
           - name: ghcr
+            image: ericcornelissen/js-re-scan
             registry: ghcr.io
             url: https://github.com/ericcornelissen/js-regex-security-scanner/pkgs/container/js-re-scan
     permissions:
@@ -112,13 +114,13 @@ jobs:
           file: Containerfile
           push: true
           tags: >-
-            ${{ matrix.registry }}/ericornelissen/js-re-scan:latest,
-            ${{ matrix.registry }}/ericornelissen/js-re-scan:${{ needs.check.outputs.version }}
+            ${{ matrix.image }}:latest,
+            ${{ matrix.image }}:${{ needs.check.outputs.version }}
       - name: Sign container image
         env:
+          IMAGE: ${{ matrix.image }}
           IMAGE_DIGEST: ${{ steps.docker_hub.outputs.digest }}
           REF: ${{ github.sha }}
-          REGISTRY: ${{ matrix.registry }}
           REPO: ${{ github.repository }}
           WORKFLOW: ${{ github.workflow }}
         run: |
@@ -126,4 +128,4 @@ jobs:
             -a "repo=${REPO}" \
             -a "workflow=${WORKFLOW}" \
             -a "ref=${REF}" \
-            "${REGISTRY}/ericornelissen/js-re-scan@${IMAGE_DIGEST}"
+            "${IMAGE}@${IMAGE_DIGEST}"
