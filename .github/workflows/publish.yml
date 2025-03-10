@@ -63,8 +63,8 @@ jobs:
         env:
           MAJOR_VERSION: ${{ steps.version.outputs.result }}
         run: git push origin "HEAD:${MAJOR_VERSION}"
-  docker-hub:
-    name: Docker Hub
+  registry:
+    name: ${{ matrix.name }}
     runs-on: ubuntu-24.04
     if: ${{ needs.check.outputs.released == 'false' }}
     strategy:
@@ -73,14 +73,13 @@ jobs:
         include:
           - name: docker
             image: ericornelissen/js-re-scan
-            registry: "" # `docker/login-action` defaults to Docker Hub
             url: https://hub.docker.com/r/ericornelissen/js-re-scan
           - name: ghcr
             image: ericcornelissen/js-re-scan
-            registry: ghcr.io
             url: https://github.com/ericcornelissen/js-regex-security-scanner/pkgs/container/js-re-scan
     permissions:
       id-token: write # To perform keyless signing with cosign
+      packages: write # To push an image to GHCR
     environment:
       name: ${{ matrix.name }}
       url: ${{ matrix.url }}
@@ -102,10 +101,10 @@ jobs:
           cosign-release: v${{ steps.versions.outputs.cosign }}
       - name: Log in to Docker Hub
         uses: docker/login-action@0d4c9c5ea7693da7b068278f7b52bda2a190a446 # v3.2.0
+        if: ${{ matrix.name != 'ghcr' }}
         with:
           username: ${{ vars.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
-          registry: ${{ matrix.registry }}
       - name: Build and push to Docker Hub
         id: docker_hub
         uses: docker/build-push-action@471d1dc4e07e5cdedd4c2171150001c434f0b7a4 # v6.15.0
