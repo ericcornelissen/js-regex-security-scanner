@@ -12,6 +12,7 @@ Versioning].
 
 - (`1240c4b`) Bump ESLint from `9.22.0` to `9.23.0`.
 - (`1dfb469`) Bump `@typescript-eslint/parser` from `8.26.0` to `8.27.0`.
+- (`ff905f9`) Bump `@typescript-eslint/parser` from `8.27.0` to `8.28.0`.
 
 ## [0.4.32] - 2025-03-10
 
