@@ -12,6 +12,7 @@ Versioning].
 
 - (`43ba04b`) Bump ESLint from `9.23.0` to `9.24.0`.
 - (`ef8b7cd`) Bump `@typescript-eslint/parser` from `8.28.0` to `8.29.0`.
+- (`207c068`) Set `org.opencontainers.image.title,description,version,licenses`.
 
 ## [0.4.33] - 2025-03-25
 
@@ -24,6 +25,7 @@ Versioning].
 - (`950c0cc`) Bump ESLint from `9.21.0` to `9.22.0`.
 - (`91d0e82`) Bump `@eslint/markdown` from `6.2.1` to `6.3.0`.
 - (`261e7d9`) Bump `@typescript-eslint/parser` from `8.25.0` to `8.26.0`.
+- (`07bdf5f`) Set `org.opencontainers.image.source`.
 
 ## [0.4.31] - 2025-02-26
 
