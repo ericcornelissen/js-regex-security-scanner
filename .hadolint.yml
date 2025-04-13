@@ -11,11 +11,11 @@ override:
 ignored: ~
 
 label-schema:
-  description: text
-  license: spdx
-  name: text
+  org.opencontainers.image.description: text
+  org.opencontainers.image.licenses: spdx
+  org.opencontainers.image.title: text
   org.opencontainers.image.source: url
-  version: semver
+  org.opencontainers.image.version: semver
 strict-labels: true
 
 trustedRegistries:

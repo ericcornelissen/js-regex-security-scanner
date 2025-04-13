@@ -16,7 +16,7 @@ const containerfileRaw = fs.readFileSync(containerfilePath).toString();
 const versionLabel = containerfileRaw
 	.split(/\n/)
 	.map((line) => line.trim())
-	.find((line) => line.startsWith("version="));
+	.find((line) => line.startsWith("org.opencontainers.image.version="));
 const version = versionLabel.split('"')[1];
 
 const versionTuple = version.split(".");
@@ -42,5 +42,8 @@ switch (process.argv[2]) {
 const newVersion = versionTuple.join(".");
 fs.writeFileSync(
 	containerfilePath,
-	containerfileRaw.replace(versionLabel, `version="${newVersion}" \\`),
+	containerfileRaw.replace(
+		versionLabel,
+		`org.opencontainers.image.version="${newVersion}" \\`,
+	),
 );
