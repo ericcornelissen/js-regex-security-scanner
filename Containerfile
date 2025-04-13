@@ -14,10 +14,10 @@
 
 FROM docker.io/node:22.14.0-alpine3.21
 
-LABEL name="js-regex-security-scanner" \
-	description="A static analyzer to scan JavaScript code for problematic regular expressions." \
-	version="0.4.33" \
-	license="Apache-2.0" \
+LABEL org.opencontainers.image.title="js-regex-security-scanner" \
+	org.opencontainers.image.description="A static analyzer to scan JavaScript code for problematic regular expressions." \
+	org.opencontainers.image.version="0.4.33" \
+	org.opencontainers.image.licenses="Apache-2.0" \
 	org.opencontainers.image.source="https://github.com/ericcornelissen/js-regex-security-scanner"
 
 ENV NODE_ENV=production
