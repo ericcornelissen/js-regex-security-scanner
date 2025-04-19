@@ -72,10 +72,10 @@ jobs:
       matrix:
         include:
           - name: docker
-            image: ericornelissen/js-re-scan
+            image: docker.io/ericornelissen/js-re-scan
             url: https://hub.docker.com/r/ericornelissen/js-re-scan
           - name: ghcr
-            image: ericcornelissen/js-re-scan
+            image: ghcr.io/ericcornelissen/js-re-scan
             url: https://github.com/ericcornelissen/js-regex-security-scanner/pkgs/container/js-re-scan
     permissions:
       id-token: write # To perform keyless signing with cosign
