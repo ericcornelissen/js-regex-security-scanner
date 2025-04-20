@@ -85,6 +85,7 @@ To be able to contribute you need at least the following:
 - [Node.js] v22.0.0 or higher and [npm] v8.1.2 or higher;
 - (Recommended) a code editor with [EditorConfig] support;
 - (Optional) [actionlint] (see `.tool-versions` for preferred version);
+- (Optional) [diffoci] (see `.tool-versions` for preferred version);
 - (Optional) [Grype] (see `.tool-versions` for preferred version);
 - (Optional) [hadolint] (see `.tool-versions` for preferred version);
 - (Optional) [ShellCheck] (see `.tool-versions` for preferred version);
@@ -124,6 +125,14 @@ Or to build using Podman, run:
 
 ```shell
 make build ENGINE=podman
+```
+
+##### Build Reproducibility
+
+To test the reproducibility of the container image, run:
+
+```shell
+make reproducible-build
 ```
 
 #### Formatting
@@ -269,6 +278,7 @@ exceptions defined in the `.ndmrc` file.
 [actionlint]: https://github.com/rhysd/actionlint
 [bug report]: https://github.com/ericcornelissen/js-regex-security-scanner/issues/new?labels=bug
 [depreman]: https://github.com/ericcornelissen/depreman
+[diffoci]: https://github.com/reproducible-containers/diffoci
 [docker]: https://www.docker.com/
 [editorconfig]: https://editorconfig.org/
 [eslint]: https://eslint.org/

@@ -128,6 +128,16 @@ check-yml: $(TOOLING) ## Check the YAML files
 		-c .yamllint.yml \
 		.
 
+.PHONY: reproducible-build
+reproducible-build: build ## Check if the container is reproducible
+	@TAG=a ENGINE_OPTIONS=--no-cache make build
+	@TAG=b ENGINE_OPTIONS=--no-cache make build
+	@diffoci diff --semantic \
+		docker://$(IMAGE_NAME):a \
+		docker://$(IMAGE_NAME):b
+	@$(ENGINE) rmi --force $(IMAGE_NAME):a $(IMAGE_NAME):b
+	@rm $(IMAGES_DIR)/a $(IMAGES_DIR)/b
+
 .PHONY: sbom
 sbom: $(SBOM_SPDX_FILE) $(SBOM_SYFT_FILE) ## Generate a Software Bill Of Materials (SBOM)
 
@@ -172,6 +182,7 @@ $(IMAGES_DIR): | $(TEMP_DIR)
 	@mkdir -p $(IMAGES_DIR)
 $(IMAGES_DIR)/%: Containerfile eslint.config.js package*.json | $(IMAGES_DIR)
 	@$(ENGINE) build \
+		$(ENGINE_OPTIONS) \
 		--file Containerfile \
 		--tag $(IMAGE_NAME):$(TAG) \
 		.
