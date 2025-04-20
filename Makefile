@@ -132,8 +132,7 @@ check-yml: $(TOOLING) ## Check the YAML files
 reproducible-build: build ## Check if the container is reproducible
 	@TAG=a ENGINE_OPTIONS=--no-cache make build
 	@TAG=b ENGINE_OPTIONS=--no-cache make build
-	@go run github.com/reproducible-containers/diffoci/cmd/diffoci@v0.1.5 diff \
-		--semantic \
+	@diffoci diff --semantic \
 		docker://$(IMAGE_NAME):a \
 		docker://$(IMAGE_NAME):b
 	@$(ENGINE) rmi --force \
