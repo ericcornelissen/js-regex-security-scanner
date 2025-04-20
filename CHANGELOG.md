@@ -10,8 +10,51 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.34] - 2025-04-19
+
+- (`43ba04b`) Bump ESLint from `9.23.0` to `9.24.0`.
+- (`563ff65`) Bump `@eslint/markdown` from `6.3.0` to `6.4.0`.
+- (`ef8b7cd`) Bump `@typescript-eslint/parser` from `8.28.0` to `8.29.0`.
+- (`89ed108`) Bump `@typescript-eslint/parser` from `8.29.0` to `8.30.1`.
+- (`207c068`) Set `org.opencontainers.image.title,description,version,licenses`.
+
+## [0.4.33] - 2025-03-25
+
+- (`1240c4b`) Bump ESLint from `9.22.0` to `9.23.0`.
+- (`1dfb469`) Bump `@typescript-eslint/parser` from `8.26.0` to `8.27.0`.
+- (`ff905f9`) Bump `@typescript-eslint/parser` from `8.27.0` to `8.28.0`.
+
+## [0.4.32] - 2025-03-10
+
+- (`950c0cc`) Bump ESLint from `9.21.0` to `9.22.0`.
+- (`91d0e82`) Bump `@eslint/markdown` from `6.2.1` to `6.3.0`.
+- (`261e7d9`) Bump `@typescript-eslint/parser` from `8.25.0` to `8.26.0`.
+- (`07bdf5f`) Set `org.opencontainers.image.source`.
+
+## [0.4.31] - 2025-02-26
+
+- (`62f7a03`) Bump ESLint from `9.18.0` to `9.19.0`.
+- (`47adeeb`) Bump ESLint from `9.19.0` to `9.20.0`.
+- (`1017260`) Bump ESLint from `9.20.0` to `9.21.0`.
+- (`613a51a`) Bump Node.js runtime from `22.13.0` to `22.13.1`.
+- (`03227af`) Bump Node.js runtime from `22.13.1` to `22.14.0`.
+- (`b846735`) Bump `@typescript-eslint/parser` from `8.20.0` to `8.22.0`.
+- (`47d01fb`) Bump `@typescript-eslint/parser` from `8.22.0` to `8.23.0`.
+- (`475ee0d`) Bump `@typescript-eslint/parser` from `8.23.0` to `8.24.0`.
+- (`69dc0e0`) Bump `@typescript-eslint/parser` from `8.24.0` to `8.25.0`.
+
+## [0.4.30] - 2025-01-19
+
+- (`ef29b70`) Bump Alpine from `3.20` to `3.21`.
 - (`653216a`) Bump ESLint from `9.15.0` to `9.16.0`.
+- (`3066fe2`) Bump ESLint from `9.16.0` to `9.17.0`.
+- (`07844c2`) Bump ESLint from `9.17.0` to `9.18.0`.
 - (`65ea189`) Bump Node.js runtime from `22.10.0` to `22.12.0`.
+- (`bf42676`) Bump Node.js runtime from `22.12.0` to `22.13.0`.
+- (`48d3bfd`) Bump `@typescript-eslint/parser` from `8.16.0` to `8.18.1`.
+- (`c05e1cb`) Bump `@typescript-eslint/parser` from `8.18.1` to `8.20.0`.
 
 ## [0.4.29] - 2024-11-26
 

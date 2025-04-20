@@ -1,0 +1,6 @@
+# Configuration file for CodeQL (https://codeql.github.com/)
+
+name: JavaScript Regex Security Scanner CodeQL config
+
+queries:
+  - uses: security-extended

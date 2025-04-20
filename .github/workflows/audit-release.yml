@@ -1,12 +1,8 @@
-name: Audit
+name: Audit (release)
 on:
-  workflow_call:
-    inputs:
-      refs:
-        default: |-
-          [""]
-        required: false
-        type: string
+  schedule:
+    - cron: 0 3 * * *
+  workflow_dispatch: ~
 
 permissions: read-all
 
@@ -17,40 +13,50 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ref: ${{ fromJSON(inputs.refs) }}
+        ref:
+          - v0
     steps:
       - name: Checkout repository
         uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
         with:
-          persist-credentials: false
           ref: ${{ matrix.ref }}
+          persist-credentials: false
       - name: Install Node.js
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
           cache: npm
           node-version-file: .nvmrc
-      - name: Audit deprecation warnings
-        run: make audit-deprecations
+      - name: Insert custom configuration
+        env:
+          NDMRC: ${{ vars.NDMRC }}
+        run: echo "${NDMRC}" | tee .ndmrc
+      - name: Audit production deprecation warnings
+        run: make audit-deprecations-npm ARGS="--omit=dev"
   image:
     name: Image
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
-        ref: ${{ fromJSON(inputs.refs) }}
+        ref:
+          - v0
     steps:
       - name: Checkout repository
         uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
         id: checkout
         with:
-          persist-credentials: false
           ref: ${{ matrix.ref }}
+          persist-credentials: false
       - name: Install tooling
         uses: asdf-vm/actions/install@4f8f7939dd917fc656bb7c3575969a5988c28364 # v3.0.0
+      - name: Insert custom configuration
+        env:
+          GRYPERC: ${{ vars.GRYPERC }}
+        run: echo "${GRYPERC}" | tee .grype.yml
       - name: Audit dependencies in container image
-        run: make audit-image
+        run: make audit-vulnerabilities-image
       - name: Upload SBOM and vulnerability scan
-        uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.4.0
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: ${{ failure() || success() }}
         with:
           if-no-files-found: error
@@ -64,34 +70,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ref: ${{ fromJSON(inputs.refs) }}
+        ref:
+          - v0
     steps:
       - name: Checkout repository
         uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
         with:
-          persist-credentials: false
           ref: ${{ matrix.ref }}
+          persist-credentials: false
       - name: Install Node.js
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e # v4.3.0
         with:
           cache: npm
           node-version-file: .nvmrc
-      - name: Audit all npm dependencies
-        if: ${{ !startsWith(matrix.ref, 'v') }}
-        run: make audit-npm
       - name: Audit production npm dependencies
-        if: ${{ startsWith(matrix.ref, 'v') }}
-        run: make audit-npm ARGS="--omit dev"
-  secrets:
-    name: Secrets
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
-        with:
-          fetch-depth: 0 # To allow for historic scans
-          persist-credentials: false
-      - name: Scan for secrets
-        uses: trufflesecurity/trufflehog@4d355d414e2d6c674bcebfe40cb648e22f6457ae # v3.83.1
-        with:
-          extra_args: --only-verified
+        run: make audit-vulnerabilities-npm ARGS="--omit dev"

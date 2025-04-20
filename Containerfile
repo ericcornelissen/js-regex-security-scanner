@@ -1,4 +1,4 @@
-# Copyright 2022-2024 Eric Cornelissen
+# Copyright 2022-2025 Eric Cornelissen
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,12 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM docker.io/node:22.12.0-alpine3.20
+FROM docker.io/node:22.14.0-alpine3.21
 
-LABEL name="js-regex-security-scanner" \
-	description="A static analyzer to scan JavaScript code for problematic regular expressions." \
-	version="0.4.29" \
-	license="Apache-2.0"
+LABEL org.opencontainers.image.title="js-regex-security-scanner" \
+	org.opencontainers.image.description="A static analyzer to scan JavaScript code for problematic regular expressions." \
+	org.opencontainers.image.version="0.4.34" \
+	org.opencontainers.image.licenses="Apache-2.0" \
+	org.opencontainers.image.source="https://github.com/ericcornelissen/js-regex-security-scanner"
 
 ENV NODE_ENV=production
 

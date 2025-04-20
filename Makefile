@@ -19,17 +19,22 @@ VULN_FILE:=vulns.json
 .PHONY: default
 default: help
 
-.PHONY: audit audit-image audit-npm
-audit: audit-image audit-npm audit-deprecations ## Audit the project dependencies
+.PHONY: audit audit-deprecations audit-deprecations-npm audit-vulnerabilities audit-vulnerabilities-image audit-vulnerabilities-npm
+audit: audit-deprecations audit-vulnerabilities ## Audit the project dependencies
 
-audit-deprecations: $(NODE_MODULES) ## Audit deprecation warnings
+audit-deprecations: audit-deprecations-npm ## Audit deprecation warnings
+
+audit-deprecations-npm: $(NODE_MODULES) ## Audit the npm dependencies deprecation warnings
 	@npx depreman \
 		--errors-only \
-		--report-unused
+		--report-unused \
+		$(ARGS)
 
-audit-image: $(VULN_FILE) ## Audit the container image dependencies
+audit-vulnerabilities: audit-vulnerabilities-image audit-vulnerabilities-npm ## Audit for known vulnerabilities
 
-audit-npm: ## Audit the npm dependencies
+audit-vulnerabilities-image: $(VULN_FILE) ## Audit the container image for known vulnerabilities
+
+audit-vulnerabilities-npm: ## Audit the npm dependencies for known vulnerabilities
 	@npm audit $(ARGS)
 
 .PHONY: build
@@ -74,28 +79,16 @@ help: ## Show this help message
 .PHONY: init
 init: $(NODE_MODULES) ## Initialize the project dependencies
 
-.PHONY: license-check license-check-image license-check-npm
-license-check: license-check-image license-check-npm ## Check the project dependency licenses
+.PHONY: check check-ci check-formatting check-formatting-js check-image check-licenses check-licenses-image check-licenses-npm check-md check-yml
+check: check-ci check-formatting check-image check-licenses check-md check-yml ## Lint the project
 
-license-check-image: $(SBOM_SYFT_FILE) ## Check container image dependency licenses
-	@node scripts/check-licenses.js
-
-license-check-npm: $(NODE_MODULES) ## Check npm dependency licenses
-	@npx licensee \
-		--errors-only
-
-.PHONY: lint lint-ci lint-image lint-js lint-md lint-yml
-lint: lint-ci lint-image lint-js lint-md lint-yml ## Lint the project
-
-lint-ci: $(TOOLING) ## Lint Continuous Integration configuration files
+check-ci: $(TOOLING) ## Check the Continuous Integration configuration files
 	@SHELLCHECK_OPTS='--enable=avoid-nullary-conditions --enable=deprecate-which --enable=quote-safe-variables --enable=require-variable-braces' \
 		actionlint
 
-lint-image: $(TOOLING) ## Lint the Containerfile
-	@hadolint \
-		Containerfile
+check-formatting: check-formatting-js ## Check the formatting
 
-lint-js: $(NODE_MODULES) ## Lint JavaScript files
+check-formatting-js: $(NODE_MODULES) ## Check the formatting of JavaScript files
 	@npx prettier \
 		--check \
 		--ignore-path .gitignore \
@@ -109,7 +102,20 @@ lint-js: $(NODE_MODULES) ## Lint JavaScript files
 		./tests/*.js \
 		./eslint.config.js
 
-lint-md: $(NODE_MODULES) ## Lint MarkDown files
+check-image: $(TOOLING) ## Check the Containerfile
+	@hadolint \
+		Containerfile
+
+check-licenses: check-licenses-image check-licenses-npm ## Check the dependency licenses
+
+check-licenses-image: $(SBOM_SYFT_FILE) ## Check the container image dependency licenses
+	@node scripts/check-licenses.js
+
+check-licenses-npm: $(NODE_MODULES) ## Check the npm dependency licenses
+	@npx licensee \
+		--errors-only
+
+check-md: $(NODE_MODULES) ## Check the MarkDown files
 	@npx markdownlint \
 		--dot \
 		--ignore-path .gitignore \
@@ -117,7 +123,7 @@ lint-md: $(NODE_MODULES) ## Lint MarkDown files
 		--ignore testdata/ \
 		.
 
-lint-yml: $(TOOLING) ## Lint .yml files
+check-yml: $(TOOLING) ## Check the YAML files
 	@yamllint \
 		-c .yamllint.yml \
 		.
@@ -154,7 +160,7 @@ update-test-snapshots: build $(NODE_MODULES) ## Update the test snapshots
 		'tests/*.test.js'
 
 .PHONY: verify
-verify: build license-check lint test ## Verify project is in a good state
+verify: build check test ## Verify project is in a good state
 
 $(SBOM_SPDX_FILE) $(SBOM_SYFT_FILE): .syft.yml $(TOOLING) $(IMAGES_DIR)/latest
 	@syft $(IMAGE_NAME):latest

@@ -33,7 +33,7 @@ const changelogRaw = fs.readFileSync(changelogFilePath).toString();
 const versionLabel = containerfileRaw
 	.split(/\n/)
 	.map((line) => line.trim())
-	.find((line) => line.startsWith("version="));
+	.find((line) => line.startsWith("org.opencontainers.image.version="));
 const version = versionLabel.split('"')[1];
 
 // ----------
