@@ -135,9 +135,8 @@ reproducible-build: build ## Check if the container is reproducible
 	@diffoci diff --semantic \
 		docker://$(IMAGE_NAME):a \
 		docker://$(IMAGE_NAME):b
-	@$(ENGINE) rmi --force \
-		$(IMAGE_NAME):a \
-		$(IMAGE_NAME):b
+	@$(ENGINE) rmi --force $(IMAGE_NAME):a $(IMAGE_NAME):b
+	@rm $(IMAGES_DIR)/a $(IMAGES_DIR)/b
 
 .PHONY: sbom
 sbom: $(SBOM_SPDX_FILE) $(SBOM_SYFT_FILE) ## Generate a Software Bill Of Materials (SBOM)

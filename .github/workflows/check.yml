@@ -126,7 +126,7 @@ jobs:
           sarif_file: semgrep.sarif
   reproducible-build:
     name: Reproducible build
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs:
       - build
     steps:
