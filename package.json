@@ -8,7 +8,7 @@
   "dependencies": {
     "@eslint/markdown": "6.4.0",
     "@typescript-eslint/parser": "8.30.1",
-    "eslint": "9.25.0",
+    "eslint": "9.25.1",
     "eslint-plugin-regexp": "2.7.0"
   },
   "devDependencies": {
