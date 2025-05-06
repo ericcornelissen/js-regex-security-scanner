@@ -10,6 +10,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.35] - 2025-05-06
+
 - (`c5f441b`) Bump ESLint from `9.24.0` to `9.25.0`.
 - (`4ac3f06`) Bump ESLint from `9.25.0` to `9.26.0`.
 - (`487a667`) Bump Node.js runtime from `22.14.0` to `22.15.0`.
