@@ -14,6 +14,7 @@ Versioning].
 - (`4ac3f06`) Bump ESLint from `9.25.0` to `9.26.0`.
 - (`487a667`) Bump Node.js runtime from `22.14.0` to `22.15.0`.
 - (`68e830b`) Bump `@typescript-eslint/parser` from `8.30.1` to `8.31.0`.
+- (`caa37d9`) Bump `@typescript-eslint/parser` from `8.31.0` to `8.32.0`.
 
 ## [0.4.34] - 2025-04-19
 
