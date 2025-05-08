@@ -10,7 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`c833dd2`) Bump Node.js runtime from `22.15.0` to `24.0.0`.
 
 ## [0.4.35] - 2025-05-06
 
