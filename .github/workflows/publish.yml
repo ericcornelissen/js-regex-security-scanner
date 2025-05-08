@@ -58,26 +58,15 @@ jobs:
         env:
           MAJOR_VERSION: ${{ steps.version.outputs.result }}
         run: git push origin "HEAD:${MAJOR_VERSION}"
-  registry:
-    name: ${{ matrix.name }}
+  docker:
+    name: Docker Hub
     runs-on: ubuntu-24.04
     if: ${{ needs.check.outputs.released == 'false' }}
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - name: docker
-            image: docker.io/ericornelissen/js-re-scan
-            url: https://hub.docker.com/r/ericornelissen/js-re-scan
-          - name: ghcr
-            image: ghcr.io/ericcornelissen/js-re-scan
-            url: https://github.com/ericcornelissen/js-regex-security-scanner/pkgs/container/js-re-scan
     permissions:
       id-token: write # To perform keyless signing with cosign
-      packages: write # To push an image to GHCR
     environment:
-      name: ${{ matrix.name }}
-      url: ${{ matrix.url }}
+      name: docker
+      url: https://hub.docker.com/r/ericornelissen/js-re-scan
     needs:
       - check
     steps:
@@ -89,17 +78,16 @@ jobs:
         id: versions
         run: |
           COSIGN_VERSION="$(grep cosign < .tool-versions | awk '{print $2}')"
-          echo "cosign=${COSIGN_VERSION}" >> "${GITHUB_OUTPUT}"
+          echo "cosign=${COSIGN_VERSION}" >>"${GITHUB_OUTPUT}"
       - name: Install cosign
         uses: sigstore/cosign-installer@c56c2d3e59e4281cc41dea2217323ba5694b171e # v3.8.0
         with:
           cosign-release: v${{ steps.versions.outputs.cosign }}
       - name: Log in to Docker Hub
         uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
-        if: ${{ matrix.name != 'ghcr' }}
         with:
-          username: ${{ vars.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build and push to Docker Hub
         id: docker_hub
         uses: docker/build-push-action@14487ce63c7a62a4a324b0bfb37086795e31c6c1 # v6.16.0
@@ -108,11 +96,10 @@ jobs:
           file: Containerfile
           push: true
           tags: >-
-            ${{ matrix.image }}:latest,
-            ${{ matrix.image }}:${{ needs.check.outputs.version }}
+            docker.io/ericornelissen/js-re-scan:latest,
+            docker.io/ericornelissen/js-re-scan:${{ needs.check.outputs.version }}
       - name: Sign container image
         env:
-          IMAGE: ${{ matrix.image }}
           IMAGE_DIGEST: ${{ steps.docker_hub.outputs.digest }}
           REF: ${{ github.sha }}
           REPO: ${{ github.repository }}
@@ -122,4 +109,58 @@ jobs:
             -a "repo=${REPO}" \
             -a "workflow=${WORKFLOW}" \
             -a "ref=${REF}" \
-            "${IMAGE}@${IMAGE_DIGEST}"
+            "docker.io/ericornelissen/js-re-scan@${IMAGE_DIGEST}"
+  ghcr:
+    name: GHCR
+    runs-on: ubuntu-24.04
+    if: ${{ needs.check.outputs.released == 'false' }}
+    permissions:
+      id-token: write # To perform keyless signing with cosign
+      packages: write # To push an image to GHCR
+    environment:
+      name: ghcr
+      url: https://github.com/ericcornelissen/js-regex-security-scanner/pkgs/container/js-re-scan
+    needs:
+      - check
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@d632683dd7b4114ad314bca15554477dd762a938 # v4.2.0
+        with:
+          persist-credentials: false
+      - name: Get cosign version
+        id: versions
+        run: |
+          COSIGN_VERSION="$(grep cosign < .tool-versions | awk '{print $2}')"
+          echo "cosign=${COSIGN_VERSION}" >>"${GITHUB_OUTPUT}"
+      - name: Install cosign
+        uses: sigstore/cosign-installer@c56c2d3e59e4281cc41dea2217323ba5694b171e # v3.8.0
+        with:
+          cosign-release: v${{ steps.versions.outputs.cosign }}
+      - name: Log in to Docker Hub
+        uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push to Docker Hub
+        id: docker_hub
+        uses: docker/build-push-action@14487ce63c7a62a4a324b0bfb37086795e31c6c1 # v6.16.0
+        with:
+          context: .
+          file: Containerfile
+          push: true
+          tags: >-
+            ghcr.io/ericcornelissen/js-re-scan:latest,
+            ghcr.io/ericcornelissen/js-re-scan:${{ needs.check.outputs.version }}
+      - name: Sign container image
+        env:
+          IMAGE_DIGEST: ${{ steps.docker_hub.outputs.digest }}
+          REF: ${{ github.sha }}
+          REPO: ${{ github.repository }}
+          WORKFLOW: ${{ github.workflow }}
+        run: |
+          cosign sign --yes \
+            -a "repo=${REPO}" \
+            -a "workflow=${WORKFLOW}" \
+            -a "ref=${REF}" \
+            "ghcr.io/ericcornelissen/js-re-scan@${IMAGE_DIGEST}"
