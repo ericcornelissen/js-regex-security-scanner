@@ -82,7 +82,7 @@ To be able to contribute you need at least the following:
 - [Git];
 - [Docker] (or [Podman]);
 - [Make];
-- [Node.js] v22.0.0 or higher and [npm] v8.1.2 or higher;
+- [Node.js] v24.0.0 or higher and [npm] v8.1.2 or higher;
 - (Recommended) a code editor with [EditorConfig] support;
 - (Optional) [actionlint] (see `.tool-versions` for preferred version);
 - (Optional) [diffoci] (see `.tool-versions` for preferred version);
