@@ -12,6 +12,7 @@ Versioning].
 
 - (`ca5353b`) Bump ESLint from `9.26.0` to `9.27.0`.
 - (`c833dd2`) Bump Node.js runtime from `22.15.0` to `24.0.0`.
+- (`f3b9098`) Bump Node.js runtime from `24.0.0` to `24.0.2`.
 
 ## [0.4.35] - 2025-05-06
 
