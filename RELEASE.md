@@ -119,18 +119,33 @@ the automatic release process, follow these steps to release a new version
 
    ```shell
    make build TAG=v0.1.2
-   docker push ericornelissen/js-re-scan:v0.1.2
+   docker push docker.io/ericornelissen/js-re-scan:v0.1.2
    ```
 
    then the `latest` tag:
 
    ```shell
    make build TAG=latest
-   docker push ericornelissen/js-re-scan:latest
+   docker push docker.io/ericornelissen/js-re-scan:latest
+   ```
+
+1. Publish to [GitHub Container Registry], first with a version tag:
+
+   ```shell
+   make build TAG=v0.1.2
+   docker push ghcr.io/ericcornelissen/js-re-scan:v0.1.2
+   ```
+
+   then the `latest` tag:
+
+   ```shell
+   make build TAG=latest
+   docker push ghcr.io/ericcornelissen/js-re-scan
    ```
 
 [docker hub]: https://hub.docker.com/
 [git tag]: https://git-scm.com/book/en/v2/Git-Basics-Tagging
+[github container registry]: https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry
 [manually trigger]: https://docs.github.com/en/actions/managing-workflow-runs/manually-running-a-workflow
 [release workflow]: ./.github/workflows/release.yml
 [semantic versioning]: https://semver.org/spec/v2.0.0.html

@@ -14,8 +14,9 @@ JavaScript or TypeScript project. For example, to scan the current directory:
 docker run --rm -v $(pwd):/project docker.io/ericornelissen/js-re-scan:latest
 ```
 
-> **NOTE:** To use [Podman] instead of [Docker] you can replace `docker` by
-> `podman` in any example command.
+To use [Podman] instead of [Docker] you can replace `docker` by `podman` in any
+example command. To use the [GitHub Container Registry] instead of [Docker] hub
+you can use `ghcr.io/ericcornelissen/js-re-scan` instead.
 
 ### Ignore patterns
 
@@ -200,6 +201,7 @@ how to improve the documentation.
 [docker]: https://www.docker.com/
 [eslint]: https://eslint.org/
 [eslint-plugin-regexp]: https://github.com/ota-meshi/eslint-plugin-regexp
+[github container registry]: https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry
 [license]: ./LICENSE
 [make]: https://www.gnu.org/software/make/
 [open an issue]: https://github.com/ericcornelissen/js-regex-security-scanner/issues/new?labels=documentation&template=documentation.md
