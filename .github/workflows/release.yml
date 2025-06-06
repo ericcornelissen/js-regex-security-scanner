@@ -70,7 +70,7 @@ jobs:
             - [ ] The major version branch is updated.
 
             [docker]: https://hub.docker.com/r/ericornelissen/js-re-scan
-            [ghcr]: https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry
+            [ghcr]: https://github.com/ericcornelissen/js-regex-security-scanner/pkgs/container/js-re-scan
             [semantic versioning]: https://semver.org/spec/v2.0.0.html
           branch: release-${{ github.event.inputs.update_type }}
           branch-suffix: random
