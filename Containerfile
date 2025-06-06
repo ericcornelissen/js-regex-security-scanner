@@ -35,7 +35,7 @@ RUN npm clean-install \
 	&& \
 	rm -rf /home/node/.npm/_cacache /home/node/.npm/_logs /tmp/node-compile-cache
 
-COPY --chown=node:node ./eslint.config.js ./
+COPY --chown=node:node ./eslint.config.js ./SECURITY.md ./LICENSE ./
 
 WORKDIR /project
 
