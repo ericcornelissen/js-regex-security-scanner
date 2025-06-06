@@ -33,7 +33,7 @@ RUN npm clean-install \
 	--no-fund \
 	--no-update-notifier \
 	&& \
-	rm -rf /home/node/.npm/_cacache /home/node/.npm/_logs /tmp/node-compile-cache
+	rm -rf /home/node/.npm /tmp/node-compile-cache
 
 COPY --chown=node:node ./eslint.config.js ./SECURITY.md ./LICENSE ./
 
