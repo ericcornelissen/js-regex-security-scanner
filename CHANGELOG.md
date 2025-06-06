@@ -10,6 +10,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.37] - 2025-06-06
+
 - (`8805a3f`) Bump ESLint from `9.27.0` to `9.28.0`.
 - (`66f95ec`) Bump eslint-plugin-regexp from `2.7.0` to `2.8.0`.
 - (`45864ff`) Bump `@eslint/markdown` from `6.4.0` to `6.5.0`.
