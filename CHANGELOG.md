@@ -11,6 +11,7 @@ Versioning].
 ## [Unreleased]
 
 - (`e69341c`) Bump `@typescript-eslint/parser` from `8.32.0` to `8.34.0`.
+- (`e8a53c8`) Bump Node.js runtime from `24.1.0` to `24.2.0`.
 
 ## [0.4.37] - 2025-06-06
 
