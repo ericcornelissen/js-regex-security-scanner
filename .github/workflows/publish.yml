@@ -80,7 +80,7 @@ jobs:
           COSIGN_VERSION="$(grep cosign < .tool-versions | awk '{print $2}')"
           echo "cosign=${COSIGN_VERSION}" >>"${GITHUB_OUTPUT}"
       - name: Install cosign
-        uses: sigstore/cosign-installer@c56c2d3e59e4281cc41dea2217323ba5694b171e # v3.8.0
+        uses: sigstore/cosign-installer@fb28c2b6339dcd94da6e4cbcbc5e888961f6f8c3 # v3.9.0
         with:
           cosign-release: v${{ steps.versions.outputs.cosign }}
       - name: Log in to Docker Hub
@@ -133,7 +133,7 @@ jobs:
           COSIGN_VERSION="$(grep cosign < .tool-versions | awk '{print $2}')"
           echo "cosign=${COSIGN_VERSION}" >>"${GITHUB_OUTPUT}"
       - name: Install cosign
-        uses: sigstore/cosign-installer@c56c2d3e59e4281cc41dea2217323ba5694b171e # v3.8.0
+        uses: sigstore/cosign-installer@fb28c2b6339dcd94da6e4cbcbc5e888961f6f8c3 # v3.9.0
         with:
           cosign-release: v${{ steps.versions.outputs.cosign }}
       - name: Log in to Docker Hub
