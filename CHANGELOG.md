@@ -12,6 +12,7 @@ Versioning].
 
 - (`0e7e848`) Bump ESLint from `9.28.0` to `9.29.0`.
 - (`92508bf`) Bump `@eslint/markdown` from `6.5.0` to `6.6.0`.
+- (`4f8095b`) Bump `@typescript-eslint/parser` from `8.34.0` to `8.35.0`.
 
 ## [0.4.38] - 2025-06-13
 
