@@ -16,6 +16,8 @@ Versioning].
 - (`482dab4`) Bump `@eslint/markdown` from `6.6.0` to `7.0.0`.
 - (`4f8095b`) Bump `@typescript-eslint/parser` from `8.34.0` to `8.35.0`.
 - (`78531d2`) Bump `@typescript-eslint/parser` from `8.35.0` to `8.36.0`.
+- (`c916603`) Bump Alpine from `3.21` to `3.22`.
+- (`2ea695a`) Bump Node.js runtime from `24.2.0` to `24.4.0`.
 
 ## [0.4.38] - 2025-06-13
 
