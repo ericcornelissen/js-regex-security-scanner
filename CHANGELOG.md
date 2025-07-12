@@ -10,7 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`eae53df`) Bump ESLint from 9.30.0 to 9.31.0.
 
 ## [0.4.39] - 2025-07-12
 
