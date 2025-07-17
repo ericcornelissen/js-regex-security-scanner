@@ -147,13 +147,13 @@ On top of that, the project uses static analysis tools to catch mistakes. Use
 `make check` to run all checks, or use one of the following commands to check
 your changes if applicable:
 
-| What            | Command                 |
-| :-------------- | :---------------------- |
-| CI workflows    | `make check-ci`         |
-| `Containerfile` | `make check-image`      |
-| Licenses        | `make check-licenses`   |
-| MarkDown        | `make check-md`         |
-| YAML            | `make check-yml`        |
+| What            | Command               |
+| :-------------- | :-------------------- |
+| CI workflows    | `make check-ci`       |
+| `Containerfile` | `make check-image`    |
+| Licenses        | `make check-licenses` |
+| MarkDown        | `make check-md`       |
+| YAML            | `make check-yml`      |
 
 #### Testing
 
