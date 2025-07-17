@@ -51,8 +51,8 @@ clean: ## Clean the repository
 	@$(ENGINE) rmi --force \
 		$(IMAGE_NAME)
 
-.PHONY: format format-js
-format: format-js ## Format the project
+.PHONY: format format-js format-md
+format: format-js format-md ## Format the project
 
 format-js: $(NODE_MODULES) ## Format JavaScript files
 	@npx prettier \
@@ -68,6 +68,13 @@ format-js: $(NODE_MODULES) ## Format JavaScript files
 		./tests/*.js \
 		./eslint.config.js
 
+format-md: $(NODE_MODULES) ## Format MarkDown files
+	@npx prettier \
+		--write \
+		--ignore-path .gitignore \
+		\
+		./*.md
+
 .PHONY: help
 help: ## Show this help message
 	@printf "Usage: make <command>\n\n"
@@ -79,14 +86,14 @@ help: ## Show this help message
 .PHONY: init
 init: $(NODE_MODULES) ## Initialize the project dependencies
 
-.PHONY: check check-ci check-formatting check-formatting-js check-image check-licenses check-licenses-image check-licenses-npm check-md check-yml
+.PHONY: check check-ci check-formatting check-formatting-js check-formatting-md check-image check-licenses check-licenses-image check-licenses-npm check-md check-yml
 check: check-ci check-formatting check-image check-licenses check-md check-yml ## Lint the project
 
 check-ci: $(TOOLING) ## Check the Continuous Integration configuration files
 	@SHELLCHECK_OPTS='--enable=avoid-nullary-conditions --enable=deprecate-which --enable=quote-safe-variables --enable=require-variable-braces' \
 		actionlint
 
-check-formatting: check-formatting-js ## Check the formatting
+check-formatting: check-formatting-js check-formatting-md ## Check the formatting
 
 check-formatting-js: $(NODE_MODULES) ## Check the formatting of JavaScript files
 	@npx prettier \
@@ -101,6 +108,13 @@ check-formatting-js: $(NODE_MODULES) ## Check the formatting of JavaScript files
 		./scripts/*.js \
 		./tests/*.js \
 		./eslint.config.js
+
+check-formatting-md: $(NODE_MODULES) ## Check the formatting of MarkDown files
+	@npx prettier \
+		--check \
+		--ignore-path .gitignore \
+		\
+		./*.md
 
 check-image: $(TOOLING) ## Check the Containerfile
 	@hadolint \

@@ -35,9 +35,9 @@ The scanner has the following exit codes.
 
 | Exit code | Meaning                                          |
 | --------: | :----------------------------------------------- |
-| 0         | No problems found                                |
-| 1         | Files with problematic regular expressions found |
-| 2         | Something went wrong while scanning              |
+|         0 | No problems found                                |
+|         1 | Files with problematic regular expressions found |
+|         2 | Something went wrong while scanning              |
 
 ## Features
 
@@ -59,12 +59,12 @@ Follow these steps to update your ESLint setup to cover what this scanner does:
 1. Install the plugin:
 
    <!-- doctest:ignore -->
+
    ```shell
    npm install --save-dev eslint-plugin-regexp
    ```
 
 1. Update your ESLint configuration:
-
    - ESLint v9 with flat config:
 
      ```javascript
@@ -81,19 +81,19 @@ Follow these steps to update your ESLint setup to cover what this scanner does:
            "regexp/no-super-linear-backtracking": [
              "error",
              {
-               "report": "certain"
-             }
+               report: "certain",
+             },
            ],
            "regexp/no-super-linear-move": [
              "error",
              {
-               "ignorePartial": false,
-               "ignoreSticky": false,
-               "report": "certain"
-             }
-           ]
-         }
-       }
+               ignorePartial: false,
+               ignoreSticky: false,
+               report: "certain",
+             },
+           ],
+         },
+       },
        // ... rest of your configuration
      ];
      ```
@@ -117,7 +117,6 @@ Follow these steps to update your ESLint setup to cover what this scanner does:
          - ignorePartial: false
            ignoreSticky: false
            report: certain
-
      # ... rest of your configuration
      ```
 
