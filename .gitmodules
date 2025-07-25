@@ -3,3 +3,12 @@
 [submodule "testdata/shescape"]
 	path = testdata/shescape
 	url = git@github.com:ericcornelissen/shescape.git
+[submodule "testdata/eslint-rewrite"]
+	path = testdata/eslint-rewrite
+	url = https://github.com/eslint/rewrite.git
+[submodule "testdata/eslint-markdown"]
+	path = testdata/eslint-markdown
+	url = https://github.com/eslint/markdown.git
+[submodule "testdata/denoland-std"]
+	path = testdata/denoland-std
+	url = https://github.com/denoland/std.git
