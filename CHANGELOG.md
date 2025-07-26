@@ -10,6 +10,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.40] - 2025-07-26
+
 - (`3a1a3c7`) Bump Node.js from 24.4.0 to 24.4.1.
 - (`eae53df`) Bump ESLint from 9.30.0 to 9.31.0.
 - (`45f7243`) Bump @typescript-eslint/parser from 8.36.0 to 8.37.0.
