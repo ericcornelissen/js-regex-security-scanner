@@ -10,7 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`83b9ed1`) Bump eslint from 9.31.0 to 9.32.0.
 
 ## [0.4.40] - 2025-07-26
 
