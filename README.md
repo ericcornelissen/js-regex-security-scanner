@@ -48,6 +48,28 @@ The scanner has the following exit codes.
 - Ignore tests based on standard file and folder patterns.
 - Scan documentation.
 
+## Trophies
+
+The table below provides an overview of bugs and security advisories discovered
+with the help of this scanner (from most to least recent). If you reported a bug
+or advisory based on the results of this scanner, feel free to add it to the
+list!
+
+| Project              | Bug / Advisory               |
+| -------------------- | ---------------------------- |
+| [@std/path]          | [#6764][@std/path-6764]      |
+| [@eslint/markdown]   | [#463][@eslint/markdown-463] |
+| [@eslint/plugin-kit] | [GHSA-xffm-g5w8-qvg7]        |
+| [shescape]           | [CVE-2022-36064]             |
+
+[@eslint/markdown-463]: https://github.com/eslint/markdown/pull/463
+[@eslint/plugin-kit]: https://www.npmjs.com/package/@eslint/plugin-kit
+[@std/path]: https://jsr.io/@std/path
+[@std/path-6764]: https://github.com/denoland/std/pull/6764
+[cve-2022-36064]: https://nvd.nist.gov/vuln/detail/CVE-2022-36064
+[ghsa-xffm-g5w8-qvg7]: https://github.com/advisories/GHSA-xffm-g5w8-qvg7
+[shescape]: https://www.npmjs.com/package/shescape
+
 ## Migrating to ESLint
 
 If you have found this scanner helpful, consider using [eslint-plugin-regexp]
