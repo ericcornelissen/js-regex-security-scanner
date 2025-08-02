@@ -95,6 +95,9 @@ jobs:
           context: .
           file: Containerfile
           push: true
+          platforms: >-
+            linux/amd64,
+            linux/arm64
           tags: >-
             docker.io/ericornelissen/js-re-scan:latest,
             docker.io/ericornelissen/js-re-scan:${{ needs.check.outputs.version }}
@@ -149,6 +152,9 @@ jobs:
           context: .
           file: Containerfile
           push: true
+          platforms: >-
+            linux/amd64,
+            linux/arm64
           tags: >-
             ghcr.io/ericcornelissen/js-re-scan:latest,
             ghcr.io/ericcornelissen/js-re-scan:${{ needs.check.outputs.version }}
