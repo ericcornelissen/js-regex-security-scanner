@@ -89,7 +89,7 @@ jobs:
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build and push to Docker Hub
-        id: docker_hub
+        id: container
         uses: docker/build-push-action@1dc73863535b631f98b2378be8619f83b136f4a0 # v6.17.0
         with:
           context: .
@@ -100,7 +100,7 @@ jobs:
             docker.io/ericornelissen/js-re-scan:${{ needs.check.outputs.version }}
       - name: Sign container image
         env:
-          IMAGE_DIGEST: ${{ steps.docker_hub.outputs.digest }}
+          IMAGE_DIGEST: ${{ steps.container.outputs.digest }}
           REF: ${{ github.sha }}
           REPO: ${{ github.repository }}
           WORKFLOW: ${{ github.workflow }}
@@ -136,14 +136,14 @@ jobs:
         uses: sigstore/cosign-installer@c56c2d3e59e4281cc41dea2217323ba5694b171e # v3.8.0
         with:
           cosign-release: v${{ steps.versions.outputs.cosign }}
-      - name: Log in to Docker Hub
+      - name: Log in to GHCR
         uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3.4.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and push to Docker Hub
-        id: docker_hub
+      - name: Build and push to GHCR
+        id: container
         uses: docker/build-push-action@1dc73863535b631f98b2378be8619f83b136f4a0 # v6.17.0
         with:
           context: .
@@ -154,7 +154,7 @@ jobs:
             ghcr.io/ericcornelissen/js-re-scan:${{ needs.check.outputs.version }}
       - name: Sign container image
         env:
-          IMAGE_DIGEST: ${{ steps.docker_hub.outputs.digest }}
+          IMAGE_DIGEST: ${{ steps.container.outputs.digest }}
           REF: ${{ github.sha }}
           REPO: ${{ github.repository }}
           WORKFLOW: ${{ github.workflow }}
