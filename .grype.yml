@@ -8,8 +8,6 @@ fail-on-severity: low
 ignore:
   - vulnerability: CVE-2024-58251
     vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2025-4575
-    vex-justification: vulnerable_code_not_in_execute_path
   - vulnerability: CVE-2025-46394
     vex-justification: vulnerable_code_not_in_execute_path
 
