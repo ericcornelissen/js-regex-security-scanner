@@ -12,6 +12,7 @@ Versioning].
 
 - (`83b9ed1`) Bump eslint from 9.31.0 to 9.32.0.
 - (`9ee117a`) Bump eslint-plugin-regexp from 2.8.0 to 2.9.1.
+- (`0cc7693`) Bump @typescript-eslint/parser from 8.37.0 to 8.39.0.
 
 ## [0.4.40] - 2025-07-26
 
