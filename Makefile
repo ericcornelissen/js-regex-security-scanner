@@ -90,7 +90,7 @@ init: $(NODE_MODULES) ## Initialize the project dependencies
 check: check-ci check-formatting check-image check-licenses check-md check-yml ## Lint the project
 
 check-ci: $(TOOLING) ## Check the Continuous Integration configuration files
-	@SHELLCHECK_OPTS='--enable=avoid-nullary-conditions --enable=deprecate-which --enable=quote-safe-variables --enable=require-variable-braces' \
+	@SHELLCHECK_OPTS='--enable=avoid-nullary-conditions --enable=deprecate-which --enable=quote-safe-variables --enable=require-variable-braces --enable=useless-use-of-cat' \
 		actionlint
 
 check-formatting: check-formatting-js check-formatting-md ## Check the formatting
