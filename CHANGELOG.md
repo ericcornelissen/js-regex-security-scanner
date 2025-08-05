@@ -10,7 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`34dc617`) Bump Node.js from 24.4.1 to 24.5.0.
 
 ## [0.4.41] - 2025-08-05
 
