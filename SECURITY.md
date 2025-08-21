@@ -56,6 +56,16 @@ Try to include as many of the following items as possible in a security report:
 
 [cwe]: https://cwe.mitre.org/
 
+### Threat Model
+
+The scanner considers Docker, ESLint, and its plugins to be trusted. All inputs
+are considered untrusted. Any violation of confidentiality, integrity, and
+availability is considered a security issue.
+
+The project considers the GitHub infrastructure and all project maintainers to
+be trusted. Any action performed on the repository by any other GitHub user is
+considered untrusted.
+
 ## Advisories
 
 > **NOTE:** Advisories will be created only for vulnerabilities present in
