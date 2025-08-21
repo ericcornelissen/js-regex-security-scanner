@@ -55,20 +55,29 @@ with the help of this scanner (from most to least recent). If you reported a bug
 or advisory based on the results of this scanner, feel free to add it to the
 list!
 
-| Project              | Bug / Advisory               |
+| Project              | Fix / Advisory               |
 | -------------------- | ---------------------------- |
+| [decamelize]         | [`e9e3041`]                  |
+| [browserslist]       | [`c331c95`]                  |
+| [st]                 | [#103][st-103]               |
 | [@std/path]          | [#6764][@std/path-6764]      |
 | [@eslint/markdown]   | [#463][@eslint/markdown-463] |
 | [@eslint/plugin-kit] | [GHSA-xffm-g5w8-qvg7]        |
 | [shescape]           | [CVE-2022-36064]             |
 
+[`c331c95`]: https://github.com/browserslist/browserslist/commit/c331c95c6aaf77ab284d7e338e462ad74bb5081a
+[`e9e3041`]: https://github.com/sindresorhus/decamelize/commit/e9e304170ecaaccc39d3696d7d816408c29eed71
 [@eslint/markdown-463]: https://github.com/eslint/markdown/pull/463
 [@eslint/plugin-kit]: https://www.npmjs.com/package/@eslint/plugin-kit
 [@std/path]: https://jsr.io/@std/path
 [@std/path-6764]: https://github.com/denoland/std/pull/6764
+[browserslist]: https://www.npmjs.com/package/browserslist
 [cve-2022-36064]: https://nvd.nist.gov/vuln/detail/CVE-2022-36064
+[decamelize]: https://www.npmjs.com/package/decamelize
 [ghsa-xffm-g5w8-qvg7]: https://github.com/advisories/GHSA-xffm-g5w8-qvg7
 [shescape]: https://www.npmjs.com/package/shescape
+[st]: https://www.npmjs.com/package/st
+[st-103]: https://github.com/isaacs/st/pull/103
 
 ## Migrating to ESLint
 
