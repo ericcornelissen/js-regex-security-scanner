@@ -10,6 +10,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.42] - 2025-08-21
+
 - (`34dc617`) Bump Node.js from 24.4.1 to 24.5.0.
 - (`6cbe61e`) Bump Node.js from 24.5.0 to 24.6.0.
 - (`0ca4c53`) Bump eslint-plugin-regexp from 2.9.1 to 2.10.0.
