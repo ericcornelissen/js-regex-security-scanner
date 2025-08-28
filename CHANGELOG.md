@@ -11,7 +11,8 @@ Versioning].
 ## [Unreleased]
 
 - (`b08a11b`) Bump eslint from 9.33.0 to 9.34.0.
-- (`ebe7241`) Bump @typescript-eslint/parser from 8.40.0 to 8.41.0
+- (`ebe7241`) Bump @typescript-eslint/parser from 8.40.0 to 8.41.0.
+- (`f3849e3`) Bump @eslint/markdown from 7.1.0 to 7.2.0.
 
 ## [0.4.42] - 2025-08-21
 
