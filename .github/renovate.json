@@ -1,0 +1,28 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "labels": ["dependencies"],
+  "packageRules": [
+    {
+      "matchManagers": ["asdf", "nvm"],
+      "addLabels": ["meta"],
+      "schedule": "* 0-4 * * 5",
+      "prConcurrentLimit": 1
+    },
+    {
+      "matchManagers": ["dockerfile"],
+      "schedule": "* 0-4 * * *",
+      "prConcurrentLimit": 1
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "addLabels": ["ci"],
+      "schedule": "* 0-4 * * *",
+      "prConcurrentLimit": 1
+    },
+    {
+      "matchManagers": ["npm"],
+      "schedule": "* 0-4 * * *",
+      "prConcurrentLimit": 1
+    }
+  ]
+}
