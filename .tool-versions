@@ -3,7 +3,7 @@ actionlint 1.7.7
 cosign 2.5.3
 diffoci 0.1.7
 grype 0.99.0
-hadolint 2.12.0
+hadolint 2.13.1
 shellcheck 0.11.0
 syft 1.32.0
 yamllint 1.37.1
