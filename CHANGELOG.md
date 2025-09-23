@@ -13,6 +13,7 @@ Versioning].
 - (`5891086`) Update dependency @typescript-eslint/parser to v8.43.0.
 - (`bec203d`) Update Node.js to v24.8.0.
 - (`9a9cb3e`) Update dependency eslint to v9.36.0.
+- (`2fc8c02`) Update dependency @eslint/markdown to v7.3.0.
 
 ## [0.4.43] - 2025-09-07
 
