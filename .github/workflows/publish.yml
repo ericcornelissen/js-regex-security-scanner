@@ -58,6 +58,15 @@ jobs:
         env:
           MAJOR_VERSION: ${{ steps.version.outputs.result }}
         run: git push origin "HEAD:${MAJOR_VERSION}"
+      - name: Create GitHub Release
+        env:
+          VERSION: ${{ needs.check.outputs.version }}
+        run: |
+          gh release create "${VERSION}" \
+            --title "Release ${VERSION}" \
+            --notes "Release ${VERSION}" \
+            --verify-tag=true \
+            --latest=true
   docker:
     name: Docker Hub
     runs-on: ubuntu-24.04
