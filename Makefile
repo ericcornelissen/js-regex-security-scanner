@@ -116,9 +116,13 @@ check-formatting-md: $(NODE_MODULES) ## Check the formatting of MarkDown files
 		\
 		./*.md
 
-check-image: $(TOOLING) ## Check the Containerfile
+check-image: $(TOOLING) build ## Check the Containerfile
 	@hadolint \
 		Containerfile
+	@dockle \
+		--exit-code 1 --exit-level info \
+		--ignore CIS-DI-0005 --ignore CIS-DI-0006 --ignore DKL-DI-0006 \
+		$(IMAGE_NAME)
 
 check-licenses: check-licenses-image check-licenses-npm ## Check the dependency licenses
 
