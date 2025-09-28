@@ -86,6 +86,7 @@ To be able to contribute you need at least the following:
 - (Recommended) a code editor with [EditorConfig] support;
 - (Optional) [actionlint] (see `.tool-versions` for preferred version);
 - (Optional) [diffoci] (see `.tool-versions` for preferred version);
+- (Optional) [Dockle] (see `.tool-versions` for preferred version);
 - (Optional) [Grype] (see `.tool-versions` for preferred version);
 - (Optional) [hadolint] (see `.tool-versions` for preferred version);
 - (Optional) [ShellCheck] (see `.tool-versions` for preferred version);
@@ -280,6 +281,7 @@ exceptions defined in the `.ndmrc` file.
 [depreman]: https://github.com/ericcornelissen/depreman
 [diffoci]: https://github.com/reproducible-containers/diffoci
 [docker]: https://www.docker.com/
+[dockle]: https://github.com/goodwithtech/dockle
 [editorconfig]: https://editorconfig.org/
 [eslint]: https://eslint.org/
 [feature request]: https://github.com/ericcornelissen/js-regex-security-scanner/issues/new?labels=enhancement
