@@ -10,7 +10,8 @@ Versioning].
 
 ## [Unreleased]
 
-- (`ed40133`) Update dependency @typescript-eslint/parser to v8.45.0
+- (`ed40133`) Update dependency @typescript-eslint/parser to v8.45.0.
+- (`8bf33f7`) Update dependency eslint to v9.37.0.
 
 ## [0.4.44] - 2025-09-27
 
