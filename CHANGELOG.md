@@ -10,10 +10,11 @@ Versioning].
 
 ## [Unreleased]
 
+- (`861540b`) Update Node.js to v24.10.0.
 - (`ed40133`) Update dependency @typescript-eslint/parser to v8.45.0.
+- (`cef8a83`) Update dependency @typescript-eslint/parser to v8.46.0.
 - (`8bf33f7`) Update dependency eslint to v9.37.0.
 - (`c5ad152`) Update dependency @eslint/markdown to v7.4.0.
-- (`cef8a83`) Update dependency @typescript-eslint/parser to v8.46.0.
 
 ## [0.4.44] - 2025-09-27
 
