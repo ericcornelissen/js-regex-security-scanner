@@ -60,6 +60,7 @@ jobs:
         run: git push origin "HEAD:${MAJOR_VERSION}"
       - name: Create GitHub Release
         env:
+          GH_TOKEN: ${{ github.token }}
           VERSION: ${{ needs.check.outputs.version }}
         run: |
           gh release create "${VERSION}" \
