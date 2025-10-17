@@ -1,6 +1,6 @@
 # Configuration file for asdf (https://asdf-vm.com/)
 actionlint 1.7.8
-cosign 2.6.1
+cosign 3.0.2
 diffoci 0.1.7
 dockle 0.4.15
 grype 0.99.0
