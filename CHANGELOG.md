@@ -10,7 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`9f5b6f1`) Update dependency eslint to v9.38.0.
 
 ## [0.4.45] - 2025-10-10
 
