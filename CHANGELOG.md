@@ -11,6 +11,7 @@ Versioning].
 ## [Unreleased]
 
 - (`9f5b6f1`) Update dependency eslint to v9.38.0.
+- (`8635445`) Update dependency @eslint/markdown to v7.4.1.
 
 ## [0.4.45] - 2025-10-10
 
