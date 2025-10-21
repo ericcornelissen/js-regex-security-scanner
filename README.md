@@ -57,6 +57,7 @@ list!
 
 | Project              | Fix / Advisory               |
 | -------------------- | ---------------------------- |
+| [ssri]               | [#151][ssri-151]             |
 | [decamelize]         | [`e9e3041`]                  |
 | [browserslist]       | [`c331c95`]                  |
 | [st]                 | [#103][st-103]               |
@@ -76,6 +77,8 @@ list!
 [decamelize]: https://www.npmjs.com/package/decamelize
 [ghsa-xffm-g5w8-qvg7]: https://github.com/advisories/GHSA-xffm-g5w8-qvg7
 [shescape]: https://www.npmjs.com/package/shescape
+[ssri]: https://www.npmjs.com/package/ssri
+[ssri-151]:https://github.com/npm/ssri/pull/151
 [st]: https://www.npmjs.com/package/st
 [st-103]: https://github.com/isaacs/st/pull/103
 
