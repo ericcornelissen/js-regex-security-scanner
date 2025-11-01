@@ -67,6 +67,7 @@ jobs:
             - [ ] The new version is published to [Docker].
             - [ ] The new version is published to [GHCR].
             - [ ] A git tag for the new release is created.
+            - [ ] A GitHub release for the new release is created.
             - [ ] The major version branch is updated.
 
             [docker]: https://hub.docker.com/r/ericornelissen/js-re-scan
