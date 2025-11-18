@@ -104,6 +104,14 @@ If you decide to make a contribution, please do use the following workflow:
 - Commit to the new branch and push the commit(s).
 - Make a Pull Request.
 
+### Getting start
+
+Before you start making changes you should run `make verify`. This ensures your
+local development environment is set up and ready to go and everything is
+working as expected. If this does not _just work_, please [open an issue] and
+share your experience. This way, we can improve the experience for future
+contributors.
+
 ### Development Details
 
 This scanner is in essence running [ESLint] with a specific configuration in a
@@ -292,6 +300,7 @@ exceptions defined in the `.ndmrc` file.
 [node.js]: https://nodejs.org/en/
 [npm]: https://www.npmjs.com/
 [open issues]: https://github.com/ericcornelissen/js-regex-security-scanner/issues
+[open an issue]: https://github.com/ericcornelissen/js-regex-security-scanner/issues/new
 [podman]: https://podman.io/
 [security policy]: ./SECURITY.md
 [shellcheck]: https://github.com/koalaman/shellcheck
