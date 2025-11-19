@@ -1,3 +1,5 @@
 # Configuration file for markdownlint (https://github.com/DavidAnson/markdownlint)
 
 default: true
+MD060: # table-column-style
+  style: aligned
