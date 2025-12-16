@@ -13,6 +13,7 @@ Versioning].
 - (`7fc6db5`) Update dependency @typescript-eslint/parser to v8.47.0.
 - (`5faabc0`) Update dependency @typescript-eslint/parser to v8.48.0.
 - (`3a11ce1`) Update dependency @typescript-eslint/parser to v8.49.0.
+- (`944baeb`) Update dependency @typescript-eslint/parser to v8.50.0.
 - (`e18f592`) Update docker.io/node Docker tag to v24.12.0.
 
 ## [0.4.46] - 2025-11-01
