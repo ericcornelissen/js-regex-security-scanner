@@ -3,7 +3,7 @@
   "labels": ["dependencies"],
   "packageRules": [
     {
-      "matchManagers": ["asdf", "nvm"],
+      "matchManagers": ["nvm"],
       "addLabels": ["meta"],
       "schedule": "* 0-4 * * 5",
       "prConcurrentLimit": 1

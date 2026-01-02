@@ -1,0 +1,40 @@
+name: Tooling
+on:
+  schedule:
+    - cron: 0 3 * * *
+  workflow_dispatch: ~
+
+permissions: read-all
+
+jobs:
+  update:
+    name: Update
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write # To push a commit
+      pull-requests: write # To open a Pull Request
+    steps:
+      - name: Create token to create Pull Request
+        uses: actions/create-github-app-token@7e473efe3cb98aa54f8d4bac15400b15fad77d94 # v2.2.0
+        id: automation-token
+        with:
+          app-id: ${{ secrets.AUTOMATION_ID }}
+          private-key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
+      - name: Update tooling
+        uses: ericcornelissen/tool-versions-update-action/pr@aa1815a7caf1aecd37208e34ad57bec973bcd507 # v2.2.1
+        with:
+          commit-message: Bump {{updated-tools}} from {{updated-old-versions}} to {{updated-new-versions}}
+          labels: dependencies
+          max: 1
+          pr-body: |
+            Bumps {{updated-tools}} from {{updated-old-versions}} to {{updated-new-versions}}.
+
+            ---
+
+            _This Pull Request was created using the [tool-versions-update-action]_
+
+            [tool-versions-update-action]: https://github.com/ericcornelissen/tool-versions-update-action
+          pr-title: Bump {{updated-tools}} from {{updated-old-versions}} to {{updated-new-versions}}
+          plugins: |
+            diffoci https://github.com/ericcornelissen/asdf-diffoci
+          token: ${{ steps.automation-token.outputs.token }}
