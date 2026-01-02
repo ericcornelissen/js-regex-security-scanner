@@ -94,13 +94,6 @@ const applyException = (artifact) => {
 
 const corrections = [
 	{
-		name: "busybox",
-		foundBy: "binary-classifier-cataloger",
-		licenses: ["GPL-2.0-only"],
-		licenseUrl: "https://busybox.net/license.html",
-		reason: "license not detected by Syft",
-	},
-	{
 		name: "node",
 		foundBy: "binary-classifier-cataloger",
 		licenses: ["MIT"],
@@ -136,7 +129,7 @@ const exceptions = [
 		reason: "OK under the 'mere aggregation' clause",
 	},
 	{
-		name: "libapk2",
+		name: "libapk",
 		licenses: ["GPL-2.0-only"],
 		reason: "OK under the 'mere aggregation' clause",
 	},
