@@ -16,6 +16,8 @@ ignore:
     vex-justification: vulnerable_code_not_in_execute_path
   - vulnerability: CVE-2025-46394
     vex-justification: vulnerable_code_not_in_execute_path
+  - vulnerability: CVE-2025-60876
+    vex-justification: vulnerable_code_not_in_execute_path
 
   # Ignore all npm vulnerabilities. This project relies on `npm audit` instead.
   - package:
