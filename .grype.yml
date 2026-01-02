@@ -6,16 +6,6 @@ file: vulns.json
 fail-on-severity: low
 
 ignore:
-  - vulnerability: CVE-2024-58251
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2025-9230
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2025-9231
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2025-9232
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2025-46394
-    vex-justification: vulnerable_code_not_in_execute_path
   - vulnerability: CVE-2025-60876
     vex-justification: vulnerable_code_not_in_execute_path
 
