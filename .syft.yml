@@ -3,3 +3,5 @@
 output:
   - json=sbom-syft.json
   - spdx-json=sbom-spdx.json
+
+check-for-app-update: false
