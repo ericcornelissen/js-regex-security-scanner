@@ -10,6 +10,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.48] - 2026-01-15
+
 - (`600d4f4`) Update dependency @typescript-eslint/parser to v8.51.0.
 - (`d0f7f9a`) Update dependency @typescript-eslint/parser to v8.52.0.
 - (`5994a2b`) Update dependency @typescript-eslint/parser to v8.53.0.
