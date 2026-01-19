@@ -7,8 +7,27 @@ expressions.
 
 ## Getting started
 
-The scanner is available as a container image that you can run against any
-JavaScript or TypeScript project. For example, to scan the current directory:
+The scanner is available as a container image, install it using:
+
+```shell
+docker pull docker.io/ericornelissen/js-re-scan:latest
+```
+
+Validate the container provenance using cosign (optional but recommended):
+
+<!-- doctest:ignore -->
+
+```shell
+cosign verify \
+  --certificate-identity-regexp \
+    'https://github.com/ericcornelissen/js-regex-security-scanner/.+' \
+  --certificate-oidc-issuer \
+    'https://token.actions.githubusercontent.com' \
+  docker.io/ericornelissen/js-re-scan:latest
+```
+
+Now you can use it to scan a JavaScript or TypeScript project. For example, to
+scan the current directory:
 
 ```shell
 docker run --rm -v $(pwd):/project docker.io/ericornelissen/js-re-scan:latest
