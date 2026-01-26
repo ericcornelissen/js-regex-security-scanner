@@ -2,10 +2,6 @@ exports[`docs > README.md snippet #1 1`] = `
 0
 `;
 
-exports[`docs > README.md snippet #10 1`] = `
-0
-`;
-
 exports[`docs > README.md snippet #3 1`] = `
 1
 `;
@@ -14,6 +10,10 @@ exports[`docs > README.md snippet #4 1`] = `
 1
 `;
 
-exports[`docs > README.md snippet #9 1`] = `
+exports[`docs > README.md snippet #7 1`] = `
+0
+`;
+
+exports[`docs > README.md snippet #8 1`] = `
 0
 `;

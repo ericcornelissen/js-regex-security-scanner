@@ -115,89 +115,37 @@ Follow these steps to update your ESLint setup to cover what this scanner does:
    ```
 
 1. Update your ESLint configuration:
-   - ESLint v9 with flat config:
 
-     ```javascript
-     import regexp from "eslint-plugin-regexp";
-     // ... other plugins you're already using
+   ```javascript
+   import regexp from "eslint-plugin-regexp";
+   // ... other plugins you're already using
 
-     export default [
-       {
-         files: ["**/*.{js,jsx,cjs,mjs,ts,cts,mts}"],
-         plugins: {
-           regexp,
-         },
-         rules: {
-           "regexp/no-super-linear-backtracking": [
-             "error",
-             {
-               report: "certain",
-             },
-           ],
-           "regexp/no-super-linear-move": [
-             "error",
-             {
-               ignorePartial: false,
-               ignoreSticky: false,
-               report: "certain",
-             },
-           ],
-         },
-       },
-       // ... rest of your configuration
-     ];
-     ```
-
-   - ESLint v8 and earlier _or_ legacy config:
-
-     ```yaml
-     # .eslintrc.yml or similar
-
-     plugins:
-       # ... other plugins you're already using
-       - regexp
-
-     rules:
-       # ... other rules you already configured
-       regexp/no-super-linear-backtracking:
-         - error
-         - report: certain
-       regexp/no-super-linear-move:
-         - error
-         - ignorePartial: false
-           ignoreSticky: false
-           report: certain
-     # ... rest of your configuration
-     ```
-
-     ```javascript
-     // .eslintrc.json, .eslintrc.js or similar
-
+   export default [
      {
-       "plugins": [
-         // ... other plugins you're already using
-         "regexp"
-       ],
-       "rules": {
-         // ... other rules you already configured
+       files: ["**/*.{js,jsx,cjs,mjs,ts,cts,mts}"],
+       plugins: {
+         regexp,
+       },
+       rules: {
          "regexp/no-super-linear-backtracking": [
            "error",
            {
-             "report": "certain"
-           }
+             report: "certain",
+           },
          ],
          "regexp/no-super-linear-move": [
            "error",
            {
-             "ignorePartial": false,
-             "ignoreSticky": false,
-             "report": "certain"
-           }
-         ]
-       }
-       // ... rest of your configuration
-     }
-     ```
+             ignorePartial: false,
+             ignoreSticky: false,
+             report: "certain",
+           },
+         ],
+       },
+     },
+     // ... rest of your configuration
+   ];
+   ```
 
 ## Build from source
 
