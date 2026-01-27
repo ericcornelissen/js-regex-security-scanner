@@ -11,6 +11,7 @@ Versioning].
 ## [Unreleased]
 
 - (`6a7be88`) Update dependency eslint-plugin-regexp to v3.0.0.
+- (`0a3862e`) Update dependency @typescript-eslint/parser to v8.54.0.
 
 ## [0.4.48] - 2026-01-15
 
