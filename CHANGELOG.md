@@ -11,6 +11,7 @@ Versioning].
 ## [Unreleased]
 
 - (`75132a4`) Update dependency eslint to v10.0.1.
+- (`827e5f7`) Bump ajv from 6.12.6 to 6.14.0.
 
 ## [0.4.49] - 2026-02-17
 
