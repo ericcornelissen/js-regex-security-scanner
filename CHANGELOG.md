@@ -12,6 +12,7 @@ Versioning].
 
 - (`75132a4`) Update dependency eslint to v10.0.1.
 - (`475b36d`) Update dependency eslint to v10.0.2.
+- (`c98bd56`) Update docker.io/node Docker tag to v24.14.0.
 - (`827e5f7`) Bump ajv from 6.12.6 to 6.14.0.
 
 ## [0.4.49] - 2026-02-17
