@@ -12,6 +12,10 @@ Versioning].
 
 - _No changes yet_
 
+## [0.4.51] - 2026-03-03
+
+- (`7b204df`) Bump minimatch from 10.2.2 to 10.2.4.
+
 ## [0.4.50] - 2026-02-25
 
 - (`75132a4`) Update dependency eslint to v10.0.1.
