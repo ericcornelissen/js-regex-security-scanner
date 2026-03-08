@@ -1,0 +1,40 @@
+# Configuration file for Grant (https://github.com/anchore/grant)
+
+require-license: true
+require-known-license: true
+
+allow:
+  - 0BSD
+  - Apache-2.0
+  - Artistic-2.0
+  - BlueOak-1.0.0
+  - BSD-2-Clause
+  - BSD-3-Clause
+  - CC0-1.0
+  - CC-BY-3.0
+  - ISC
+  - MIT
+  - MPL-2.0
+  - openssl
+  - Python-2.0
+  - Zlib
+
+ignore-packages:
+  # [no licenses found]
+  - qrcode-terminal  # Apache 2.0
+  - node             # MIT
+
+  # [GPL-2.0-only] OK under the 'mere aggregation' clause
+  - alpine-baselayout
+  - alpine-baselayout-data
+  - apk-tools
+  - busybox
+  - busybox-binsh
+  - libapk
+  - scanelf
+  - ssl_client
+
+  # [GPL-2.0-or-later] OK under the 'mere aggregation' clause
+  - libgcc
+  - libstdc++
+  - musl-utils
