@@ -1,0 +1,65 @@
+name: Weekly
+on:
+  schedule:
+    - cron: 0 4 * * 6
+  workflow_dispatch: ~
+
+permissions: read-all
+
+jobs:
+  npm-deps:
+    name: Update transitive dependencies
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write # To push a commit
+      pull-requests: write # To open a Pull Request
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        with:
+          persist-credentials: false
+      - name: Install Node.js
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          cache: npm
+          node-version-file: .nvmrc
+      - name: Create token to create Pull Request
+        uses: actions/create-github-app-token@7e473efe3cb98aa54f8d4bac15400b15fad77d94 # v2.2.0
+        id: automation-token
+        with:
+          app-id: ${{ secrets.AUTOMATION_ID }}
+          private-key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
+      - name: Install dependencies
+        run: npm clean-install
+      - name: Update dependencies
+        run: |
+          npm update --prefer-dedupe
+      - name: Create Pull Request
+        env:
+          GH_TOKEN: ${{ steps.automation-token.outputs.token }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${REPOSITORY}"
+
+          if git diff --quiet package.json package-lock.json; then
+            echo "No changes"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git checkout -B npm-transitive-dependencies
+          git add package.json package-lock.json
+          git commit --message "Update transitive dependencies"
+          git push --force origin npm-transitive-dependencies
+
+          if gh pr view --head npm-transitive-dependencies >/dev/null 2>&1; then
+            exit 0
+          fi
+
+          gh pr create \
+            --title='Update transitive dependencies' \
+            --body='_This Pull Request was created automatically_' \
+            --base='main' --head='npm-transitive-dependencies' \
+            --label='dependencies'
