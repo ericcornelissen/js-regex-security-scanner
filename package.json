@@ -9,7 +9,7 @@
     "@eslint/markdown": "7.5.0",
     "@typescript-eslint/parser": "8.57.0",
     "eslint": "10.0.3",
-    "eslint-plugin-regexp": "3.0.0"
+    "eslint-plugin-regexp": "3.1.0"
   },
   "devDependencies": {
     "depreman": "0.3.12",
