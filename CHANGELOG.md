@@ -11,6 +11,8 @@ Versioning].
 ## [Unreleased]
 
 - (`db54db2`) Update dependency eslint-plugin-regexp to v3.1.0.
+- (`9a4cd36`) Update dependency eslint to v10.1.0.
+- (`4e900bb`) Update dependency flatted to 3.4.2.
 
 ## [0.4.52] - 2026-03-17
 
