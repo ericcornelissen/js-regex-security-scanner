@@ -10,8 +10,6 @@ ignore:
     vex-justification: vulnerable_code_not_in_execute_path
   - vulnerability: CVE-2026-2673
     vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-22184
-    vex-justification: vulnerable_code_not_in_execute_path
   - vulnerability: CVE-2026-27171
     vex-justification: vulnerable_code_not_in_execute_path
 
