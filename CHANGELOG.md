@@ -10,7 +10,8 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`e34c0f4`) Update docker.io/node Docker tag to v24.14.1.
+- (`2b3e0ca`) Bump brace-expansion from 5.0.4 to 5.0.5.
 
 ## [0.4.53] - 2026-03-26
 
