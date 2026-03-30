@@ -10,7 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`57114df`) Update dependency @eslint/markdown to v8.
 
 ## [0.4.54] - 2026-03-29
 
