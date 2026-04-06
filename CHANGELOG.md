@@ -10,6 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
+- (`ff39de2`) Update dependency eslint to v10.2.0.
 - (`57114df`) Update dependency @eslint/markdown to v8.0.0.
 - (`a9451c6`) Update dependency @eslint/markdown to v8.0.1.
 - (`08e8ec3`) Update dependency @typescript-eslint/parser to v8.58.0.
