@@ -98,7 +98,6 @@ To be able to contribute you need at least the following:
 If you decide to make a contribution, please do use the following workflow:
 
 - Fork the repository.
-  - **Tip**: use `--recurse-submodules` when cloning the repository.
 - Create a new branch from the latest `main`.
 - Make your changes on the new branch.
 - Commit to the new branch and push the commit(s).
@@ -172,12 +171,6 @@ against a previous output of the scanner (the snapshot) for that same project.
 
 ##### Running Tests
 
-To be able to run the tests, make sure you:
-
-- Initialized the [git] submodules.
-  - If you're cloning the project, use the `--recurse-submodules` flag.
-  - If you already cloned the repo, use `git submodule update --init`.
-
 To run the tests, run:
 
 ```shell
@@ -209,11 +202,8 @@ make update-test-snapshots ENGINE=podman
 
 To write a test you need to do two things:
 
-1. Create a new project to scan in the `testdata/` directory.
-   - If it's a toy example, simply create a directory and put the relevant files
-     in the directory.
-   - If it's a real-world example, add the repository as a [submodule] to this
-     repository.
+1. Create a new entry to scan in the `testdata/` directory. Simply create a
+   directory and put the relevant files in the directory.
 1. Run the tests, this will automatically initialize the snapshot for the new
    test.
 
@@ -304,6 +294,5 @@ exceptions defined in the `.ndmrc` file.
 [podman]: https://podman.io/
 [security policy]: ./SECURITY.md
 [shellcheck]: https://github.com/koalaman/shellcheck
-[submodule]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
 [syft]: https://github.com/anchore/syft
 [yamllint]: https://github.com/adrienverge/yamllint
