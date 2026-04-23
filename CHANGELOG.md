@@ -16,6 +16,7 @@ Versioning].
 - (`a9451c6`) Update dependency @eslint/markdown to v8.0.1.
 - (`08e8ec3`) Update dependency @typescript-eslint/parser to v8.58.0.
 - (`87fadfc`) Update dependency @typescript-eslint/parser to v8.58.2.
+- (`0b32bd0`) Update dependency @typescript-eslint/parser to v8.59.0.
 
 ## [0.4.54] - 2026-03-29
 
