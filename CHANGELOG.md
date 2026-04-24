@@ -10,6 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
+- (`b7f3e98`) Update dependency node to v24.15.0.
 - (`ff39de2`) Update dependency eslint to v10.2.0.
 - (`23e68e9`) Update dependency eslint to v10.2.1.
 - (`57114df`) Update dependency @eslint/markdown to v8.0.0.
