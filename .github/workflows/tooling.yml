@@ -18,7 +18,7 @@ jobs:
         uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
         id: automation-token
         with:
-          app-id: ${{ secrets.AUTOMATION_ID }}
+          client-id: ${{ secrets.AUTOMATION_ID }}
           private-key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
       - name: Update tooling
         uses: ericcornelissen/tool-versions-update-action/pr@aa1815a7caf1aecd37208e34ad57bec973bcd507 # v2.2.1
