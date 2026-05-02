@@ -10,6 +10,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.55] - 2026-05-02
+
 - (`ff39de2`) Update dependency eslint to v10.2.0.
 - (`23e68e9`) Update dependency eslint to v10.2.1.
 - (`57114df`) Update dependency @eslint/markdown to v8.0.0.
