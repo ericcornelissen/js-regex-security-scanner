@@ -1,4 +1,4 @@
-name: Tooling
+name: Nightly
 on:
   schedule:
     - cron: 0 3 * * *
@@ -7,8 +7,26 @@ on:
 permissions: read-all
 
 jobs:
+  reproducible-builds:
+    name: Reproduce latest release
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        with:
+          persist-credentials: false
+          ref: v0
+      - name: Build latest image
+        run: TAG=rebuid ENGINE_OPTIONS=--no-cache make build
+      - name: Pull published image
+        run: docker.io/ericornelissen/js-re-scan:latest
+      - name: Diff images
+        run: |
+          diffoci diff --semantic \
+            docker://docker.io/ericornelissen/js-re-scan:latest \
+            docker://docker.io/ericornelissen/js-re-scan:rebuild
   update:
-    name: Update
+    name: Update Tooling
     runs-on: ubuntu-24.04
     permissions:
       contents: write # To push a commit
