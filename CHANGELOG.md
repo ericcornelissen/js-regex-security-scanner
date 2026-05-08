@@ -11,6 +11,7 @@ Versioning].
 ## [Unreleased]
 
 - (`b427311`) Update docker.io/node Docker tag to v24.15.0.
+- (`91a6af8`) Update docker.io/node Docker tag to v26.
 
 ## [0.4.55] - 2026-05-02
 
