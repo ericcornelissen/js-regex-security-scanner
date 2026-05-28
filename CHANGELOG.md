@@ -13,6 +13,7 @@ Versioning].
 - (`4063ca2`) Update docker.io/node Docker tag to v26.2.0.
 - (`7903815`) Update dependency @eslint/markdown to v8.0.2.
 - (`42579a7`) Update dependency @typescript-eslint/parser to v8.59.4.
+- (`1daea44`) Update dependency @typescript-eslint/parser to v8.60.0.
 
 ## [0.4.57] - 2026-05-19
 
