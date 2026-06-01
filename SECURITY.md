@@ -7,14 +7,14 @@ issues seriously. We appreciate your efforts to responsibly disclose your
 findings. Due to the non-funded and open-source nature of the project, we take a
 best-efforts approach when it comes to engaging with security reports.
 
-This document should be considered expired after 2026-06-01. If you are reading
-this after that date you should try to find an up-to-date version in the
-official source repository.
+This document should be considered expired after 2027-01-01. If you are reading
+this after that date, try to find an up-to-date version in the official source
+repository.
 
 ## Supported Versions
 
-The table below shows which versions of the project are currently supported
-with security updates.
+The table below shows which versions of the project are currently supported with
+security updates.
 
 | Version | End-of-life |
 | ------: | :---------- |
@@ -22,22 +22,22 @@ with security updates.
 
 ## Reporting a Vulnerability
 
-To report a security issue in the latest version of a supported version range,
-either:
+To report a security issue in a supported version or the development head of the
+project, either (in order of preference):
 
 - [Report it through GitHub][new github advisory], or
-- Send an email to [security@ericcornelissen.dev] with the terms "SECURITY" and
-  "js-re-scan" in the subject line.
+- Send an email to [ericornelissen+security@gmail.com] with the terms "SECURITY"
+  and "js-regex-security-scanner" in the subject line.
 
 Please do not open a regular issue or Pull Request in the public repository.
 
-To report a security issue in an unsupported version of the project, or if the
-latest version of a supported version range isn't affected, please report it
+If a security issue only affects an unsupported version of the project, or the
+latest version of a supported version range is not affected, please report it
 publicly. For example, as a regular issue in the public repository. If in doubt,
 report the issue privately.
 
 [new github advisory]: https://github.com/ericcornelissen/js-regex-security-scanner/security/advisories/new
-[security@ericcornelissen.dev]: mailto:security@ericcornelissen.dev?subject=SECURITY%20%28js-re-scan%29
+[ericornelissen+security@gmail.com]: mailto:ericornelissen+security@gmail.com?subject=SECURITY%20%28js-regex-security-scanner%29
 
 ### What to Include in a Report
 
@@ -54,7 +54,7 @@ Try to include as many of the following items as possible in a security report:
 
 [cwe]: https://cwe.mitre.org/
 
-### Threat Model
+## Threat Model
 
 The scanner considers Docker, ESLint, and its plugins to be trusted. All inputs
 are considered untrusted. Any violation of confidentiality, integrity, and
@@ -66,16 +66,23 @@ considered untrusted.
 
 ## Advisories
 
-> **NOTE:** Advisories will be created only for vulnerabilities present in
-> released versions of the project.
+An advisory will be created only if a vulnerability affects at least one
+released versions of the project. The affected versions range of an advisory
+will by default include all unsupported versions of the project at the time of
+disclosure.
 
-| ID  | Date | Affected versions | Patched versions |
-| :-- | :--- | :---------------- | :--------------- |
-| -   | -    | -                 | -                |
+All advisories are listed in the table below, ordered most to least recent by
+publication date.
 
-_This table is ordered most to least recent._
+| ID  | Date | Affected version(s) | Patched version(s) |
+| :-- | :--- | :------------------ | :----------------- |
+| -   | -    | -                   | -                  |
 
 ## Acknowledgments
+
+If you conduct a security audit of this project we would like to acknowledge it.
+If you found a security issue, you will be credited in the advisory. If you find
+nothing but the audit report is publicly available we will acknowledge it too.
 
 We would like to publicly thank the following reporters:
 
