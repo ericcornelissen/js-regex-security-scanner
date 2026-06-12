@@ -74,16 +74,20 @@ with the help of this scanner (from most to least recent). If you reported a bug
 or advisory based on the results of this scanner, feel free to add it to the
 list!
 
-| Project              | Fix / Advisory               |
-| -------------------- | ---------------------------- |
-| [decamelize]         | [`e9e3041`]                  |
-| [browserslist]       | [`c331c95`]                  |
-| [st]                 | [#103][st-103]               |
-| [@std/path]          | [#6764][@std/path-6764]      |
-| [@eslint/markdown]   | [#463][@eslint/markdown-463] |
-| [@eslint/plugin-kit] | [GHSA-xffm-g5w8-qvg7]        |
-| [shescape]           | [CVE-2022-36064]             |
+| Project                    | Fix / Advisory               |
+| -------------------------- | ---------------------------- |
+| [string.prototype.trimend] | [`14ee151`]                  |
+| [string.prototype.trim]    | [#13][trim-13]               |
+| [ssri]                     | [#151][ssri-151]             |
+| [decamelize]               | [`e9e3041`]                  |
+| [browserslist]             | [`c331c95`]                  |
+| [st]                       | [#103][st-103]               |
+| [@std/path]                | [#6764][@std/path-6764]      |
+| [@eslint/markdown]         | [#463][@eslint/markdown-463] |
+| [@eslint/plugin-kit]       | [GHSA-xffm-g5w8-qvg7]        |
+| [shescape]                 | [CVE-2022-36064]             |
 
+[`14ee151`]: https://github.com/es-shims/String.prototype.trimEnd/commit/14ee1516d13537c2c63afa56c85048ead5f2e7c8
 [`c331c95`]: https://github.com/browserslist/browserslist/commit/c331c95c6aaf77ab284d7e338e462ad74bb5081a
 [`e9e3041`]: https://github.com/sindresorhus/decamelize/commit/e9e304170ecaaccc39d3696d7d816408c29eed71
 [@eslint/markdown-463]: https://github.com/eslint/markdown/pull/463
@@ -95,8 +99,13 @@ list!
 [decamelize]: https://www.npmjs.com/package/decamelize
 [ghsa-xffm-g5w8-qvg7]: https://github.com/advisories/GHSA-xffm-g5w8-qvg7
 [shescape]: https://www.npmjs.com/package/shescape
+[ssri]: https://www.npmjs.com/package/ssri
+[ssri-151]: https://github.com/npm/ssri/pull/151
 [st]: https://www.npmjs.com/package/st
 [st-103]: https://github.com/isaacs/st/pull/103
+[string.prototype.trim]: https://www.npmjs.com/package/string.prototype.trim
+[string.prototype.trimend]: https://www.npmjs.com/package/string.prototype.trimend
+[trim-13]: https://github.com/es-shims/String.prototype.trim/pull/13
 
 ## Migrating to ESLint
 
