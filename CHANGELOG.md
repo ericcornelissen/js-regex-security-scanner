@@ -18,6 +18,7 @@ Versioning].
 - (`1daea44`) Update dependency @typescript-eslint/parser to v8.60.0.
 - (`00d9677`) Update dependency @typescript-eslint/parser to v8.60.1.
 - (`d54d981`) Update dependency @typescript-eslint/parser to v8.61.0.
+- (`4cd715e`) Bump Alpine from `3.23` to `3.24`.
 
 ## [0.4.57] - 2026-05-19
 
