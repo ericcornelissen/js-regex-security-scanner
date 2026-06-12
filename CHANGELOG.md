@@ -11,6 +11,7 @@ Versioning].
 ## [Unreleased]
 
 - (`4063ca2`) Update docker.io/node Docker tag to v26.2.0.
+- (`273fef8`) Update docker.io/node Docker tag to v26.3.0.
 - (`43566a0`) Update dependency eslint to v10.4.1.
 - (`7903815`) Update dependency @eslint/markdown to v8.0.2.
 - (`42579a7`) Update dependency @typescript-eslint/parser to v8.59.4.
