@@ -10,6 +10,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.4.58] - 2026-06-12
+
 - (`4063ca2`) Update docker.io/node Docker tag to v26.2.0.
 - (`273fef8`) Update docker.io/node Docker tag to v26.3.0.
 - (`43566a0`) Update dependency eslint to v10.4.1.
