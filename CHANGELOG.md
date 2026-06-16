@@ -10,7 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`42bf22f`) Update dependency eslint to v10.5.0.
 
 ## [0.4.58] - 2026-06-12
 
