@@ -23,11 +23,11 @@ jobs:
         id: version
         run: |
           VERSION="$(grep 'version=' < Containerfile | awk -F'"' '{print $2}')"
-          echo "version=v${VERSION}" >> "${GITHUB_OUTPUT}"
+          echo "version=v${VERSION}" >>"${GITHUB_OUTPUT}"
           if [ -n "$(git tag --list "v${VERSION}")" ]; then
-            echo 'released=true' >> "${GITHUB_OUTPUT}"
+            echo 'released=true' >>"${GITHUB_OUTPUT}"
           else
-            echo 'released=false' >> "${GITHUB_OUTPUT}"
+            echo 'released=false' >>"${GITHUB_OUTPUT}"
           fi
   git:
     name: Git
