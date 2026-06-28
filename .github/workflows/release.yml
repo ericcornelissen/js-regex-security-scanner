@@ -17,9 +17,6 @@ jobs:
   initiate:
     name: Initiate
     runs-on: ubuntu-24.04
-    permissions:
-      contents: write # To push a commit
-      pull-requests: write # To open a Pull Request
     steps:
       - name: Checkout repository
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
@@ -35,6 +32,8 @@ jobs:
         id: automation-token
         with:
           client-id: ${{ secrets.AUTOMATION_ID }}
+          permission-contents: write # To push a commit
+          permission-pull-requests: write # To open a Pull Request
           private-key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
       - name: Bump version
         env:

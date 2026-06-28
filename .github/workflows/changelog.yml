@@ -10,8 +10,6 @@ jobs:
   add-to-changelog:
     name: Add specific commit
     runs-on: ubuntu-24.04
-    permissions:
-      contents: write # To push a commit
     if: |
       github.event.issue.pull_request &&
       github.event.comment.user.login == 'ericcornelissen' &&
@@ -28,6 +26,8 @@ jobs:
         id: automation-token
         with:
           client-id: ${{ secrets.AUTOMATION_ID }}
+          permission-contents: write # To push a commit
+          permission-pull-requests: read
           private-key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
       - name: Parse comment
         id: comment
