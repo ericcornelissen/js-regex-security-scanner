@@ -45,7 +45,7 @@ jobs:
           permission-pull-requests: write # To open a Pull Request
           private-key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
       - name: Update tooling
-        uses: ericcornelissen/tool-versions-update-action/pr@aa1815a7caf1aecd37208e34ad57bec973bcd507 # v2.2.1
+        uses: ericcornelissen/tool-versions-update-action/pr@e42ba48806082845f434a42b706bfe3f9a807806 # v2.2.2
         with:
           commit-message: Bump {{updated-tools}} from {{updated-old-versions}} to {{updated-new-versions}}
           labels: dependencies
