@@ -10,6 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
+- (`50767af`) Update dependency eslint to v10.6.0.
 - (`5fdcba7`) Update dependency @typescript-eslint/parser to v8.62.1.
 - (`ed337fb`) Update dependency eslint-plugin-regexp to v3.1.1.
 - (`47a23f6`) Update dependency @typescript-eslint/parser to v8.62.0.
