@@ -10,6 +10,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.5.0] - 2026-07-14
+
 - (`6acc1a9`) Add SARIF support.
 - (`044cb8c`) Update dependency @typescript-eslint/parser to v8.63.0.
 - (`e119908`) Update dependency @eslint/markdown to v8.0.3.
