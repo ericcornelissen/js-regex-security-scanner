@@ -12,11 +12,13 @@
       "MIT",
       "openssl",
       "Python-2.0",
+      "X11",
       "zlib"
     ]
   },
   "packages": {
-    "depreman": "*"
+    "depreman": "*",
+    "jschardet": "3.1.4"
   },
   "corrections": true
 }

@@ -160,6 +160,7 @@ reproducible-build: build ## Check if the container is reproducible
 sbom: $(SBOM_SPDX_FILE) $(SBOM_SYFT_FILE) ## Generate a Software Bill Of Materials (SBOM)
 
 .PHONY: test update-test-snapshots
+test: TAG=test
 test: build $(NODE_MODULES) ## Run the tests
 	@CONTAINER_ENGINE=$(ENGINE) \
 		node --test \
@@ -167,6 +168,7 @@ test: build $(NODE_MODULES) ## Run the tests
 		--experimental-test-snapshots \
 		'tests/*.test.js'
 
+update-test-snapshots: TAG=test
 update-test-snapshots: build $(NODE_MODULES) ## Update the test snapshots
 	@CONTAINER_ENGINE=$(ENGINE) \
 		node --test \
@@ -198,7 +200,7 @@ endif
 	@touch $(TOOLING)
 $(IMAGES_DIR): | $(TEMP_DIR)
 	@mkdir -p $(IMAGES_DIR)
-$(IMAGES_DIR)/%: Containerfile eslint.config.js package*.json | $(IMAGES_DIR)
+$(IMAGES_DIR)/%: Containerfile entrypoint.sh eslint.config.js package*.json | $(IMAGES_DIR)
 	@$(ENGINE) build \
 		$(ENGINE_OPTIONS) \
 		--file Containerfile \

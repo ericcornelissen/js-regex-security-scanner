@@ -20,8 +20,10 @@ LABEL org.opencontainers.image.title="js-regex-security-scanner" \
 	org.opencontainers.image.licenses="Apache-2.0" \
 	org.opencontainers.image.source="https://github.com/ericcornelissen/js-regex-security-scanner"
 
-ENV NODE_ENV=production
+RUN apk add --no-cache bash=5.3.9-r1 \
+	&& rm /var/log/apk.log
 
+ENV NODE_ENV=production
 USER node:node
 RUN mkdir /home/node/js-re-scan
 WORKDIR /home/node/js-re-scan
@@ -35,27 +37,8 @@ RUN npm clean-install \
 	&& \
 	rm -rf /home/node/.npm /tmp/node-compile-cache
 
-COPY --chown=node:node ./eslint.config.js ./SECURITY.md ./LICENSE ./
+COPY --chown=node:node ./entrypoint.sh ./eslint.config.js ./SECURITY.md ./LICENSE ./
 
 WORKDIR /project
 
-ENTRYPOINT [ \
-	"/home/node/js-re-scan/node_modules/.bin/eslint", \
-	\
-	# This option avoids unexpected errors if the project being scanned includes
-	# an ESLint configuration file.
-	"--no-config-lookup", \
-	\
-	# This option avoids errors due to ignore directives for rules not known to
-	# the ESLint setup in this project.
-	"--no-inline-config", \
-	\
-	# Explicitly specify a path to the local configuration file so it can't be
-	# missed.
-	"--config", \
-	"/home/node/js-re-scan/eslint.config.js", \
-	\
-	# The folder that should be scanned. This is the folder that users should
-	# mount their project to.
-	"." \
-]
+ENTRYPOINT ["/home/node/js-re-scan/entrypoint.sh"]

@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@eslint/markdown": "8.0.3",
+    "@microsoft/eslint-formatter-sarif": "3.1.0",
     "@typescript-eslint/parser": "8.63.0",
     "eslint": "10.6.0",
     "eslint-plugin-regexp": "3.1.1"
