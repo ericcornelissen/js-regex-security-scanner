@@ -90,6 +90,7 @@ To be able to contribute you need at least the following:
 - (Optional) [Grype] (see `.tool-versions` for preferred version);
 - (Optional) [hadolint] (see `.tool-versions` for preferred version);
 - (Optional) [ShellCheck] (see `.tool-versions` for preferred version);
+- (Optional) [shfmt] (see `.tool-versions` for preferred version);
 - (Optional) [Syft] (see `.tool-versions` for preferred version);
 - (Optional) [yamllint] (see `.tool-versions` for preferred version);
 
@@ -294,5 +295,6 @@ exceptions defined in the `.ndmrc` file.
 [podman]: https://podman.io/
 [security policy]: ./SECURITY.md
 [shellcheck]: https://github.com/koalaman/shellcheck
+[shfmt]: https://github.com/mvdan/sh
 [syft]: https://github.com/anchore/syft
 [yamllint]: https://github.com/adrienverge/yamllint

@@ -37,6 +37,18 @@ To use [Podman] instead of [Docker] you can replace `docker` by `podman` in any
 example command. To use the [GitHub Container Registry] instead of [Docker] hub
 you can use `ghcr.io/ericcornelissen/js-re-scan` instead.
 
+### SARIF
+
+It is possible to get a report in SARIF format for programmatic consuption of
+the scan results. Simply use the `--sarif` and `--output-file` options:
+
+<!-- doctest:ignore -->
+
+```shell
+docker run --rm -v $(pwd):/project docker.io/ericornelissen/js-re-scan:latest  \
+  --sarif --output-file js-re-scan.sarif
+```
+
 ### Ignore patterns
 
 If necessary you can ignore certain files or directories using the option
@@ -189,7 +201,8 @@ This scanner runs [ESLint] with the [eslint-plugin-regexp] plugin to find and
 report on regular expressions that violate rules with security implications.
 
 TypeScript support is provided by [@typescript-eslint/parser], MarkDown support
-is provided by [@eslint/markdown].
+is provided by [@eslint/markdown], SARIF support support is provided by
+[@microsoft/eslint-formatter-sarif].
 
 ## License
 
@@ -202,6 +215,7 @@ Please [open an issue] if you found a mistake or if you have a suggestion for
 how to improve the documentation.
 
 [@eslint/markdown]: https://www.npmjs.com/package/@eslint/markdown
+[@microsoft/eslint-formatter-sarif]: https://www.npmjs.com/package/@microsoft/eslint-formatter-sarif
 [@typescript-eslint/parser]: https://www.npmjs.com/package/@typescript-eslint/parser
 [cc by-sa 4.0]: https://creativecommons.org/licenses/by-sa/4.0/
 [docker]: https://www.docker.com/

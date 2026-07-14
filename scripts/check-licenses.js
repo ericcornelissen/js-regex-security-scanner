@@ -119,6 +119,11 @@ const exceptions = [
 		reason: "OK under the 'mere aggregation' clause",
 	},
 	{
+		name: "bash",
+		licenses: ["GPL-3.0-or-later"],
+		reason: "OK under the 'mere aggregation' clause",
+	},
+	{
 		name: "busybox",
 		licenses: ["GPL-2.0-only"],
 		reason: "OK under the 'mere aggregation' clause",
@@ -141,6 +146,11 @@ const exceptions = [
 	{
 		name: "libstdc++",
 		licenses: ["GPL-2.0-or-later AND LGPL-2.1-or-later"],
+		reason: "OK under the 'mere aggregation' clause",
+	},
+	{
+		name: "readline",
+		licenses: ["GPL-3.0-or-later"],
 		reason: "OK under the 'mere aggregation' clause",
 	},
 	{
