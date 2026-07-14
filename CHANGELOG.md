@@ -10,6 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
+- (`6acc1a9`) Add SARIF support.
 - (`044cb8c`) Update dependency @typescript-eslint/parser to v8.63.0.
 - (`e119908`) Update dependency @eslint/markdown to v8.0.3.
 - (`839ffc4`) Update docker.io/node Docker tag to v26.4.0.
