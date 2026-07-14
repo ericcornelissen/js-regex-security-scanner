@@ -51,8 +51,8 @@ clean: ## Clean the repository
 	@$(ENGINE) rmi --force \
 		$(IMAGE_NAME)
 
-.PHONY: format format-js format-md
-format: format-js format-md ## Format the project
+.PHONY: format format-js format-md format-sh
+format: format-js format-md format-sh ## Format the project
 
 format-js: $(NODE_MODULES) ## Format JavaScript files
 	@npx prettier \
@@ -75,6 +75,13 @@ format-md: $(NODE_MODULES) ## Format MarkDown files
 		\
 		./*.md
 
+format-sh: $(TOOLING) ## Format shell scripts
+	@shfmt \
+		--simplify \
+		--write \
+		\
+		./*.sh
+
 .PHONY: help
 help: ## Show this help message
 	@printf "Usage: make <command>\n\n"
@@ -86,14 +93,14 @@ help: ## Show this help message
 .PHONY: init
 init: $(NODE_MODULES) ## Initialize the project dependencies
 
-.PHONY: check check-ci check-formatting check-formatting-js check-formatting-md check-image check-licenses check-licenses-image check-licenses-npm check-md check-yml
-check: check-ci check-formatting check-image check-licenses check-md check-yml ## Lint the project
+.PHONY: check check-ci check-formatting check-formatting-js check-formatting-md check-formatting-sh check-image check-licenses check-licenses-image check-licenses-npm check-md check-sh check-yml
+check: check-ci check-formatting check-image check-licenses check-md check-sh check-yml ## Lint the project
 
 check-ci: $(TOOLING) ## Check the Continuous Integration configuration files
 	@SHELLCHECK_OPTS='--enable=avoid-nullary-conditions --enable=deprecate-which --enable=quote-safe-variables --enable=require-variable-braces --enable=useless-use-of-cat' \
 		actionlint
 
-check-formatting: check-formatting-js check-formatting-md ## Check the formatting
+check-formatting: check-formatting-js check-formatting-md check-formatting-sh ## Check the formatting
 
 check-formatting-js: $(NODE_MODULES) ## Check the formatting of JavaScript files
 	@npx prettier \
@@ -115,6 +122,13 @@ check-formatting-md: $(NODE_MODULES) ## Check the formatting of MarkDown files
 		--ignore-path .gitignore \
 		\
 		./*.md
+
+check-formatting-sh: $(TOOLING) ## Check the formatting of shell scripts
+	@shfmt \
+		--simplify \
+		--diff \
+		\
+		./*.sh
 
 check-image: $(TOOLING) build ## Check the Containerfile
 	@hadolint \
@@ -140,6 +154,10 @@ check-md: $(NODE_MODULES) ## Check the MarkDown files
 		--ignore tests/snapshots \
 		--ignore testdata/ \
 		.
+
+check-sh: $(TOOLING) ## Check the shell scripts
+	@shellcheck \
+		./*.sh
 
 check-yml: $(TOOLING) ## Check the YAML files
 	@yamllint \

@@ -14,11 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-sarif=""
+sarif=()
 user_args=()
 for arg in "$@"; do
-	if [[ "${arg}" == '--sarif' ]]; then
-		sarif='--format /home/node/js-re-scan/node_modules/@microsoft/eslint-formatter-sarif/sarif.js'
+	if [[ ${arg} == '--sarif' ]]; then
+		sarif=(
+			--format
+			'/home/node/js-re-scan/node_modules/@microsoft/eslint-formatter-sarif/sarif.js'
+		)
 	else
 		user_args+=("${arg}")
 	fi
@@ -39,7 +42,7 @@ args=(
 	'/home/node/js-re-scan/eslint.config.js'
 
 	# If enabled, use the flags for enabling SARIF output.
-	${sarif[@]}
+	"${sarif[@]}"
 
 	# The folder that should be scanned. This is the folder that users should
 	# mount their project to.
@@ -47,7 +50,7 @@ args=(
 
 	# Any user supplied arguments for ESLint. Enables use of `--ignore-pattern`
 	# and provided backwards compatibility with v0.4.59 and before.
-	${user_args[@]}
+	"${user_args[@]}"
 )
 
-/home/node/js-re-scan/node_modules/.bin/eslint ${args[@]}
+/home/node/js-re-scan/node_modules/.bin/eslint "${args[@]}"

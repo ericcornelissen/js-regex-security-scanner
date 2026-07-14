@@ -38,6 +38,7 @@ jobs:
           - formatting
           - image
           - md
+          - sh
           - yml
     steps:
       - name: Checkout repository
