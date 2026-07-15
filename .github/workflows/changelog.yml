@@ -52,6 +52,7 @@ jobs:
           LINE=$(echo "- (\`${COMMIT}\`) ${DESCRIPTION}.")
           sed -i '/## \[Unreleased\]/{n; a '"${LINE}"'
           }' CHANGELOG.md
+          sed -i '/^- _No changes yet_$/d' CHANGELOG.md
       - name: Create commit
         env:
           BRANCH: ${{ steps.pr.outputs.branch }}
