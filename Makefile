@@ -212,8 +212,8 @@ $(TEMP_DIR):
 $(TOOLING): .tool-versions | $(TEMP_DIR)
 ifneq (, $(shell which asdf))
 	@asdf install
-else ifneq (, $(shell which rtx))
-	@rtx install
+else ifneq (, $(shell which mise))
+	@mise install
 endif
 	@touch $(TOOLING)
 $(IMAGES_DIR): | $(TEMP_DIR)
