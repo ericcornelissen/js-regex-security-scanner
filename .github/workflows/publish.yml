@@ -87,7 +87,7 @@ jobs:
       - name: Get cosign version
         id: versions
         run: |
-          COSIGN_VERSION="$(grep cosign < .tool-versions | awk '{print $2}')"
+          COSIGN_VERSION="$(grep cosign <.tool-versions | awk '{print $2}')"
           echo "cosign=${COSIGN_VERSION}" >>"${GITHUB_OUTPUT}"
       - name: Install cosign
         uses: sigstore/cosign-installer@ba7bc0a3fef59531c69a25acd34668d6d3fe6f22 # v4.1.0
@@ -145,7 +145,7 @@ jobs:
       - name: Get cosign version
         id: versions
         run: |
-          COSIGN_VERSION="$(grep cosign < .tool-versions | awk '{print $2}')"
+          COSIGN_VERSION="$(grep cosign <.tool-versions | awk '{print $2}')"
           echo "cosign=${COSIGN_VERSION}" >>"${GITHUB_OUTPUT}"
       - name: Install cosign
         uses: sigstore/cosign-installer@ba7bc0a3fef59531c69a25acd34668d6d3fe6f22 # v4.1.0
