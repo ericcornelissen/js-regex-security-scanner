@@ -84,15 +84,15 @@ To be able to contribute you need at least the following:
 - [Make];
 - [Node.js] v26.0.0 or higher and [npm] v8.1.2 or higher;
 - (Recommended) a code editor with [EditorConfig] support;
-- (Optional) [actionlint] (see `.tool-versions` for preferred version);
-- (Optional) [diffoci] (see `.tool-versions` for preferred version);
-- (Optional) [Dockle] (see `.tool-versions` for preferred version);
-- (Optional) [Grype] (see `.tool-versions` for preferred version);
-- (Optional) [hadolint] (see `.tool-versions` for preferred version);
-- (Optional) [ShellCheck] (see `.tool-versions` for preferred version);
-- (Optional) [shfmt] (see `.tool-versions` for preferred version);
-- (Optional) [Syft] (see `.tool-versions` for preferred version);
-- (Optional) [yamllint] (see `.tool-versions` for preferred version);
+- (Optional) [actionlint] (see `aqua.yml` for preferred version);
+- (Optional) [diffoci] (see `aqua.yml` for preferred version);
+- (Optional) [Dockle] (see `aqua.yml` for preferred version);
+- (Optional) [Grype] (see `aqua.yml` for preferred version);
+- (Optional) [hadolint] (see `aqua.yml` for preferred version);
+- (Optional) [ShellCheck] (see `aqua.yml` for preferred version);
+- (Optional) [shfmt] (see `aqua.yml` for preferred version);
+- (Optional) [Syft] (see `aqua.yml` for preferred version);
+- (Optional) [yamllint] (see `aqua.yml` for preferred version);
 
 ### Workflow
 
