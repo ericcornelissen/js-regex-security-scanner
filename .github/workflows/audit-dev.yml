@@ -18,6 +18,9 @@ on:
 
 permissions: read-all
 
+env:
+  AQUA_DISABLE_POLICY: true
+
 jobs:
   deprecations:
     name: Deprecations

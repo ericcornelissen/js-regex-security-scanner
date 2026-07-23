@@ -8,6 +8,9 @@ on:
 
 permissions: read-all
 
+env:
+  AQUA_DISABLE_POLICY: true
+
 jobs:
   build:
     name: Build with ${{ matrix.engine }}
@@ -94,9 +97,6 @@ jobs:
         uses: aquaproj/aqua-installer@96a9bc20066c5bf5e275b41019cfc165b25f4e2e # v4.0.5
         with:
           aqua_version: v2.62.0
-      - name: Install Grant
-        run: |
-          curl -sSfL https://get.anchore.io/grant | sh -s -- -b /usr/local/bin
       - name: Check container image licenses
         if: ${{ failure() || success() }}
         run: make check-licenses-image

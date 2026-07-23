@@ -17,11 +17,12 @@ allow:
   - MPL-2.0
   - openssl
   - Python-2.0
+  - X11
   - Zlib
 
 ignore-packages:
   # [no licenses found]
-  - qrcode-terminal  # Apache 2.0
+  - qrcode-terminal  # Apache-2.0
   - node             # MIT
 
   # [GPL-2.0-only] OK under the 'mere aggregation' clause
@@ -38,3 +39,10 @@ ignore-packages:
   - libgcc
   - libstdc++
   - musl-utils
+
+  # [GPL-3.0-or-later] OK under the 'mere aggregation' clause
+  - bash
+  - readline
+
+  # [LGPL-2.1-or-later] OK under the 'mere aggregation' clause
+  - jschardet

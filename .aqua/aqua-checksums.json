@@ -1,6 +1,26 @@
 {
   "checksums": [
     {
+      "id": "github_release/github.com/anchore/grant/v0.6.8/grant_0.6.8_darwin_amd64.tar.gz",
+      "checksum": "E8B2B3B3666EF4BB3731D0399485215258F8C205AB30F1557B9B51B34B8BD44C",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/anchore/grant/v0.6.8/grant_0.6.8_darwin_arm64.tar.gz",
+      "checksum": "3D8F315F4F27D9EFC8FC712EE27F10CD0DF64AC794226580EA5346234F2D6806",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/anchore/grant/v0.6.8/grant_0.6.8_linux_amd64.tar.gz",
+      "checksum": "6500F8BBF0F20FB993DE8084686E199F0BA1EB494769FF75454286D5EF63F919",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/anchore/grant/v0.6.8/grant_0.6.8_linux_arm64.tar.gz",
+      "checksum": "15EC0B4346A64B5580958DC62C4E7C25CA9E59B7582BAB9706679F6B9D2288B8",
+      "algorithm": "sha256"
+    },
+    {
       "id": "github_release/github.com/anchore/grype/v0.116.0/grype_0.116.0_darwin_amd64.tar.gz",
       "checksum": "92DC64F7F1C71F92F610B250D801837C75A3C7336CB44656E59C4F1A07939163",
       "algorithm": "sha256"

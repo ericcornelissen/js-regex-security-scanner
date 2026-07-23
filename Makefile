@@ -138,16 +138,10 @@ check-image: $(TOOLING) build ## Check the Containerfile
 		--ignore CIS-DI-0005 --ignore CIS-DI-0006 --ignore DKL-DI-0006 \
 		$(IMAGE_NAME)
 
-check-licenses: check-licenses-image check-licenses-npm ## Check the dependency licenses
-
-check-licenses-image: .grant.yml $(TOOLING) $(IMAGES_DIR)/latest ## Check the container image dependency licenses
+check-licenses: .grant.yml $(TOOLING) $(IMAGES_DIR)/latest ## Check the dependency licenses
 	@grant check \
 		--config .grant.yml \
 		$(IMAGE_NAME):latest
-
-check-licenses-npm: $(NODE_MODULES) ## Check the npm dependency licenses
-	@npx licensee \
-		--errors-only
 
 check-md: $(NODE_MODULES) ## Check the MarkDown files
 	@npx markdownlint \
@@ -215,7 +209,7 @@ $(NODE_MODULES): .npmrc package*.json
 
 $(TEMP_DIR):
 	@mkdir $(TEMP_DIR)
-$(TOOLING): aqua.yml | $(TEMP_DIR)
+$(TOOLING): .aqua/aqua.yml | $(TEMP_DIR)
 ifneq (, $(shell which aqua))
 	@aqua install
 endif
