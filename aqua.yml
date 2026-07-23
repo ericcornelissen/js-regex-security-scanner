@@ -13,7 +13,7 @@ packages:
   - name: wasilibs/go-yamllint@v1.38.0
 registries:
   - type: standard
-    ref: v4.539.0 # renovate: depName=aquaproj/aqua-registry
+    ref: v4.541.0
 checksum:
   enabled: true
   require_checksum: true
