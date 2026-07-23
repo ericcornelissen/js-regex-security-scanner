@@ -70,6 +70,6 @@ jobs:
 
           gh pr create \
             --base='main' --head='bump-tools' \
-            --label='dependencies' --label='dependencies' \
+            --label='dependencies' \
             --title='Bump tools' \
             --body='_This Pull Request was created automatically by running `aqua update` and `aqua update-checksum`._'
