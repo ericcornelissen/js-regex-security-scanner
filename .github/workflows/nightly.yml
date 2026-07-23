@@ -1,0 +1,75 @@
+name: Nightly
+on:
+  schedule:
+    - cron: 0 3 * * *
+  workflow_dispatch: ~
+
+permissions: read-all
+
+jobs:
+  reproducible-builds:
+    name: Reproduce latest release
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+          ref: v0
+      - name: Install tooling
+        uses: aquaproj/aqua-installer@96a9bc20066c5bf5e275b41019cfc165b25f4e2e # v4.0.5
+        with:
+          aqua_version: v2.62.0
+      - name: Build latest image
+        run: TAG=rebuild ENGINE_OPTIONS=--no-cache make build
+      - name: Pull published image
+        run: docker pull docker.io/ericornelissen/js-re-scan:latest
+      - name: Diff images
+        run: |
+          diffoci diff --semantic \
+            docker://docker.io/ericornelissen/js-re-scan:latest \
+            docker://docker.io/ericornelissen/js-re-scan:rebuild
+  update:
+    name: Update Tooling
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+      - name: Create token to create Pull Request
+        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
+        id: automation-token
+        with:
+          client-id: ${{ secrets.AUTOMATION_ID }}
+          permission-contents: write # To push a commit
+          permission-pull-requests: write # To open a Pull Request
+          private-key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
+      - name: Install tooling
+        uses: aquaproj/aqua-installer@96a9bc20066c5bf5e275b41019cfc165b25f4e2e # v4.0.5
+        with:
+          aqua_version: v2.62.0
+      - name: Update tooling
+        run: |
+          aqua update
+          aqua update-checksum --prune
+      - name: Create Pull Request
+        env:
+          GH_TOKEN: ${{ steps.automation-token.outputs.token }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+
+          git checkout -B 'bump-tools'
+          git add 'aqua.yml' 'aqua-checksums.json'
+          git commit --message 'Bump tools with aqua'
+
+          git remote set-url 'origin' "https://x-access-token:${GH_TOKEN}@github.com/${REPOSITORY}"
+          git push --force 'origin' 'bump-tools'
+
+          gh pr create \
+            --base='main' --head='bump-tools' \
+            --label='dependencies' \
+            --title='Bump tools' \
+            --body='_This Pull Request was created automatically by running `aqua update` and `aqua update-checksum`._'

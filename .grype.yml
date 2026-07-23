@@ -5,12 +5,13 @@ file: vulns.json
 
 fail-on-severity: low
 
+# To identify unused ignore directives, run the two commands below which will
+# output the *used* ignore directives. All others are unused and can be pruned.
+#     make vulns.json
+#     cat vulns.json | jq '[.ignoredMatches[].appliedIgnoreRules]|flatten|unique'
+# Based on: <https://github.com/anchore/grype/issues/3050>
 ignore:
   - vulnerability: CVE-2025-60876
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-27171
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-22184
     vex-justification: vulnerable_code_not_in_execute_path
 
   # Ignore all npm vulnerabilities. This project relies on `npm audit` instead.

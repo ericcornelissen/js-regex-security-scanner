@@ -10,7 +10,80 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.5.1] - 2026-07-23
+
+- (`6fb594c`) Update docker.io/node Docker tag to v26.5.0.
+- (`4eae75d`) Update dependency eslint to v10.7.0.
+- (`6a8bc99`) Update dependency js-yaml to v4.3.0.
+
+## [0.5.0] - 2026-07-14
+
+- (`6acc1a9`) Add SARIF support.
+- (`044cb8c`) Update dependency @typescript-eslint/parser to v8.63.0.
+- (`e119908`) Update dependency @eslint/markdown to v8.0.3.
+- (`839ffc4`) Update docker.io/node Docker tag to v26.4.0.
+- (`50767af`) Update dependency eslint to v10.6.0.
+- (`5fdcba7`) Update dependency @typescript-eslint/parser to v8.62.1.
+- (`ed337fb`) Update dependency eslint-plugin-regexp to v3.1.1.
+- (`47a23f6`) Update dependency @typescript-eslint/parser to v8.62.0.
+
+## [0.4.59] - 2026-06-24
+
+- (`759d111`) Update docker.io/node Docker tag to v26.3.1.
+- (`42bf22f`) Update dependency eslint to v10.5.0.
+
+## [0.4.58] - 2026-06-12
+
+- (`4063ca2`) Update docker.io/node Docker tag to v26.2.0.
+- (`273fef8`) Update docker.io/node Docker tag to v26.3.0.
+- (`43566a0`) Update dependency eslint to v10.4.1.
+- (`7903815`) Update dependency @eslint/markdown to v8.0.2.
+- (`42579a7`) Update dependency @typescript-eslint/parser to v8.59.4.
+- (`1daea44`) Update dependency @typescript-eslint/parser to v8.60.0.
+- (`00d9677`) Update dependency @typescript-eslint/parser to v8.60.1.
+- (`d54d981`) Update dependency @typescript-eslint/parser to v8.61.0.
+- (`4cd715e`) Bump Alpine from `3.23` to `3.24`.
+
+## [0.4.57] - 2026-05-19
+
+- (`3853898`) Update dependency eslint to v10.4.0.
+- (`2de54ea`) Update dependency @typescript-eslint/parser to v8.59.3.
+
+## [0.4.56] - 2026-05-08
+
+- (`b427311`) Update docker.io/node Docker tag to v24.15.0.
+- (`91a6af8`) Update docker.io/node Docker tag to v26.
+- (`a4aa894`) Update dependency eslint to v10.3.0.
+- (`c699c3f`) Update dependency @typescript-eslint/parser to v8.59.2.
+
+## [0.4.55] - 2026-05-02
+
+- (`ff39de2`) Update dependency eslint to v10.2.0.
+- (`23e68e9`) Update dependency eslint to v10.2.1.
+- (`57114df`) Update dependency @eslint/markdown to v8.0.0.
+- (`a9451c6`) Update dependency @eslint/markdown to v8.0.1.
+- (`08e8ec3`) Update dependency @typescript-eslint/parser to v8.58.0.
+- (`87fadfc`) Update dependency @typescript-eslint/parser to v8.58.2.
+- (`0b32bd0`) Update dependency @typescript-eslint/parser to v8.59.0.
+
+## [0.4.54] - 2026-03-29
+
+- (`e34c0f4`) Update docker.io/node Docker tag to v24.14.1.
+- (`2b3e0ca`) Bump brace-expansion from 5.0.4 to 5.0.5.
+
+## [0.4.53] - 2026-03-26
+
+- (`db54db2`) Update dependency eslint-plugin-regexp to v3.1.0.
+- (`9a4cd36`) Update dependency eslint to v10.1.0.
+- (`4e900bb`) Update dependency flatted to 3.4.2.
+- (`47600ad`) Update dependency picomatch to 4.0.4.
+
+## [0.4.52] - 2026-03-17
+
 - (`44bbc25`) Update dependency eslint to v10.0.3.
+- (`4bb9e12`) Update dependency @typescript-eslint/parser to v8.57.0.
 
 ## [0.4.51] - 2026-03-03
 
@@ -25,7 +98,7 @@ Versioning].
 
 ## [0.4.49] - 2026-02-17
 
-- (`1a99c5c`) Update ESLint to v10.
+- (`1a99c5c`) Update ESLint to v10.0.0.
 - (`6a7be88`) Update dependency eslint-plugin-regexp to v3.0.0.
 - (`0a3862e`) Update dependency @typescript-eslint/parser to v8.54.0.
 - (`28a286f`) Update dependency @typescript-eslint/parser to v8.55.0.

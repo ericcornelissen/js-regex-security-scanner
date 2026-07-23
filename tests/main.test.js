@@ -24,18 +24,20 @@ test("main", async (t) => {
 				args = fs.readFileSync(argsPath, { encoding: "utf-8" }).trim();
 			}
 
-			const { stdout } = cp.spawnSync(
+			const { status, stderr, stdout } = cp.spawnSync(
 				process.env.CONTAINER_ENGINE,
 				[
 					"run",
 					"--rm",
 					"-v",
 					`${dirPath}:/project`,
-					"ericornelissen/js-re-scan:latest",
+					"ericornelissen/js-re-scan:test",
 					...(args?.split(/\s+/) || []),
 				],
 				{ encoding: "utf-8" },
 			);
+			t.assert.snapshot(status);
+			t.assert.snapshot(stderr);
 			t.assert.snapshot(stdout);
 		});
 	}

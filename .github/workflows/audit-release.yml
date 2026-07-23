@@ -7,86 +7,78 @@ on:
 permissions: read-all
 
 jobs:
-  deprecations:
-    name: Deprecations
+  audit:
+    name: Audit ${{ matrix.release }}
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
-        ref:
-          - v0
+        include:
+          - release: v0
+            main: main
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+      # Setup
+      - name: Checkout release
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        id: checkout
         with:
-          ref: ${{ matrix.ref }}
+          ref: ${{ matrix.release }}
           persist-credentials: false
+      - name: Install tooling
+        uses: aquaproj/aqua-installer@96a9bc20066c5bf5e275b41019cfc165b25f4e2e # v4.0.5
+        with:
+          aqua_version: v2.62.0
       - name: Install Node.js
-        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           cache: npm
           node-version-file: .nvmrc
-      - name: Insert custom configuration
-        env:
-          NDMRC: ${{ vars.NDMRC }}
-        run: echo "${NDMRC}" | tee .ndmrc
-      - name: Audit production deprecation warnings
-        run: make audit-deprecations-npm ARGS="--omit=dev"
-  image:
-    name: Image
-    runs-on: ubuntu-24.04
-    strategy:
-      fail-fast: false
-      matrix:
-        ref:
-          - v0
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
-        id: checkout
-        with:
-          ref: ${{ matrix.ref }}
-          persist-credentials: false
-      - name: Install asdf
-        uses: asdf-vm/actions/setup@1902764435ca0dd2f3388eea723a4f92a4eb8302 # v4.0.0
-      - name: Configure asdf plugins
-        run: |
-          asdf plugin add diffoci https://github.com/ericcornelissen/asdf-diffoci
-      - name: Install tooling
-        uses: asdf-vm/actions/install@1902764435ca0dd2f3388eea723a4f92a4eb8302 # v4.0.0
+
+      # Audit
       - name: Insert custom configuration
         env:
           GRYPERC: ${{ vars.GRYPERC }}
-        run: echo "${GRYPERC}" | tee .grype.yml
-      - name: Audit dependencies in container image
-        run: make audit-vulnerabilities-image
+          NDMRC: ${{ vars.NDMRC }}
+        run: |
+          echo 'Grype configuration'
+          echo "${GRYPERC}" | tee .grype.yml
+          echo 'Depreman configuration'
+          echo "${NDMRC}" | tee .ndmrc
+      - name: Audit production dependencies
+        run: |
+          make audit-deprecations-npm ARGS="--omit=dev"
+          make audit-vulnerabilities-image
+          make audit-vulnerabilities-npm ARGS="--omit dev"
       - name: Upload SBOM and vulnerability scan
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
-        if: ${{ failure() || success() }}
+        if: ${{ failure() }}
         with:
           if-no-files-found: error
           name: container-scan-${{ steps.checkout.outputs.commit }}
           path: |
             sbom-syft.json
             vulns.json
-  npm:
-    name: npm
-    runs-on: ubuntu-24.04
-    strategy:
-      fail-fast: false
-      matrix:
-        ref:
-          - v0
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+
+      # Trigger release
+      - name: Checkout main
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        if: ${{ failure() }}
         with:
-          ref: ${{ matrix.ref }}
+          ref: ${{ matrix.main }}
           persist-credentials: false
-      - name: Install Node.js
-        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+      - name: Create token to create Pull Request
+        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
+        if: ${{ failure() }}
+        id: automation-token
         with:
-          cache: npm
-          node-version-file: .nvmrc
-      - name: Audit production npm dependencies
-        run: make audit-vulnerabilities-npm ARGS="--omit dev"
+          client-id: ${{ secrets.AUTOMATION_ID }}
+          permission-actions: write # To trigger another workflow
+          permission-contents: read
+          private-key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
+      - name: Trigger new release if main is clean
+        if: ${{ failure() }}
+        env:
+          GH_TOKEN: ${{ steps.automation-token.outputs.token }}
+        run: |
+          make audit
+          gh workflow run release.yml -f update_type=patch
