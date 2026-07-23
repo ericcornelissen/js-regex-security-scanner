@@ -138,14 +138,10 @@ check-image: $(TOOLING) build ## Check the Containerfile
 		--ignore CIS-DI-0005 --ignore CIS-DI-0006 --ignore DKL-DI-0006 \
 		$(IMAGE_NAME)
 
-check-licenses: check-licenses-image check-licenses-npm ## Check the dependency licenses
-
-check-licenses-image: $(SBOM_SYFT_FILE) ## Check the container image dependency licenses
-	@node scripts/check-licenses.js
-
-check-licenses-npm: $(NODE_MODULES) ## Check the npm dependency licenses
-	@npx licensee \
-		--errors-only
+check-licenses: .grant.yml $(TOOLING) $(IMAGES_DIR)/latest ## Check the dependency licenses
+	@grant check \
+		--config .grant.yml \
+		$(IMAGE_NAME):latest
 
 check-md: $(NODE_MODULES) ## Check the MarkDown files
 	@npx markdownlint \
@@ -199,9 +195,13 @@ update-test-snapshots: build $(NODE_MODULES) ## Update the test snapshots
 verify: build check test ## Verify project is in a good state
 
 $(SBOM_SPDX_FILE) $(SBOM_SYFT_FILE): .syft.yml $(TOOLING) $(IMAGES_DIR)/latest
-	@syft $(IMAGE_NAME):latest
+	@syft scan \
+		--config .syft.yml \
+		$(IMAGE_NAME):latest
 $(VULN_FILE): .grype.yml $(TOOLING) $(SBOM_SPDX_FILE)
-	@grype $(SBOM_SPDX_FILE)
+	@grype \
+		--config .grype.yml \
+		$(SBOM_SPDX_FILE)
 
 $(NODE_MODULES): .npmrc package*.json
 	@npm clean-install \
@@ -209,7 +209,7 @@ $(NODE_MODULES): .npmrc package*.json
 
 $(TEMP_DIR):
 	@mkdir $(TEMP_DIR)
-$(TOOLING): aqua.yml | $(TEMP_DIR)
+$(TOOLING): .aqua/aqua.yml | $(TEMP_DIR)
 ifneq (, $(shell which aqua))
 	@aqua install
 endif

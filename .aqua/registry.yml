@@ -1,0 +1,13 @@
+# Registry file for aqua (https://aquaproj.github.io/docs/reference/registry-config/)
+
+packages:
+  - type: github_release
+    repo_owner: anchore
+    repo_name: grant
+    asset: grant_{{trimV .Version}}_{{.OS}}_{{.Arch}}.tar.gz
+    format: tar.gz
+    files:
+      - name: grant
+    supported_envs:
+      - darwin
+      - linux
