@@ -2,7 +2,7 @@
 
 packages:
   - name: anchore/grype@v0.116.0
-  - name: anchore/syft@v1.48.0
+  - name: anchore/syft@v1.49.0
   - name: goodwithtech/dockle@v0.4.15
   - name: hadolint/hadolint@v2.14.0
   - name: koalaman/shellcheck@v0.11.0
