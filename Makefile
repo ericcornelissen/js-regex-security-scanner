@@ -209,11 +209,9 @@ $(NODE_MODULES): .npmrc package*.json
 
 $(TEMP_DIR):
 	@mkdir $(TEMP_DIR)
-$(TOOLING): .tool-versions | $(TEMP_DIR)
-ifneq (, $(shell which asdf))
-	@asdf install
-else ifneq (, $(shell which rtx))
-	@rtx install
+$(TOOLING): aqua.yml | $(TEMP_DIR)
+ifneq (, $(shell which aqua))
+	@aqua install
 endif
 	@touch $(TOOLING)
 $(IMAGES_DIR): | $(TEMP_DIR)
