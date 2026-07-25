@@ -5,9 +5,9 @@
 
 'use strict';
 
-const fs = require('fs');
-const url = require('url');
-const utf8 = require('utf8');
+const fs = require('node:fs');
+const url = require('node:url');
+const { TextEncoder } = require('node:util');
 const jschardet = require('jschardet');
 
 //------------------------------------------------------------------------------
@@ -116,7 +116,8 @@ module.exports = function (results, data) {
           // Encoding will be null if it could not be determined.
           if (encoding) {
             // Convert the content bytes to a UTF-8 string.
-            contentsUtf8 = utf8.encode(contents.toString(encoding.encoding));
+            const encoder = new TextEncoder();
+            contentsUtf8 = encoder.encode(contents.toString(encoding.encoding));
 
             sarifFiles[result.filePath].contents = {
               text: contentsUtf8,
