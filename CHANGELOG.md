@@ -10,7 +10,8 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`791f506`) Update dependency @typescript-eslint/parser to v8.65.0.
+- (`2adc44a`) Update transitive dependency brace-expansion to v5.0.8.
 
 ## [0.5.1] - 2026-07-23
 
