@@ -20,7 +20,7 @@ for arg in "$@"; do
 	if [[ ${arg} == '--sarif' ]]; then
 		sarif=(
 			--format
-			'/home/node/js-re-scan/node_modules/@microsoft/eslint-formatter-sarif/sarif.js'
+			'/home/node/js-re-scan/sarif.cjs'
 		)
 	else
 		user_args+=("${arg}")

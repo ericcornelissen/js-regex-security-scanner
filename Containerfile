@@ -37,7 +37,7 @@ RUN npm clean-install \
 	&& \
 	rm -rf /home/node/.npm /tmp/node-compile-cache
 
-COPY --chown=node:node ./entrypoint.sh ./eslint.config.js ./SECURITY.md ./LICENSE ./
+COPY --chown=node:node ./LICENSE ./SECURITY.md ./entrypoint.sh ./eslint.config.js ./sarif.cjs ./
 
 WORKDIR /project
 
