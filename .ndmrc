@@ -1,9 +1,2 @@
 {
-  "@microsoft/eslint-formatter-sarif@*": {
-    "eslint@^8.0.0": {
-      "*": {
-        "#ignore": "ESLint is not really used by this package"
-      }
-    }
-  }
 }
