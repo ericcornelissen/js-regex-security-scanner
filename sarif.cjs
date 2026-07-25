@@ -8,7 +8,6 @@
 const fs = require('fs');
 const url = require('url');
 const utf8 = require('utf8');
-const lodash = require('lodash');
 const jschardet = require('jschardet');
 
 //------------------------------------------------------------------------------
@@ -49,7 +48,7 @@ function getResultLevel(message) {
 //------------------------------------------------------------------------------
 
 module.exports = function (results, data) {
-  const rulesMeta = lodash.get(data, 'rulesMeta', null);
+  const rulesMeta = data?.rulesMeta;
 
   const sarifLog = {
     version: '2.1.0',
