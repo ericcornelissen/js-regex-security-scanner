@@ -5,10 +5,12 @@
 
 'use strict';
 
-const fs = require('node:fs');
-const url = require('node:url');
-const { TextEncoder } = require('node:util');
-const jschardet = require('jschardet');
+import fs from 'node:fs';
+import url from 'node:url';
+import { TextEncoder } from 'node:util';
+
+import jschardet from 'jschardet';
+import { ESLint } from 'eslint';
 
 //------------------------------------------------------------------------------
 // Helper Functions
@@ -21,8 +23,6 @@ const jschardet = require('jschardet');
  */
 function getESLintVersion() {
   try {
-    // Resolve ESLint relative to main entry script, not the formatter
-    const { ESLint } = require.main.require('eslint');
     return ESLint.version;
   } catch {
     // Formatter was not called from eslint, return undefined
@@ -47,7 +47,7 @@ function getResultLevel(message) {
 // Public Interface
 //------------------------------------------------------------------------------
 
-module.exports = function (results, data) {
+export default function sarif(results, data) {
   const rulesMeta = data?.rulesMeta;
 
   const sarifLog = {
