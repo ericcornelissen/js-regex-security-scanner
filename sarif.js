@@ -3,8 +3,6 @@
  * @author Microsoft
  */
 
-'use strict';
-
 import fs from 'node:fs';
 import url from 'node:url';
 import { TextEncoder } from 'node:util';

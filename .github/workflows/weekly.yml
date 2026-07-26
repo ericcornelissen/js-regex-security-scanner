@@ -48,18 +48,18 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
 
-          git checkout -B 'npm-transitive-dependencies'
+          git checkout -B 'bump-transitive-npm-dependencies'
           git add 'package.json' 'package-lock.json'
           git commit --message 'Update transitive dependencies'
-          git push --force 'origin' 'npm-transitive-dependencies'
+          git push --force 'origin' 'bump-transitive-npm-dependencies'
 
-          if gh pr view --head 'npm-transitive-dependencies' >/dev/null 2>&1; then
+          if gh pr view --head 'bump-transitive-npm-dependencies' >/dev/null 2>&1; then
             echo 'Pull Request already exists.'
             exit 0
           fi
 
           gh pr create \
-            --base='main' --head='npm-transitive-dependencies' \
+            --base='main' --head='bump-transitive-npm-dependencies' \
             --label='dependencies' \
             --title='Update transitive dependencies' \
             --body='_This Pull Request was created automatically_'
