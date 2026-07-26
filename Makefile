@@ -216,7 +216,7 @@ endif
 	@touch $(TOOLING)
 $(IMAGES_DIR): | $(TEMP_DIR)
 	@mkdir -p $(IMAGES_DIR)
-$(IMAGES_DIR)/%: Containerfile entrypoint.sh eslint.config.js package*.json sarif.cjs | $(IMAGES_DIR)
+$(IMAGES_DIR)/%: Containerfile entrypoint.sh eslint.config.js package*.json sarif.js | $(IMAGES_DIR)
 	@$(ENGINE) build \
 		$(ENGINE_OPTIONS) \
 		--file Containerfile \

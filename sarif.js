@@ -5,11 +5,12 @@
 
 'use strict';
 
-const fs = require('fs');
-const url = require('url');
-const utf8 = require('utf8');
-const lodash = require('lodash');
-const jschardet = require('jschardet');
+import fs from 'node:fs';
+import url from 'node:url';
+import { TextEncoder } from 'node:util';
+
+import jschardet from 'jschardet';
+import { ESLint } from 'eslint';
 
 //------------------------------------------------------------------------------
 // Helper Functions
@@ -22,8 +23,6 @@ const jschardet = require('jschardet');
  */
 function getESLintVersion() {
   try {
-    // Resolve ESLint relative to main entry script, not the formatter
-    const { ESLint } = require.main.require('eslint');
     return ESLint.version;
   } catch {
     // Formatter was not called from eslint, return undefined
@@ -48,8 +47,8 @@ function getResultLevel(message) {
 // Public Interface
 //------------------------------------------------------------------------------
 
-module.exports = function (results, data) {
-  const rulesMeta = lodash.get(data, 'rulesMeta', null);
+export default function sarif(results, data) {
+  const rulesMeta = data?.rulesMeta;
 
   const sarifLog = {
     version: '2.1.0',
@@ -117,7 +116,8 @@ module.exports = function (results, data) {
           // Encoding will be null if it could not be determined.
           if (encoding) {
             // Convert the content bytes to a UTF-8 string.
-            contentsUtf8 = utf8.encode(contents.toString(encoding.encoding));
+            const encoder = new TextEncoder();
+            contentsUtf8 = encoder.encode(contents.toString(encoding.encoding));
 
             sarifFiles[result.filePath].contents = {
               text: contentsUtf8,
