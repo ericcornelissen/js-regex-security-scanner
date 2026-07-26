@@ -61,15 +61,20 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
 
-          git checkout -B 'bump-tools'
+          git checkout -B 'bump-tool-dependencies'
           git add 'aqua.yml' 'aqua-checksums.json'
           git commit --message 'Bump tools with aqua'
 
           git remote set-url 'origin' "https://x-access-token:${GH_TOKEN}@github.com/${REPOSITORY}"
-          git push --force 'origin' 'bump-tools'
+          git push --force 'origin' 'bump-tool-dependencies'
+
+          if gh pr view --head 'bump-tool-dependencies' >/dev/null 2>&1; then
+            echo 'Pull Request already exists.'
+            exit 0
+          fi
 
           gh pr create \
-            --base='main' --head='bump-tools' \
+            --base='main' --head='bump-tool-dependencies' \
             --label='dependencies' \
             --title='Bump tools' \
             --body='_This Pull Request was created automatically by running `aqua update` and `aqua update-checksum`._'
