@@ -1,0 +1,7 @@
+# Configuration file for zizmor (https://docs.zizmor.sh/)
+
+rules:
+  concurrency-limits:
+    disable: true  # n/a
+  excessive-permissions:
+    disable: true  # read-all is fine
