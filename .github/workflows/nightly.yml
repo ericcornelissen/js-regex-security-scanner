@@ -68,7 +68,7 @@ jobs:
           git remote set-url 'origin' "https://x-access-token:${GH_TOKEN}@github.com/${REPOSITORY}"
           git push --force 'origin' 'bump-tool-dependencies'
 
-          if gh pr view --head 'bump-tool-dependencies' >/dev/null 2>&1; then
+          if gh pr view 'bump-tool-dependencies' >/dev/null 2>&1; then
             echo 'Pull Request already exists.'
             exit 0
           fi
