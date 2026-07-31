@@ -10,7 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
-- (`8c7c4b8`) Update dependency node to v26.5.1.
+- (`6628649`) Update docker.io/node Docker tag to v26.5.1.
 - (`e1faeb2`) Update dependency eslint to v10.8.0.
 
 ## [0.5.3] - 2026-07-26
