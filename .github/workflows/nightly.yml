@@ -54,27 +54,13 @@ jobs:
           aqua update
           aqua update-checksum --prune
       - name: Create Pull Request
-        env:
-          GH_TOKEN: ${{ steps.automation-token.outputs.token }}
-          REPOSITORY: ${{ github.repository }}
-        run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
-
-          git checkout -B 'bump-tool-dependencies'
-          git add 'aqua.yml' 'aqua-checksums.json'
-          git commit --message 'Bump tools with aqua'
-
-          git remote set-url 'origin' "https://x-access-token:${GH_TOKEN}@github.com/${REPOSITORY}"
-          git push --force 'origin' 'bump-tool-dependencies'
-
-          if gh pr view 'bump-tool-dependencies' >/dev/null 2>&1; then
-            echo 'Pull Request already exists.'
-            exit 0
-          fi
-
-          gh pr create \
-            --base='main' --head='bump-tool-dependencies' \
-            --label='dependencies' \
-            --title='Bump tools' \
-            --body='_This Pull Request was created automatically by running `aqua update` and `aqua update-checksum`._'
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          token: ${{ steps.automation-token.outputs.token }}
+          title: Bump tool dependencies
+          body: |
+            _This Pull Request was created automatically by running `aqua update` and `aqua update-checksum`._
+          labels: dependencies
+          add-paths: aqua.yml, aqua-checksums.json
+          branch: bump-tool-dependencies
+          commit-message: Bump tools with aqua

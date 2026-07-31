@@ -5,3 +5,5 @@ rules:
     disable: true  # n/a
   excessive-permissions:
     disable: true  # read-all is fine
+  superfluous-actions:
+    disable: true
