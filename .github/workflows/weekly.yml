@@ -34,32 +34,13 @@ jobs:
         run: |
           npm update --prefer-dedupe
       - name: Create Pull Request
-        env:
-          GH_TOKEN: ${{ steps.automation-token.outputs.token }}
-          REPOSITORY: ${{ github.repository }}
-        run: |
-          git remote set-url 'origin' "https://x-access-token:${GH_TOKEN}@github.com/${REPOSITORY}"
-
-          if git diff --quiet 'package.json' 'package-lock.json'; then
-            echo 'No changes.'
-            exit 0
-          fi
-
-          git config user.name 'github-actions[bot]'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
-
-          git checkout -B 'bump-transitive-npm-dependencies'
-          git add 'package.json' 'package-lock.json'
-          git commit --message 'Update transitive dependencies'
-          git push --force 'origin' 'bump-transitive-npm-dependencies'
-
-          if gh pr view --head 'bump-transitive-npm-dependencies' >/dev/null 2>&1; then
-            echo 'Pull Request already exists.'
-            exit 0
-          fi
-
-          gh pr create \
-            --base='main' --head='bump-transitive-npm-dependencies' \
-            --label='dependencies' \
-            --title='Update transitive dependencies' \
-            --body='_This Pull Request was created automatically_'
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          token: ${{ steps.automation-token.outputs.token }}
+          title: Update transitive dependencies
+          body: |
+            _This Pull Request was created automatically._
+          labels: dependencies
+          add-paths: package.json, package-lock.json
+          branch: bump-transitive-npm-dependencies
+          commit-message: Bump transitive dependencies

@@ -42,47 +42,37 @@ jobs:
       - name: Update the changelog
         run: node scripts/bump-changelog.js
       - name: Create Pull Request
-        env:
-          GH_TOKEN: ${{ steps.automation-token.outputs.token }}
-          REPOSITORY: ${{ github.repository }}
-          UPDATE_TYPE: ${{ github.event.inputs.update_type }}
-        run: |
-          git remote set-url 'origin' "https://x-access-token:${GH_TOKEN}@github.com/${REPOSITORY}"
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          token: ${{ steps.automation-token.outputs.token }}
+          title: New ${{ github.event.inputs.update_type }} release for v0
+          body: |
+            _This Pull Request was created automatically_
 
-          git config user.name 'github-actions[bot]'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
+            ---
 
-          git checkout -B "release-${UPDATE_TYPE}"
-          git add 'CHANGELOG.md' 'Containerfile'
-          git commit --message 'Version bump'
-          git push --force 'origin' "release-${UPDATE_TYPE}"
+            ### Merge checklist
 
-          gh pr create \
-            --base='main' --head="release-${UPDATE_TYPE}" \
-            --title="New ${UPDATE_TYPE} release for v0" \
-            --body='_This Pull Request was created automatically_
+            - [ ] All continuous integration checks passed.
+            - [ ] The version number is updated in `Containerfile`.
+            - [ ] The new release is added to `CHANGELOG.md` with the correct version number and date.
+            - [ ] The new version number is in accordance with the [Semantic Versioning] rules.
+            - [ ] There are no other changes in the Pull Request.
 
-          ---
+            ### Post-merge
 
-          ### Merge checklist
+            _It will take a few minutes for this to happen._
 
-          - [ ] All continuous integration checks passed.
-          - [ ] The version number is updated in `Containerfile`.
-          - [ ] The new release is added to `CHANGELOG.md` with the correct version number and date.
-          - [ ] The new version number is in accordance with the [Semantic Versioning] rules.
-          - [ ] There are no other changes in the Pull Request.
+            - [ ] A git tag for the new release is created.
+            - [ ] The major version branch is updated.
+            - [ ] The new version is published as a [GitHub release].
+            - [ ] The new version is published to [Docker].
+            - [ ] The new version is published to [GHCR].
 
-          ### Post-merge
-
-          _It will take a few minutes for this to happen._
-
-          - [ ] A git tag for the new release is created.
-          - [ ] The major version branch is updated.
-          - [ ] The new version is published as a [GitHub release].
-          - [ ] The new version is published to [Docker].
-          - [ ] The new version is published to [GHCR].
-
-          [docker]: https://hub.docker.com/r/ericornelissen/js-re-scan
-          [ghcr]: https://github.com/ericcornelissen/js-regex-security-scanner/pkgs/container/js-re-scan
-          [github release]: https://github.com/ericcornelissen/js-regex-security-scanner/releases
-          [semantic versioning]: https://semver.org/spec/v2.0.0.html'
+            [docker]: https://hub.docker.com/r/ericornelissen/js-re-scan
+            [ghcr]: https://github.com/ericcornelissen/js-regex-security-scanner/pkgs/container/js-re-scan
+            [github release]: https://github.com/ericcornelissen/js-regex-security-scanner/releases
+            [semantic versioning]: https://semver.org/spec/v2.0.0.html
+          add-paths: CHANGELOG.md, Containerfile
+          branch: release-${{ github.event.inputs.update_type }}-v0
+          commit-message: Version bump
