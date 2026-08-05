@@ -1,6 +1,11 @@
 # SPDX-License-Identifier: MIT-0
 
-ENGINE?=docker
+ifneq (, $(shell which docker))
+	ENGINE?=docker
+else
+	ENGINE?=podman
+endif
+
 TAG?=latest
 
 IMAGE_NAME:=ericornelissen/js-re-scan
