@@ -9,11 +9,11 @@ packages:
   - name: mvdan/sh@v3.13.1
   - name: reproducible-containers/diffoci@v0.1.8
   - name: rhysd/actionlint@v1.7.12
-  - name: sigstore/cosign@v3.1.2
+  - name: sigstore/cosign@v3.1.3
   - name: wasilibs/go-yamllint@v1.38.0
 registries:
   - type: standard
-    ref: v4.545.0
+    ref: v4.549.0
 checksum:
   enabled: true
   require_checksum: true
