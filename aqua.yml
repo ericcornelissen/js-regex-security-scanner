@@ -1,8 +1,8 @@
 # Configuration file for aqua (https://aquaproj.github.io/)
 
 packages:
-  - name: anchore/grype@v0.116.1
-  - name: anchore/syft@v1.50.0
+  - name: anchore/grype@v0.117.0
+  - name: anchore/syft@v1.51.0
   - name: goodwithtech/dockle@v0.4.15
   - name: hadolint/hadolint@v2.15.1
   - name: koalaman/shellcheck@v0.11.0
@@ -13,7 +13,7 @@ packages:
   - name: wasilibs/go-yamllint@v1.38.0
 registries:
   - type: standard
-    ref: v4.549.0
+    ref: v4.550.0
 checksum:
   enabled: true
   require_checksum: true
