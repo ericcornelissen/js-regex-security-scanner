@@ -1,53 +1,53 @@
 {
   "checksums": [
     {
-      "id": "github_release/github.com/anchore/grype/v0.116.1/grype_0.116.1_darwin_amd64.tar.gz",
-      "checksum": "E5FF3ADAC317511876DE7863598587A7DBAB0C47C8E150368B7DF06909C11F4E",
+      "id": "github_release/github.com/anchore/grype/v0.117.0/grype_0.117.0_darwin_amd64.tar.gz",
+      "checksum": "312ED375DCDA6D8893B4CA5D517371FEF1A50062EBB0B0DBE6BDB4AC2FB57C57",
       "algorithm": "sha256"
     },
     {
-      "id": "github_release/github.com/anchore/grype/v0.116.1/grype_0.116.1_darwin_arm64.tar.gz",
-      "checksum": "F493F169CBAAE48BADE169532B20235FC16653D2A044A5BC6FE6F69A3923F975",
+      "id": "github_release/github.com/anchore/grype/v0.117.0/grype_0.117.0_darwin_arm64.tar.gz",
+      "checksum": "BFCEFA3F3B1690D9C77D847841B32EBD6106AB0E0E32F810924707E704D53584",
       "algorithm": "sha256"
     },
     {
-      "id": "github_release/github.com/anchore/grype/v0.116.1/grype_0.116.1_linux_amd64.tar.gz",
-      "checksum": "0122DF7B655981ABE547AD3D2190D65551DAC6A2BFC80B4DC2A989B5D0587458",
+      "id": "github_release/github.com/anchore/grype/v0.117.0/grype_0.117.0_linux_amd64.tar.gz",
+      "checksum": "38525DAB1E06F162EBAA02F94D82D1F807076B011A44180CF2777EDF1A7B9C26",
       "algorithm": "sha256"
     },
     {
-      "id": "github_release/github.com/anchore/grype/v0.116.1/grype_0.116.1_linux_arm64.tar.gz",
-      "checksum": "A8D7504A149629324EB5F4CE3DC25DFD211BBFE047E64EE2BF7844B466C3D84D",
+      "id": "github_release/github.com/anchore/grype/v0.117.0/grype_0.117.0_linux_arm64.tar.gz",
+      "checksum": "935F628BDF9331FFDD946931EA5FDB50045D3970BA52670CBEB44A88F127291B",
       "algorithm": "sha256"
     },
     {
-      "id": "github_release/github.com/anchore/grype/v0.116.1/grype_0.116.1_windows_amd64.zip",
-      "checksum": "A8AD864F2F06C9AFCC90D417F46F5587ADEABA4E1E46CC4E32A6A076DAE2FDA7",
+      "id": "github_release/github.com/anchore/grype/v0.117.0/grype_0.117.0_windows_amd64.zip",
+      "checksum": "7728EE9C06792E62444BD651274E4DD1E30EEC02EEE1266BB6C9C9D237D0F0CB",
       "algorithm": "sha256"
     },
     {
-      "id": "github_release/github.com/anchore/syft/v1.50.0/syft_1.50.0_darwin_amd64.tar.gz",
-      "checksum": "D11A8C7BC27114853BD7C1E1B2F3BE3DDDA3A1DE17AEE585329F04C369341C75",
+      "id": "github_release/github.com/anchore/syft/v1.51.0/syft_1.51.0_darwin_amd64.tar.gz",
+      "checksum": "CDDF9A044145CAF0A1A3194D00D1DD51A1666F4814F2919CDB4768A0C062AD95",
       "algorithm": "sha256"
     },
     {
-      "id": "github_release/github.com/anchore/syft/v1.50.0/syft_1.50.0_darwin_arm64.tar.gz",
-      "checksum": "E32FDB9D47823FA633748A1EFCA2528FD77C37469EA93C9E40AB835DA44E4CCE",
+      "id": "github_release/github.com/anchore/syft/v1.51.0/syft_1.51.0_darwin_arm64.tar.gz",
+      "checksum": "4F37F4C7FEFCE0A68E4CF71BA3F5F9829A99E65D89B29F7EE41B8C2C10EA8C59",
       "algorithm": "sha256"
     },
     {
-      "id": "github_release/github.com/anchore/syft/v1.50.0/syft_1.50.0_linux_amd64.tar.gz",
-      "checksum": "BF7B29FF57F06DA30918266A0E1C2885A8F99784798D1BDB1628886AA015D788",
+      "id": "github_release/github.com/anchore/syft/v1.51.0/syft_1.51.0_linux_amd64.tar.gz",
+      "checksum": "2A2E837A2C8D59EC9AF5472EE22D3B04EE463C4E44476ECF993FD1E5AB6EBC7F",
       "algorithm": "sha256"
     },
     {
-      "id": "github_release/github.com/anchore/syft/v1.50.0/syft_1.50.0_linux_arm64.tar.gz",
-      "checksum": "887C57CBCC2D0E8C5C110A4571A3FC7150058B24D74F993EE4663516E5C8CE86",
+      "id": "github_release/github.com/anchore/syft/v1.51.0/syft_1.51.0_linux_arm64.tar.gz",
+      "checksum": "6C0466811541EA03ADD5213A60A1562F0851E4C0B0ECFDEE1A694A9455285900",
       "algorithm": "sha256"
     },
     {
-      "id": "github_release/github.com/anchore/syft/v1.50.0/syft_1.50.0_windows_amd64.zip",
-      "checksum": "815EE6973EC5DFF6A671D7F41B0E78835A8C45B91D5A39F4743EA1CEE833D3BE",
+      "id": "github_release/github.com/anchore/syft/v1.51.0/syft_1.51.0_windows_amd64.zip",
+      "checksum": "FC5FFAEFFB993576ECE9C791DA5A688FB2C8969A1479BBFE58583672C64DA336",
       "algorithm": "sha256"
     },
     {
@@ -251,8 +251,8 @@
       "algorithm": "sha256"
     },
     {
-      "id": "registries/github_content/github.com/aquaproj/aqua-registry/v4.549.0/registry.yaml",
-      "checksum": "9F742A7B08C556C1BF98782E3305B4421531E65E70B84FFBB1FE9F3926E4D724",
+      "id": "registries/github_content/github.com/aquaproj/aqua-registry/v4.550.0/registry.yaml",
+      "checksum": "CB90BB436C94AD3922E39BC88D281320CC7D9C2200EF2700197D989E74581FFA",
       "algorithm": "sha256"
     }
   ]
