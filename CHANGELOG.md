@@ -10,6 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
+- (`7a3e091`) Update dependency eslint-plugin-regexp to v3.2.0.
 - (`03e66e8`) Update docker.io/node Docker tag to v26.7.0.
 - (`cc6b74f`) Update dependency @typescript-eslint/parser to v8.67.0.
 - (`9776b12`) Update dependency @typescript-eslint/parser to v8.66.0.
