@@ -15,6 +15,24 @@ ignore:
     vex-justification: vulnerable_code_not_in_execute_path
   - vulnerability: CVE-2026-14456
     vex-justification: vulnerable_code_not_in_execute_path
+  - vulnerability: CVE-2026-14457
+    vex-justification: vulnerable_code_not_in_execute_path
+  - vulnerability: CVE-2026-18798
+    vex-justification: vulnerable_code_not_in_execute_path
+  - vulnerability: CVE-2026-54874
+    vex-justification: vulnerable_code_not_in_execute_path
+  - vulnerability: CVE-2026-63072
+    vex-justification: vulnerable_code_not_in_execute_path
+  - vulnerability: CVE-2026-63073
+    vex-justification: vulnerable_code_not_in_execute_path
+  - vulnerability: CVE-2026-63074
+    vex-justification: vulnerable_code_not_in_execute_path
+  - vulnerability: CVE-2026-63075
+    vex-justification: vulnerable_code_not_in_execute_path
+  - vulnerability: CVE-2026-63076
+    vex-justification: vulnerable_code_not_in_execute_path
+  - vulnerability: CVE-2026-75803
+    vex-justification: vulnerable_code_not_in_execute_path
 
   # Ignore all npm vulnerabilities. This project relies on `npm audit` instead.
   - package:
