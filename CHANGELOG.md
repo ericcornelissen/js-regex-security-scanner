@@ -10,6 +10,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.5.5] - 2026-08-27
+
 - (`c6365a7`) Update dependency eslint to v10.9.1.
 - (`ab80b43`) Update dependency eslint to v10.9.0.
 - (`7a3e091`) Update dependency eslint-plugin-regexp to v3.2.0.
