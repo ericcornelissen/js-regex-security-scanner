@@ -53,7 +53,7 @@ jobs:
       - name: Install tooling
         uses: aquaproj/aqua-installer@96a9bc20066c5bf5e275b41019cfc165b25f4e2e # v4.0.5
         with:
-          aqua_version: v2.62.0
+          aqua_version: v2.63.0
       - name: Check
         env:
           WHAT: ${{ matrix.what }}
@@ -93,7 +93,7 @@ jobs:
       - name: Install tooling
         uses: aquaproj/aqua-installer@96a9bc20066c5bf5e275b41019cfc165b25f4e2e # v4.0.5
         with:
-          aqua_version: v2.62.0
+          aqua_version: v2.63.0
       - name: Check container image licenses
         if: ${{ failure() || success() }}
         run: make check-licenses-image
@@ -149,7 +149,7 @@ jobs:
       - name: Install tooling
         uses: aquaproj/aqua-installer@96a9bc20066c5bf5e275b41019cfc165b25f4e2e # v4.0.5
         with:
-          aqua_version: v2.62.0
+          aqua_version: v2.63.0
       - name: Check reproducibility
         run: make reproducible-build
   test:
