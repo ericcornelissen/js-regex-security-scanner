@@ -10,6 +10,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.5.6] - 2026-09-19
+
 - (`fefa9ec`) Update dependency node to v26.9.0.
 - (`9f3adac`) Update dependency @typescript-eslint/parser to v8.70.0.
 - (`3a785d5`) Update dependency eslint-plugin-regexp to v3.3.0.
