@@ -9,7 +9,7 @@ permissions: read-all
 jobs:
   check:
     name: Check
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     outputs:
       released: ${{ steps.version.outputs.released }}
       version: ${{ steps.version.outputs.version }}
@@ -31,7 +31,7 @@ jobs:
           fi
   git:
     name: Git
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     if: ${{ needs.check.outputs.released == 'false' }}
     permissions:
       contents: write # To push a branch
@@ -73,7 +73,7 @@ jobs:
             --latest=true
   docker:
     name: Docker Hub
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     if: ${{ needs.check.outputs.released == 'false' }}
     permissions:
       id-token: write # To perform keyless signing with cosign
@@ -130,7 +130,7 @@ jobs:
             "docker.io/ericornelissen/js-re-scan@${IMAGE_DIGEST}"
   ghcr:
     name: GHCR
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     if: ${{ needs.check.outputs.released == 'false' }}
     permissions:
       id-token: write # To perform keyless signing with cosign
