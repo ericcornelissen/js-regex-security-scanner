@@ -30,7 +30,7 @@ test("main", async (t) => {
 					"run",
 					"--rm",
 					"-v",
-					`${dirPath}:/project`,
+					`${dirPath}:/project:ro`,
 					"ericornelissen/js-re-scan:test",
 					...(args?.split(/\s+/) || []),
 				],
