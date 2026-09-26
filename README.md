@@ -30,7 +30,7 @@ Now you can use it to scan a JavaScript or TypeScript project. For example, to
 scan the current directory:
 
 ```shell
-docker run --rm -v $(pwd):/project docker.io/ericornelissen/js-re-scan:latest
+docker run --rm -v $(pwd):/project:ro docker.io/ericornelissen/js-re-scan:latest
 ```
 
 To use [Podman] instead of [Docker] you can replace `docker` by `podman` in any
@@ -45,7 +45,8 @@ the scan results. Simply use the `--sarif` and `--output-file` options:
 <!-- doctest:ignore -->
 
 ```shell
-docker run --rm -v $(pwd):/project docker.io/ericornelissen/js-re-scan:latest  \
+docker run --rm -v $(pwd):/project:ro  \
+  docker.io/ericornelissen/js-re-scan:latest  \
   --sarif --output-file js-re-scan.sarif
 ```
 
@@ -56,7 +57,8 @@ If necessary you can ignore certain files or directories using the option
 in your own project you can use:
 
 ```shell
-docker run --rm -v $(pwd):/project docker.io/ericornelissen/js-re-scan:latest  \
+docker run --rm -v $(pwd):/project:ro  \
+  docker.io/ericornelissen/js-re-scan:latest  \
   --ignore-pattern vendor/
 ```
 
