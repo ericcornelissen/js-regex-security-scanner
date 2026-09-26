@@ -10,6 +10,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.5.7] - 2026-09-26
+
 - (`a87ce55`) Update docker.io/node Docker tag to v26.10.0.
 - (`95689fc`) Update dependency eslint-plugin-regexp to v3.3.1.
 - (`41afeaf`) Update dependency eslint to v10.11.0.
