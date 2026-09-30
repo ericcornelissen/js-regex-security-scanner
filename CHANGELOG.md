@@ -10,6 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
+- (`05a93f7`) Update dependency jschardet to v4.
 - (`3f3aaed`) Bump transitive dependency brace-expansion to 5.0.12.
 
 ## [0.5.7] - 2026-09-26
