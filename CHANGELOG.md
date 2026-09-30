@@ -10,7 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`3f3aaed`) Bump transitive dependency brace-expansion to 5.0.12.
 
 ## [0.5.7] - 2026-09-26
 
