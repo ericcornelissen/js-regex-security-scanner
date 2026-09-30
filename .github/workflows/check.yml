@@ -69,12 +69,12 @@ jobs:
         with:
           persist-credentials: false
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@c10b8064de6f491fea524254123dbe5e09572f13 # v4.35.1
+        uses: github/codeql-action/init@2892aa5e19bbd11bc0cff5427e3b750a04d9e3c2 # v4.38.2
         with:
           config-file: ./.github/codeql.yml
           languages: actions
       - name: Perform CodeQL analysis
-        uses: github/codeql-action/analyze@c10b8064de6f491fea524254123dbe5e09572f13 # v4.35.1
+        uses: github/codeql-action/analyze@2892aa5e19bbd11bc0cff5427e3b750a04d9e3c2 # v4.38.2
   licenses:
     name: Licenses
     runs-on: ubuntu-26.04
@@ -113,7 +113,7 @@ jobs:
       - name: Run Poutine
         uses: boostsecurityio/poutine-action@e240ebd3eff8b2db5a8e5f6b28f58739d7db2247 # v1.1.4
       - name: Upload Poutine report to GitHub
-        uses: github/codeql-action/upload-sarif@c10b8064de6f491fea524254123dbe5e09572f13 # v4.35.1
+        uses: github/codeql-action/upload-sarif@2892aa5e19bbd11bc0cff5427e3b750a04d9e3c2 # v4.38.2
         if: ${{ failure() || success() }}
         with:
           sarif_file: results.sarif
@@ -132,7 +132,7 @@ jobs:
       - name: Perform Semgrep analysis
         run: semgrep --sarif --output semgrep.sarif
       - name: Upload Semgrep report to GitHub
-        uses: github/codeql-action/upload-sarif@c10b8064de6f491fea524254123dbe5e09572f13 # v4.35.1
+        uses: github/codeql-action/upload-sarif@2892aa5e19bbd11bc0cff5427e3b750a04d9e3c2 # v4.38.2
         if: ${{ failure() || success() }}
         with:
           sarif_file: semgrep.sarif
