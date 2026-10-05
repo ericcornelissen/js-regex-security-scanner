@@ -10,6 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
+- (`57e1a93`) Update dependency eslint to v10.12.0.
 - (`05a93f7`) Update dependency jschardet to v4.
 - (`3f3aaed`) Bump transitive dependency brace-expansion to 5.0.12.
 
