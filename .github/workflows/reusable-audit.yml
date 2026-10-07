@@ -2,6 +2,10 @@ name: Audit (reusable)
 on:
   workflow_call:
     inputs:
+      cveliterc:
+        default: ""
+        required: false
+        type: string
       env:
         default: "{}"
         required: false
@@ -88,5 +92,10 @@ jobs:
         with:
           cache: npm
           node-version-file: .nvmrc
+      - name: Insert custom configuration
+        if: inputs.cveliterc != ''
+        env:
+          CVELITERC: ${{ inputs.cveliterc }}
+        run: echo "${CVELITERC}" | tee .cve-lite/baseline.json
       - name: Audit npm dependencies
         run: make audit-vulnerabilities-npm
