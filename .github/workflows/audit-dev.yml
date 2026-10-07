@@ -1,4 +1,4 @@
-name: Audit (dev)
+name: Audit
 on:
   pull_request:
     paths:
@@ -13,57 +13,6 @@ on:
 permissions: read-all
 
 jobs:
-  deprecations:
-    name: Deprecations
-    runs-on: ubuntu-26.04
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-        with:
-          persist-credentials: false
-      - name: Install Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
-        with:
-          cache: npm
-          node-version-file: .nvmrc
-      - name: Audit deprecation warnings
-        run: make audit-deprecations-npm
-  image:
-    name: Image
-    runs-on: ubuntu-26.04
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-        id: checkout
-        with:
-          persist-credentials: false
-      - name: Install tooling
-        uses: aquaproj/aqua-installer@96a9bc20066c5bf5e275b41019cfc165b25f4e2e # v4.0.5
-        with:
-          aqua_version: v2.64.0
-      - name: Audit container dependencies
-        run: make audit-vulnerabilities-image
-      - name: Upload SBOM and vulnerability scan
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
-        if: failure() || success()
-        with:
-          if-no-files-found: error
-          name: container-scan-${{ steps.checkout.outputs.commit }}
-          path: |
-            sbom-syft.json
-            vulns.json
-  npm:
-    name: npm
-    runs-on: ubuntu-26.04
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-        with:
-          persist-credentials: false
-      - name: Install Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
-        with:
-          cache: npm
-          node-version-file: .nvmrc
-      - name: Audit npm dependencies
-        run: make audit-vulnerabilities-npm
+  audit:
+    name: Dev
+    uses: $/.github/workflows/reusable-audit.yml
