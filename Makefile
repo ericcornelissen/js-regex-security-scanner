@@ -39,8 +39,8 @@ audit-vulnerabilities: audit-vulnerabilities-image audit-vulnerabilities-npm ## 
 
 audit-vulnerabilities-image: $(VULN_FILE) ## Audit the container image for known vulnerabilities
 
-audit-vulnerabilities-npm: ## Audit the npm dependencies for known vulnerabilities
-	@npm audit $(ARGS)
+audit-vulnerabilities-npm: $(NODE_MODULES) ## Audit the npm dependencies for known vulnerabilities
+	@npx cve-lite . $(ARGS)
 
 .PHONY: build
 build: $(IMAGES_DIR)/$(TAG) ## Build the container image
