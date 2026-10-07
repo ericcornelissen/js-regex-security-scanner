@@ -1,14 +1,16 @@
-name: Audit (dev)
+name: Audit (runtime)
 on:
   pull_request:
     paths:
-      - .github/workflows/audit-dev.yml
+      - .github/workflows/audit-runtime.yml
       - .grype.yml
       - .ndmrc
       - .syft.yml
-  schedule:
-    - cron: 0 1 * * 2
-  workflow_dispatch: ~
+      - Containerfile
+      - package-lock.json
+  push:
+    branches:
+      - main
 
 permissions: read-all
 
@@ -27,7 +29,7 @@ jobs:
           cache: npm
           node-version-file: .nvmrc
       - name: Audit deprecation warnings
-        run: make audit-deprecations-npm
+        run: make audit-deprecations-npm ARGS='--omit dev'
   image:
     name: Image
     runs-on: ubuntu-26.04
@@ -66,4 +68,4 @@ jobs:
           cache: npm
           node-version-file: .nvmrc
       - name: Audit npm dependencies
-        run: make audit-vulnerabilities-npm
+        run: make audit-vulnerabilities-npm ARGS='--omit dev'

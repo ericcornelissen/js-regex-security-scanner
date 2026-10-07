@@ -1,74 +1,99 @@
 name: Audit (release)
 on:
+  pull_request:
+    paths:
+      - .github/workflows/audit-release.yml
   schedule:
-    - cron: 0 3 * * *
+    - cron: 0 1 * * *
   workflow_dispatch: ~
 
 permissions: read-all
 
 jobs:
-  audit:
-    name: Audit ${{ matrix.release }}
+  deprecations:
+    name: Deprecations
     runs-on: ubuntu-26.04
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - release: v0
-            main: main
     steps:
-      # Setup
-      - name: Checkout release
+      - name: Checkout repository
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-        id: checkout
         with:
-          ref: ${{ matrix.release }}
           persist-credentials: false
-      - name: Install tooling
-        uses: aquaproj/aqua-installer@96a9bc20066c5bf5e275b41019cfc165b25f4e2e # v4.0.5
-        with:
-          aqua_version: v2.63.0
+          ref: v0
       - name: Install Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           cache: npm
           node-version-file: .nvmrc
-
-      # Audit
-      - name: Insert custom configuration
+      - name: Insert release configuration
+        env:
+          NDMRC: ${{ vars.NDMRC }}
+        run: |
+          echo 'Depreman configuration'
+          echo "${NDMRC}" | tee .ndmrc
+      - name: Audit deprecation warnings
+        run: make audit-deprecations-npm ARGS='--omit dev'
+  image:
+    name: Image
+    runs-on: ubuntu-26.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        id: checkout
+        with:
+          persist-credentials: false
+          ref: v0
+      - name: Install tooling
+        uses: aquaproj/aqua-installer@96a9bc20066c5bf5e275b41019cfc165b25f4e2e # v4.0.5
+        with:
+          aqua_version: v2.63.0
+      - name: Insert release configuration
         env:
           GRYPERC: ${{ vars.GRYPERC }}
-          NDMRC: ${{ vars.NDMRC }}
         run: |
           echo 'Grype configuration'
           echo "${GRYPERC}" | tee .grype.yml
-          echo 'Depreman configuration'
-          echo "${NDMRC}" | tee .ndmrc
-      - name: Audit production dependencies
-        run: |
-          make audit-deprecations-npm ARGS="--omit=dev"
-          make audit-vulnerabilities-image
-          make audit-vulnerabilities-npm ARGS="--omit dev"
+      - name: Audit container dependencies
+        run: make audit-vulnerabilities-image
       - name: Upload SBOM and vulnerability scan
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
-        if: ${{ failure() }}
+        if: failure()
         with:
           if-no-files-found: error
           name: container-scan-${{ steps.checkout.outputs.commit }}
           path: |
             sbom-syft.json
             vulns.json
-
-      # Trigger release
+  npm:
+    name: npm
+    runs-on: ubuntu-26.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+          ref: v0
+      - name: Install Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          cache: npm
+          node-version-file: .nvmrc
+      - name: Audit npm dependencies
+        run: make audit-vulnerabilities-npm ARGS='--omit dev'
+  trigger-release:
+    name: Trigger release
+    runs-on: ubuntu-26.04
+    if: failure()
+    needs:
+      - image
+      - npm
+    steps:
       - name: Checkout main
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-        if: ${{ failure() }}
         with:
-          ref: ${{ matrix.main }}
           persist-credentials: false
+          ref: main
       - name: Create token to trigger a workflow
         uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
-        if: ${{ failure() }}
         id: automation-token
         with:
           client-id: ${{ secrets.AUTOMATION_ID }}
@@ -76,9 +101,9 @@ jobs:
           permission-contents: read
           private-key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
       - name: Trigger new release if main is clean
-        if: ${{ failure() }}
         env:
           GH_TOKEN: ${{ steps.automation-token.outputs.token }}
         run: |
-          make audit
+          make audit-vulnerabilities-image
+          make audit-vulnerabilities-npm ARGS='--omit dev'
           gh workflow run release.yml -f update_type=patch
