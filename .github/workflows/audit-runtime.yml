@@ -19,5 +19,4 @@ jobs:
     name: Runtime
     uses: $/.github/workflows/reusable-audit.yml
     with:
-      env: |
-        {"ARGS":"--omit=dev"}
+      dev: false

@@ -15,8 +15,7 @@ jobs:
     uses: $/.github/workflows/reusable-audit.yml
     with:
       cveliterc: ${{ vars.CVELITERC }}
-      env: |
-        {"ARGS":"--omit=dev"}
+      dev: false
       gryperc: ${{ vars.GRYPERC }}
       ndmrc: ${{ vars.NDMRC }}
       ref: v0

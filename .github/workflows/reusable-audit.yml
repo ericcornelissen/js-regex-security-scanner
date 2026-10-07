@@ -6,6 +6,10 @@ on:
         default: ""
         required: false
         type: string
+      dev:
+        default: true
+        required: false
+        type: boolean
       env:
         default: "{}"
         required: false
@@ -47,6 +51,8 @@ jobs:
           NDMRC: ${{ inputs.ndmrc }}
         run: echo "${NDMRC}" | tee .ndmrc
       - name: Audit deprecation warnings
+        env:
+          ARGS: ${{ inputs.dev == false && '--omit=dev' || '' }}
         run: make audit-deprecations-npm
   image:
     name: Image
@@ -96,6 +102,8 @@ jobs:
         if: inputs.cveliterc != ''
         env:
           CVELITERC: ${{ inputs.cveliterc }}
-        run: echo "${CVELITERC}" | tee .cve-lite/baseline.json
+        run: echo "${CVELITERC}" | tee .cve-lite/baseline.json || true
       - name: Audit npm dependencies
+        env:
+          ARGS: ${{ inputs.dev == false && '--prod-only' || '' }}
         run: make audit-vulnerabilities-npm
