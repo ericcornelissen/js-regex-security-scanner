@@ -13,25 +13,31 @@ fail-on-severity: low
 ignore:
   - vulnerability: CVE-2025-60876
     vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-14456
+  - vulnerability: CVE-2026-35189
     vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-14457
+  - vulnerability: CVE-2026-35191
     vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-18798
+  - vulnerability: CVE-2026-42772
     vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-54874
+  - vulnerability: CVE-2026-54873
     vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-63072
+  - vulnerability: CVE-2026-54872
     vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-63073
+  - vulnerability: CVE-2026-54875
     vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-63074
+  - vulnerability: CVE-2026-72897
     vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-63075
+  - vulnerability: CVE-2026-75804
     vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-63076
+  - vulnerability: CVE-2026-75805
     vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-75803
+  - vulnerability: CVE-2026-75806
+    vex-justification: vulnerable_code_not_in_execute_path
+  - vulnerability: CVE-2026-77696
+    vex-justification: vulnerable_code_not_in_execute_path
+  - vulnerability: CVE-2026-84782
+    vex-justification: vulnerable_code_not_in_execute_path
+  - vulnerability: CVE-2026-84784
     vex-justification: vulnerable_code_not_in_execute_path
   - vulnerability: CVE-2026-85091
     vex-justification: vulnerable_code_not_in_execute_path
