@@ -58,6 +58,27 @@ jobs:
         env:
           WHAT: ${{ matrix.what }}
         run: make "check-${WHAT}"
+  checkov:
+    name: Checkov
+    runs-on: ubuntu-26.04
+    permissions:
+      security-events: write # To upload SARIF results
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+      - name: Run Checkov
+        uses: bridgecrewio/checkov-action@c13aafd679d3814a25067d10fcaf98c4f7594931 # v12.3131.0
+        with:
+          config_file: .checkov.yml
+          output_file_path: console,results.sarif
+          output_format: cli,sarif
+      - name: Upload Checkov report to GitHub
+        uses: github/codeql-action/upload-sarif@c10b8064de6f491fea524254123dbe5e09572f13 # v4.35.1
+        if: ${{ failure() || success() }}
+        with:
+          sarif_file: results.sarif
   codeql:
     name: CodeQL (actions)
     runs-on: ubuntu-26.04
