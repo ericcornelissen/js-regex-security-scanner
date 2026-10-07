@@ -10,10 +10,6 @@ on:
         default: true
         required: false
         type: boolean
-      env:
-        default: "{}"
-        required: false
-        type: string
       gryperc:
         default: ""
         required: false
@@ -27,8 +23,6 @@ on:
         type: string
 
 permissions: read-all
-
-env: ${{ fromJSON(inputs.env) }}
 
 jobs:
   deprecations:
