@@ -1,74 +1,38 @@
-name: Audit (release)
+name: Audit
 on:
+  pull_request:
+    paths:
+      - .github/workflows/audit-release.yml
   schedule:
-    - cron: 0 3 * * *
+    - cron: 0 1 * * *
   workflow_dispatch: ~
 
 permissions: read-all
 
 jobs:
   audit:
-    name: Audit ${{ matrix.release }}
+    name: v0
+    uses: $/.github/workflows/reusable-audit.yml
+    with:
+      env: |
+        {"ARGS":"--omit=dev"}
+      gryperc: ${{ vars.GRYPERC }}
+      ndmrc: ${{ vars.NDMRC }}
+      ref: v0
+  trigger-release:
+    name: Trigger release
     runs-on: ubuntu-26.04
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - release: v0
-            main: main
+    if: github.event_name != 'pull_request' && failure()
+    needs:
+      - audit
     steps:
-      # Setup
-      - name: Checkout release
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-        id: checkout
-        with:
-          ref: ${{ matrix.release }}
-          persist-credentials: false
-      - name: Install tooling
-        uses: aquaproj/aqua-installer@96a9bc20066c5bf5e275b41019cfc165b25f4e2e # v4.0.5
-        with:
-          aqua_version: v2.64.0
-      - name: Install Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
-        with:
-          cache: npm
-          node-version-file: .nvmrc
-
-      # Audit
-      - name: Insert custom configuration
-        env:
-          GRYPERC: ${{ vars.GRYPERC }}
-          NDMRC: ${{ vars.NDMRC }}
-        run: |
-          echo 'Grype configuration'
-          echo "${GRYPERC}" | tee .grype.yml
-          echo 'Depreman configuration'
-          echo "${NDMRC}" | tee .ndmrc
-      - name: Audit production dependencies
-        run: |
-          make audit-deprecations-npm ARGS="--omit=dev"
-          make audit-vulnerabilities-image
-          make audit-vulnerabilities-npm ARGS="--omit dev"
-      - name: Upload SBOM and vulnerability scan
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
-        if: ${{ failure() }}
-        with:
-          if-no-files-found: error
-          name: container-scan-${{ steps.checkout.outputs.commit }}
-          path: |
-            sbom-syft.json
-            vulns.json
-
-      # Trigger release
       - name: Checkout main
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-        if: ${{ failure() }}
         with:
-          ref: ${{ matrix.main }}
           persist-credentials: false
+          ref: main
       - name: Create token to trigger a workflow
         uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
-        if: ${{ failure() }}
         id: automation-token
         with:
           client-id: ${{ secrets.AUTOMATION_ID }}
@@ -76,9 +40,11 @@ jobs:
           permission-contents: read
           private-key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
       - name: Trigger new release if main is clean
-        if: ${{ failure() }}
         env:
+          ARGS: --omit dev
           GH_TOKEN: ${{ steps.automation-token.outputs.token }}
         run: |
-          make audit
-          gh workflow run release.yml -f update_type=patch
+          make audit-deprecations-npm
+          make audit-vulnerabilities-image
+          make audit-vulnerabilities-npm
+          gh workflow run release.yml --raw-field update_type=patch

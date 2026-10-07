@@ -1,0 +1,23 @@
+name: Audit
+on:
+  pull_request:
+    paths:
+      - .github/workflows/audit-runtime.yml
+      - .grype.yml
+      - .ndmrc
+      - .syft.yml
+      - Containerfile
+      - package-lock.json
+  push:
+    branches:
+      - main
+
+permissions: read-all
+
+jobs:
+  audit:
+    name: Runtime
+    uses: $/.github/workflows/reusable-audit.yml
+    with:
+      env: |
+        {"ARGS":"--omit=dev"}

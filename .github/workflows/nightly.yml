@@ -1,7 +1,7 @@
 name: Nightly
 on:
   schedule:
-    - cron: 0 3 * * *
+    - cron: 0 1 * * *
   workflow_dispatch: ~
 
 permissions: read-all
@@ -29,38 +29,3 @@ jobs:
           diffoci diff --semantic \
             docker://docker.io/ericornelissen/js-re-scan:latest \
             docker://docker.io/ericornelissen/js-re-scan:rebuild
-  update:
-    name: Update Tooling
-    runs-on: ubuntu-26.04
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-        with:
-          persist-credentials: false
-      - name: Create token to create Pull Request
-        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
-        id: automation-token
-        with:
-          client-id: ${{ secrets.AUTOMATION_ID }}
-          permission-contents: write # To push a commit
-          permission-pull-requests: write # To open a Pull Request
-          private-key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
-      - name: Install tooling
-        uses: aquaproj/aqua-installer@96a9bc20066c5bf5e275b41019cfc165b25f4e2e # v4.0.5
-        with:
-          aqua_version: v2.64.0
-      - name: Update tooling
-        run: |
-          aqua update
-          aqua update-checksum --prune
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
-        with:
-          token: ${{ steps.automation-token.outputs.token }}
-          title: Bump tool dependencies
-          body: |
-            _This Pull Request was created automatically by running `aqua update` and `aqua update-checksum`._
-          labels: dependencies
-          add-paths: aqua.yml, aqua-checksums.json
-          branch: bump-tool-dependencies
-          commit-message: Bump tools with aqua
