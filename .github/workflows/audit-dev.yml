@@ -16,3 +16,41 @@ jobs:
   audit:
     name: Dev
     uses: $/.github/workflows/reusable-audit.yml
+  auto-audit-fix:
+    name: Auto audit fix
+    runs-on: ubuntu-26.04
+    if: github.event_name != 'pull_request' && failure()
+    needs:
+      - audit
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+      - name: Install Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          cache: npm
+          node-version-file: .nvmrc
+      - name: Create automation token
+        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
+        id: automation-token
+        with:
+          client-id: ${{ secrets.AUTOMATION_ID }}
+          permission-contents: write # To push a commit
+          permission-pull-requests: write # To open a Pull Request
+          private-key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
+      - name: Bump vulnerable dependencies
+        run: |
+          npm clean-install
+          npm audit fix
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          token: ${{ steps.automation-token.outputs.token }}
+          title: Bump vulnerable dependencies
+          body: _This Pull Request was created automatically by running `npm audit fix`._
+          labels: dependencies
+          add-paths: package.json, package-lock.json
+          branch: bump-vulnerable-dependencies
+          commit-message: Bump vulnerable dependencies
