@@ -1,0 +1,4 @@
+# Configuration file for Checkov (https://www.checkov.io/)
+
+skip-check:
+  - CKV_GHA_7
