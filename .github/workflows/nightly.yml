@@ -1,5 +1,8 @@
 name: Nightly
 on:
+  pull_request:
+    paths:
+      - .github/workflows/nightly.yml
   schedule:
     - cron: 0 1 * * *
   workflow_dispatch: ~
@@ -13,6 +16,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        id: checkout
         with:
           persist-credentials: false
           ref: v0
@@ -26,6 +30,14 @@ jobs:
         run: docker pull docker.io/ericornelissen/js-re-scan:latest
       - name: Diff images
         run: |
-          diffoci diff --semantic \
+          diffoci diff --semantic --backend=local \
+            --report-dir ./image-diff \
             docker://docker.io/ericornelissen/js-re-scan:latest \
             docker://docker.io/ericornelissen/js-re-scan:rebuild
+      - name: Upload report
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        if: failure()
+        with:
+          if-no-files-found: error
+          name: diffoci-scan-${{ steps.checkout.outputs.commit }}
+          path: image-diff
