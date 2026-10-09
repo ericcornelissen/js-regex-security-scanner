@@ -30,7 +30,7 @@ jobs:
         run: docker pull docker.io/ericornelissen/js-re-scan:latest
       - name: Diff images
         run: |
-          diffoci diff --semantic \
+          diffoci diff --semantic --backend=local \
             --report-dir ./image-diff \
             docker://docker.io/ericornelissen/js-re-scan:latest \
             docker://docker.io/ericornelissen/js-re-scan:rebuild
