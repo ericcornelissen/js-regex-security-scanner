@@ -12,16 +12,16 @@ jobs:
     runs-on: ubuntu-26.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@v7.0.0
         with:
           persist-credentials: false
       - name: Install Node.js
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        uses: actions/setup-node@v7.1.0
         with:
           cache: npm
           node-version-file: .nvmrc
       - name: Create token to create Pull Request
-        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        uses: actions/create-github-app-token@v3.3.0
         id: automation-token
         with:
           client-id: ${{ secrets.AUTOMATION_ID }}
@@ -34,7 +34,7 @@ jobs:
         run: |
           npm update --prefer-dedupe
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        uses: peter-evans/create-pull-request@v8.1.1
         with:
           token: ${{ steps.automation-token.outputs.token }}
           title: Update transitive dependencies
@@ -48,11 +48,11 @@ jobs:
     runs-on: ubuntu-26.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@v7.0.0
         with:
           persist-credentials: false
       - name: Create token to create Pull Request
-        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        uses: actions/create-github-app-token@v3.3.0
         id: automation-token
         with:
           client-id: ${{ secrets.AUTOMATION_ID }}
@@ -60,7 +60,7 @@ jobs:
           permission-pull-requests: write # To open a Pull Request
           private-key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
       - name: Install tooling
-        uses: aquaproj/aqua-installer@611554c6f0137ba41c8dd15aca8bee82504ea461 # v4.1.1
+        uses: aquaproj/aqua-installer@v4.1.1
         with:
           aqua_version: v2.65.2
       - name: Update tooling
@@ -68,7 +68,7 @@ jobs:
           aqua update
           aqua update-checksum --prune
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        uses: peter-evans/create-pull-request@v8.1.1
         with:
           token: ${{ steps.automation-token.outputs.token }}
           title: Bump tool dependencies

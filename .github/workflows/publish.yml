@@ -15,7 +15,7 @@ jobs:
       version: ${{ steps.version.outputs.version }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@v7.0.0
         with:
           fetch-depth: 0 # To fetch all tags
           persist-credentials: false
@@ -41,7 +41,7 @@ jobs:
       - ghcr
     steps:
       - name: Checkout repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@v7.0.0
         with:
           fetch-depth: 0
           persist-credentials: true # To push version tag and major ref
@@ -84,7 +84,7 @@ jobs:
       - check
     steps:
       - name: Checkout repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@v7.0.0
         with:
           persist-credentials: false
       - name: Get cosign version
@@ -93,19 +93,19 @@ jobs:
           COSIGN_VERSION="$(grep cosign <aqua.yml | awk -F@ '{print $2}')"
           echo "cosign=${COSIGN_VERSION}" >>"${GITHUB_OUTPUT}"
       - name: Install cosign
-        uses: sigstore/cosign-installer@ba7bc0a3fef59531c69a25acd34668d6d3fe6f22 # v4.1.0
+        uses: sigstore/cosign-installer@v4.1.0
         with:
           cosign-release: ${{ steps.versions.outputs.cosign }}
       - name: Install Docker Buildx
-        uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+        uses: docker/setup-buildx-action@v4.4.1
       - name: Log in to Docker Hub
-        uses: docker/login-action@81c6f93d4bc991e510b342a00b419b3bb4efc5c6 # v4.7.0
+        uses: docker/login-action@v4.7.0
         with:
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build and push to Docker Hub
         id: container
-        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        uses: docker/build-push-action@v7.4.0
         with:
           context: .
           file: Containerfile
@@ -142,7 +142,7 @@ jobs:
       - check
     steps:
       - name: Checkout repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@v7.0.0
         with:
           persist-credentials: false
       - name: Get cosign version
@@ -151,20 +151,20 @@ jobs:
           COSIGN_VERSION="$(grep cosign <aqua.yml | awk -F@ '{print $2}')"
           echo "cosign=${COSIGN_VERSION}" >>"${GITHUB_OUTPUT}"
       - name: Install cosign
-        uses: sigstore/cosign-installer@ba7bc0a3fef59531c69a25acd34668d6d3fe6f22 # v4.1.0
+        uses: sigstore/cosign-installer@v4.1.0
         with:
           cosign-release: ${{ steps.versions.outputs.cosign }}
       - name: Install Docker Buildx
-        uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+        uses: docker/setup-buildx-action@v4.4.1
       - name: Log in to GHCR
-        uses: docker/login-action@81c6f93d4bc991e510b342a00b419b3bb4efc5c6 # v4.7.0
+        uses: docker/login-action@v4.7.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push to GHCR
         id: container
-        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        uses: docker/build-push-action@v7.4.0
         with:
           context: .
           file: Containerfile
