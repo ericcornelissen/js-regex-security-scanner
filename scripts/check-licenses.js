@@ -139,11 +139,6 @@ const exceptions = [
 		reason: "OK under the 'mere aggregation' clause",
 	},
 	{
-		name: "libatomic",
-		licenses: ["GPL-2.0-or-later AND LGPL-2.1-or-later"],
-		reason: "OK under the 'mere aggregation' clause",
-	},
-	{
 		name: "libgcc",
 		licenses: ["GPL-2.0-or-later AND LGPL-2.1-or-later"],
 		reason: "OK under the 'mere aggregation' clause",
@@ -216,6 +211,11 @@ const unnecessaryCorrections = licenseDataToEvaluate
 		};
 	});
 
+const unnecessaryException = exceptions.filter(
+	(exception) =>
+		!sbom.artifacts.map((artifact) => artifact.name).includes(exception.name),
+);
+
 // --------------
 // Output results
 // --------------
@@ -229,6 +229,18 @@ if (unnecessaryCorrections.length > 0) {
 	console.log(
 		unnecessaryCorrections.length,
 		"unnecessary correction(s) detected. Please review",
+	);
+}
+
+if (unnecessaryException.length > 0) {
+	unnecessaryException.forEach((exception) => {
+		console.log("Unnecessary license exception for", quoted(exception.name));
+	});
+
+	console.log(/* newline */);
+	console.log(
+		unnecessaryException.length,
+		"unnecessary exception(s) detected. Please review",
 	);
 }
 
@@ -257,7 +269,11 @@ if (licenseViolations.length > 0) {
 	);
 }
 
-if (licenseViolations.length > 0 || unnecessaryCorrections.length > 0) {
+if (
+	licenseViolations.length > 0 ||
+	unnecessaryCorrections.length > 0 ||
+	unnecessaryException.length > 0
+) {
 	process.exit(1);
 } else {
 	console.log("No license violations detected");
