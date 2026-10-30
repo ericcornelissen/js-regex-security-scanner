@@ -30,12 +30,12 @@ jobs:
     runs-on: ubuntu-26.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@v7.0.0
         with:
           persist-credentials: false
           ref: ${{ inputs.ref }}
       - name: Install Node.js
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        uses: actions/setup-node@v7.1.0
         with:
           cache: npm
           node-version-file: .nvmrc
@@ -53,13 +53,13 @@ jobs:
     runs-on: ubuntu-26.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@v7.0.0
         id: checkout
         with:
           persist-credentials: false
           ref: ${{ inputs.ref }}
       - name: Install tooling
-        uses: aquaproj/aqua-installer@611554c6f0137ba41c8dd15aca8bee82504ea461 # v4.1.1
+        uses: aquaproj/aqua-installer@v4.1.1
         with:
           aqua_version: v2.65.2
       - name: Insert custom configuration
@@ -70,7 +70,7 @@ jobs:
       - name: Audit container dependencies
         run: make audit-vulnerabilities-image
       - name: Upload SBOM and vulnerability scan
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        uses: actions/upload-artifact@v7.0.0
         if: failure() || success()
         with:
           if-no-files-found: error
@@ -83,12 +83,12 @@ jobs:
     runs-on: ubuntu-26.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@v7.0.0
         with:
           persist-credentials: false
           ref: ${{ inputs.ref }}
       - name: Install Node.js
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        uses: actions/setup-node@v7.1.0
         with:
           cache: npm
           node-version-file: .nvmrc
