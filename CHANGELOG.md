@@ -10,6 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
+- (`f8eb285`) Update dependency @typescript-eslint/parser to v8.72.1.
 - (`4883d0e`) Update docker.io/node Docker tag to v26.13.0.
 
 ## [0.5.8] - 2026-10-05
