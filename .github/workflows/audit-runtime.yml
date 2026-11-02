@@ -2,6 +2,7 @@ name: Audit
 on:
   pull_request:
     paths:
+      - .cve-lite/baseline.json
       - .github/workflows/audit-runtime.yml
       - .grype.yml
       - .ndmrc

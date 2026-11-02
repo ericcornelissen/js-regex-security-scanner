@@ -26,7 +26,7 @@ workflows:
         - 'actions/setup-node@v7.1.0'
         - 'aquaproj/aqua-installer@v4.1.1'
         - 'boostsecurityio/poutine-action@v1.1.4'
-        - 'bridgecrewio/checkov-action@v12.3131.0'
+        - 'bridgecrewio/checkov-action@v12.3136.0'
         - 'github/codeql-action@v4.35.1'
         - 'zizmorcore/zizmor-action@v0.8.0'
     '.github/workflows/nightly.yml':
@@ -80,9 +80,9 @@ dependencies:
         commit: 'sha1-e240ebd3eff8b2db5a8e5f6b28f58739d7db2247'
         owner_id: 77755945
         repo_id: 786633965
-    'bridgecrewio/checkov-action@v12.3131.0':
-        ref: 'v12.3131.0'
-        commit: 'sha1-c13aafd679d3814a25067d10fcaf98c4f7594931'
+    'bridgecrewio/checkov-action@v12.3136.0':
+        ref: 'v12.3136.0'
+        commit: 'sha1-c10e2438743528f9e4549758fad8b7a62052541d'
         owner_id: 48174253
         repo_id: 256738016
     'docker/build-push-action@v7.4.0':
