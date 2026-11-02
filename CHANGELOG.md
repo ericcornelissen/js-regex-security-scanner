@@ -10,6 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
+- (`04f6e77`) Update dependency jschardet to v4.1.0.
 - (`f8eb285`) Update dependency @typescript-eslint/parser to v8.72.1.
 - (`4883d0e`) Update docker.io/node Docker tag to v26.13.0.
 
