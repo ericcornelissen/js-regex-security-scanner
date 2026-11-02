@@ -69,7 +69,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Run Checkov
-        uses: bridgecrewio/checkov-action@v12.3131.0
+        uses: bridgecrewio/checkov-action@v12.3136.0
         with:
           config_file: .checkov.yml
           output_file_path: console,results.sarif
