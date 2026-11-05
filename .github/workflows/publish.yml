@@ -93,7 +93,7 @@ jobs:
           COSIGN_VERSION="$(grep cosign <aqua.yml | awk -F@ '{print $2}')"
           echo "cosign=${COSIGN_VERSION}" >>"${GITHUB_OUTPUT}"
       - name: Install cosign
-        uses: sigstore/cosign-installer@v4.1.0
+        uses: sigstore/cosign-installer@v4.1.3
         with:
           cosign-release: ${{ steps.versions.outputs.cosign }}
       - name: Install Docker Buildx
@@ -151,7 +151,7 @@ jobs:
           COSIGN_VERSION="$(grep cosign <aqua.yml | awk -F@ '{print $2}')"
           echo "cosign=${COSIGN_VERSION}" >>"${GITHUB_OUTPUT}"
       - name: Install cosign
-        uses: sigstore/cosign-installer@v4.1.0
+        uses: sigstore/cosign-installer@v4.1.3
         with:
           cosign-release: ${{ steps.versions.outputs.cosign }}
       - name: Install Docker Buildx
