@@ -10,6 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
+- (`18a8246`) Update dependency eslint to v10.14.0.
 - (`b4b26af`) Update dependency eslint-plugin-regexp to v3.3.3.
 
 ## [0.5.9] - 2026-11-02
