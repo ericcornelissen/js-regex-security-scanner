@@ -13,55 +13,7 @@ fail-on-severity: low
 ignore:
   - vulnerability: CVE-2025-60876
     vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-35189
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-35191
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-42772
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-54872
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-54873
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-54875
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-72897
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-75804
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-75805
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-75806
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-77696
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-84782
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-84784
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-85091
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-105481
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-105482
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-105483
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-106069
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-106070
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-106071
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-106072
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-106073
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-106074
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-107891
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-111497
+  - vulnerability: CVE-2026-4738
     vex-justification: vulnerable_code_not_in_execute_path
 
   # Ignore all npm vulnerabilities. This project relies on `npm audit` instead.
