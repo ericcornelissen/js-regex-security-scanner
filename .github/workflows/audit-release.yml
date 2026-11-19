@@ -32,7 +32,7 @@ jobs:
           persist-credentials: false
           ref: main
       - name: Create token to trigger a workflow
-        uses: actions/create-github-app-token@v3.3.0
+        uses: actions/create-github-app-token@v3.4.0
         id: automation-token
         with:
           client-id: ${{ secrets.AUTOMATION_ID }}
