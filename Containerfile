@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM docker.io/node:26.13.1-alpine3.24
+FROM docker.io/node:26.13.1-alpine3.24@sha256:6bd9ab43c0ec0190ca7b2d193906cb8b7edf6e7f4afa43ddeccd6452710bffb5
 
 LABEL org.opencontainers.image.title="js-regex-security-scanner" \
 	org.opencontainers.image.description="A static analyzer to scan JavaScript code for problematic regular expressions." \
