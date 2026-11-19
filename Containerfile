@@ -16,7 +16,7 @@ FROM docker.io/node:26.13.1-alpine3.24@sha256:6bd9ab43c0ec0190ca7b2d193906cb8b7e
 
 LABEL org.opencontainers.image.title="js-regex-security-scanner" \
 	org.opencontainers.image.description="A static analyzer to scan JavaScript code for problematic regular expressions." \
-	org.opencontainers.image.version="0.5.9" \
+	org.opencontainers.image.version="0.5.10" \
 	org.opencontainers.image.licenses="Apache-2.0" \
 	org.opencontainers.image.source="https://github.com/ericcornelissen/js-regex-security-scanner"
 
