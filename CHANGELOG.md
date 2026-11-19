@@ -10,6 +10,10 @@ Versioning].
 
 ## [Unreleased]
 
+- _No changes yet_
+
+## [0.5.10] - 2026-11-19
+
 - (`f971738`) Update docker.io/node Docker tag to v26.13.1.
 - (`9e56c07`) Update dependency @typescript-eslint/parser to v8.72.2.
 - (`18a8246`) Update dependency eslint to v10.14.0.
