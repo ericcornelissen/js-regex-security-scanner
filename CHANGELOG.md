@@ -10,7 +10,7 @@ Versioning].
 
 ## [Unreleased]
 
-- _No changes yet_
+- (`cdaf3d6`) Update dependency @typescript-eslint/parser to v8.73.0.
 
 ## [0.5.10] - 2026-11-19
 
