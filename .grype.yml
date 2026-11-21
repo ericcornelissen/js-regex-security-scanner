@@ -8,53 +8,17 @@ fail-on-severity: low
 # To identify unused ignore directives, run the two commands below which will
 # output the *used* ignore directives. All others are unused and can be pruned.
 #     make vulns.json
-#     cat vulns.json | jq '[.ignoredMatches[].appliedIgnoreRules]|flatten|unique'
+#     cat vulns.json | jq -r '[.ignoredMatches[].appliedIgnoreRules[].vulnerability] | map(select(. != null)) | unique[]'
 # Based on: <https://github.com/anchore/grype/issues/3050>
 ignore:
   - vulnerability: CVE-2025-60876
     vex-justification: vulnerable_code_not_in_execute_path
   - vulnerability: CVE-2026-4738
     vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-88822
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-88823
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-95691
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-95692
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-107496
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-123828
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-123829
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-123862
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-123863
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-123864
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-123865
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-123866
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-123867
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-123868
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-123871
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-123872
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-123874
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-123875
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-123877
-    vex-justification: vulnerable_code_not_in_execute_path
-  - vulnerability: CVE-2026-126051
-    vex-justification: vulnerable_code_not_in_execute_path
+
+  # Ignore all OpenSSL vulnerabilities. At worst this only affects the build.
+  - package:
+      upstream-name: openssl
 
   # Ignore all npm vulnerabilities. This project relies on `npm audit` instead.
   - package:
