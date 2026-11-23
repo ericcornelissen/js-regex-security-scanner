@@ -70,7 +70,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Run Checkov
-        uses: bridgecrewio/checkov-action@v12.3136.0
+        uses: bridgecrewio/checkov-action@v12.3142.0
         with:
           config_file: .checkov.yml
           output_file_path: console,results.sarif
@@ -210,7 +210,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Run Zizmor
-        uses: zizmorcore/zizmor-action@v0.8.1
+        uses: zizmorcore/zizmor-action@v0.9.0
         with:
           config: .github/zizmor.yml
           persona: pedantic
