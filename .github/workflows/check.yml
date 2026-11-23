@@ -38,6 +38,7 @@ jobs:
           - formatting
           - image
           - md
+          - secrets
           - sh
           - yml
     steps:

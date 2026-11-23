@@ -98,8 +98,8 @@ help: ## Show this help message
 .PHONY: init
 init: $(NODE_MODULES) ## Initialize the project dependencies
 
-.PHONY: check check-ci check-formatting check-formatting-js check-formatting-md check-formatting-sh check-image check-licenses check-licenses-image check-licenses-npm check-md check-sh check-yml
-check: check-ci check-formatting check-image check-licenses check-md check-sh check-yml ## Lint the project
+.PHONY: check check-ci check-formatting check-formatting-js check-formatting-md check-formatting-sh check-image check-licenses check-licenses-image check-licenses-npm check-md check-secrets check-sh check-yml
+check: check-ci check-formatting check-image check-licenses check-md check-secrets check-sh check-yml ## Lint the project
 
 check-ci: $(TOOLING) ## Check the Continuous Integration configuration files
 	@SHELLCHECK_OPTS='--enable=avoid-nullary-conditions --enable=deprecate-which --enable=quote-safe-variables --enable=require-variable-braces --enable=useless-use-of-cat' \
@@ -159,6 +159,10 @@ check-md: $(NODE_MODULES) ## Check the MarkDown files
 		--ignore tests/snapshots \
 		--ignore testdata/ \
 		.
+
+check-secrets: $(NODE_MODULES) ## Check for leaking secrets
+	@npx secretlint \
+		"**/*"
 
 check-sh: $(TOOLING) ## Check the shell scripts
 	@shellcheck \
