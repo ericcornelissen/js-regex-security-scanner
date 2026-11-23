@@ -51,7 +51,7 @@ jobs:
           cache: npm
           node-version-file: .nvmrc
       - name: Install tooling
-        uses: aquaproj/aqua-installer@v4.1.1
+        uses: aquaproj/aqua-installer@v4.1.2
         with:
           aqua_version: v2.66.1
       - name: Check
@@ -112,7 +112,7 @@ jobs:
           cache: npm
           node-version-file: .nvmrc
       - name: Install tooling
-        uses: aquaproj/aqua-installer@v4.1.1
+        uses: aquaproj/aqua-installer@v4.1.2
         with:
           aqua_version: v2.66.1
       - name: Check container image licenses
@@ -168,7 +168,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Install tooling
-        uses: aquaproj/aqua-installer@v4.1.1
+        uses: aquaproj/aqua-installer@v4.1.2
         with:
           aqua_version: v2.66.1
       - name: Check reproducibility

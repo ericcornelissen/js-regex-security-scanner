@@ -59,7 +59,7 @@ jobs:
           persist-credentials: false
           ref: ${{ inputs.ref }}
       - name: Install tooling
-        uses: aquaproj/aqua-installer@v4.1.1
+        uses: aquaproj/aqua-installer@v4.1.2
         with:
           aqua_version: v2.66.1
       - name: Insert custom configuration

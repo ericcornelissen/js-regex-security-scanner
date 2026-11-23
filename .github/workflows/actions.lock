@@ -16,7 +16,7 @@ workflows:
         - 'actions/checkout@v7.0.0'
         - 'actions/create-github-app-token@v3.4.0'
         - 'actions/setup-node@v7.1.0'
-        - 'aquaproj/aqua-installer@v4.1.1'
+        - 'aquaproj/aqua-installer@v4.1.2'
         - 'peter-evans/create-pull-request@v8.1.3'
     '.github/workflows/changelog.yml':
         - 'actions/checkout@v7.0.0'
@@ -24,7 +24,7 @@ workflows:
     '.github/workflows/check.yml':
         - 'actions/checkout@v7.0.0'
         - 'actions/setup-node@v7.1.0'
-        - 'aquaproj/aqua-installer@v4.1.1'
+        - 'aquaproj/aqua-installer@v4.1.2'
         - 'boostsecurityio/poutine-action@v1.1.4'
         - 'bridgecrewio/checkov-action@v12.3142.0'
         - 'github/codeql-action@v4.35.1'
@@ -32,7 +32,7 @@ workflows:
     '.github/workflows/nightly.yml':
         - 'actions/checkout@v7.0.0'
         - 'actions/upload-artifact@v7.0.0'
-        - 'aquaproj/aqua-installer@v4.1.1'
+        - 'aquaproj/aqua-installer@v4.1.2'
     '.github/workflows/publish.yml':
         - 'actions/checkout@v7.0.0'
         - 'docker/build-push-action@v7.4.0'
@@ -48,7 +48,7 @@ workflows:
         - 'actions/checkout@v7.0.0'
         - 'actions/setup-node@v7.1.0'
         - 'actions/upload-artifact@v7.0.0'
-        - 'aquaproj/aqua-installer@v4.1.1'
+        - 'aquaproj/aqua-installer@v4.1.2'
 dependencies:
     'actions/checkout@v7.0.0':
         ref: 'v7.0.0'
@@ -70,9 +70,9 @@ dependencies:
         commit: 'sha1-bbbca2ddaa5d8feaa63e36b76fdaad77386f024f'
         owner_id: 44036562
         repo_id: 192625955
-    'aquaproj/aqua-installer@v4.1.1':
-        ref: 'v4.1.1'
-        commit: 'sha1-611554c6f0137ba41c8dd15aca8bee82504ea461'
+    'aquaproj/aqua-installer@v4.1.2':
+        ref: 'v4.1.2'
+        commit: 'sha1-b8be739961814ee66b9e0d505f4d5de0d2eff047'
         owner_id: 95116411
         repo_id: 400140776
     'boostsecurityio/poutine-action@v1.1.4':
